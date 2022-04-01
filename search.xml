@@ -1,0 +1,1049 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Express</title>
+    <url>/2022/03/16/Express/</url>
+    <content><![CDATA[<h2 id="Express简介"><a href="#Express简介" class="headerlink" title="Express简介"></a>Express简介</h2><h3 id="什么是Express"><a href="#什么是Express" class="headerlink" title="什么是Express"></a>什么是Express</h3><p>官方给出的概念：Express 是基于 Node.js 平台，快速、开放、极简的 Web 开发框架。<br>通俗的理解：Express 的作用和 Node.js 内置的 http 模块类似，是专门用来创建 Web 服务器的。<br>Express 的本质：就是一个 npm 上的第三方包，提供了快速创建 Web 服务器的便捷方法。<br>Express 的中文官网：<a href="http://www.expressjs.com.cn/">http://www.expressjs.com.cn/</a> </p>
+<span id="more"></span>
+
+<h3 id="Express的作用"><a href="#Express的作用" class="headerlink" title="Express的作用"></a>Express的作用</h3><p>对于前端程序员来说，最常见的两种服务器，分别是：</p>
+<ul>
+<li>Web 网站服务器：专门对外提供 Web 网页资源的服务器。</li>
+<li>API 接口服务器：专门对外提供 API 接口的服务器。<br>使用 Express，我们可以方便、快速的创建 Web 网站的服务器或 API 接口的服务器</li>
+</ul>
+<h3 id="Express的基本使用"><a href="#Express的基本使用" class="headerlink" title="Express的基本使用"></a>Express的基本使用</h3><ul>
+<li>安装Express<br>在项目所处的目录中，运行如下的终端命令，即可将 express 安装到项目中使用<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm i express@4.17.1   //express版本号可有可无，但是学习的时候必须和老师保持一致</span><br></pre></td></tr></table></figure></li>
+<li>创建基本的Web服务器<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//1．导入、express</span><br><span class="line">  const express = require( &quot; express &quot;)</span><br><span class="line">//2，创建web服字果</span><br><span class="line"> const app = express()</span><br><span class="line">//3．调用 app.listen(端口号，启动成功后的回调函数)，启动服务器</span><br><span class="line"> app.listen(8o,()=&gt; &#123;</span><br><span class="line">   console.log( &#x27;express server running at http://127.0.0.1&quot;))</span><br></pre></td></tr></table></figure></li>
+<li>监听GET请求<br>通过 app.get() 方法，可以监听客户端的 GET 请求，具体的语法格式如下：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//参数1:客户端请求的URL地址</span><br><span class="line">//参数2:请求对应的处理函数</span><br><span class="line">req:请求对象(包含了与请求相关的属性与方法)</span><br><span class="line">res:响应对象(包含了与响应相关的属性与方法)</span><br><span class="line">app.get( &#x27;请求URL&#x27;, function(req,res) &#123;/*处理函数*/&#125;)</span><br></pre></td></tr></table></figure></li>
+<li>监听POST请求<br>通过 app.post() 方法，可以监听客户端的 POST 请求，具体的语法格式如下<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//参数1:客户端请求的URL地址</span><br><span class="line">//参数2:请求对应的处理函数</span><br><span class="line">//  req:请求对象（包含了与请求相关的属性与方法)</span><br><span class="line">//  res:响应对象(包含了与响应相关的属性与方法)</span><br><span class="line">app.post( &#x27;请求URL&#x27; function(req,res) &#123;/*处理函数*/&#125;)</span><br></pre></td></tr></table></figure></li>
+<li>把内容响应给客户端<br>通过 res.send() 方法，可以把处理好的内容，发送给客户端：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">app.get(&#x27;/user&#x27;, (req, res) =&gt; &#123;</span><br><span class="line">  // 调用 express 提供的 res.send() 方法，向客户端响应一个 JSON 对象</span><br><span class="line">res.send(&#123; name: &#x27;zs&#x27;, age: 20, gender: &#x27;男&#x27; &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">app.post(&#x27;/user&#x27;, (req, res) =&gt; &#123;</span><br><span class="line">  // 调用 express 提供的 res.send() 方法，向客户端响应一个 文本字符串</span><br><span class="line"> res.send(&#x27;请求成功&#x27;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li>获取URL中携带的查询参数<br>通过 req.query 对象，可以访问到客户端通过查询字符串的形式，发送到服务器的参数：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> app.get(&#x27;/&#x27;, (req, res) =&gt; &#123;</span><br><span class="line">// 通过 req.query 可以获取到客户端发送过来的 查询参数</span><br><span class="line">// 注意：默认情况下，req.query 是一个空对象</span><br><span class="line">console.log(req.query)</span><br><span class="line">res.send(req.query)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li>获取URL中的动态参数<br>通过 req.params 对象，可以访问到 URL 中，通过 : 匹配到的动态参数：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> // 注意：这里的 :id 是一个动态的参数</span><br><span class="line">app.get(&#x27;/user/:ids/:username&#x27;, (req, res) =&gt; &#123;</span><br><span class="line">// req.params 是动态匹配到的 URL 参数，默认也是一个空对象</span><br><span class="line">console.log(req.params)</span><br><span class="line">res.send(req.params)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="托管静态资源"><a href="#托管静态资源" class="headerlink" title="托管静态资源"></a>托管静态资源</h3>express 提供了一个非常好用的函数，叫做 express.static()，通过它，我们可以非常方便地创建一个静态资源服务器，例如，通过如下代码就可以将 public 目录下的图片、CSS 文件、JavaScript 文件对外开放访问了：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">app.use(express.static(&#x27;public&#x27;))</span><br></pre></td></tr></table></figure>
+现在，你就可以访问 public 目录中的所有文件了：<br><a href="http://localhost:3000/images/bg.jpg">http://localhost:3000/images/bg.jpg</a><br><a href="http://localhost:3000/css/style.css">http://localhost:3000/css/style.css</a><br><a href="http://localhost:3000/js/login.js">http://localhost:3000/js/login.js</a></li>
+</ul>
+<p><strong>注意：</strong></p>
+<ul>
+<li>Express 在指定的静态目录中查找文件，并对外提供资源的访问路径。因此，存放静态文件的目录名不会出现在 URL 中</li>
+<li>如果要托管多个静态资源目录，就要多次调用express.static()函数，但是函数会根据目录的添加顺序查找所需的文件</li>
+</ul>
+<p><strong>挂载路径前缀：</strong>如果希望在托管的静态资源访问路径之前，挂载路径前缀，则可以使用如下的方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">app.use(&#x27;/pubic&#x27;,express.static(&#x27;public&#x27;))</span><br></pre></td></tr></table></figure>
+<p>现在，你就可以通过带有 &#x2F;public 前缀地址来访问 public 目录中的文件了：<br><a href="http://localhost:3000/public/images/kitten.jpg">http://localhost:3000/public/images/kitten.jpg</a><br><a href="http://localhost:3000/public/css/style.css">http://localhost:3000/public/css/style.css</a><br><a href="http://localhost:3000/public/js/app.js">http://localhost:3000/public/js/app.js</a></p>
+<h3 id="nodemon"><a href="#nodemon" class="headerlink" title="nodemon"></a>nodemon</h3><p>在编写调试 Node.js 项目的时候，如果修改了项目的代码，则需要频繁的手动 close 掉，然后再重新启动，非常繁琐。<br>现在，我们可以使用 nodemon <a href="https://www.npmjs.com/package/nodemon">https://www.npmjs.com/package/nodemon</a> 这个工具，它能够监听项目文件的变动，当代码被修改后，nodemon 会自动帮我们重启项目，极大方便了开发和调试。<br>**安装nodemon:**在终端中，运行如下命令，即可将 nodemon 安装为全局可用的工具：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm i -g nodemon  //-g  全局</span><br></pre></td></tr></table></figure>
+<p>当基于 Node.js 编写了一个网站应用的时候，传统的方式，是运行 node app.js 命令，来启动项目。这样做的坏处是：代码被修改之后，需要手动重启项目。<br>现在，我们可以将 node 命令替换为 nodemon 命令，使用 nodemon app.js 来启动项目。这样做的好处是：代码被修改之后，会被 nodemon 监听到，从而实现自动重启项目的效果。</p>
+<h2 id="Express-路由"><a href="#Express-路由" class="headerlink" title="Express 路由"></a>Express 路由</h2><h3 id="路由的概念"><a href="#路由的概念" class="headerlink" title="路由的概念"></a>路由的概念</h3><p>广义上来讲，路由就是映射关系。在 Express 中，路由指的是客户端的请求与服务器处理函数之间的映射关系。<br>Express 中的路由分 3 部分组成，分别是请求的类型、请求的 URL 地址、处理函数，格式如下：<br> <strong>app.METHOD(PATH,HANDLER)</strong><br><strong>路由的匹配过程：</strong><br>每当一个请求到达服务器之后，需要先经过路由的匹配，只有匹配成功之后，才会调用对应的处理函数。<br>在匹配时，会按照路由的顺序进行匹配，如果请求类型和请求的 URL 同时匹配成功，则 Express 会将这次请求，转交给对应的 function 函数进行处理。</p>
+<h3 id="路由的使用"><a href="#路由的使用" class="headerlink" title="路由的使用"></a>路由的使用</h3><ul>
+<li>最简单的用法<br>在 Express 中使用路由最简单的方式，就是把路由挂载到 app 上，示例代码如下：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  const express = require(&#x27;express&#x27;)</span><br><span class="line">  const app = express()</span><br><span class="line">// 挂载路由</span><br><span class="line">app.get(&#x27;/&#x27;, (req, res) =&gt; &#123;</span><br><span class="line">  res.send(&#x27;hello world.&#x27;)</span><br><span class="line">&#125;)</span><br><span class="line">app.post(&#x27;/&#x27;, (req, res) =&gt; &#123;</span><br><span class="line"> 	res.send(&#x27;Post Request.&#x27;)</span><br><span class="line">&#125;)</span><br><span class="line">  //启动Web服务器</span><br><span class="line">app.listen(80, () =&gt; &#123;</span><br><span class="line">	 console.log(&#x27;http://127.0.0.1&#x27;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li>路由的模块化<br>为了方便对路由进行模块化的管理，Express 不建议将路由直接挂载到 app 上，而是推荐将路由抽离为单独的模块。<br>将路由抽离为单独模块的步骤如下：</li>
+</ul>
+<p>1.创建路由模块对应的 .js 文件<br>2.调用 express.Router() 函数创建路由对象<br>3.向路由对象上挂载具体的路由<br>4.使用 module.exports 向外共享路由对象<br>5.使用 app.use() 函数注册路由模块</p>
+<ul>
+<li>创建路由模块<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">   // 这是路由模块</span><br><span class="line">   // 1. 导入 express</span><br><span class="line">   const express = require(&#x27;express&#x27;)</span><br><span class="line">   // 2. 创建路由对象</span><br><span class="line">   const router = express.Router()</span><br><span class="line">   // 3. 挂载具体的路由</span><br><span class="line">   router.get(&#x27;/user/list&#x27;, (req, res) =&gt; &#123;</span><br><span class="line">     res.send(&#x27;Get user list.&#x27;)</span><br><span class="line">   &#125;)</span><br><span class="line">   router.post(&#x27;/user/add&#x27;, (req, res) =&gt; &#123;</span><br><span class="line">     res.send(&#x27;Add new user.&#x27;)</span><br><span class="line">   &#125;)</span><br><span class="line">// 4. 向外导出路由对象</span><br><span class="line">module.exports = router</span><br></pre></td></tr></table></figure></li>
+<li>注册路由模块<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 1. 导入路由模块</span><br><span class="line">   const router = require(&#x27;./03.router&#x27;)</span><br><span class="line">// 2. 注册路由模块</span><br><span class="line">   app.use(&#x27;/api&#x27;, router)</span><br><span class="line">// 注意： app.use() 函数的作用，就是来注册全局中间件</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>前后端交互</category>
+      </categories>
+      <tags>
+        <tag>Express</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Github的使用</title>
+    <url>/2022/03/01/Github%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h1 id="开源项目托管平台"><a href="#开源项目托管平台" class="headerlink" title="开源项目托管平台"></a>开源项目托管平台</h1><p>专门用于免费存放开源项目源代码的网站，叫做开源项目托管平台。目前世界上比较出名的开源项目托管平台<br>主要有以下 3 个：</p>
+<ul>
+<li>Github（全球最牛的开源项目托管平台，没有之一）</li>
+<li>Gitlab（对代码私有性支持较好，因此企业用户较多）</li>
+<li>Gitee（又叫做码云，是国产的开源项目托管平台。访问速度快、纯中文界面、使用友好）<span id="more"></span></li>
+</ul>
+<h1 id="Github的使用"><a href="#Github的使用" class="headerlink" title="Github的使用"></a>Github的使用</h1><h2 id="注册Github账号"><a href="#注册Github账号" class="headerlink" title="注册Github账号"></a>注册Github账号</h2><p>① 访问 Github 的官网首页 <a href="https://github.com/">https://github.com/</a><br>② 点击“Sign up”按钮跳转到注册页面<br>③ 填写可用的用户名、邮箱、密码<br>④ 通过点击箭头的形式，将验证图片摆正<br>⑤ 点击“Create account”按钮注册新用户<br>⑥ 登录到第三步填写的邮箱中，点击激活链接，完成注册</p>
+<h2 id="远程仓库的使用"><a href="#远程仓库的使用" class="headerlink" title="远程仓库的使用"></a>远程仓库的使用</h2><h3 id="远程仓库的两种访问方式"><a href="#远程仓库的两种访问方式" class="headerlink" title="远程仓库的两种访问方式"></a>远程仓库的两种访问方式</h3><p>Github 上的远程仓库，有两种访问方式，分别是 HTTPS 和 SSH。它们的区别是：<br>① HTTPS：零配置；但是每次访问仓库时，需要重复输入 Github 的账号和密码才能访问成功<br>② SSH：需要进行额外的配置；但是配置成功后，每次访问仓库时，不需重复输入 Github 的账号和密码<br>注意：在实际开发中，推荐使用 SSH 的方式访问远程仓库</p>
+<h3 id="基于HTTPS将本地仓库上传到Github"><a href="#基于HTTPS将本地仓库上传到Github" class="headerlink" title="基于HTTPS将本地仓库上传到Github"></a>基于HTTPS将本地仓库上传到Github</h3><p>第一种情况：本地没有现成的Git仓库</p>
+<ol>
+<li>使用终端命令创建README.md文档，并写入初始内容为project_02<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">echo &quot;# project_02&quot; &gt;&gt; README.md</span><br></pre></td></tr></table></figure></li>
+<li>初始化本地Git仓库，并将文件的修改提交到本地的Git仓库中<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git init </span><br><span class="line">git add README.md</span><br><span class="line">git commit -m &quot;第一次提交&quot;</span><br></pre></td></tr></table></figure></li>
+<li>将本地仓库和远程仓库进行关联，并把远程仓库命名为origin<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git remote add origin https://github.com/用户名/project_02.git</span><br></pre></td></tr></table></figure></li>
+<li>将本地仓库中的内容推送到远程的origin 仓库中<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git push -u origin master`</span><br></pre></td></tr></table></figure>
+第二种情况：本地有现成的Git仓库</li>
+<li>将本地仓库和远程仓库进行关联，并把远程仓库命名为origin<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git remote add origin https://github.com/用户名/project_02.git</span><br></pre></td></tr></table></figure></li>
+<li>将本地仓库中的内容推送到远程的origin 仓库中<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+(只有第一次推送内容需要-u origin master，往后都不用了)<h2 id="SSH-key"><a href="#SSH-key" class="headerlink" title="SSH key"></a>SSH key</h2></li>
+</ol>
+<p><strong>SSH key介绍</strong><br>SSH key 的作用：实现本地仓库和 Github 之间免登录的加密数据传输。<br>SSH key 的好处：免登录身份认证、数据加密传输。<br>SSH key 由两部分组成，分别是：<br>① id_rsa（私钥文件，存放于客户端的电脑中即可）<br>② id_rsa.pub（公钥文件，需要配置到 Github 中）<br><strong>生成SSH key</strong></p>
+<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#x79;&#x6f;&#x75;&#x72;&#x5f;&#x65;&#109;&#x61;&#105;&#x6c;&#x40;&#101;&#x78;&#x61;&#109;&#112;&#108;&#x65;&#46;&#x63;&#x6f;&#x6d;">&#x79;&#x6f;&#x75;&#x72;&#x5f;&#x65;&#109;&#x61;&#105;&#x6c;&#x40;&#101;&#x78;&#x61;&#109;&#112;&#108;&#x65;&#46;&#x63;&#x6f;&#x6d;</a> 替换为注册 Github 账号时填写的邮箱：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</span><br></pre></td></tr></table></figure>
+<p>③ 连续敲击 3 次回车，即可在 C:\Users\用户名文件夹.ssh 目录中生成 id_rsa 和 id_rsa.pub 两个文件</p>
+<p><strong>配置SSH key</strong><br>① 使用记事本打开 id_rsa.pub 文件，复制里面的文本内容<br>② 在浏览器中登录 Github，点击头像 -&gt; Settings -&gt; SSH and GPG Keys -&gt; New SSH key<br>③ 将 id_rsa.pub 文件中的内容，粘贴到 Key 对应的文本框中<br>④ 在 Title 文本框中任意填写一个名称，来标识这个 Key 从何而来</p>
+<p><strong>检测SSH key</strong>　</p>
+<p>打开 Git Bash，输入如下的命令并回车执行：</p>
+<pre><code>   git -T git@github.com
+　
+</code></pre>
+<p>出现用户名证明已经配置成功</p>
+<h3 id="基于SSH将本地仓库上传到Github"><a href="#基于SSH将本地仓库上传到Github" class="headerlink" title="基于SSH将本地仓库上传到Github"></a>基于SSH将本地仓库上传到Github</h3><p>将本地仓库和远程仓库进行关联，并把远程仓库命名为origin</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git remote add origin git@github.com:用户名/project_02.git</span><br></pre></td></tr></table></figure>
+<p>将本地仓库中的内容推送到远程的origin 仓库中</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<p> 将远程仓库克隆到本地</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git clone 远程仓库的地址</span><br></pre></td></tr></table></figure>
+
+<h1 id="Git分支"><a href="#Git分支" class="headerlink" title="Git分支"></a>Git分支</h1><p>——在进行多人协作开发的时候，为了防止互相干扰，提高协同开发的体验，建议每个开发者都基于分支进行项目功能的开发</p>
+<h2 id="本地分支操作"><a href="#本地分支操作" class="headerlink" title="本地分支操作"></a>本地分支操作</h2><p><strong>查看分支列表</strong>使用如下的命令，可以查看当前 Git 仓库中所有的分支列表：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git branch //分支名字前面的 * 号表示当前所处的分支。</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建分支列表</strong>使用如下的命令，可以基于当前分支，创建一个新的分支，此时，新分支中的代码和当前分支完全一样：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git branch 分支名称</span><br></pre></td></tr></table></figure>
+
+<p><strong>切换分支</strong>使用如下的命令，可以切换到指定的分支上进行开发</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git checkout login</span><br></pre></td></tr></table></figure>
+
+<p><strong>分支的快速创建和切换</strong>使用如下的命令，可以创建指定名称的新分支，并立即切换到新分支上：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git checkout -b 分支名称</span><br><span class="line">//-b 表示创建一个新分支</span><br><span class="line">//checkout 表示切换到刚才创建的新分支上</span><br></pre></td></tr></table></figure>
+
+<p><strong>合并分支</strong>功能分支的代码开发测试完毕之后，可以使用如下的命令，将完成后的代码合并到 master 主分支上：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//首先切换到master分支</span><br><span class="line"> git checkout master</span><br><span class="line">// 在master分支上运行如下命令</span><br><span class="line"> git merge login</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除分支</strong>当把功能分支的代码合并到 master 主分支上以后，就可以使用如下的命令，删除对应的功能分支：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git branch -d 分支名称</span><br></pre></td></tr></table></figure>
+
+<p><strong>遇到冲突时的分支合并</strong>如果在两个不同的分支中，对同一个文件进行了不同的修改，Git 就没法干净的合并它们。 此时，我们需要打开这些包含冲突的文件然后手动解决冲突，再提交文件就可以了</p>
+<h2 id="远程分支操作"><a href="#远程分支操作" class="headerlink" title="远程分支操作"></a>远程分支操作</h2><p><strong>将本地分支推送到远程仓库</strong> 如果是第一次将本地分支推送到远程仓库，需要运行如下的命令：(第一次推送分支需要带 -u 参数，此后可以直接使用 git push 推送代码到远程分支。)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//-U表示把本地分支和远程分支进行关联，只在第一次推送的时候需要带-u参数</span><br><span class="line">  git push -u远程仓库的别名本地分支名称:远程分支名称</span><br><span class="line">//实际案例:</span><br><span class="line">  git push -U origin payment :pay</span><br><span class="line">//如果希望远程分支的名称和本地分支名称保持一致，可以对命令进行简化:</span><br><span class="line">   git push -U origin payment</span><br></pre></td></tr></table></figure>
+<p><strong>查看远程仓库中所有的分支列表</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">git remote show 远程仓库名称</span><br></pre></td></tr></table></figure>
+<p><strong>跟踪分支</strong>  跟踪分支指的是：从远程仓库中，把远程分支下载到本地仓库中</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//从远程仓库中，把对应的远程分支下载到本地仓库，保持本地分支和远程分支名称相同</span><br><span class="line">  git checkout 远程分支的名称</span><br><span class="line">//示例:</span><br><span class="line">  git checkout pay</span><br><span class="line">//从远程仓库中，把对应的远程分支下载到本地仓库，并把下载的本地分支进行重命名</span><br><span class="line">  git checkout -b本地分支名称远程仓库名称/远程分支名称</span><br><span class="line">//示例:</span><br><span class="line">  git checkout -b payment origin/pay</span><br></pre></td></tr></table></figure>
+<p><strong>拉取远程分支的最新的代码</strong>可以使用如下的命令，把远程分支最新的代码下载到本地对应的分支中</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//从远程仓库，拉取当前分支最新的代码，保持当前分支的代码和远程分支代码一致</span><br><span class="line">   git pull</span><br></pre></td></tr></table></figure>
+<p><strong>删除远程分支</strong>  删除远程仓库中指定的分支</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//删除远程仓库中，指定名称的远程分支</span><br><span class="line">  git push 远程仓库名称--delete 远程分支名称</span><br><span class="line">//示例:</span><br><span class="line">  git push origin--delete pay   </span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Git版本控制</category>
+      </categories>
+      <tags>
+        <tag>Github的基本使用</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>HTTP协议</title>
+    <url>/2022/02/28/HTTP%E5%8D%8F%E8%AE%AE/</url>
+    <content><![CDATA[<h1 id="HTTP协议简介"><a href="#HTTP协议简介" class="headerlink" title="HTTP协议简介"></a>HTTP协议简介</h1><h2 id="什么是通信"><a href="#什么是通信" class="headerlink" title="什么是通信"></a>什么是通信</h2><p>——通信就是信息的传递和交换</p>
+<p><strong>通信三要素</strong>：主体，内容，方式。</p>
+<p>（服务器把张三的文章通过响应的方式发送给客户端浏览器）<br>其中通信的<strong>主体</strong>是服务器和客服端浏览器，<strong>内容</strong>是张三的文章，<strong>方式</strong>是响应 <span id="more"></span></p>
+<h2 id="通信协议"><a href="#通信协议" class="headerlink" title="通信协议"></a>通信协议</h2><p>——通信协议是指通信的双方完成通信所必须遵守的规则和约定。</p>
+<p>客户端与服务器之间要实现网页内容的传输，则通信的双方必须遵守网页内容的传输协议。</p>
+<p>网页内容又叫做超文本，因此网页内容的传输协议又叫做超文本传输协议（HyperText Transfer Protocol） ，简称 HTTP 协议。</p>
+<h2 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h2><p>HTTP 协议即超文本传送协议 (HyperText Transfer Protocol) ，它规定了客户端与服务器之间进行网页内容传输时，所必须遵守的传输格式。<br>例如：</p>
+<ul>
+<li><p>客户端要以HTTP协议要求的格式把数据提交到服务器</p>
+</li>
+<li><p>服务器要以HTTP协议要求的格式把内容响应给客户端</p>
+<h1 id="HTTP请求消息"><a href="#HTTP请求消息" class="headerlink" title="HTTP请求消息"></a>HTTP请求消息</h1><p>——由于 HTTP 协议属于客户端浏览器和服务器之间的通信协议。因此，客户端发起的请求叫做 HTTP 请求，客户端发送到服务器的消息，叫做 HTTP 请求消息。注意：HTTP 请求消息又叫做 HTTP 请求报文。</p>
+<h2 id="HTTP请求消息的组成部分"><a href="#HTTP请求消息的组成部分" class="headerlink" title="HTTP请求消息的组成部分"></a>HTTP请求消息的组成部分</h2><p>HTTP 请求消息由<strong>请求行</strong>（request line）、<strong>请求头部</strong>（ header ） 、<strong>空行</strong> 和 <strong>请求体</strong> 4 个部分组成</p>
+</li>
+<li><p><strong>请求行</strong>由请求方式、URL 和 HTTP 协议版本 3 个部分组成，他们之间使用空格隔开</p>
+</li>
+<li><p><strong>请求头部</strong>用来描述客户端的基本信息，从而把客户端相关的信息告知服务器。比如：User-Agent 用来说明当前是什么类型的浏览器；Content-Type 用来描述发送到服务器的数据格式；Accept 用来描述客户端能够接收什么类型的返回内容；Accept-Language 用来描述客户端期望接收哪种人类语言的文本内容。<br>请求头部由多行 键&#x2F;值对 组成，每行的键和值之间用英文的冒号分隔。</p>
+</li>
+</ul>
+<table style=" text-align: center;">
+<tr>
+<td>头部字段</td>
+<td>说明</td>
+</tr>
+<tr>
+<td>Host</td>
+<td>要请求的服务器域名</td>
+</tr>
+<tr>
+<td>Connection
+</td>
+<td>客户端与服务器的连接方式(close 或 keepalive)
+</td>
+</tr>
+<tr>
+<td>Content-Length
+</td>
+<td>用来描述请求体的大小
+</td>
+</tr>
+<tr>
+<td>Accept
+</td>
+<td>客户端可识别的响应内容类型列表
+</td>
+</tr>
+<tr>
+<td>User-Agent
+</td>
+<td>产生请求的浏览器类型
+</td>
+</tr>
+<tr>
+<td>Content-Type
+</td>
+<td>客户端告诉服务器实际发送的数据类型
+</td>
+</tr>
+<tr>
+<td>Accept-Encoding
+</td>
+<td>客户端可接收的内容压缩编码形式
+</td>
+</tr>
+<tr>
+<td>Accept-Language
+</td>
+<td>用户期望获得的自然语言的优先顺序
+</td>
+</tr>
+
+</table>
+- **空行**：请求消息中的空行，用来分隔请求头部与请求体。
+
+<ul>
+<li><strong>请求体</strong>：请求体中存放的，是要通过 POST 方式提交到服务器的数据（注意：只有 POST 请求才有请求体，GET 请求没有请求体！<br>）<h1 id="HTTP响应消息"><a href="#HTTP响应消息" class="headerlink" title="HTTP响应消息"></a>HTTP响应消息</h1>——<strong>响应消息</strong>就是服务器响应给客户端的消息内容，也叫作响应报文</li>
+</ul>
+<h2 id="HTTP响应消息的组成部分"><a href="#HTTP响应消息的组成部分" class="headerlink" title="HTTP响应消息的组成部分"></a>HTTP响应消息的组成部分</h2><p> HTTP响应消息由<strong>状态行、响应头部、空行 和 响应体</strong> 4 个部分组成，</p>
+<ul>
+<li><p><strong>状态行</strong>由 HTTP 协议版本、状态码和状态码的描述文本 3 个部分组成，他们之间使用空格隔开;</p>
+</li>
+<li><p><strong>响应头部</strong>用来描述服务器的基本信息。响应头部由多行 键&#x2F;值对 组成，每行的键和值之间用英文的冒号分隔。（关于更多响应头字段的描述，可以查看 ： <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers">MDN 官方文档</a>）</p>
+</li>
+<li><p><strong>空行</strong>：响应消息中的空行，用来分隔响应头部与响应体。</p>
+</li>
+<li><p><strong>响应体</strong>：响应体中存放的，是服务器响应给客户端的资源内容。</p>
+<h1 id="HTTP请求方法"><a href="#HTTP请求方法" class="headerlink" title="HTTP请求方法"></a>HTTP请求方法</h1></li>
+</ul>
+<p><strong>HTTP请求方法</strong>属于HTTP协议中的一部分，请求方法的作用是：用来表明要对服务器上的资源执行的操作<br>（最常用的请求方法是GET和POST）</p>
+<ol>
+<li><strong>GET</strong>(查询)发送请求来获得服务器上的资源，请求体中不会包含请求数据，请求数据放在协议头中。</li>
+<li><strong>POST</strong>(新增)向服务器提交资源（例如提交表单或上传文件）。数据被包含在请求体中提交给服务器。</li>
+<li><strong>PUT</strong>(修改)向服务器提交资源，并使用提交的新资源，替换掉服务器对应的旧资源。</li>
+<li><strong>DELETE</strong>(删除)请求服务器删除指定的资源。<h1 id="HTTP响应状态码"><a href="#HTTP响应状态码" class="headerlink" title="HTTP响应状态码"></a>HTTP响应状态码</h1>——<strong>HTTP 响应状态码</strong>（HTTP Status Code），也属于 HTTP 协议的一部分，用来标识响应的状态。<br>响应状态码会随着响应消息一起被发送至客户端浏览器，浏览器根据服务器返回的响应状态码，就能知道这次 HTTP 请求的结果是成功还是失败了。<h2 id="HTTP响应状态码的组成及分类"><a href="#HTTP响应状态码的组成及分类" class="headerlink" title="HTTP响应状态码的组成及分类"></a>HTTP响应状态码的组成及分类</h2></li>
+</ol>
+<p><strong>HTTP 状态码</strong>由三个十进制数字组成，第一个十进制数字定义了状态码的类型，后两个数字用来对状态码进行细分。<br>HTTP 状态码共分为 5 种类型：</p>
+<ul>
+<li><p>1xx——<strong>信息</strong>，服务器收到请求，需要请求者继续执行操作（实际开发中很少遇到 1** 类型的状态码）</p>
+</li>
+<li><p>2xx——<strong>成功</strong>，操作被成功接收并处理</p>
+<table style=" text-align: center;">
+<tr>
+<td>200</td>
+<td>OK</td>
+<td>请求成功，一般用于GET与POST请求</td>
+</tr>
+<tr>
+<td>201</td>
+<td>Created</td>
+<td>已创建，成功请求并创建了新的资源，通常用于POST或PUT</td>
+</tr>
+</table></li>
+<li><p>3xx——<strong>重定向</strong>，需要进一步的操作以完成请求</p>
+<table style=" text-align: center;">
+<tr>
+<td>301</td>
+<td>Moved Permanently</td>
+<td>永久移动。请求的资源已被永久的移动到新URI，返回信息会包括新的URI，浏览器会自动定向到新URI。今后任何新的请求都应使用新的URI代替</td>
+</tr>
+<tr>
+<td>302</td>
+<td>Found</td>
+<td>临时移动。与301类似。但资源只是临时被移动。客户端应继续使用原有URI</td>
+</tr>
+<tr>
+<td>303</td>
+<td>Not Modified</td>
+<td>未修改。所请求的资源未修改，服务器返回此状态码时，不会返回任何资源（响应消息中不包含响应体）。客户端通常会缓存访问过的资源。</td>
+</tr>
+</table></li>
+<li><p>4xx——<strong>客户端错误</strong>，请求包含语法错误或无法完成请求</p>
+<table style=" text-align: center;">
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+<td>1、语义有误，当前请求无法被服务器理解。除非进行修改，否则客户端不应该重复提交这个请求。
+2、请求参数有误。</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized</td>
+<td>当前请求需要用户验证。</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden</td>
+<td>服务器已经理解请求，但是拒绝执行它。</td>
+</tr>
+<tr style="color:red;">
+<td>404</td>
+<td>Not Found</td>
+<td>服务器无法根据客户端的请求找到资源（网页）</td>
+</tr>
+<tr>
+<td>408</td>
+<td>Request Timeout</td>
+<td>请求超时。服务器等待客户端发送的请求时间过长，超时。</td>
+</tr>
+<tr>
+</table></li>
+<li><p>5xx——<strong>服务器错误</strong>，服务器在处理请求的过程中发生了错</p>
+<table style=" text-align: center;">
+<tr>
+<td>500</td>
+<td>Internal Server Error</td>
+<td>服务器内部错误，无法完成请求。</td>
+</tr>
+<tr>
+<td>501</td>
+<td>Not Implemented</td>
+<td>服务器不支持该请求方法，无法完成请求。只有 GET 和 HEAD 请求方法是要求每个服务器必须支持的，其它请求方法在不支持的服务器上会返回501</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable</td>
+<td>由于超载或系统维护，服务器暂时的无法处理客户端的请求。</td>
+</tr>
+</table></li>
+</ul>
+]]></content>
+      <categories>
+        <category>前后端交互</category>
+      </categories>
+      <tags>
+        <tag>HTTP协议</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Node.js的模块化</title>
+    <url>/2022/03/10/Node-js%E7%9A%84%E6%A8%A1%E5%9D%97%E5%8C%96/</url>
+    <content><![CDATA[<h1 id="什么是模块化"><a href="#什么是模块化" class="headerlink" title="什么是模块化"></a>什么是模块化</h1><p>编程领域中的模块化，就是遵守固定的规则，把一个大文件拆成独立并互相依赖的多个小模块。<br>把代码进行模块化拆分的好处：</p>
+<ul>
+<li>提高了代码的复用性</li>
+<li>提高了代码的可维护性</li>
+<li>可以实现按需加载<span id="more"></span>
+<h1 id="Node-js中的模块化"><a href="#Node-js中的模块化" class="headerlink" title="Node.js中的模块化"></a>Node.js中的模块化</h1></li>
+</ul>
+<h2 id="模块的分类"><a href="#模块的分类" class="headerlink" title="模块的分类"></a>模块的分类</h2><p>Node.js 中根据模块来源的不同，将模块分为了 3 大类，分别是：</p>
+<ul>
+<li>内置模块（内置模块是由 Node.js 官方提供的，例如 fs、path、http 等）</li>
+<li>自定义模块（用户创建的每个 .js 文件，都是自定义模块）</li>
+<li>第三方模块（由第三方开发出来的模块，并非官方提供的内置模块，也不是用户创建的自定义模块，使用前需要先下载）</li>
+</ul>
+<h2 id="加载模块"><a href="#加载模块" class="headerlink" title="加载模块"></a>加载模块</h2><p>使用强大的 require() 方法，可以加载需要的内置模块、用户自定义模块、第三方模块进行使用<br>（注意：使用 require() 方法加载其它模块时，会执行被加载模块中的代码）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 1.加载内置的fs模块</span><br><span class="line">const fs = require(&#x27;fs&#x27; )</span><br><span class="line">// 2.加载用户的自定义模块</span><br><span class="line">const custom = require( &#x27; ./custom.js&#x27;)</span><br><span class="line">// 3.加载第三方模块(关于第三方模块的下载和使用，会在后面的课程中进行专]的讲解)</span><br><span class="line">const moment = require( &#x27; moment &#x27; )</span><br></pre></td></tr></table></figure>
+<h2 id="模块作用域"><a href="#模块作用域" class="headerlink" title="模块作用域"></a>模块作用域</h2><p>与函数作用域类似，在自定义模块中定义的变量、方法等成员，只能在当前模块内被访问，这种模块级别的访问限制，叫做模块作用域；他的好处是：防止全局变量污染的问题</p>
+<h2 id="向外共享模块作用域中的成员"><a href="#向外共享模块作用域中的成员" class="headerlink" title="向外共享模块作用域中的成员"></a>向外共享模块作用域中的成员</h2><ol>
+<li>module对象：在每个 .js 自定义模块中都有一个 module 对象，它里面存储了和当前模块有关的信息</li>
+<li>module.exports 对象：在自定义模块中，可以使用 module.exports 对象，将模块内的成员共享出去，供外界使用。外界用 require() 方法导入自定义模块时，得到的就是 module.exports 所指向的对象。（注意：使用 require() 方法导入模块时，导入的结果，永远以 module.exports 指向的对象为准）</li>
+<li>exports 对象：由于 module.exports 单词写起来比较复杂，为了简化向外共享成员的代码，Node 提供了 exports 对象。默认情况下，exports 和 module.exports 指向同一个对象。最终共享的结果，还是以 module.exports 指向的对象为准。</li>
+</ol>
+<h1 id="模块的加载机制"><a href="#模块的加载机制" class="headerlink" title="模块的加载机制"></a>模块的加载机制</h1><h2 id="优先从缓存中加载"><a href="#优先从缓存中加载" class="headerlink" title="优先从缓存中加载"></a>优先从缓存中加载</h2><p>模块在第一次加载后会被缓存。 这也意味着多次调用 require() 不会导致模块的代码被执行多次。<br>注意：不论是内置模块、用户自定义模块、还是第三方模块，它们都会优先从缓存中加载，从而提高模块的加载效率。</p>
+<h2 id="内置模块的加载机制"><a href="#内置模块的加载机制" class="headerlink" title="内置模块的加载机制"></a>内置模块的加载机制</h2><p>内置模块是由 Node.js 官方提供的模块，内置模块的加载优先级最高。<br>例如，require(‘fs’) 始终返回内置的 fs 模块，即使在 node_modules 目录下有名字相同的包也叫做 fs。</p>
+<h2 id="自定义模块的加载机制"><a href="#自定义模块的加载机制" class="headerlink" title="自定义模块的加载机制"></a>自定义模块的加载机制</h2><p>使用 require() 加载自定义模块时，必须指定以 .&#x2F; 或 ..&#x2F; 开头的路径标识符。在加载自定义模块时，如果没有指定 .&#x2F; 或 ..&#x2F; 这样的路径标识符，则 node 会把它当作内置模块或第三方模块进行加载。</p>
+<p>同时，在使用 require() 导入自定义模块时，如果省略了文件的扩展名，则 Node.js 会按顺序分别尝试加载以下的文件：<br>按照确切的文件名进行加载</p>
+<ul>
+<li>补全 .js 扩展名进行加载</li>
+<li>补全 .json 扩展名进行加载</li>
+<li>补全 .node 扩展名进行加载</li>
+<li>加载失败，终端报错<h2 id="第三方模块的加载机制"><a href="#第三方模块的加载机制" class="headerlink" title="第三方模块的加载机制"></a>第三方模块的加载机制</h2>如果传递给 require() 的模块标识符不是一个内置模块，也没有以 ‘.&#x2F;’ 或 ‘..&#x2F;’ 开头，则 Node.js 会从当前模块的父目录开始，尝试从 &#x2F;node_modules 文件夹中加载第三方模块。<br>如果没有找到对应的第三方模块，则移动到再上一层父目录中，进行加载，直到文件系统的根目录。<br>例如，假设在 ‘C:\Users\itheima\project\foo.js’ 文件里调用了 require(‘tools’)，则 Node.js 会按以下顺序查找：</li>
+<li>C:\Users\itheima\project\node_modules\tools</li>
+<li>C:\Users\itheima\node_modules\tools</li>
+<li>C:\Users\node_modules\tools</li>
+<li>C:\node_modules\tools</li>
+</ul>
+<h2 id="目录作为模块"><a href="#目录作为模块" class="headerlink" title="目录作为模块"></a>目录作为模块</h2><p>当把目录作为模块标识符，传递给 require() 进行加载的时候，有三种加载方式：</p>
+<ul>
+<li>在被加载的目录下查找一个叫做 package.json 的文件，并寻找 main 属性，作为 require() 加载的入口</li>
+<li>如果目录里没有 package.json 文件，或者 main 入口不存在或无法解析，则 Node.js 将会试图加载目录下的 index.js 文件。</li>
+<li>如果以上两步都失败了，则 Node.js 会在终端打印错误消息，报告模块的缺失：Error: Cannot find module ‘xxx’</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前后端交互</category>
+      </categories>
+      <tags>
+        <tag>Node.js的模块化</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NodeJs基础</title>
+    <url>/2022/03/04/NodeJs%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h1 id="初始Node-js"><a href="#初始Node-js" class="headerlink" title="初始Node.js"></a>初始Node.js</h1><h2 id="什么是Node-js"><a href="#什么是Node-js" class="headerlink" title="什么是Node.js"></a>什么是Node.js</h2><p>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。<br>Node.js 的官网地址： <a href="https://nodejs.org/zh-cn/">https://nodejs.org/zh-cn/</a></p>
+<span id="more"></span>
+
+<ul>
+<li>浏览器是 JavaScript 的前端运行环境;</li>
+<li>Node.js 是 JavaScript 的后端运行环境;</li>
+<li>Node.js 中无法调用 DOM 和 BOM 等浏览器内置 API。</li>
+</ul>
+<h2 id="Node-js-可以做什么"><a href="#Node-js-可以做什么" class="headerlink" title="Node.js 可以做什么"></a>Node.js 可以做什么</h2><p>Node.js 作为一个 JavaScript 的运行环境，仅仅提供了基础的功能和 API。然而，基于 Node.js 提供的这些基础能，很多强大的工具和框架如雨后春笋，层出不穷，所以学会了 Node.js ，可以让前端程序员胜任更多的工作和岗位：</p>
+<ul>
+<li>基于 Express 框架（<a href="http://www.expressjs.com.cn/%EF%BC%89%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA">http://www.expressjs.com.cn/），可以快速构建</a> Web 应用</li>
+<li>基于 Electron 框架（<a href="https://electronjs.org/%EF%BC%89%EF%BC%8C%E5%8F%AF%E4%BB%A5%E6%9E%84%E5%BB%BA%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8">https://electronjs.org/），可以构建跨平台的桌面应用</a></li>
+<li>基于 restify 框架（<a href="http://restify.com/%EF%BC%89%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA">http://restify.com/），可以快速构建</a> API 接口项目</li>
+<li>读写和操作数据库、创建实用的命令行工具辅助前端开发、etc…<br>总之：Node.js 是大前端时代的“大宝剑”，有了 Node.js 这个超级 buff 的加持，前端程序员的行业竞争力会越来越强！</li>
+</ul>
+<h2 id="在-Node-js-环境中执行-JavaScript-代码"><a href="#在-Node-js-环境中执行-JavaScript-代码" class="headerlink" title="在 Node.js 环境中执行 JavaScript 代码"></a>在 Node.js 环境中执行 JavaScript 代码</h2><ol>
+<li>打开终端</li>
+<li>输入node 要执行的js文件的路径</li>
+</ol>
+<h3 id="终端中的快捷键"><a href="#终端中的快捷键" class="headerlink" title="终端中的快捷键"></a>终端中的快捷键</h3><ul>
+<li>使用 ↑ 键，可以快速定位到上一次执行的命令</li>
+<li>使用 tab 键，能够快速补全路径</li>
+<li>使用 esc 键，能够快速清空当前已输入的命令</li>
+<li>输入 cls 命令，可以清空终端</li>
+</ul>
+<h1 id="fs文件系统模块"><a href="#fs文件系统模块" class="headerlink" title="fs文件系统模块"></a>fs文件系统模块</h1><h2 id="什么是-fs-文件系统模块"><a href="#什么是-fs-文件系统模块" class="headerlink" title="什么是 fs 文件系统模块"></a>什么是 fs 文件系统模块</h2><p>fs 模块是 Node.js 官方提供的、用来操作文件的模块。它提供了一系列的方法和属性，用来满足用户对文件的操作需求</p>
+<ul>
+<li>fs.readFile() 方法，用来读取指定文件中的内容</li>
+<li>fs.writeFile() 方法，用来向指定的文件中写入内容<br>如果要在 JavaScript 代码中，使用 fs 模块来操作文件，则需要使用如下的方式先导入它</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const fs = require(&#x27;fs&#x27;)</span><br></pre></td></tr></table></figure>
+<h2 id="fs-readFile-的语法"><a href="#fs-readFile-的语法" class="headerlink" title="fs.readFile()的语法"></a>fs.readFile()的语法</h2><p>用来读取指定文件中的内容<br><strong>格式：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">fs.readFile(path[,options],callback)</span><br><span class="line">//参数1：必选参数，字符串，表示文件的路径</span><br><span class="line">//参数2：可选参数，表示以什么编码格式来读取文件</span><br><span class="line">//参数3：必选参数，文件读取完成后，通过回调函数拿到读取的结果</span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const fs = require( &#x27;fs&#x27;)</span><br><span class="line">fs. readFile(&#x27; ./files/11.txt&#x27;, &#x27;utf8&#x27;, function(err, dataStr) &#123;</span><br><span class="line"> console.log(err )</span><br><span class="line"> console. 0og(-----&#x27;)</span><br><span class="line"> console. log(dataStr)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>判断文件是否读取成功</strong><br>可以判断 err 对象是否为 null，从而知晓文件读取的结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const fs = require(&#x27;fs&#x27;)</span><br><span class="line">fs. readFile(&#x27; ./files/1.txt&#x27;, &#x27;utf8&#x27;, function(err, result) &#123;</span><br><span class="line">     if (err) &#123;</span><br><span class="line">       return console. log( &#x27;文件读取失败! &#x27; + err . message)</span><br><span class="line">     &#125;</span><br><span class="line">     console. log( &#x27;文件读取成功，内容是: + result)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="fs-writeFile-的语法"><a href="#fs-writeFile-的语法" class="headerlink" title="fs.writeFile()的语法"></a>fs.writeFile()的语法</h2><p>用来向指定的文件中写入内容<br><strong>格式：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">fs .writeFile(file, data[, options], callback)</span><br><span class="line">//参数1：必选参数，需要指定一个文件路径的字符串，表示文件的存放路径。</span><br><span class="line">//参数2：必选参数，表示要写入的内容。</span><br><span class="line">//参数3：可选参数，表示以什么格式写入文件内容，默认值是 utf8。</span><br><span class="line">//参数4：必选参数，文件写入完成后的回调函数。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const fs = require(&#x27;fs&#x27;)</span><br><span class="line">fs . writeFile(&#x27; ./files/2.txt&#x27;, &#x27;Hello Node.js!&#x27;, function(err) &#123;</span><br><span class="line">    console. log(err)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>判断文件是否写入成功</strong><br>可以判断 err 对象是否为 null，从而知晓文件写入的结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const fs = require(&#x27;fs&#x27;)</span><br><span class="line">fs . writeFile(&#x27;F:/files/2.txt&#x27;, &#x27;Hello Node.js!&#x27;, function(err) &#123;</span><br><span class="line">   if (err) &#123;</span><br><span class="line">      return console.log( ‘文件写入失败!”+ err . message )</span><br><span class="line">   console. log( &#x27;文件写入成功! &#x27;)</span><br><span class="line"> &#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="path-路径模块"><a href="#path-路径模块" class="headerlink" title="path 路径模块"></a>path 路径模块</h1><h2 id="什么是path-路径模块"><a href="#什么是path-路径模块" class="headerlink" title="什么是path 路径模块"></a>什么是path 路径模块</h2><p>path 模块是 Node.js 官方提供的、用来处理路径的模块。它提供了一系列的方法和属性，用来满足用户对路径的处理需求。</p>
+<ul>
+<li>path.join() 方法，用来将多个路径片段拼接成一个完整的路径字符串</li>
+<li>path.basename() 方法，用来从路径字符串中，将文件名解析出来</li>
+<li>path.extname() 方法，可以获取路径中的扩展名部分，<br>如果要在 JavaScript 代码中，使用 path 模块来处理路径，则需要使用如下的方式先导入它</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const path =require(&#x27;path&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="path-join-的语法"><a href="#path-join-的语法" class="headerlink" title="path.join() 的语法"></a>path.join() 的语法</h2><p>用来将多个路径片段拼接成一个完整的路径字符串<br><strong>格式：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path.join([...paths])</span><br><span class="line">//...paths&lt;string&gt;路径片段的序列</span><br><span class="line">// 返回值：&lt;string&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const pathStr - path. join(&#x27;/a&#x27;, &#x27;/b/c&#x27;, ../&#x27;，&#x27;./d&#x27;,&#x27;e&#x27;)</span><br><span class="line">console . log(pathStr) /1输出\a\bide</span><br><span class="line">const pathStr2 = path.</span><br><span class="line">join(_ dirname, &#x27; ./files/1.txt&#x27;)</span><br><span class="line">console . log(pathStr2) 11输出当前文件所处目录\files\1. txt</span><br></pre></td></tr></table></figure>
+<h2 id="path-basename-的语法"><a href="#path-basename-的语法" class="headerlink" title="path.basename() 的语法"></a>path.basename() 的语法</h2><p>使用 path.basename() 方法，可以获取路径中的最后一部分，经常通过这个方法获取路径中的文件名</p>
+<p><strong>格式：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path.basename(path[,ext])</span><br><span class="line">//path &lt;string&gt; 必选参数，表示一个路径的字符串</span><br><span class="line">//ext &lt;string&gt; 可选参数，表示文件扩展名</span><br><span class="line">//返回: &lt;string&gt; 表示路径中的最后一部分</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const fpath = &#x27; /a/b/c/index.html&#x27; //文件的存放路径</span><br><span class="line"></span><br><span class="line">var fullName = path . basename( fpath)</span><br><span class="line">console. log( fullName) // 输出index . html</span><br><span class="line"></span><br><span class="line">var nameWi thoutExt = path. basename( fpath, &#x27; .html &#x27; )</span><br><span class="line">console . logc nameWithoutExt) 1// 输出index</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="path-extname-的语法"><a href="#path-extname-的语法" class="headerlink" title="path.extname() 的语法"></a>path.extname() 的语法</h2><p>使用 path.extname() 方法，可以获取路径中的扩展名部分</p>
+<p><strong>格式：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">path.extname(path)</span><br><span class="line">//path &lt;string&gt;必选参数，表示一个路径的字符串</span><br><span class="line">//返回: &lt;string&gt; 返回得到的扩展名字符串</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const fpath = &#x27; /a/b/c/index.html&#x27; //路径字符串</span><br><span class="line">const fext = path. extname( fpath)</span><br><span class="line">console. log(fext) //输出. html</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="http-模块"><a href="#http-模块" class="headerlink" title="http 模块"></a>http 模块</h1><h2 id="什么是http-模块"><a href="#什么是http-模块" class="headerlink" title="什么是http 模块"></a>什么是http 模块</h2><p>http 模块是 Node.js 官方提供的、用来创建 web 服务器的模块。通过 http 模块提供的 http.createServer() 方法，就能方便的把一台普通的电脑，变成一台 Web 服务器，从而对外提供 Web 资源服务。</p>
+<p>如果要希望使用 http 模块创建 Web 服务器，则需要先导入它</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const http= require(&#x27;http&#x27;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="http-模块的作用"><a href="#http-模块的作用" class="headerlink" title="http 模块的作用"></a>http 模块的作用</h2><p>在 Node.js 中，我们不需要使用 IIS、Apache 等这些第三方 web 服务器软件。因为我们可以基于 Node.js 提供的 http 模块，通过几行简单的代码，就能轻松的手写一个服务器软件，从而对外提供 web 服务。</p>
+<h2 id="创建最基本的web服务器"><a href="#创建最基本的web服务器" class="headerlink" title="创建最基本的web服务器"></a>创建最基本的web服务器</h2><ol>
+<li>导入http 模块</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const http=require(&#x27;http&#x27;)</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>创建web服务器实例<br>调用 http.createServer() 方法，即可快速创建一个 web 服务器实例：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">const server=http.createServer()</span><br></pre></td></tr></table></figure></li>
+<li>为服务器实例绑定 request 事件<br>为服务器实例绑定 request 事件，即可监听客户端发送过来的网络请求</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//使用服务器实例的.on() 方法，为服务器绑定个request 事件</span><br><span class="line">server . on(&#x27;request&#x27;，(req, res) =&gt; &#123;</span><br><span class="line">//只要有客户端来请求我们自己的服务器，就会触发request 事件，从而调用这个事件处理函数</span><br><span class="line">console. log( &#x27;Someone visit our web server.&#x27; )</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>启动服务器<br>调用服务器实例的 .listen() 方法，即可启动当前的 web 服务器实例：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">   //调用server.listen(端0号， cb回调)方法，即可启动web服务器</span><br><span class="line">   server .listen(80, () =&gt; &#123;</span><br><span class="line">   console log( &#x27;http server running at http://127.0.0.1&#x27;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>req请求对象<br>只要服务器接收到了客户端的请求，就会调用通过 server.on() 为服务器绑定的 request 事件处理函数。<br>如果想在事件处理函数中，访问与客户端相关的数据或属性，可以使用如下的方式：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server .on( &#x27;request&#x27;, (req) &gt; &#123;</span><br><span class="line">// req是请求对象，它包含了与客户端相关的数据和属性，例如:</span><br><span class="line">// req.url是客户端请求的URL 地址</span><br><span class="line">// req.method 是客户端的method请求类型</span><br><span class="line">const str . Your request url is $&#123;req.ur1&#125;, and request method is $&#123;req . method&#125;</span><br><span class="line">console. log(str )</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>res 响应对象<br>在服务器的 request 事件处理函数中，如果想访问与服务器相关的数据或属性，可以使用如下的方式：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server . on( &#x27;request&#x27;, (req, res) =&gt; &#123;</span><br><span class="line">// res 是响应对象，它包含了与服务器相关的数据和属性，例如:</span><br><span class="line">//要发送到客户端的字符串</span><br><span class="line">const str = &quot;Your request url is $&#123;req,ur1&#125;, and request method is $&#123;req. method&#125;</span><br><span class="line">// res .end( )方法的作用:</span><br><span class="line">//向客户端发送指定的内容，并结束这次请求的处理过程</span><br><span class="line">res . end(str )</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li>解决中文乱码的问题<br>当调用 res.end() 方法，向客户端发送中文内容的时候，会出现乱码问题，此时，需要手动设置内容的编码格式：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">server . on( &#x27;request&#x27;, (req, res) =&gt; &#123;</span><br><span class="line">//发送的内容包含中文</span><br><span class="line">const str =。 您请求的url地址是$&#123;req.ur1&#125;, 请求的method类型是$&#123;req . method&#125;</span><br><span class="line">// 为了防止中文显示乱码的问题， 需要设置响应头Content -Type的值为text/html; charset=utf-8</span><br><span class="line">res . setHeader &#x27; Content-Type&#x27;, &#x27; text/html; charset=utf-8&#x27;)</span><br><span class="line">//把包含中文的内容，响应给客户端</span><br><span class="line">res . end(str)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+      <categories>
+        <category>前后端交互</category>
+      </categories>
+      <tags>
+        <tag>Node</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git基础</title>
+    <url>/2022/03/01/git%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h1 id="版本控制软件"><a href="#版本控制软件" class="headerlink" title="版本控制软件"></a>版本控制软件</h1><p><strong>版本控制软件</strong>是一个用来记录文件变化，以便将来查阅特定版本修订情况的系统，因此有时也叫做<strong>版本控制系统</strong>。</p>
+<p>版本控制系统的分类：本地版本控制系统；集中化的版本控制系统；分布式版本控制系统。现在主要使用分布式版本控制系统，前面两种已经淘汰掉了</p>
+<p>分布式版本控制系统（Git）的特点：基于服务器，客户端的运行模式</p>
+<ul>
+<li>服务器保存文件的所有更新版本</li>
+<li>客户端是服务器的完整备份，并不是只保留文件的最新版本  <span id="more"></span></li>
+</ul>
+<p><strong>优点：</strong><br>① 联网运行，支持多人协作开发</p>
+<p>② 客户端断网后支持离线本地提交版本更新</p>
+<p>③ 服务器故障或损坏后，可使用任何一个客户端的备份进行恢复</p>
+<h1 id="Git基础"><a href="#Git基础" class="headerlink" title="Git基础"></a>Git基础</h1><h2 id="Git中的三个区域"><a href="#Git中的三个区域" class="headerlink" title="Git中的三个区域"></a>Git中的三个区域</h2><ul>
+<li>工作区：处理工作的区域</li>
+<li>暂存区：已完成的工作的临时存放区域，等待被提交</li>
+<li>Git仓库：最终的存放区域</li>
+</ul>
+<h2 id="Git中的三种状态"><a href="#Git中的三种状态" class="headerlink" title="Git中的三种状态"></a>Git中的三种状态</h2><ul>
+<li><strong>已修改 modified</strong>：表示修改了文件，但还没将修改的结果放到暂存区</li>
+<li><strong>已暂存 staged</strong>：表示对已修改文件的当前版本做了标记，使之包含在下次提交的列表中</li>
+<li><strong>已提交 committed</strong>：表示文件已经安全地保存在本地的 Git 仓库中<h2 id="基本的Git工作流程"><a href="#基本的Git工作流程" class="headerlink" title="基本的Git工作流程"></a>基本的Git工作流程</h2></li>
+</ul>
+<p>基本的 Git 工作流程如下：</p>
+<ol>
+<li>在工作区中修改文件</li>
+<li>将你想要下次提交的更改进行暂存</li>
+<li>提交更新，找到暂存区的文件，将快照永久性存储到 Git 仓库<h2 id="安装并配置Git"><a href="#安装并配置Git" class="headerlink" title="安装并配置Git"></a>安装并配置Git</h2></li>
+</ol>
+<p><strong>1.在 Windows 中下载并安装 Git</strong></p>
+<p>在开始使用 Git 管理项目的版本之前，需要将它安装到计算机上。可以使用浏览器访问如下的网址，根据自己<br>的操作系统，选择下载对应的 Git 安装包：<a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a></p>
+<p><strong>2.配置用户信息</strong></p>
+<p>安装完 Git 之后，要做的第一件事就是设置自己的用户名和邮件地址。因为通过 Git 对项目进行版本管理的时<br>候，Git 需要使用这些基本信息，来记录是谁对项目进行了操作：</p>
+<pre><code>git config --global user.name &quot;用户名&quot;//--global 表示该命令只需要运行一次,即可永久生效
+git config --global uaer.email &quot;邮箱地址&quot;
+</code></pre>
+<p><strong>3.获取帮助信息</strong></p>
+<p>可以使用 git help <verb> 命令，无需联网即可在浏览器中打开帮助手册，</p>
+<pre><code>git help config //打开帮助手册
+git config -h  //用 -h 选项获得更简明的“help”输出
+</code></pre>
+<h2 id="Git的基本操作"><a href="#Git的基本操作" class="headerlink" title="Git的基本操作"></a>Git的基本操作</h2><p><strong>1.获取 Git 仓库的两种方式</strong></p>
+<ul>
+<li>将尚未进行版本控制的本地目录转换为 Git 仓库</li>
+<li>从其它服务器克隆一个已存在的 Git 仓库</li>
+</ul>
+<p><strong>2.在现有目录中初始化仓库</strong></p>
+<p>如果自己有一个尚未进行版本控制的项目目录，想要用 Git 来控制它，需要执行如下两个步骤：</p>
+<p>① 在项目目录中，通过鼠标右键打开“Git Bash”</p>
+<p>② 执行 git init 命令将当前的目录转化为 Git 仓库</p>
+<p>git init 命令会创建一个名为 .git 的隐藏目录，这个 .git 目录就是当前项目的 Git 仓库，里面包含了初始的必要文件，这些文件是 Git 仓库的必要组成部分</p>
+<p><strong>3.工作区中文件的 4 种状态</strong></p>
+<ul>
+<li>未被Git管理: 未跟踪（Untracked）不被 Git 所管理的文件</li>
+<li>已被Git管理:</li>
+</ul>
+<p><strong>未修改（Unmodified）</strong>工作区中文件的内容和 Git 仓库中文件的内容保持一致</p>
+<p><strong>已修改（Modified）</strong>工作区中文件的内容和 Git仓库中文件的内容不一致</p>
+<p><strong>已暂存（Staged）</strong>工作区中被修改的文件已被放到暂存区，准备将修改后的文件保存到 Git 仓库中</p>
+<p><strong>4.检查文件的状态</strong></p>
+<p>   <code>git status  //查看文件处于什么状态</code></p>
+<p>如果看到新建的 index.html 文件出现在 Untracked files（未跟踪的文件） 下面。未跟踪的文件意味着Git 在之前的快照（提交）中没有这些文件；Git 不会自动将之纳入跟踪范围，除非明确地告诉它“我需要使用 Git 跟踪管理该文件”。</p>
+<pre><code>git status -s  //以精简的方式显示文件的状态
+git status --short
+</code></pre>
+<p>未跟踪文件前面有红色的 ?? 标记</p>
+<p><strong>6.跟踪新文件</strong></p>
+<pre><code>git add index.html  //用命令 git add 开始跟踪一个文件
+git add . //向暂存区中一次性添加多个文件
+</code></pre>
+<p>就是把文件放在暂存区</p>
+<p><strong>7.提交更新</strong></p>
+<pre><code>git commit -m &quot;新建文件&quot;  
+//执行 git commit 命令进行提交,其中 -m 选项后面是本次的提交消息，用来对提交的内容做进一步的描述
+</code></pre>
+<p><strong>8.对已提交的文件进行修改</strong></p>
+<p>修改了工作区中 index.html 的内容之后，再次运行 git status 和 git status -s 命令，文件index.html 出现在 Changes not staged for commit 这行下面，说明已跟踪文件的内容发生了变化，但还没有放到暂存区。<br>注意：修改过的、没有放入暂存区的文件前面有红色的 M 标记</p>
+<p><strong>9.暂存已修改的文件</strong></p>
+<p>如果要暂存这次修改，需要再次运行 git add 命令，这个命令是个多功能的命令，主要有如下 3 个功效：</p>
+<ul>
+<li>可以用它开始跟踪新文件</li>
+<li>把已跟踪的、且已修改的文件放到暂存区</li>
+<li>把有冲突的文件标记为已解决状态</li>
+</ul>
+<p><strong>10.提交已暂存的文件</strong></p>
+<p>再次运行 git commit -m “提交消息” 命令，即可将暂存区中记录的 index.html 的快照，提交到 Git仓库中进行保存</p>
+<p><strong>11.撤销对文件的修改</strong></p>
+<pre><code>git checkout --index.html
+</code></pre>
+<p>撤销对文件的修改指的是：把对工作区中对应文件的修改，还原成 Git 仓库中所保存的版本。<br>操作的结果：所有的修改会丢失，且无法恢复！危险性比较高，请慎重操作！</p>
+<p><strong>12.取消暂存的文件</strong></p>
+<pre><code>git reset HEAD  要移除的文件名称
+</code></pre>
+<p><strong>13.跳过使用暂存区域</strong></p>
+<pre><code>git commit -a -m &quot;描述消息&quot;
+</code></pre>
+<p>Git 提供了一个跳过使用暂存区域的方式， 只要在提交的时候，给 git commit 加上 -a 选项，Git 就会自动把所有已经跟踪过的文件暂存起来一并提交，从而跳过 git add 步骤</p>
+<p><strong>14.移除文件</strong></p>
+<pre><code>git rm -f index.js  //从Git仓库和工作区中同时移除index.js
+git rm --cached index.css  //只从Git仓库中移除index.css，但保留工作区中的index.css文件
+</code></pre>
+<p><strong>15.忽略文件</strong><br>一般我们总会有些文件无需纳入 Git 的管理，也不希望它们总出现在未跟踪文件列表。 在这种情况下，我们可以创建一个名为 .gitignore 的配置文件，列出要忽略的文件的匹配模式。</p>
+<p>文件 .gitignore 的格式规范如下：</p>
+<ul>
+<li>① 以 # 开头的是注释</li>
+<li>② 以 &#x2F; 结尾的是目录</li>
+<li>③ 以 &#x2F; 开头防止递归</li>
+<li>④ 以 ! 开头表示取反</li>
+<li>⑤ 可以使用 glob 模式进行文件和文件夹的匹配（glob 指简化了的正则表达式）</li>
+</ul>
+<p><strong>16.glob 模式</strong><br>所谓的 glob 模式是指简化了的正则表达式：</p>
+<ul>
+<li>① 星号 * 匹配零个或多个任意字符</li>
+<li>② [abc] 匹配任何一个列在方括号中的字符 （此案例匹配一个 a 或匹配一个 b 或匹配一个 c）</li>
+<li>③ 问号 ? 只匹配一个任意字符</li>
+<li>④ 在方括号中使用短划线分隔两个字符， 表示所有在这两个字符范围内的都可以匹配（比如 [0-9] 表示匹配所有 0 到 9 的数字）</li>
+<li>⑤ 两个星号 ** 表示匹配任意中间目录（比如 a&#x2F;**&#x2F;z 可以匹配 a&#x2F;z 、 a&#x2F;b&#x2F;z 或 a&#x2F;b&#x2F;c&#x2F;z 等）</li>
+</ul>
+<p><strong>17..gitignore文件的例子</strong></p>
+<pre><code> *.a  //忽略所有的.a文件
+!lib.a  //但跟踪所有的lib.a, 即便你在前面忽略了.a文件 
+/T0D0  //只忽略当前目录下的TODO 文件，而不忽略subdir/T0D0
+build/  //忽略任何目录下名为build 的文件夹
+doc/*. txt  //忽略doc/notes. txt, 但不忽略doc/server /arch. txt 
+doc/**/* .pdf  //忽略doc/ 目录及其所有子目录下的.pdf 文件
+</code></pre>
+<p><strong>18.查看提交历史</strong></p>
+<p>如果希望回顾项目的提交历史，可以使用 git log 这个简单且有效的命令。</p>
+<pre><code>git log //按时间先后顺序列出所有的提交历史，最近的提交排在最上面
+git log -2 //只展示最新的两条提交历史，数字可以按需进行填写
+git log -2 --pretty=one line //在一行上展示最近两条提交历史的信息
+//在一行上展示最近两条提交历史的信息，并自定义输出的格式
+%h提交的简写哈希值
+%an作者名字
+%ar作者修订日期，按多久以前的方式显示
+%s提交说明
+git log -2 --pretty=format:&quot;%hI %an| %ar| %s”
+</code></pre>
+<p><strong>19.回退到指定的版本</strong></p>
+<pre><code>git log --pretty=oneline //在一行上展示所有的提交历史
+git reset --hard &lt;CommitID&gt; //使用git reset --hard 命令，根据指定的提交ID回退到指定版本
+git reflog --pretty=one line //在旧版本中使用git reflog --pretty=oneline 命令，查看命令操作的历史
+git reset --hard &lt;CommitID&gt; //再次根据最新的提交ID,跳转到最新的版本
+</code></pre>
+<p><strong>20.小结</strong></p>
+<ul>
+<li>① 初始化 Git 仓库的命令<br>  <strong>git init</strong></li>
+<li>② 查看文件状态的命令<br> <strong>git status 或 git status -s</strong></li>
+<li>③ 一次性将文件加入暂存区的命令<br>  <strong>git add .</strong></li>
+<li>④ 将暂存区的文件提交到 Git 仓库的命令<br>  <strong>git commit -m “提交消息”</strong></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Git版本控制</category>
+      </categories>
+      <tags>
+        <tag>Git基础命令使用</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>跨域与JSONP.md</title>
+    <url>/2022/02/27/%E8%B7%A8%E5%9F%9F%E4%B8%8EJSONP-md/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>————同源策略，跨域，JSONP的实现原理，防抖和节流。</p>
+<h1 id="了解同源策略和跨域"><a href="#了解同源策略和跨域" class="headerlink" title="了解同源策略和跨域"></a>了解同源策略和跨域</h1><p>  同源指的是如果两个页面的协议，域名，端口都相同，则两个页面具有相同的源（如果没有给出端口号，默认是80端口）。<span id="more"></span></p>
+<p><strong>同源策略</strong>是浏览器提供的一个安全功能</p>
+<p><strong>跨域</strong>是指两个URL的协议，域名，端口有一个或一个以上不一致。出现跨域的根本原因：浏览器的同源策略不允许非同源的URL之间进行资源的交互<br>（浏览器允许发起跨域请求，但是，跨域请求回来的数据会被浏览器拦截，无法被页面获取到）</p>
+<p>如何实现跨域数据请求解决方案：JSONP和CORS<br> JSONP：出现的早，兼容性好，缺点是只支持GET请求，不支持POST请求；<br> CORS：出现的较晚，W3C标准，两种请求都支持，缺点是不兼容低版本浏览器</p>
+<h1 id="JSONP的实现原理"><a href="#JSONP的实现原理" class="headerlink" title="JSONP的实现原理"></a>JSONP的实现原理</h1><p>  JSONP的实现原理就是通过<code>&lt;script&gt;</code>标签的src属性，请求跨域的数据接口，并通过函数调用的形式，接收跨域接口响应回来的数据</p>
+<h2 id="jQuery中的JSONP"><a href="#jQuery中的JSONP" class="headerlink" title="jQuery中的JSONP"></a>jQuery中的JSONP</h2><p>  jQuery 提供的 $.ajax() 函数，除了可以发起真正的 Ajax 数据请求之外，还能够发起 JSONP 数据请求</p>
+<pre><code>$.ajax(&#123;
+  url: &#39;http://ajax.frontend.itheima.net:3006/api/jsonp?name=zs&amp;age=20&#39;,
+  // 如果要使用 $.ajax() 发起 JSONP 请求，必须指定 datatype 为 jsonp
+  dataType: &#39;jsonp&#39;,
+   success: function(res) &#123;
+   console.log(res)
+&#125;
+&#125;)
+</code></pre>
+<p>在使用 jQuery 发起 JSONP 请求时，如果想要自定义 JSONP 的参数以及回调函数名称，可以通过如下两个参数来指定：</p>
+<pre><code>$.ajax(&#123;
+  url: &#39;http://ajax.frontend.itheima.net:3006/api/jsonp?name=zs&amp;age=20&#39;,
+  dataType: &#39;jsonp&#39;,
+  // 发送到服务端的参数名称，默认值为 callback
+  jsonp: &#39;callback&#39;,
+  // 自定义的回调函数名称，默认值为 jQueryxxx 格式
+  jsonpCallback: &#39;abc&#39;,
+  success: function(res) &#123;
+  console.log(res)
+&#125;
+</code></pre>
+<p> })</p>
+<h2 id="jQuery中JSONP的实现过程"><a href="#jQuery中JSONP的实现过程" class="headerlink" title="jQuery中JSONP的实现过程"></a>jQuery中JSONP的实现过程</h2><p> jQuery 中的 JSONP，也是通过 <code>&lt;script&gt;</code> 标签的 src 属性实现跨域数据访问的，只不过，jQuery 采用的是动态创建和移除<code>&lt;script&gt;</code>标签的方式，来发起 JSONP 数据请求。</p>
+<ul>
+<li><p>在发起 JSONP 请求的时候，动态向 <code>&lt;header&gt;</code> 中 append 一个 <code>&lt;script&gt;</code> 标签；</p>
+</li>
+<li><p>在 JSONP 请求成功以后，动态从 <code>&lt;header&gt;</code> 中移除刚才 append 进去的<code> &lt;script&gt;</code> 标签；</p>
+</li>
+</ul>
+<h1 id="防抖与节流"><a href="#防抖与节流" class="headerlink" title="防抖与节流"></a>防抖与节流</h1><h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><p>———<strong>防抖策略</strong>是当事件被触发后，延迟n秒后再执行回调，如果在这n秒内事件又被触发，则重新计时。</p>
+<p>防抖的应用场景：用户在输入框中连续输入一串字符是时，可以通过防抖策略，只在输入完成时，才执行查询的请求，这样可以有效减少请求次数，节约请求资源。</p>
+<pre><code>var timer = null                    // 1. 防抖动的 timer
+  function debounceSearch(keywords) &#123; // 2. 定义防抖的函数
+  timer = setTimeout(function() &#123;
+  // 发起 JSONP 请求
+  getSuggestList(keywords)
+  &#125;, 500)
+  &#125;
+
+  $(&#39;#ipt&#39;).on(&#39;keyup&#39;, function() &#123; 
+  // 3. 在触发 keyup 事件时，立即清空 timer    
+    clearTimeout(timer)
+   debounceSearch(keywords)
+&#125;)
+</code></pre>
+<h2 id="缓存搜索的建议列表"><a href="#缓存搜索的建议列表" class="headerlink" title="缓存搜索的建议列表"></a>缓存搜索的建议列表</h2><p>1.定义全局缓存对象</p>
+<p><code>// 缓存对象   var cacheObj = &#123;&#125;</code></p>
+<p>2.将搜索结果保存到缓存对象中</p>
+<pre><code> // 渲染建议列表
+ function renderSuggestList(res) &#123;
+   // ...省略其他代码
+   // 将搜索的结果，添加到缓存对象中
+    var k = $(&#39;#ipt&#39;).val().trim()
+    cacheObj[k] = res
+ &#125;
+</code></pre>
+<p>3.优先从缓存中获取搜索建议</p>
+<pre><code> // 监听文本框的 keyup 事件
+ $(&#39;#ipt&#39;).on(&#39;keyup&#39;, function() &#123;
+    // ...省略其他代码
+
+    // 优先从缓存中获取搜索建议
+    if (cacheObj[keywords]) &#123;
+       return renderSuggestList(cacheObj[keywords])
+    &#125;
+    // 获取搜索建议列表
+    debounceSearch(keywords)
+  &#125;)
+</code></pre>
+<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p><strong>节流策略</strong> 就是可以减少一段时间内事件的触发频率</p>
+<p>节流的应用场景：</p>
+<ul>
+<li><p>鼠标连续不断地触发某事件，只在单位时间内只触发一次</p>
+</li>
+<li><p>懒加载时要监听计算滚动条的位置，但不必每次滑动都触发，可以降低计算的频率，而不必去浪费cpu资源。</p>
+</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>防抖：如果事件被频繁触发，防抖能保证只有最有一次触发生效！前面 N 多次的触发都会被忽略！</li>
+<li>节流：如果事件被频繁触发，节流能够减少事件触发的频率，因此，节流是有选择性地执行一部分事件！</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前后端交互</category>
+      </categories>
+      <tags>
+        <tag>跨域与JSONP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>npm与包的简单概念</title>
+    <url>/2022/03/10/npm%E4%B8%8E%E5%8C%85%E7%9A%84%E7%AE%80%E5%8D%95%E6%A6%82%E5%BF%B5/</url>
+    <content><![CDATA[<h1 id="包"><a href="#包" class="headerlink" title="包"></a>包</h1><ul>
+<li><strong>包的概念：</strong>Node.js 中的第三方模块又叫做包。</li>
+<li><strong>包的来源：</strong>不同于 Node.js 中的内置模块与自定义模块，包是由第三方个人或团队开发出来的，免费供所有人使用。注意：Node.js 中的包都是免费且开源的，不需要付费即可免费下载使用。</li>
+<li><strong>为什么需要包：</strong>由于 Node.js 的内置模块仅提供了一些底层的 API，导致在基于内置模块进行项目开发的时，效率很低。<br>包是基于内置模块封装出来的，提供了更高级、更方便的 API，极大的提高了开发效率。<br>包和内置模块之间的关系，类似于 jQuery 和 浏览器内置 API 之间的关系<span id="more"></span></li>
+<li><strong>从哪里下载包：</strong>国外有一家 IT 公司，叫做 npm, Inc. 这家公司旗下有一个非常著名的网站： <a href="https://www.npmjs.com/">https://www.npmjs.com/</a> ，它是全球最大的包共享平台，你可以从这个网站上搜索到任何你需要的包，只要你有足够的耐心！<br>到目前位置，全球约 1100 多万的开发人员，通过这个包共享平台，开发并共享了超过 120 多万个包 供我们使用。<br>npm, Inc. 公司提供了一个地址为 <a href="https://registry.npmjs.org/">https://registry.npmjs.org/</a> 的服务器，来对外共享所有的包，我们可以从这个服务器上下载自己所需要的包。</li>
+</ul>
+<p>注意：<br> 从 <a href="https://www.npmjs.com/">https://www.npmjs.com/</a> 网站上搜索自己所需要的包<br> 从 <a href="https://registry.npmjs.org/">https://registry.npmjs.org/</a>  服务器上下载自己需要的包</p>
+<ul>
+<li><strong>如何下载包：</strong>npm, Inc. 公司提供了一个包管理工具，我们可以使用这个包管理工具，从 <a href="https://registry.npmjs.org/">https://registry.npmjs.org/</a> 服务器把需要的包下载到本地使用。<br>这个包管理工具的名字叫做 Node Package Manager（简称 npm 包管理工具），这个包管理工具随着 Node.js 的安装包一起被安装到了用户的电脑上。</li>
+</ul>
+<h1 id="npm-的使用"><a href="#npm-的使用" class="headerlink" title="npm 的使用"></a>npm 的使用</h1><ul>
+<li>格式化时间的传统做法</li>
+</ul>
+<p>创建格式化时间的自定义模块<br>定义格式化时间的方法<br>创建补零函数<br>从自定义模块中导出格式化时间的函数<br>导入格式化时间的自定义模块<br>调用格式化时间的函数</p>
+<ul>
+<li>格式化时间的高级做法</li>
+</ul>
+<p>使用 npm 包管理工具，在项目中安装格式化时间的包 moment<br>使用 require() 导入格式化时间的包<br>参考 moment 的官方 API 文档对时间进行格式化</p>
+<h2 id="在项目中安装包的命令"><a href="#在项目中安装包的命令" class="headerlink" title="在项目中安装包的命令"></a>在项目中安装包的命令</h2><p>如果想在项目中安装指定名称的包，需要运行如下的命令</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install 包的完整名称</span><br><span class="line">//简写格式</span><br><span class="line">npm i 包的完整名称</span><br></pre></td></tr></table></figure>
+<h2 id="初次装包后多了哪些文件"><a href="#初次装包后多了哪些文件" class="headerlink" title="初次装包后多了哪些文件"></a>初次装包后多了哪些文件</h2><p>初次装包完成后，在项目文件夹下多一个叫做 node_modules 的文件夹和 package-lock.json 的配置文件。<br>其中：</p>
+<ul>
+<li>node_modules 文件夹用来存放所有已安装到项目中的包。require() 导入第三方包时，就是从这个目录中查找并加载包。</li>
+<li>package-lock.json 配置文件用来记录 node_modules 目录下的每一个包的下载信息，例如包的名字、版本号、下载地址等。<br>注意：程序员不要手动修改 node_modules 或 package-lock.json 文件中的任何代码，npm 包管理工具会自动维护它们。<h2 id="安装指定版本的包"><a href="#安装指定版本的包" class="headerlink" title="安装指定版本的包"></a>安装指定版本的包</h2>默认情况下，使用 npm install 命令安装包的时候，会自动安装最新版本的包。如果需要安装指定版本的包，可以在包名之后，通过 @ 符号指定具体的版本，<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm i moment@2.22.2</span><br></pre></td></tr></table></figure>
+<h1 id="包管理配置文件"><a href="#包管理配置文件" class="headerlink" title="包管理配置文件"></a>包管理配置文件</h1>npm 规定，在项目根目录中，必须提供一个叫做 package.json 的包管理配置文件。用来记录与项目有关的一些配置信息。例如：</li>
+<li>项目的名称、版本号、描述等</li>
+<li>项目中都用到了哪些包</li>
+<li>哪些包只在开发期间会用到 </li>
+<li>那些包在开发和部署时都需要用到</li>
+</ul>
+<h2 id="如何记录项目中安装了哪些包"><a href="#如何记录项目中安装了哪些包" class="headerlink" title="如何记录项目中安装了哪些包"></a>如何记录项目中安装了哪些包</h2><p>在项目根目录中，创建一个叫做 package.json 的配置文件，即可用来记录项目中安装了哪些包。从而方便剔除 node_modules 目录之后，在团队成员之间共享项目的源代码。</p>
+<p>注意：今后在项目开发中，一定要把 node_modules 文件夹，添加到 .gitignore 忽略文件中。</p>
+<h2 id="快速创建-package-json"><a href="#快速创建-package-json" class="headerlink" title="快速创建 package.json"></a>快速创建 package.json</h2><p>npm 包管理工具提供了一个快捷命令，可以在执行命令时所处的目录中，快速创建 package.json 这个包管理配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm init -y</span><br></pre></td></tr></table></figure>
+<p><strong>注意:</strong></p>
+<ul>
+<li>上述命令只能在英文的目录下成功运行！所以，项目文件夹的名称一定要使用英文命名，不要使用中文，不能出现空格。</li>
+<li>运行 npm install 命令安装包的时候，npm 包管理工具会自动把包的名称和版本号，记录到 package.json 中。</li>
+</ul>
+<h2 id="一次性安装所有的包"><a href="#一次性安装所有的包" class="headerlink" title="一次性安装所有的包"></a>一次性安装所有的包</h2><p>当我们拿到一个剔除了 node_modules 的项目之后，需要先把所有的包下载到项目中，才能将项目运行起来<br>可以运行 npm install 命令（或 npm i）一次性安装所有的依赖包</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//执行npm install 命令时，npm包管理工具会先读取package. json中的dependencies 节点，</span><br><span class="line">//读取到记录的所有依赖包名称和版本号之后，npm包管理工具会把这些包次性下载到项目中</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<h2 id="卸载包"><a href="#卸载包" class="headerlink" title="卸载包"></a>卸载包</h2><p>可以运行 npm uninstall 命令，来卸载指定的包</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm uninstall 包的完整名称</span><br></pre></td></tr></table></figure>
+<h2 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h2><ol>
+<li>dependencies 节点<br>package.json 文件中，有一个 dependencies 节点，专门用来记录您使用 npm install 命令安装了哪些包。</li>
+<li>devDependencies 节点<br>如果某些包只在项目开发阶段会用到，在项目上线之后不会用到，则建议把这些包记录到 devDependencies 节点中。与之对应的，如果某些包在开发和项目上线之后都需要用到，则建议把这些包记录到 dependencies 节点中。<br>您可以使用如下的命令，将包记录到 devDependencies 节点中<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install 包名 --save-dev   //完整写法</span><br><span class="line">npm i 包名 -D     //简写</span><br></pre></td></tr></table></figure>
+<h2 id="切换-npm-的下包镜像源"><a href="#切换-npm-的下包镜像源" class="headerlink" title="切换 npm 的下包镜像源"></a>切换 npm 的下包镜像源</h2>下包的镜像源，指的就是下包的服务器地址<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//查看当前的下包镜像源</span><br><span class="line">npm config get registry</span><br><span class="line">//将下包的镜像源切换为淘宝镜像源</span><br><span class="line">npm config set registry=https ://registry .npm. taobao .org/</span><br><span class="line">//检查镜像源是否下载成功</span><br><span class="line">npm config get registry</span><br></pre></td></tr></table></figure>
+<h2 id="nrm"><a href="#nrm" class="headerlink" title="nrm"></a>nrm</h2>为了更方便的切换下包的镜像源，我们可以安装 nrm 这个小工具，利用 nrm 提供的终端命令，可以快速查看和切换下包的镜像源。<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//通过npm包管理器，将nrm安装为全局可用的工具</span><br><span class="line">npm i nrm -g</span><br><span class="line">//查看所有可用的镜像源</span><br><span class="line">nrm ls</span><br><span class="line">//将下包的镜像源切换为taobao 镜像</span><br><span class="line">nrm use taobao</span><br></pre></td></tr></table></figure>
+<h1 id="包的分类"><a href="#包的分类" class="headerlink" title="包的分类"></a>包的分类</h1>分为项目包和全局包<h2 id="项目包"><a href="#项目包" class="headerlink" title="项目包"></a>项目包</h2>那些被安装到项目的 node_modules 目录中的包，都是项目包。</li>
+</ol>
+<p>项目包又分为两类，分别是：</p>
+<ul>
+<li>开发依赖包（被记录到 devDependencies 节点中的包，只在开发期间会用到）</li>
+<li>核心依赖包（被记录到 dependencies 节点中的包，在开发期间和项目上线之后都会用到）</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm i 包名 -D</span><br><span class="line">//开发依赖包(会被记录到devDependencies 节点下)</span><br><span class="line">npm i包名</span><br><span class="line">//核心依赖包(会被记录到dependencies 节点下</span><br></pre></td></tr></table></figure>
+<h2 id="全局包"><a href="#全局包" class="headerlink" title="全局包"></a>全局包</h2><p>在执行 npm install 命令时，如果提供了 -g 参数，则会把包安装为全局包。<br>全局包会被安装到 C:\Users\用户目录\AppData\Roaming\npm\node_modules 目录下。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm i 包名 -g    //全局安装指定的包</span><br><span class="line">npm uninstall 包名 -g   //卸载全局安装的包</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<ul>
+<li>只有工具性质的包，才有全局安装的必要性。因为它们提供了好用的终端命令。</li>
+<li>判断某个包是否需要全局安装后才能使用，可以参考官方提供的使用说明即可</li>
+</ul>
+<h2 id="i5ting-toc"><a href="#i5ting-toc" class="headerlink" title="i5ting_toc"></a>i5ting_toc</h2><p>i5ting_toc 是一个可以把 md 文档转为 html 页面的小工具，使用步骤如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//将i5ting toc安装为全局包</span><br><span class="line">npm install -g i5ting_toc</span><br><span class="line">//调用i5ting toc,轻松实现md转html的功能</span><br><span class="line">i5ting_toc -f 要转换的md文件路径 -o</span><br></pre></td></tr></table></figure>
+<h2 id="规范的包结构"><a href="#规范的包结构" class="headerlink" title="规范的包结构"></a>规范的包结构</h2><p>在清楚了包的概念、以及如何下载和使用包之后，接下来，我们深入了解一下包的内部结构。<br>一个规范的包，它的组成结构，必须符合以下 3 点要求：</p>
+<ul>
+<li>包必须以单独的目录而存在</li>
+<li>包的顶级目录下要必须包含 package.json 这个包管理配置文件</li>
+<li>package.json 中必须包含 name，version，main 这三个属性，分别代表包的名字、版本号、包的入口。<br>注意：以上 3 点要求是一个规范的包结构必须遵守的格式，关于更多的约束，可以参考如下网址：<br><a href="https://yarnpkg.com/zh-Hans/docs/package-json">https://yarnpkg.com/zh-Hans/docs/package-json</a></li>
+</ul>
+<h2 id="发布包"><a href="#发布包" class="headerlink" title="发布包"></a>发布包</h2><ol>
+<li>注册npm 账号</li>
+<li>登录npm 账号<br>npm 账号注册完成后，可以在终端中执行 npm login 命令，依次输入用户名、密码、邮箱后，即可登录成功<br>注意：在运行 npm login 命令之前，必须先把下包的服务器地址切换为 npm 的官方服务器。否则会导致发布包失败！</li>
+<li>把包发布到npm上<br>将终端切换到包的根目录之后，运行 npm publish 命令，即可将包发布到 npm 上（注意：包名不能雷同）</li>
+<li>删除已发布的包</li>
+</ol>
+<p>运行 npm unpublish 包名 –force 命令，即可从 npm 删除已发布的包。注意：</p>
+<ul>
+<li>npm unpublish 命令只能删除 72 小时以内发布的包</li>
+<li>npm unpublish 删除的包，在 24 小时内不允许重复发布</li>
+<li>发布包的时候要慎重，尽量不要往 npm 上发布没有意义的包！</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前后端交互</category>
+      </categories>
+      <tags>
+        <tag>npm与包</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Vue基础入门</title>
+    <url>/2022/04/01/Vue%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<h2 id="什么是vue"><a href="#什么是vue" class="headerlink" title="什么是vue"></a>什么是vue</h2><ol>
+<li>构建用户界面</li>
+</ol>
+<ul>
+<li>用vue往HTML页面中填充数据，非常方便</li>
+</ul>
+<ol start="2">
+<li>框架</li>
+</ol>
+<ul>
+<li>框架是一套现成的解决方案，程序员只能遵守框架内的规范，去编写自己的业务功能！</li>
+<li>要学习vue，就是在学习vue框架中规定的用法！</li>
+<li>vue的指令，组件（是对UI结构的复用），路由，Vuex，vue组件库</li>
+<li>只有把上面罗列的知识，掌握之后，才有开发vue项目的能力</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="vue-的特性"><a href="#vue-的特性" class="headerlink" title="vue 的特性"></a>vue 的特性</h2><p>1.数据驱动视图</p>
+<ul>
+<li>数据的变化<strong>会驱动视图</strong>自动更新</li>
+<li>好处：程序员只管把数据维护好，那么页面结构会被vue自动渲染出来!</li>
+</ul>
+<p>2.双向数据绑定</p>
+<blockquote>
+<p>在网页中，form表单负责<strong>采集数据</strong>，Ajax负责<strong>提交数据</strong>！</p>
+</blockquote>
+<ul>
+<li>js数据的变化，会被自动渲染到页面上，开发者不需要手动操作DOM元素</li>
+<li>页面上表单采集的数据发生变化的时候，会被vue自动获取到，并更新到js数据中<blockquote>
+<p>注意：数据驱动视图和双向数据绑定的底层原理是 MVVM（Mode 数据源、View 视图、ViewModel 就是 vue 的实例）</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="vue的使用"><a href="#vue的使用" class="headerlink" title="vue的使用"></a>vue的使用</h2><ol>
+<li>导入vue.js的script脚本文件</li>
+<li>在页面中声明一个将要被vue所控制的DOM区域</li>
+<li>创建vm 实例对象（vue实例对象）</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!-- 希望Vue能够控制下面的这个div 帮我们在把数据填充到div 内部 --&gt;</span><br><span class="line">&lt;div id=&quot;app&quot;&gt;&#123;&#123; username &#125;&#125;&lt;/div&gt;</span><br><span class="line">&lt;!-- 1.导入Vue的库文件，在Windows全局就有了Vue构造函数 --&gt;</span><br><span class="line">&lt;script src=&quot;./lib/vue-2.6.12.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;!-- 2.创建Vue实例对象 --&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    // 创建Vue的实例对象</span><br><span class="line">    const vm = new Vue(&#123;</span><br><span class="line">        // el 属性是固定写法，表示当前vm实例要控制页面上的哪个区域，接收的值是一个选择器</span><br><span class="line">        el: &#x27;#app&#x27;,</span><br><span class="line">        // data 对象就是要渲染到页面上的数据</span><br><span class="line">        data: &#123;</span><br><span class="line">            username: &#x27;zhangsan&#x27;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="vue-的调试工具"><a href="#vue-的调试工具" class="headerlink" title="vue 的调试工具"></a>vue 的调试工具</h2><ol>
+<li>安装vue-devtools调试工具：vue官方提供的vue-devtools调试工具，能够方便对开发者对vue项目进行调试与开发<blockquote>
+<p>Chrome浏览器在线安装 <a href="https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd">vue-devtools</a></p>
+</blockquote>
+</li>
+</ol>
+<h2 id="vue-的指令"><a href="#vue-的指令" class="headerlink" title="vue 的指令"></a>vue 的指令</h2><h3 id="内容渲染指令"><a href="#内容渲染指令" class="headerlink" title="内容渲染指令"></a>内容渲染指令</h3><ol>
+<li><code>v-text</code> ：<code>&lt;p v-text=&quot;gender&quot;&gt;性别&lt;/p&gt;</code>指令的缺点：会覆盖元素内部原有的内容！</li>
+<li><code>&#123;&#123; &#125;&#125;</code> 插值表达式：在实际开发中用的最多，只是内容的占位符，不会覆盖原有的内容！</li>
+<li><code>v-html</code> 指令的作用：可以把带有标签的字符串，渲染成真正的 HTML 内容！<blockquote>
+<p> 注意：插值表达式只能用在元素的<strong>内容节点</strong>中，不能用在元素的<strong>属性节点</strong>中！</p>
+</blockquote>
+<h3 id="属性绑定指令"><a href="#属性绑定指令" class="headerlink" title="属性绑定指令"></a>属性绑定指令</h3></li>
+</ol>
+<ul>
+<li>在 vue 中，可以使用 <code>v-bind:</code> 指令，为元素的属性动态绑定值；</li>
+<li>简写是英文的 <code>:</code></li>
+<li>在使用 v-bind 属性绑定期间，如果绑定内容需要进行动态拼接，则字符串的外面应该包裹单引号，例如 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div :title=&quot;&#x27;box&#x27; + index&quot;&gt;这是一个 div&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="事件绑定指令"><a href="#事件绑定指令" class="headerlink" title="事件绑定指令"></a>事件绑定指令</h3></li>
+</ul>
+<ol>
+<li><code>v-on</code>事件绑定指令，用来辅助程序员为DOM元素绑定事件监听，简写形式：<code>@</code></li>
+<li>语法格式为：通过v-on绑定的事件处理函数，需要在<code>methods</code>节点中进行声明</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;button @click=&quot;add&quot;&gt;&lt;/button&gt;</span><br><span class="line">methods: &#123;</span><br><span class="line">   add() &#123;</span><br><span class="line">			// 如果在方法中要修改 data 中的数据，可以通过 this 访问到</span><br><span class="line">			this.count += 1</span><br><span class="line">   &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：原生 DOM 对象有 onclick、oninput、onkeyup 等原生事件，替换为 vue 的事件绑定形式后，<br>分别为：v-on:click、v-on:input、v-on:keyup</p>
+</blockquote>
+<p>3.<code>$event</code> 的应用场景：如果默认的事件对象 e 被覆盖了，则可以手动传递一个 $event。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;button @click=&quot;add(3, $event)&quot;&gt;&lt;/button&gt;</span><br><span class="line">  methods: &#123;</span><br><span class="line">     add(n, e) &#123;</span><br><span class="line">  			// 如果在方法中要修改 data 中的数据，可以通过 this 访问到</span><br><span class="line">  			this.count += 1</span><br><span class="line">     &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.事件修饰符：在事件处理函数中调用 event.preventDefault() 或 event.stopPropagation() 是非常常见的需求。因此，vue 提供了事件修饰符的概念，来辅助程序员更方便的对事件的触发进行控制</p>
+<ul>
+<li><p><code>.prevent</code>：阻止默认行为</p>
+   <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;a @click.prevent=&quot;xxx&quot;&gt;链接&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>.stop</code> ：阻止事件冒泡</p>
+   <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;button @click.stop=&quot;xxx&quot;&gt;按钮&lt;/button&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>5.案件修饰符：在监听键盘事件时，我们经常需要判断详细的按键。此时，可以为键盘相关的事件添加按键修饰符，</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//只有在 key 是  Enter 时调用  vm.submit() </span><br><span class="line">&lt;input @keyup.enter=&quot;submit&quot;&gt;</span><br><span class="line">//只有在 key 是  Esc 时调用  vm.clearInput() </span><br><span class="line">&lt;input @keyup.esc=&quot;clearInput&quot;&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="双向绑定指令"><a href="#双向绑定指令" class="headerlink" title="双向绑定指令"></a>双向绑定指令</h3><p>vue 提供了 <code>v-model</code> 双向数据绑定指令，用来辅助开发者在不操作 DOM 的前提下，快速获取表单的数据。</p>
+<ol>
+<li>input 输入框<ul>
+<li>type&#x3D;”radio”</li>
+<li>type&#x3D;”checkbox”</li>
+<li>type&#x3D;”xxxx”</li>
+</ul>
+</li>
+<li>textarea</li>
+<li>select</li>
+<li>v-model 指令的修饰符<ul>
+<li>.number:自动将用户的输入值转为数值类型 <code>&lt;input v-model.number=&quot;age&quot;/&gt;</code></li>
+</ul>
+<ul>
+<li>.trim: 自动过滤用户输入的首尾空白字符  <code>&lt;inut v-model.trim=&quot;msg&quot;/&gt;</code></li>
+<li>.lazy： 在”change”时而非”input”时更新 <code>&lt;input v-model.lazy=&quot;msg&quot;/&gt;</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="条件渲染指令"><a href="#条件渲染指令" class="headerlink" title="条件渲染指令"></a>条件渲染指令</h3><p>条件渲染指令用来辅助开发者按需控制 DOM 的显示与隐藏。条件渲染指令有如下两个，分别是：</p>
+<ul>
+<li>v-if</li>
+<li>v-show</li>
+</ul>
+<ol>
+<li><code>v-show</code> 的原理是：动态为元素添加或移除 <code>display: none</code> 样式，来实现元素的显示和隐藏<ul>
+<li>如果要频繁的切换元素的显示状态，用 v-show 性能会更好</li>
+</ul>
+</li>
+<li><code>v-if</code> 的原理是：每次动态创建或移除元素，实现元素的显示和隐藏<ul>
+<li>如果刚进入页面的时候，某些元素默认不需要被展示，而且后期这个元素很可能也不需要被展示出来，此时 v-if 性能更好</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p> 在实际开发中，绝大多数情况，不用考虑性能问题，直接使用 v-if 就好了！！！</p>
+</blockquote>
+<ol start="3">
+<li><p><code>v-else</code> : v-if 可以单独使用，或配合 v-else 指令一起使用：v-else 指令必须配合 v-if 指令一起使用，否则它将不会被识别！</p>
+<h3 id="列表渲染指令"><a href="#列表渲染指令" class="headerlink" title="列表渲染指令"></a>列表渲染指令</h3><p>vue 提供了 <code>v-for</code> 列表渲染指令，用来辅助开发者基于一个数组来循环渲染一个列表结构。v-for 指令需要使<br>用 <code>item in items</code> 形式的特殊语法，其中：</p>
+<ul>
+<li>items 是待循环的数组</li>
+<li>item 是被循环的每一项</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>v-for 指令还支持一个可选的第二个参数，即当前项的索引。语法格式为 (item, index) in items，<blockquote>
+<p>注意：v-for 指令中的 item 项和 index 索引都是形参，可以根据需要进行重命名。例如 (user, i) in userlist</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>使用 key 维护列表的状态</strong>:<br>当列表的数据变化时，默认情况下，vue 会尽可能的复用已存在的 DOM 元素，从而提升渲染的性能。但这种默认的性能优化策略，会导致有状态的列表无法被正确更新。<br>为了给 vue 一个提示，以便它能跟踪每个节点的身份，从而在保证有状态的列表被正确更新的前提下，提升渲<br>染的性能。此时，需要为每项提供一个唯一的 key 属性：<br><strong>key 的注意事项</strong>:<br>① key 的值只能是字符串或数字类型<br>② key 的值必须具有唯一性（即：key 的值不能重复）<br>③ 建议把数据项 id 属性的值作为 key 的值（因为 id 属性的值具有唯一性）<br>④ 使用 index 的值当作 key 的值没有任何意义（因为 index 的值不具有唯一性）<br>⑤ 建议使用 v-for 指令时一定要指定 key 的值（既提升性能、又防止列表状态紊乱）</p>
+]]></content>
+      <categories>
+        <category>Vue的相关基础知识</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MarkdownPad语法</title>
+    <url>/2022/02/14/MarkdownPad%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> 我之前记笔记一直用OneNote，但是年前心血来潮，就自己建了博客，想着把自己的学习心得发到博客上。但是博客算是完工了，但是写文章又成了一大难题，就自己在网上查找写博客的编辑器，发现用Markdown Pad来编写文章很方便。但是刚接触这个编辑器，其中的语法看了几次记不住，于是准备写一下Markdown Pad的写作语法。以供自己写作的时候还要在网上找（麻烦….）。<span id="more"></span></p>
+<h1 id="语法介绍"><a href="#语法介绍" class="headerlink" title="语法介绍"></a>语法介绍</h1><h2 id="段落文本"><a href="#段落文本" class="headerlink" title="段落文本"></a>段落文本</h2><p><b>换行：</b>直接敲回车键即可</p>
+<p><strong>空格：</strong></p>
+<pre><code>   &amp;emsp;//两个空格大小，也就是一个中文字符
+   &amp;ensp;//一个空格大小，也就是半个中文字符
+   &amp;nbsp;//1/2个空格大小，也就是1/4个中文字
+   （但是现在这个功能好像不可以）
+</code></pre>
+<p><strong>文本</strong>：</p>
+<pre><code>*斜体文本*  _斜体文本_  //两种方式都可
+**加粗文本**  __加粗文本__  //两种方式都可
+***斜体加粗***  ___斜体加粗___  //两种方式都可
+&lt;u&gt;下划线&lt;/u&gt;
+^上表^  //具体以指数公式展示
+~下标~  //具体以水的化学式展示
+</code></pre>
+<p><strong>分割线：</strong>分割线的语法只需要三个 * 号或者在选项卡中添加水平标尺，快捷键 CTRL+R</p>
+<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>标题有三种设置方式：①手动添加；②快捷键添加；③选项卡添加；</p>
+<p>  ①手动添加 </p>
+<pre><code>                   #一级标题的内容#
+                  ##二级标题的内容##
+                 ###三级标题的内容###
+    以此类推
+</code></pre>
+<p>  ②快捷键添加<br>直接在键盘上输入ctrl+num,这里的num是指标题的级数，例如：设置一级标题 ctrl+1以此类推<br>③选项卡添加（可以忽略不计）</p>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><p>有序列表，顾名思义，即输入的内容按序号进行标识排列。<br>①手动添加<br>在输入的内容前，添加num. + 空格 ，接着按 回车 ，即可添加num+1条内容<br>②快捷键添加<br>直接在键盘上输入Ctrl+Shift+O，输入第一条内容后，按 回车 ，即可添加第二条内容。注意快捷键输入的是 字母O ，而不是 数字0。<br><img src="/picture/Snipaste_2022-02-14_21-13-42.png"></p>
+<h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><p>&amp;emsp;&amp;emsp;无序列表，顾名思义，即输入的内容不按序号进行排列。<br>①手动添加<br>在输入的内容前，添加-&#x2F;* + 空格 ，接着按回车 ，即可添加下一条内容。<br>②快捷键添加<br>直接在键盘上输入Ctrl+U，输入第一条内容后，按回车 ，即可添加第二条内容。<br><img src="/picture/Snipaste_2022-02-14_21-07-27.png"></p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>&amp;emsp;&amp;emsp;引用可以将一段文字进行单独的标识，<br>①手动添加<br>在需要标注引用的内容前，输入&gt;，即可将此内容标记为引用类型。<br>②快捷键添加<br>直接在键盘上输入Ctrl+Q。</p>
+<h2 id="图片与超链接"><a href="#图片与超链接" class="headerlink" title="图片与超链接"></a>图片与超链接</h2><h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><ol>
+<li>网上的图片，添加到正在编辑的文本中进行展示。此时我们便需要用到插入图片的语法。<code>![name](url)</code>  name 是添加图片的文字描述，自己添加即可，url 是添加图片的网址</li>
+<li>本地的图片，使用相对路径插入图片。比如你把一个叫做1.png的图片和*.md文件放在一起，那么你就可以用这种方式插入图片：<code>![](1.png)</code><br>如果不想放在同一层级,那么就可以这样插入:<code>![](foldername/1.png)</code> 表示引用同层级一个叫做”foldername”的文件夹中的1.png图片,以此类推<h3 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h3>&amp;emsp;&amp;emsp;超链接和图片的添加方式只差一个!号</li>
+</ol>
+<p>图片为：<code>![]()</code></p>
+<p>链接为：<code>[]()</code></p>
+<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><ul>
+<li><p>表格的话直接用HTML写就可以</p>
+<pre><code>  &lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;姓名&lt;/td&gt;
+        &lt;td&gt;性别&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;李斯&lt;/td&gt;
+        &lt;td&gt;男&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+</code></pre>
+</li>
+<li><p>结果如下：</p>
+</li>
+</ul>
+<p><img src="/picture/Snipaste_2022-02-14_22-11-01.png"></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><ul>
+<li>代码行：前后添加 &#96; 一个即可</li>
+<li>代码块：前后添加 &#96;&#96;&#96;  三个即可</li>
+<li>或者快捷键 CTRL+K<h2 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> \\ 反斜杠 </span><br><span class="line">\` 反引号 </span><br><span class="line">\* 星号 </span><br><span class="line">\_ 下划线 </span><br><span class="line">\&#123;&#125; 大括号 </span><br><span class="line">\[] 中括号 </span><br><span class="line">\() 小括号 </span><br><span class="line">\# 井号 </span><br><span class="line">\+ 加号 </span><br><span class="line">\- 减号 </span><br><span class="line">\. 英文句号 </span><br><span class="line">\! 感叹号</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">      ctrl+1 一级标题 </span><br><span class="line">   ctrl+2 二级标题 </span><br><span class="line">····</span><br><span class="line">ctrl+shift+o 有序列表</span><br><span class="line">ctrl+u 无序列表</span><br><span class="line">ctrl+g 插入图片</span><br><span class="line">ctrl+L 插入超链接</span><br><span class="line">Ctrl+B　粗体 </span><br><span class="line">Ctrl+I　斜体</span><br><span class="line">Ctrl+Q　引用 </span><br><span class="line">Ctrl+K　代码块</span><br><span class="line">   Ctrl+R  分割线 </span><br><span class="line">   Ctrl+T  时间戳</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>MarkdownPad语法</tag>
+      </tags>
+  </entry>
+</search>
