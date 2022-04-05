@@ -509,6 +509,11 @@ vue的指令，组件（是">
 </ul>
 <span id="more"></span>
 
+<p><strong>重点：</strong></p>
+<ol>
+<li>能够知道 vue 的基本使用步骤：①导入vue.js文件，②new Vue()构造函数，得到vm实例对象，③声明 el 和 data 数据节点，④ MVVM 的对应关系</li>
+<li>掌握 vue 中常见指令的基本用法：插值表达式，v-bind(:),v-on(@),v-if和v-else;v-for,:key,v-model</li>
+</ol>
 <h2 id="vue-的特性"><a href="#vue-的特性" class="headerlink" title="vue 的特性"></a>vue 的特性</h2><p>1.数据驱动视图</p>
 <ul>
 <li>数据的变化<strong>会驱动视图</strong>自动更新</li>
@@ -657,6 +662,40 @@ vue的指令，组件（是">
 </li>
 </ul>
 <p><strong>使用 key 维护列表的状态</strong>:<br>当列表的数据变化时，默认情况下，vue 会尽可能的复用已存在的 DOM 元素，从而提升渲染的性能。但这种默认的性能优化策略，会导致有状态的列表无法被正确更新。<br>为了给 vue 一个提示，以便它能跟踪每个节点的身份，从而在保证有状态的列表被正确更新的前提下，提升渲<br>染的性能。此时，需要为每项提供一个唯一的 key 属性：<br><strong>key 的注意事项</strong>:<br>① key 的值只能是字符串或数字类型<br>② key 的值必须具有唯一性（即：key 的值不能重复）<br>③ 建议把数据项 id 属性的值作为 key 的值（因为 id 属性的值具有唯一性）<br>④ 使用 index 的值当作 key 的值没有任何意义（因为 index 的值不具有唯一性）<br>⑤ 建议使用 v-for 指令时一定要指定 key 的值（既提升性能、又防止列表状态紊乱）</p>
+<h2 id="Vue的过滤器"><a href="#Vue的过滤器" class="headerlink" title="Vue的过滤器"></a>Vue的过滤器</h2><h3 id="定义过滤器"><a href="#定义过滤器" class="headerlink" title="定义过滤器"></a>定义过滤器</h3><p>  在创建vue 实例期间，可以在 <code>filters</code> 节点中定义过滤器，</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">count vm<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">el</span><span class="token operator">:</span><span class="token string">'#app'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+     <span class="token literal-property property">message</span><span class="token operator">:</span> <span class="token string">'hello vue.js'</span><span class="token punctuation">,</span>
+     <span class="token literal-property property">info</span><span class="token operator">:</span> <span class="token string">'title info'</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">filters</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>    <span class="token comment">//在filters 节点下定义"过滤器"</span>
+    <span class="token function">capitalize</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>    <span class="token comment">//把首字母转为大写的过滤器</span>
+       <span class="token keyword">return</span> str<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> str<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+   <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+  
+
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="私有过滤器和全局过滤器"><a href="#私有过滤器和全局过滤器" class="headerlink" title="私有过滤器和全局过滤器"></a>私有过滤器和全局过滤器</h3><p>在 filters 节点下定义的过滤器，称为“私有过滤器”，因为它只能在当前 vm 实例所控制的 el 区域内使用。<br>如果希望在多个 vue 实例之间共享过滤器，则可以按照如下的格式定义全局过滤器：</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">  <span class="token comment">//全局过滤器--独立于每个 vm 实例之外</span>
+  <span class="token comment">//Vue.filters() 方法，接收两个参数</span>
+  <span class="token comment">//第一个参数，是全局过滤器的 "名字"</span>
+  <span class="token comment">//第二个参数，是全局过滤器的 "处理函数"</span>
+Vue<span class="token punctuation">.</span><span class="token function">filters</span><span class="token punctuation">(</span><span class="token string">'capitalize'</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token operator">=></span><span class="token punctuation">&#123;</span>
+   <span class="token keyword">return</span> str<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span> str<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'~~'</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="过滤器的调用"><a href="#过滤器的调用" class="headerlink" title="过滤器的调用"></a>过滤器的调用</h3><p>过滤器可以串联的进行调用 <code>&#123;&#123;message | filterA | filterB&#125;&#125;</code>  中间用 ‘|’ 隔开<br>A–处理过的值传递给 B ，最终把 B处理的结果渲染到页面上</p>
+<h3 id="过滤器传参"><a href="#过滤器传参" class="headerlink" title="过滤器传参"></a>过滤器传参</h3><p>  过滤器的本质是JavaScript 函数，因此可以接收参数，</p>
+<pre class="line-numbers language-none"><code class="language-none">  &lt;p&gt;&#123;&#123;message | filterA(arg1,arg2) &#125;&#125;&lt;&#x2F;p&gt;
+   Vue.filter(&#39;filterA&#39;,(msg,arg1,arg2)&#x3D;&gt;&#123;
+   &#x2F;&#x2F;过滤器代码逻辑
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="过滤器的兼容性"><a href="#过滤器的兼容性" class="headerlink" title="过滤器的兼容性"></a>过滤器的兼容性</h3><p>过滤器仅在 vue 2.x 和 1.x 中受支持，在 vue 3.x 的版本中剔除了过滤器相关的功能。<br>在企业级项目开发中：</p>
+<ul>
+<li>如果使用的是 2.x 版本的 vue，则依然可以使用过滤器相关的功能</li>
+<li>如果项目已经升级到了 3.x 版本的 vue，官方建议使用计算属性或方法代替被剔除的过滤器功能<br>具体的迁移指南，请参考 vue 3.x 的官方文档给出的说明：<a target="_blank" rel="noopener" href="https://v3.vuejs.org/guide/migration/filters.html#migration-strategy">https://v3.vuejs.org/guide/migration/filters.html#migration-strategy</a></li>
+</ul>
 
                 
             </div>
