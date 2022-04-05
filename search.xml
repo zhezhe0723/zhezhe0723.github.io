@@ -136,7 +136,7 @@ git commit -m &quot;第一次提交&quot;<span aria-hidden="true" class="line-nu
 (只有第一次推送内容需要-u origin master，往后都不用了)<h2 id="SSH-key"><a href="#SSH-key" class="headerlink" title="SSH key"></a>SSH key</h2></li>
 </ol>
 <p><strong>SSH key介绍</strong><br>SSH key 的作用：实现本地仓库和 Github 之间免登录的加密数据传输。<br>SSH key 的好处：免登录身份认证、数据加密传输。<br>SSH key 由两部分组成，分别是：<br>① id_rsa（私钥文件，存放于客户端的电脑中即可）<br>② id_rsa.pub（公钥文件，需要配置到 Github 中）<br><strong>生成SSH key</strong></p>
-<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#x79;&#111;&#x75;&#x72;&#x5f;&#101;&#x6d;&#97;&#x69;&#x6c;&#x40;&#x65;&#120;&#x61;&#109;&#112;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#109;">&#x79;&#111;&#x75;&#x72;&#x5f;&#101;&#x6d;&#97;&#x69;&#x6c;&#x40;&#x65;&#120;&#x61;&#109;&#112;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#109;</a> 替换为注册 Github 账号时填写的邮箱：</p>
+<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#x79;&#x6f;&#x75;&#114;&#x5f;&#101;&#x6d;&#x61;&#105;&#108;&#64;&#x65;&#x78;&#97;&#109;&#112;&#x6c;&#x65;&#x2e;&#x63;&#111;&#109;">&#x79;&#x6f;&#x75;&#114;&#x5f;&#101;&#x6d;&#x61;&#105;&#108;&#64;&#x65;&#x78;&#97;&#109;&#112;&#x6c;&#x65;&#x2e;&#x63;&#111;&#109;</a> 替换为注册 Github 账号时填写的邮箱：</p>
 <pre class="line-numbers language-none"><code class="language-none">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>③ 连续敲击 3 次回车，即可在 C:\Users\用户名文件夹.ssh 目录中生成 id_rsa 和 id_rsa.pub 两个文件</p>
 <p><strong>配置SSH key</strong><br>① 使用记事本打开 id_rsa.pub 文件，复制里面的文本内容<br>② 在浏览器中登录 Github，点击头像 -&gt; Settings -&gt; SSH and GPG Keys -&gt; New SSH key<br>③ 将 id_rsa.pub 文件中的内容，粘贴到 Key 对应的文本框中<br>④ 在 Title 文本框中任意填写一个名称，来标识这个 Key 从何而来</p>
@@ -221,96 +221,6 @@ in:description xxx   按照项目描述description 搜索  <span aria-hidden="tr
       </categories>
       <tags>
         <tag>Github的基本使用</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MarkdownPad语法</title>
-    <url>/2022/02/14/markdownpad-yu-fa/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> 我之前记笔记一直用OneNote，但是年前心血来潮，就自己建了博客，想着把自己的学习心得发到博客上。但是博客算是完工了，但是写文章又成了一大难题，就自己在网上查找写博客的编辑器，发现用Markdown Pad来编写文章很方便。但是刚接触这个编辑器，其中的语法看了几次记不住，于是准备写一下Markdown Pad的写作语法。以供自己写作的时候还要在网上找（麻烦….）。<span id="more"></span></p>
-<h1 id="语法介绍"><a href="#语法介绍" class="headerlink" title="语法介绍"></a>语法介绍</h1><h2 id="段落文本"><a href="#段落文本" class="headerlink" title="段落文本"></a>段落文本</h2><p><b>换行：</b>直接敲回车键即可</p>
-<p><strong>空格：</strong></p>
-<pre><code>   &amp;emsp;//两个空格大小，也就是一个中文字符
-   &amp;ensp;//一个空格大小，也就是半个中文字符
-   &amp;nbsp;//1/2个空格大小，也就是1/4个中文字
-   （但是现在这个功能好像不可以）
-</code></pre>
-<p><strong>文本</strong>：</p>
-<pre><code>*斜体文本*  _斜体文本_  //两种方式都可
-**加粗文本**  __加粗文本__  //两种方式都可
-***斜体加粗***  ___斜体加粗___  //两种方式都可
-&lt;u&gt;下划线&lt;/u&gt;
-^上表^  //具体以指数公式展示
-~下标~  //具体以水的化学式展示
-</code></pre>
-<p><strong>分割线：</strong>分割线的语法只需要三个 * 号或者在选项卡中添加水平标尺，快捷键 CTRL+R</p>
-<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>标题有三种设置方式：①手动添加；②快捷键添加；③选项卡添加；</p>
-<p>  ①手动添加 </p>
-<pre><code>                   #一级标题的内容#
-                  ##二级标题的内容##
-                 ###三级标题的内容###
-    以此类推
-</code></pre>
-<p>  ②快捷键添加<br>直接在键盘上输入ctrl+num,这里的num是指标题的级数，例如：设置一级标题 ctrl+1以此类推<br>③选项卡添加（可以忽略不计）</p>
-<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><p>有序列表，顾名思义，即输入的内容按序号进行标识排列。<br>①手动添加<br>在输入的内容前，添加num. + 空格 ，接着按 回车 ，即可添加num+1条内容<br>②快捷键添加<br>直接在键盘上输入Ctrl+Shift+O，输入第一条内容后，按 回车 ，即可添加第二条内容。注意快捷键输入的是 字母O ，而不是 数字0。<br><img src="/picture/Snipaste_2022-02-14_21-13-42.png"></p>
-<h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><p>&amp;emsp;&amp;emsp;无序列表，顾名思义，即输入的内容不按序号进行排列。<br>①手动添加<br>在输入的内容前，添加-&#x2F;* + 空格 ，接着按回车 ，即可添加下一条内容。<br>②快捷键添加<br>直接在键盘上输入Ctrl+U，输入第一条内容后，按回车 ，即可添加第二条内容。<br><img src="/picture/Snipaste_2022-02-14_21-07-27.png"></p>
-<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>&amp;emsp;&amp;emsp;引用可以将一段文字进行单独的标识，<br>①手动添加<br>在需要标注引用的内容前，输入&gt;，即可将此内容标记为引用类型。<br>②快捷键添加<br>直接在键盘上输入Ctrl+Q。</p>
-<h2 id="图片与超链接"><a href="#图片与超链接" class="headerlink" title="图片与超链接"></a>图片与超链接</h2><h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><ol>
-<li>网上的图片，添加到正在编辑的文本中进行展示。此时我们便需要用到插入图片的语法。<code>![name](url)</code>  name 是添加图片的文字描述，自己添加即可，url 是添加图片的网址</li>
-<li>本地的图片，使用相对路径插入图片。比如你把一个叫做1.png的图片和*.md文件放在一起，那么你就可以用这种方式插入图片：<code>![](1.png)</code><br>如果不想放在同一层级,那么就可以这样插入:<code>![](foldername/1.png)</code> 表示引用同层级一个叫做”foldername”的文件夹中的1.png图片,以此类推<h3 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h3>&amp;emsp;&amp;emsp;超链接和图片的添加方式只差一个!号</li>
-</ol>
-<p>图片为：<code>![]()</code></p>
-<p>链接为：<code>[]()</code></p>
-<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><ul>
-<li><p>表格的话直接用HTML写就可以</p>
-<pre><code>  &lt;table&gt;
-    &lt;tr&gt;
-        &lt;td&gt;姓名&lt;/td&gt;
-        &lt;td&gt;性别&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;李斯&lt;/td&gt;
-        &lt;td&gt;男&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/table&gt;
-</code></pre>
-</li>
-<li><p>结果如下：</p>
-</li>
-</ul>
-<p><img src="/picture/Snipaste_2022-02-14_22-11-01.png"></p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><ul>
-<li>代码行：前后添加 &#96; 一个即可</li>
-<li>代码块：前后添加 &#96;&#96;&#96;  三个即可</li>
-<li>或者快捷键 CTRL+K<h2 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h2><pre class="line-numbers language-none"><code class="language-none"> \\ 反斜杠 
-\&#96; 反引号 
-\* 星号 
-\_ 下划线 
-\&#123;&#125; 大括号 
-\[] 中括号 
-\() 小括号 
-\# 井号 
-\+ 加号 
-\- 减号 
-\. 英文句号 
-\! 感叹号<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><pre class="line-numbers language-none"><code class="language-none">      ctrl+1 一级标题 
-   ctrl+2 二级标题 
-····
-ctrl+shift+o 有序列表
-ctrl+u 无序列表
-ctrl+g 插入图片
-ctrl+L 插入超链接
-Ctrl+B　粗体 
-Ctrl+I　斜体
-Ctrl+Q　引用 
-Ctrl+K　代码块
-   Ctrl+R  分割线 
-   Ctrl+T  时间戳<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-]]></content>
-      <tags>
-        <tag>MarkdownPad语法</tag>
       </tags>
   </entry>
   <entry>
@@ -501,6 +411,96 @@ Ctrl+K　代码块
       </categories>
       <tags>
         <tag>HTTP协议</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MarkdownPad语法</title>
+    <url>/2022/02/14/markdownpad-yu-fa/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> 我之前记笔记一直用OneNote，但是年前心血来潮，就自己建了博客，想着把自己的学习心得发到博客上。但是博客算是完工了，但是写文章又成了一大难题，就自己在网上查找写博客的编辑器，发现用Markdown Pad来编写文章很方便。但是刚接触这个编辑器，其中的语法看了几次记不住，于是准备写一下Markdown Pad的写作语法。以供自己写作的时候还要在网上找（麻烦….）。<span id="more"></span></p>
+<h1 id="语法介绍"><a href="#语法介绍" class="headerlink" title="语法介绍"></a>语法介绍</h1><h2 id="段落文本"><a href="#段落文本" class="headerlink" title="段落文本"></a>段落文本</h2><p><b>换行：</b>直接敲回车键即可</p>
+<p><strong>空格：</strong></p>
+<pre><code>   &amp;emsp;//两个空格大小，也就是一个中文字符
+   &amp;ensp;//一个空格大小，也就是半个中文字符
+   &amp;nbsp;//1/2个空格大小，也就是1/4个中文字
+   （但是现在这个功能好像不可以）
+</code></pre>
+<p><strong>文本</strong>：</p>
+<pre><code>*斜体文本*  _斜体文本_  //两种方式都可
+**加粗文本**  __加粗文本__  //两种方式都可
+***斜体加粗***  ___斜体加粗___  //两种方式都可
+&lt;u&gt;下划线&lt;/u&gt;
+^上表^  //具体以指数公式展示
+~下标~  //具体以水的化学式展示
+</code></pre>
+<p><strong>分割线：</strong>分割线的语法只需要三个 * 号或者在选项卡中添加水平标尺，快捷键 CTRL+R</p>
+<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>标题有三种设置方式：①手动添加；②快捷键添加；③选项卡添加；</p>
+<p>  ①手动添加 </p>
+<pre><code>                   #一级标题的内容#
+                  ##二级标题的内容##
+                 ###三级标题的内容###
+    以此类推
+</code></pre>
+<p>  ②快捷键添加<br>直接在键盘上输入ctrl+num,这里的num是指标题的级数，例如：设置一级标题 ctrl+1以此类推<br>③选项卡添加（可以忽略不计）</p>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><p>有序列表，顾名思义，即输入的内容按序号进行标识排列。<br>①手动添加<br>在输入的内容前，添加num. + 空格 ，接着按 回车 ，即可添加num+1条内容<br>②快捷键添加<br>直接在键盘上输入Ctrl+Shift+O，输入第一条内容后，按 回车 ，即可添加第二条内容。注意快捷键输入的是 字母O ，而不是 数字0。<br><img src="/picture/Snipaste_2022-02-14_21-13-42.png"></p>
+<h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><p>&amp;emsp;&amp;emsp;无序列表，顾名思义，即输入的内容不按序号进行排列。<br>①手动添加<br>在输入的内容前，添加-&#x2F;* + 空格 ，接着按回车 ，即可添加下一条内容。<br>②快捷键添加<br>直接在键盘上输入Ctrl+U，输入第一条内容后，按回车 ，即可添加第二条内容。<br><img src="/picture/Snipaste_2022-02-14_21-07-27.png"></p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>&amp;emsp;&amp;emsp;引用可以将一段文字进行单独的标识，<br>①手动添加<br>在需要标注引用的内容前，输入&gt;，即可将此内容标记为引用类型。<br>②快捷键添加<br>直接在键盘上输入Ctrl+Q。</p>
+<h2 id="图片与超链接"><a href="#图片与超链接" class="headerlink" title="图片与超链接"></a>图片与超链接</h2><h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><ol>
+<li>网上的图片，添加到正在编辑的文本中进行展示。此时我们便需要用到插入图片的语法。<code>![name](url)</code>  name 是添加图片的文字描述，自己添加即可，url 是添加图片的网址</li>
+<li>本地的图片，使用相对路径插入图片。比如你把一个叫做1.png的图片和*.md文件放在一起，那么你就可以用这种方式插入图片：<code>![](1.png)</code><br>如果不想放在同一层级,那么就可以这样插入:<code>![](foldername/1.png)</code> 表示引用同层级一个叫做”foldername”的文件夹中的1.png图片,以此类推<h3 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h3>&amp;emsp;&amp;emsp;超链接和图片的添加方式只差一个!号</li>
+</ol>
+<p>图片为：<code>![]()</code></p>
+<p>链接为：<code>[]()</code></p>
+<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><ul>
+<li><p>表格的话直接用HTML写就可以</p>
+<pre><code>  &lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;姓名&lt;/td&gt;
+        &lt;td&gt;性别&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;李斯&lt;/td&gt;
+        &lt;td&gt;男&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+</code></pre>
+</li>
+<li><p>结果如下：</p>
+</li>
+</ul>
+<p><img src="/picture/Snipaste_2022-02-14_22-11-01.png"></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><ul>
+<li>代码行：前后添加 &#96; 一个即可</li>
+<li>代码块：前后添加 &#96;&#96;&#96;  三个即可</li>
+<li>或者快捷键 CTRL+K<h2 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h2><pre class="line-numbers language-none"><code class="language-none"> \\ 反斜杠 
+\&#96; 反引号 
+\* 星号 
+\_ 下划线 
+\&#123;&#125; 大括号 
+\[] 中括号 
+\() 小括号 
+\# 井号 
+\+ 加号 
+\- 减号 
+\. 英文句号 
+\! 感叹号<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><pre class="line-numbers language-none"><code class="language-none">      ctrl+1 一级标题 
+   ctrl+2 二级标题 
+····
+ctrl+shift+o 有序列表
+ctrl+u 无序列表
+ctrl+g 插入图片
+ctrl+L 插入超链接
+Ctrl+B　粗体 
+Ctrl+I　斜体
+Ctrl+Q　引用 
+Ctrl+K　代码块
+   Ctrl+R  分割线 
+   Ctrl+T  时间戳<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+]]></content>
+      <tags>
+        <tag>MarkdownPad语法</tag>
       </tags>
   </entry>
   <entry>
