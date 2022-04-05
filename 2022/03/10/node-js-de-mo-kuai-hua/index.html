@@ -4,11 +4,15 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="跨域与JSONP.md, 可可托海">
-    <meta name="description" content="前言————同源策略，跨域，JSONP的实现原理，防抖和节流。
-了解同源策略和跨域  同源指的是如果两个页面的协议，域名，端口都相同，则两个页面具有相同的源（如果没有给出端口号，默认是80端口）。
-同源策略是浏览器提供的一个安全功能
-跨域是">
+    <meta name="keywords" content="Node.js的模块化, 可可托海">
+    <meta name="description" content="什么是模块化编程领域中的模块化，就是遵守固定的规则，把一个大文件拆成独立并互相依赖的多个小模块。把代码进行模块化拆分的好处：
+
+提高了代码的复用性
+提高了代码的可维护性
+可以实现按需加载
+Node.js中的模块化
+
+模块的分类Node.js">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -22,7 +26,7 @@
 
     
 
-    <title>跨域与JSONP.md | 可可托海</title>
+    <title>Node.js的模块化 | 可可托海</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -313,12 +317,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">跨域与JSONP.md</h1>
+                    <h1 class="description center-align post-title">Node.js的模块化</h1>
                 </div>
             </div>
         </div>
@@ -434,8 +438,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E8%B7%A8%E5%9F%9F%E4%B8%8EJSONP/">
-                                <span class="chip bg-color">跨域与JSONP</span>
+                            <a href="/tags/Node-js%E7%9A%84%E6%A8%A1%E5%9D%97%E5%8C%96/">
+                                <span class="chip bg-color">Node.js的模块化</span>
                             </a>
                         
                     </div>
@@ -459,7 +463,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-02-27
+                    2022-03-10
                 </div>
                 
 
@@ -475,98 +479,59 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>————同源策略，跨域，JSONP的实现原理，防抖和节流。</p>
-<h1 id="了解同源策略和跨域"><a href="#了解同源策略和跨域" class="headerlink" title="了解同源策略和跨域"></a>了解同源策略和跨域</h1><p>  同源指的是如果两个页面的协议，域名，端口都相同，则两个页面具有相同的源（如果没有给出端口号，默认是80端口）。<span id="more"></span></p>
-<p><strong>同源策略</strong>是浏览器提供的一个安全功能</p>
-<p><strong>跨域</strong>是指两个URL的协议，域名，端口有一个或一个以上不一致。出现跨域的根本原因：浏览器的同源策略不允许非同源的URL之间进行资源的交互<br>（浏览器允许发起跨域请求，但是，跨域请求回来的数据会被浏览器拦截，无法被页面获取到）</p>
-<p>如何实现跨域数据请求解决方案：JSONP和CORS<br> JSONP：出现的早，兼容性好，缺点是只支持GET请求，不支持POST请求；<br> CORS：出现的较晚，W3C标准，两种请求都支持，缺点是不兼容低版本浏览器</p>
-<h1 id="JSONP的实现原理"><a href="#JSONP的实现原理" class="headerlink" title="JSONP的实现原理"></a>JSONP的实现原理</h1><p>  JSONP的实现原理就是通过<code>&lt;script&gt;</code>标签的src属性，请求跨域的数据接口，并通过函数调用的形式，接收跨域接口响应回来的数据</p>
-<h2 id="jQuery中的JSONP"><a href="#jQuery中的JSONP" class="headerlink" title="jQuery中的JSONP"></a>jQuery中的JSONP</h2><p>  jQuery 提供的 $.ajax() 函数，除了可以发起真正的 Ajax 数据请求之外，还能够发起 JSONP 数据请求</p>
-<pre><code>$.ajax(&#123;
-  url: &#39;http://ajax.frontend.itheima.net:3006/api/jsonp?name=zs&amp;age=20&#39;,
-  // 如果要使用 $.ajax() 发起 JSONP 请求，必须指定 datatype 为 jsonp
-  dataType: &#39;jsonp&#39;,
-   success: function(res) &#123;
-   console.log(res)
-&#125;
-&#125;)
-</code></pre>
-<p>在使用 jQuery 发起 JSONP 请求时，如果想要自定义 JSONP 的参数以及回调函数名称，可以通过如下两个参数来指定：</p>
-<pre><code>$.ajax(&#123;
-  url: &#39;http://ajax.frontend.itheima.net:3006/api/jsonp?name=zs&amp;age=20&#39;,
-  dataType: &#39;jsonp&#39;,
-  // 发送到服务端的参数名称，默认值为 callback
-  jsonp: &#39;callback&#39;,
-  // 自定义的回调函数名称，默认值为 jQueryxxx 格式
-  jsonpCallback: &#39;abc&#39;,
-  success: function(res) &#123;
-  console.log(res)
-&#125;
-</code></pre>
-<p> })</p>
-<h2 id="jQuery中JSONP的实现过程"><a href="#jQuery中JSONP的实现过程" class="headerlink" title="jQuery中JSONP的实现过程"></a>jQuery中JSONP的实现过程</h2><p> jQuery 中的 JSONP，也是通过 <code>&lt;script&gt;</code> 标签的 src 属性实现跨域数据访问的，只不过，jQuery 采用的是动态创建和移除<code>&lt;script&gt;</code>标签的方式，来发起 JSONP 数据请求。</p>
+                <h1 id="什么是模块化"><a href="#什么是模块化" class="headerlink" title="什么是模块化"></a>什么是模块化</h1><p>编程领域中的模块化，就是遵守固定的规则，把一个大文件拆成独立并互相依赖的多个小模块。<br>把代码进行模块化拆分的好处：</p>
 <ul>
-<li><p>在发起 JSONP 请求的时候，动态向 <code>&lt;header&gt;</code> 中 append 一个 <code>&lt;script&gt;</code> 标签；</p>
-</li>
-<li><p>在 JSONP 请求成功以后，动态从 <code>&lt;header&gt;</code> 中移除刚才 append 进去的<code> &lt;script&gt;</code> 标签；</p>
-</li>
+<li>提高了代码的复用性</li>
+<li>提高了代码的可维护性</li>
+<li>可以实现按需加载<span id="more"></span>
+<h1 id="Node-js中的模块化"><a href="#Node-js中的模块化" class="headerlink" title="Node.js中的模块化"></a>Node.js中的模块化</h1></li>
 </ul>
-<h1 id="防抖与节流"><a href="#防抖与节流" class="headerlink" title="防抖与节流"></a>防抖与节流</h1><h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><p>———<strong>防抖策略</strong>是当事件被触发后，延迟n秒后再执行回调，如果在这n秒内事件又被触发，则重新计时。</p>
-<p>防抖的应用场景：用户在输入框中连续输入一串字符是时，可以通过防抖策略，只在输入完成时，才执行查询的请求，这样可以有效减少请求次数，节约请求资源。</p>
-<pre><code>var timer = null                    // 1. 防抖动的 timer
-  function debounceSearch(keywords) &#123; // 2. 定义防抖的函数
-  timer = setTimeout(function() &#123;
-  // 发起 JSONP 请求
-  getSuggestList(keywords)
-  &#125;, 500)
-  &#125;
-
-  $(&#39;#ipt&#39;).on(&#39;keyup&#39;, function() &#123; 
-  // 3. 在触发 keyup 事件时，立即清空 timer    
-    clearTimeout(timer)
-   debounceSearch(keywords)
-&#125;)
-</code></pre>
-<h2 id="缓存搜索的建议列表"><a href="#缓存搜索的建议列表" class="headerlink" title="缓存搜索的建议列表"></a>缓存搜索的建议列表</h2><p>1.定义全局缓存对象</p>
-<p><code>// 缓存对象   var cacheObj = &#123;&#125;</code></p>
-<p>2.将搜索结果保存到缓存对象中</p>
-<pre><code> // 渲染建议列表
- function renderSuggestList(res) &#123;
-   // ...省略其他代码
-   // 将搜索的结果，添加到缓存对象中
-    var k = $(&#39;#ipt&#39;).val().trim()
-    cacheObj[k] = res
- &#125;
-</code></pre>
-<p>3.优先从缓存中获取搜索建议</p>
-<pre><code> // 监听文本框的 keyup 事件
- $(&#39;#ipt&#39;).on(&#39;keyup&#39;, function() &#123;
-    // ...省略其他代码
-
-    // 优先从缓存中获取搜索建议
-    if (cacheObj[keywords]) &#123;
-       return renderSuggestList(cacheObj[keywords])
-    &#125;
-    // 获取搜索建议列表
-    debounceSearch(keywords)
-  &#125;)
-</code></pre>
-<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p><strong>节流策略</strong> 就是可以减少一段时间内事件的触发频率</p>
-<p>节流的应用场景：</p>
+<h2 id="模块的分类"><a href="#模块的分类" class="headerlink" title="模块的分类"></a>模块的分类</h2><p>Node.js 中根据模块来源的不同，将模块分为了 3 大类，分别是：</p>
 <ul>
-<li><p>鼠标连续不断地触发某事件，只在单位时间内只触发一次</p>
-</li>
-<li><p>懒加载时要监听计算滚动条的位置，但不必每次滑动都触发，可以降低计算的频率，而不必去浪费cpu资源。</p>
-</li>
+<li>内置模块（内置模块是由 Node.js 官方提供的，例如 fs、path、http 等）</li>
+<li>自定义模块（用户创建的每个 .js 文件，都是自定义模块）</li>
+<li>第三方模块（由第三方开发出来的模块，并非官方提供的内置模块，也不是用户创建的自定义模块，使用前需要先下载）</li>
 </ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li>防抖：如果事件被频繁触发，防抖能保证只有最有一次触发生效！前面 N 多次的触发都会被忽略！</li>
-<li>节流：如果事件被频繁触发，节流能够减少事件触发的频率，因此，节流是有选择性地执行一部分事件！</li>
+<h2 id="加载模块"><a href="#加载模块" class="headerlink" title="加载模块"></a>加载模块</h2><p>使用强大的 require() 方法，可以加载需要的内置模块、用户自定义模块、第三方模块进行使用<br>（注意：使用 require() 方法加载其它模块时，会执行被加载模块中的代码）</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 1.加载内置的fs模块
+const fs &#x3D; require(&#39;fs&#39; )
+&#x2F;&#x2F; 2.加载用户的自定义模块
+const custom &#x3D; require( &#39; .&#x2F;custom.js&#39;)
+&#x2F;&#x2F; 3.加载第三方模块(关于第三方模块的下载和使用，会在后面的课程中进行专]的讲解)
+const moment &#x3D; require( &#39; moment &#39; )<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="模块作用域"><a href="#模块作用域" class="headerlink" title="模块作用域"></a>模块作用域</h2><p>与函数作用域类似，在自定义模块中定义的变量、方法等成员，只能在当前模块内被访问，这种模块级别的访问限制，叫做模块作用域；他的好处是：防止全局变量污染的问题</p>
+<h2 id="向外共享模块作用域中的成员"><a href="#向外共享模块作用域中的成员" class="headerlink" title="向外共享模块作用域中的成员"></a>向外共享模块作用域中的成员</h2><ol>
+<li>module对象：在每个 .js 自定义模块中都有一个 module 对象，它里面存储了和当前模块有关的信息</li>
+<li>module.exports 对象：在自定义模块中，可以使用 module.exports 对象，将模块内的成员共享出去，供外界使用。外界用 require() 方法导入自定义模块时，得到的就是 module.exports 所指向的对象。（注意：使用 require() 方法导入模块时，导入的结果，永远以 module.exports 指向的对象为准）</li>
+<li>exports 对象：由于 module.exports 单词写起来比较复杂，为了简化向外共享成员的代码，Node 提供了 exports 对象。默认情况下，exports 和 module.exports 指向同一个对象。最终共享的结果，还是以 module.exports 指向的对象为准。</li>
+</ol>
+<h1 id="模块的加载机制"><a href="#模块的加载机制" class="headerlink" title="模块的加载机制"></a>模块的加载机制</h1><h2 id="优先从缓存中加载"><a href="#优先从缓存中加载" class="headerlink" title="优先从缓存中加载"></a>优先从缓存中加载</h2><p>模块在第一次加载后会被缓存。 这也意味着多次调用 require() 不会导致模块的代码被执行多次。<br>注意：不论是内置模块、用户自定义模块、还是第三方模块，它们都会优先从缓存中加载，从而提高模块的加载效率。</p>
+<h2 id="内置模块的加载机制"><a href="#内置模块的加载机制" class="headerlink" title="内置模块的加载机制"></a>内置模块的加载机制</h2><p>内置模块是由 Node.js 官方提供的模块，内置模块的加载优先级最高。<br>例如，require(‘fs’) 始终返回内置的 fs 模块，即使在 node_modules 目录下有名字相同的包也叫做 fs。</p>
+<h2 id="自定义模块的加载机制"><a href="#自定义模块的加载机制" class="headerlink" title="自定义模块的加载机制"></a>自定义模块的加载机制</h2><p>使用 require() 加载自定义模块时，必须指定以 .&#x2F; 或 ..&#x2F; 开头的路径标识符。在加载自定义模块时，如果没有指定 .&#x2F; 或 ..&#x2F; 这样的路径标识符，则 node 会把它当作内置模块或第三方模块进行加载。</p>
+<p>同时，在使用 require() 导入自定义模块时，如果省略了文件的扩展名，则 Node.js 会按顺序分别尝试加载以下的文件：<br>按照确切的文件名进行加载</p>
+<ul>
+<li>补全 .js 扩展名进行加载</li>
+<li>补全 .json 扩展名进行加载</li>
+<li>补全 .node 扩展名进行加载</li>
+<li>加载失败，终端报错<h2 id="第三方模块的加载机制"><a href="#第三方模块的加载机制" class="headerlink" title="第三方模块的加载机制"></a>第三方模块的加载机制</h2>如果传递给 require() 的模块标识符不是一个内置模块，也没有以 ‘.&#x2F;’ 或 ‘..&#x2F;’ 开头，则 Node.js 会从当前模块的父目录开始，尝试从 &#x2F;node_modules 文件夹中加载第三方模块。<br>如果没有找到对应的第三方模块，则移动到再上一层父目录中，进行加载，直到文件系统的根目录。<br>例如，假设在 ‘C:\Users\itheima\project\foo.js’ 文件里调用了 require(‘tools’)，则 Node.js 会按以下顺序查找：</li>
+<li>C:\Users\itheima\project\node_modules\tools</li>
+<li>C:\Users\itheima\node_modules\tools</li>
+<li>C:\Users\node_modules\tools</li>
+<li>C:\node_modules\tools</li>
+</ul>
+<h2 id="目录作为模块"><a href="#目录作为模块" class="headerlink" title="目录作为模块"></a>目录作为模块</h2><p>当把目录作为模块标识符，传递给 require() 进行加载的时候，有三种加载方式：</p>
+<ul>
+<li>在被加载的目录下查找一个叫做 package.json 的文件，并寻找 main 属性，作为 require() 加载的入口</li>
+<li>如果目录里没有 package.json 文件，或者 main 入口不存在或无法解析，则 Node.js 将会试图加载目录下的 index.js 文件。</li>
+<li>如果以上两步都失败了，则 Node.js 会在终端打印错误消息，报告模块的缺失：Error: Cannot find module ‘xxx’</li>
 </ul>
 
                 
@@ -594,7 +559,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://zhezhe0723.github.io/2022/02/27/%E8%B7%A8%E5%9F%9F%E4%B8%8EJSONP-md/">http://zhezhe0723.github.io/2022/02/27/%E8%B7%A8%E5%9F%9F%E4%B8%8EJSONP-md/</a>
+                    <a href="http://zhezhe0723.github.io/2022/03/10/node-js-de-mo-kuai-hua/">http://zhezhe0723.github.io/2022/03/10/node-js-de-mo-kuai-hua/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -632,8 +597,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E8%B7%A8%E5%9F%9F%E4%B8%8EJSONP/">
-                                    <span class="chip bg-color">跨域与JSONP</span>
+                                <a href="/tags/Node-js%E7%9A%84%E6%A8%A1%E5%9D%97%E5%8C%96/">
+                                    <span class="chip bg-color">Node.js的模块化</span>
                                 </a>
                             
                         </div>
@@ -811,26 +776,26 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/02/28/HTTP%E5%8D%8F%E8%AE%AE/">
+                <a href="/2022/03/10/npm-yu-bao-de-jian-dan-gai-nian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="HTTP协议">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="npm与包的简单概念">
                         
-                        <span class="card-title">HTTP协议</span>
+                        <span class="card-title">npm与包的简单概念</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            HTTP协议简介什么是通信——通信就是信息的传递和交换
-通信三要素：主体，内容，方式。
-（服务器把张三的文章通过响应的方式发送给客户端浏览器）其中通信的主体是服务器和客服端浏览器，内容是张三的文章，方式是响应
+                            包
+包的概念：Node.js 中的第三方模块又叫做包。
+包的来源：不同于 Node.js 中的内置模块与自定义模块，包是由第三方个人或团队开发出来的，免费供所有人使用。注意：Node.js 中的包都是免费且开源的，不需要付费即可免费下载使用
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-02-28
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-10
                         </span>
                         <span class="publish-author">
                             
@@ -847,8 +812,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/HTTP%E5%8D%8F%E8%AE%AE/">
-                        <span class="chip bg-color">HTTP协议</span>
+                    <a href="/tags/npm%E4%B8%8E%E5%8C%85/">
+                        <span class="chip bg-color">npm与包</span>
                     </a>
                     
                 </div>
@@ -862,29 +827,33 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/02/14/MarkdownPad%E8%AF%AD%E6%B3%95/">
+                <a href="/2022/03/04/nodejs-ji-chu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="MarkdownPad语法">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="NodeJs基础">
                         
-                        <span class="card-title">MarkdownPad语法</span>
+                        <span class="card-title">NodeJs基础</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            前言 我之前记笔记一直用OneNote，但是年前心血来潮，就自己建了博客，想着把自己的学习心得发到博客上。但是博客算是完工了，但是写文章又成了一大难题，就自己在网上查找写博客的编辑器，发现用Markdown Pad来编写文章很方便。但是刚接
+                            初始Node.js什么是Node.jsNode.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js 的官网地址： https://nodejs.org/zh-cn/
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-14
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-04
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            哲哲
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92/" class="post-category">
+                                    前后端交互
+                                </a>
+                            
                             
                         </span>
                     </div>
@@ -892,8 +861,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/MarkdownPad%E8%AF%AD%E6%B3%95/">
-                        <span class="chip bg-color">MarkdownPad语法</span>
+                    <a href="/tags/Node/">
+                        <span class="chip bg-color">Node</span>
                     </a>
                     
                 </div>
@@ -1265,6 +1234,15 @@ $(function () {
 
     
 
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
     
 
     <!-- 雪花特效 -->

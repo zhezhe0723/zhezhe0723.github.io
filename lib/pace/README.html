@@ -459,6 +459,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
@@ -473,36 +476,35 @@
 <h2 align="center">Step 1 &rarr; Go to NexT dir</h2>
 
 <p>Change dir to <strong>NexT</strong> directory. There must be <code>layout</code>, <code>source</code>, <code>languages</code> and other directories:</p>
-<pre><code class="sh">$ cd themes/next
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">$ cd themes&#x2F;next
 $ ls
-_config.yml  crowdin.yml  docs  gulpfile.js  languages  layout  LICENSE.md  package.json  README.md  scripts  source
-</code></pre>
+_config.yml  crowdin.yml  docs  gulpfile.js  languages  layout  LICENSE.md  package.json  README.md  scripts  source<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <h2 align="center">Step 2 &rarr; Get module</h2>
 
 <p>Install module to <code>source/lib</code> directory:</p>
-<pre><code class="sh">$ git clone https://github.com/theme-next/theme-next-pace source/lib/pace
-</code></pre>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">$ git clone https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;theme-next-pace source&#x2F;lib&#x2F;pace<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <h2 align="center">Step 3 &rarr; Set it up</h2>
 
 <p>Enable module in <strong>NexT</strong> <code>_config.yml</code> file and select your theme:</p>
-<pre><code class="yml">pace:
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">pace:
   enable: true
   # Themes list:
   # big-counter | bounce | barber-shop | center-atom | center-circle | center-radar | center-simple
   # corner-indicator | fill-left | flat-top | flash | loading-bar | mac-osx | material | minimal
-  theme: minimal
-</code></pre>
+  theme: minimal<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p><strong>And, if you wants to use the CDN, then need to set:</strong> (you also need to find your corresponding theme css link in <a target="_blank" rel="noopener" href="https://www.jsdelivr.com/package/npm/pace-js?path=themes">jsdelivr</a>)</p>
-<pre><code class="yml">vendors:
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">vendors:
   ...
-  pace: //cdn.jsdelivr.net/npm/pace-js@1/pace.min.js
-  pace_css: //cdn.jsdelivr.net/npm/pace-js@1/themes/blue/pace-theme-minimal.css
-</code></pre>
+  pace: &#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;pace-js@1&#x2F;pace.min.js
+  pace_css: &#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;pace-js@1&#x2F;themes&#x2F;blue&#x2F;pace-theme-minimal.css<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h1 align="center">Update</h1>
 
-<pre><code class="sh">$ cd themes/next/source/lib/pace
-$ git pull
-</code></pre>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">$ cd themes&#x2F;next&#x2F;source&#x2F;lib&#x2F;pace
+$ git pull<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
                 
             </div>
@@ -1177,6 +1179,15 @@ $(function () {
 
     
 
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
     
 
     <!-- 雪花特效 -->

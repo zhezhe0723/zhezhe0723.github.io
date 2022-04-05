@@ -4,12 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="NodeJs基础, 可可托海">
-    <meta name="description" content="初始Node.js什么是Node.jsNode.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js 的官网地址： https://nodejs.org/zh-cn/
-
-
-
-浏览器是 JavaScri">
+    <meta name="keywords" content="MarkdownPad语法, 可可托海">
+    <meta name="description" content="前言 我之前记笔记一直用OneNote，但是年前心血来潮，就自己建了博客，想着把自己的学习心得发到博客上。但是博客算是完工了，但是写文章又成了一大难题，就自己在网上查找写博客的编辑器，发现用Markdown Pad来编写文章很方便。但是刚接">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -23,7 +19,7 @@
 
     
 
-    <title>NodeJs基础 | 可可托海</title>
+    <title>MarkdownPad语法 | 可可托海</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -314,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">NodeJs基础</h1>
+                    <h1 class="description center-align post-title">MarkdownPad语法</h1>
                 </div>
             </div>
         </div>
@@ -435,23 +431,14 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Node/">
-                                <span class="chip bg-color">Node</span>
+                            <a href="/tags/MarkdownPad%E8%AF%AD%E6%B3%95/">
+                                <span class="chip bg-color">MarkdownPad语法</span>
                             </a>
                         
                     </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92/" class="post-category">
-                                前后端交互
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -460,7 +447,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-04
+                    2022-02-14
                 </div>
                 
 
@@ -476,197 +463,96 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="初始Node-js"><a href="#初始Node-js" class="headerlink" title="初始Node.js"></a>初始Node.js</h1><h2 id="什么是Node-js"><a href="#什么是Node-js" class="headerlink" title="什么是Node.js"></a>什么是Node.js</h2><p>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。<br>Node.js 的官网地址： <a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/">https://nodejs.org/zh-cn/</a></p>
-<span id="more"></span>
-
-<ul>
-<li>浏览器是 JavaScript 的前端运行环境;</li>
-<li>Node.js 是 JavaScript 的后端运行环境;</li>
-<li>Node.js 中无法调用 DOM 和 BOM 等浏览器内置 API。</li>
-</ul>
-<h2 id="Node-js-可以做什么"><a href="#Node-js-可以做什么" class="headerlink" title="Node.js 可以做什么"></a>Node.js 可以做什么</h2><p>Node.js 作为一个 JavaScript 的运行环境，仅仅提供了基础的功能和 API。然而，基于 Node.js 提供的这些基础能，很多强大的工具和框架如雨后春笋，层出不穷，所以学会了 Node.js ，可以让前端程序员胜任更多的工作和岗位：</p>
-<ul>
-<li>基于 Express 框架（<a target="_blank" rel="noopener" href="http://www.expressjs.com.cn/%EF%BC%89%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA">http://www.expressjs.com.cn/），可以快速构建</a> Web 应用</li>
-<li>基于 Electron 框架（<a target="_blank" rel="noopener" href="https://electronjs.org/%EF%BC%89%EF%BC%8C%E5%8F%AF%E4%BB%A5%E6%9E%84%E5%BB%BA%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8">https://electronjs.org/），可以构建跨平台的桌面应用</a></li>
-<li>基于 restify 框架（<a target="_blank" rel="noopener" href="http://restify.com/%EF%BC%89%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA">http://restify.com/），可以快速构建</a> API 接口项目</li>
-<li>读写和操作数据库、创建实用的命令行工具辅助前端开发、etc…<br>总之：Node.js 是大前端时代的“大宝剑”，有了 Node.js 这个超级 buff 的加持，前端程序员的行业竞争力会越来越强！</li>
-</ul>
-<h2 id="在-Node-js-环境中执行-JavaScript-代码"><a href="#在-Node-js-环境中执行-JavaScript-代码" class="headerlink" title="在 Node.js 环境中执行 JavaScript 代码"></a>在 Node.js 环境中执行 JavaScript 代码</h2><ol>
-<li>打开终端</li>
-<li>输入node 要执行的js文件的路径</li>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> 我之前记笔记一直用OneNote，但是年前心血来潮，就自己建了博客，想着把自己的学习心得发到博客上。但是博客算是完工了，但是写文章又成了一大难题，就自己在网上查找写博客的编辑器，发现用Markdown Pad来编写文章很方便。但是刚接触这个编辑器，其中的语法看了几次记不住，于是准备写一下Markdown Pad的写作语法。以供自己写作的时候还要在网上找（麻烦….）。<span id="more"></span></p>
+<h1 id="语法介绍"><a href="#语法介绍" class="headerlink" title="语法介绍"></a>语法介绍</h1><h2 id="段落文本"><a href="#段落文本" class="headerlink" title="段落文本"></a>段落文本</h2><p><b>换行：</b>直接敲回车键即可</p>
+<p><strong>空格：</strong></p>
+<pre><code>   &amp;emsp;//两个空格大小，也就是一个中文字符
+   &amp;ensp;//一个空格大小，也就是半个中文字符
+   &amp;nbsp;//1/2个空格大小，也就是1/4个中文字
+   （但是现在这个功能好像不可以）
+</code></pre>
+<p><strong>文本</strong>：</p>
+<pre><code>*斜体文本*  _斜体文本_  //两种方式都可
+**加粗文本**  __加粗文本__  //两种方式都可
+***斜体加粗***  ___斜体加粗___  //两种方式都可
+&lt;u&gt;下划线&lt;/u&gt;
+^上表^  //具体以指数公式展示
+~下标~  //具体以水的化学式展示
+</code></pre>
+<p><strong>分割线：</strong>分割线的语法只需要三个 * 号或者在选项卡中添加水平标尺，快捷键 CTRL+R</p>
+<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>标题有三种设置方式：①手动添加；②快捷键添加；③选项卡添加；</p>
+<p>  ①手动添加 </p>
+<pre><code>                   #一级标题的内容#
+                  ##二级标题的内容##
+                 ###三级标题的内容###
+    以此类推
+</code></pre>
+<p>  ②快捷键添加<br>直接在键盘上输入ctrl+num,这里的num是指标题的级数，例如：设置一级标题 ctrl+1以此类推<br>③选项卡添加（可以忽略不计）</p>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><p>有序列表，顾名思义，即输入的内容按序号进行标识排列。<br>①手动添加<br>在输入的内容前，添加num. + 空格 ，接着按 回车 ，即可添加num+1条内容<br>②快捷键添加<br>直接在键盘上输入Ctrl+Shift+O，输入第一条内容后，按 回车 ，即可添加第二条内容。注意快捷键输入的是 字母O ，而不是 数字0。<br><img src="/picture/Snipaste_2022-02-14_21-13-42.png"></p>
+<h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><p>&amp;emsp;&amp;emsp;无序列表，顾名思义，即输入的内容不按序号进行排列。<br>①手动添加<br>在输入的内容前，添加-&#x2F;* + 空格 ，接着按回车 ，即可添加下一条内容。<br>②快捷键添加<br>直接在键盘上输入Ctrl+U，输入第一条内容后，按回车 ，即可添加第二条内容。<br><img src="/picture/Snipaste_2022-02-14_21-07-27.png"></p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>&amp;emsp;&amp;emsp;引用可以将一段文字进行单独的标识，<br>①手动添加<br>在需要标注引用的内容前，输入&gt;，即可将此内容标记为引用类型。<br>②快捷键添加<br>直接在键盘上输入Ctrl+Q。</p>
+<h2 id="图片与超链接"><a href="#图片与超链接" class="headerlink" title="图片与超链接"></a>图片与超链接</h2><h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><ol>
+<li>网上的图片，添加到正在编辑的文本中进行展示。此时我们便需要用到插入图片的语法。<code>![name](url)</code>  name 是添加图片的文字描述，自己添加即可，url 是添加图片的网址</li>
+<li>本地的图片，使用相对路径插入图片。比如你把一个叫做1.png的图片和*.md文件放在一起，那么你就可以用这种方式插入图片：<code>![](1.png)</code><br>如果不想放在同一层级,那么就可以这样插入:<code>![](foldername/1.png)</code> 表示引用同层级一个叫做”foldername”的文件夹中的1.png图片,以此类推<h3 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h3>&amp;emsp;&amp;emsp;超链接和图片的添加方式只差一个!号</li>
 </ol>
-<h3 id="终端中的快捷键"><a href="#终端中的快捷键" class="headerlink" title="终端中的快捷键"></a>终端中的快捷键</h3><ul>
-<li>使用 ↑ 键，可以快速定位到上一次执行的命令</li>
-<li>使用 tab 键，能够快速补全路径</li>
-<li>使用 esc 键，能够快速清空当前已输入的命令</li>
-<li>输入 cls 命令，可以清空终端</li>
-</ul>
-<h1 id="fs文件系统模块"><a href="#fs文件系统模块" class="headerlink" title="fs文件系统模块"></a>fs文件系统模块</h1><h2 id="什么是-fs-文件系统模块"><a href="#什么是-fs-文件系统模块" class="headerlink" title="什么是 fs 文件系统模块"></a>什么是 fs 文件系统模块</h2><p>fs 模块是 Node.js 官方提供的、用来操作文件的模块。它提供了一系列的方法和属性，用来满足用户对文件的操作需求</p>
-<ul>
-<li>fs.readFile() 方法，用来读取指定文件中的内容</li>
-<li>fs.writeFile() 方法，用来向指定的文件中写入内容<br>如果要在 JavaScript 代码中，使用 fs 模块来操作文件，则需要使用如下的方式先导入它</li>
-</ul>
-<pre><code>   const fs = require(&#39;fs&#39;)
-</code></pre>
-<h2 id="fs-readFile-的语法"><a href="#fs-readFile-的语法" class="headerlink" title="fs.readFile()的语法"></a>fs.readFile()的语法</h2><p>用来读取指定文件中的内容<br><strong>格式：</strong></p>
-<pre><code>   fs.readFile(path[,options],callback)
-   //参数1：必选参数，字符串，表示文件的路径
-   //参数2：可选参数，表示以什么编码格式来读取文件
-   //参数3：必选参数，文件读取完成后，通过回调函数拿到读取的结果
-</code></pre>
-<p><strong>示例：</strong></p>
-<pre><code>   const fs = require( &#39;fs&#39;)
-   fs. readFile(&#39; ./files/11.txt&#39;, &#39;utf8&#39;, function(err, dataStr) &#123;
-    console.log(err )
-    console. 0og(-----&#39;)
-    console. log(dataStr)
-   &#125;)
-</code></pre>
-<p><strong>判断文件是否读取成功</strong><br>可以判断 err 对象是否为 null，从而知晓文件读取的结果：</p>
-<pre><code>    const fs = require(&#39;fs&#39;)
-    fs. readFile(&#39; ./files/1.txt&#39;, &#39;utf8&#39;, function(err, result) &#123;
-         if (err) &#123;
-           return console. log( &#39;文件读取失败! &#39; + err . message)
-         &#125;
-         console. log( &#39;文件读取成功，内容是: + result)
-    &#125;)
-</code></pre>
-<h2 id="fs-writeFile-的语法"><a href="#fs-writeFile-的语法" class="headerlink" title="fs.writeFile()的语法"></a>fs.writeFile()的语法</h2><p>用来向指定的文件中写入内容<br><strong>格式：</strong></p>
-<pre><code>   fs .writeFile(file, data[, options], callback)
-   //参数1：必选参数，需要指定一个文件路径的字符串，表示文件的存放路径。
-   //参数2：必选参数，表示要写入的内容。
-   //参数3：可选参数，表示以什么格式写入文件内容，默认值是 utf8。
-   //参数4：必选参数，文件写入完成后的回调函数。
-</code></pre>
-<p><strong>示例：</strong></p>
-<pre><code>    const fs = require(&#39;fs&#39;)
-    fs . writeFile(&#39; ./files/2.txt&#39;, &#39;Hello Node.js!&#39;, function(err) &#123;
-        console. log(err)
-    &#125;)
-</code></pre>
-<p><strong>判断文件是否写入成功</strong><br>可以判断 err 对象是否为 null，从而知晓文件写入的结果：</p>
-<pre><code>   const fs = require(&#39;fs&#39;)
-   fs . writeFile(&#39;F:/files/2.txt&#39;, &#39;Hello Node.js!&#39;, function(err) &#123;
-      if (err) &#123;
-         return console.log( ‘文件写入失败!”+ err . message )
-      console. log( &#39;文件写入成功! &#39;)
-    &#125;)
-</code></pre>
-<h1 id="path-路径模块"><a href="#path-路径模块" class="headerlink" title="path 路径模块"></a>path 路径模块</h1><h2 id="什么是path-路径模块"><a href="#什么是path-路径模块" class="headerlink" title="什么是path 路径模块"></a>什么是path 路径模块</h2><p>path 模块是 Node.js 官方提供的、用来处理路径的模块。它提供了一系列的方法和属性，用来满足用户对路径的处理需求。</p>
-<ul>
-<li>path.join() 方法，用来将多个路径片段拼接成一个完整的路径字符串</li>
-<li>path.basename() 方法，用来从路径字符串中，将文件名解析出来</li>
-<li>path.extname() 方法，可以获取路径中的扩展名部分，<br>如果要在 JavaScript 代码中，使用 path 模块来处理路径，则需要使用如下的方式先导入它</li>
-</ul>
-<pre><code>   const path =require(&#39;path&#39;)
-</code></pre>
-<h2 id="path-join-的语法"><a href="#path-join-的语法" class="headerlink" title="path.join() 的语法"></a>path.join() 的语法</h2><p>用来将多个路径片段拼接成一个完整的路径字符串<br><strong>格式：</strong></p>
-<pre><code>   path.join([...paths])
-   //...paths&lt;string&gt;路径片段的序列
-   // 返回值：&lt;string&gt;
-</code></pre>
-<p><strong>示例：</strong></p>
-<pre><code>    const pathStr - path. join(&#39;/a&#39;, &#39;/b/c&#39;, ../&#39;，&#39;./d&#39;,&#39;e&#39;)
-    console . log(pathStr) /1输出\a\bide
-    const pathStr2 = path.
-    join(_ dirname, &#39; ./files/1.txt&#39;)
-    console . log(pathStr2) 11输出当前文件所处目录\files\1. txt
-</code></pre>
-<h2 id="path-basename-的语法"><a href="#path-basename-的语法" class="headerlink" title="path.basename() 的语法"></a>path.basename() 的语法</h2><p>使用 path.basename() 方法，可以获取路径中的最后一部分，经常通过这个方法获取路径中的文件名</p>
-<p><strong>格式：</strong></p>
-<pre><code>   path.basename(path[,ext])
-   //path &lt;string&gt; 必选参数，表示一个路径的字符串
-   //ext &lt;string&gt; 可选参数，表示文件扩展名
-   //返回: &lt;string&gt; 表示路径中的最后一部分
-</code></pre>
-<p><strong>示例：</strong></p>
-<pre><code>   const fpath = &#39; /a/b/c/index.html&#39; //文件的存放路径
-
-   var fullName = path . basename( fpath)
-   console. log( fullName) // 输出index . html
-
-   var nameWi thoutExt = path. basename( fpath, &#39; .html &#39; )
-   console . logc nameWithoutExt) 1// 输出index
-</code></pre>
-<h2 id="path-extname-的语法"><a href="#path-extname-的语法" class="headerlink" title="path.extname() 的语法"></a>path.extname() 的语法</h2><p>使用 path.extname() 方法，可以获取路径中的扩展名部分</p>
-<p><strong>格式：</strong></p>
-<pre><code>   path.extname(path)
-   //path &lt;string&gt;必选参数，表示一个路径的字符串
-   //返回: &lt;string&gt; 返回得到的扩展名字符串
-</code></pre>
-<p><strong>示例：</strong></p>
-<pre><code>   const fpath = &#39; /a/b/c/index.html&#39; //路径字符串
-   const fext = path. extname( fpath)
-   console. log(fext) //输出. html
-</code></pre>
-<h1 id="http-模块"><a href="#http-模块" class="headerlink" title="http 模块"></a>http 模块</h1><h2 id="什么是http-模块"><a href="#什么是http-模块" class="headerlink" title="什么是http 模块"></a>什么是http 模块</h2><p>http 模块是 Node.js 官方提供的、用来创建 web 服务器的模块。通过 http 模块提供的 http.createServer() 方法，就能方便的把一台普通的电脑，变成一台 Web 服务器，从而对外提供 Web 资源服务。</p>
-<p>如果要希望使用 http 模块创建 Web 服务器，则需要先导入它</p>
-<pre><code>   const http= require(&#39;http&#39;)
-</code></pre>
-<h2 id="http-模块的作用"><a href="#http-模块的作用" class="headerlink" title="http 模块的作用"></a>http 模块的作用</h2><p>在 Node.js 中，我们不需要使用 IIS、Apache 等这些第三方 web 服务器软件。因为我们可以基于 Node.js 提供的 http 模块，通过几行简单的代码，就能轻松的手写一个服务器软件，从而对外提供 web 服务。</p>
-<h2 id="创建最基本的web服务器"><a href="#创建最基本的web服务器" class="headerlink" title="创建最基本的web服务器"></a>创建最基本的web服务器</h2><ol>
-<li>导入http 模块</li>
-</ol>
-<pre><code>   const http=require(&#39;http&#39;)
-</code></pre>
-<ol start="2">
-<li>创建web服务器实例<br>调用 http.createServer() 方法，即可快速创建一个 web 服务器实例：<pre><code>const server=http.createServer()
+<p>图片为：<code>![]()</code></p>
+<p>链接为：<code>[]()</code></p>
+<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><ul>
+<li><p>表格的话直接用HTML写就可以</p>
+<pre><code>  &lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;姓名&lt;/td&gt;
+        &lt;td&gt;性别&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;李斯&lt;/td&gt;
+        &lt;td&gt;男&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
 </code></pre>
 </li>
-<li>为服务器实例绑定 request 事件<br>为服务器实例绑定 request 事件，即可监听客户端发送过来的网络请求</li>
-</ol>
-<pre><code>   //使用服务器实例的.on() 方法，为服务器绑定个request 事件
-   server . on(&#39;request&#39;，(req, res) =&gt; &#123;
-   //只要有客户端来请求我们自己的服务器，就会触发request 事件，从而调用这个事件处理函数
-   console. log( &#39;Someone visit our web server.&#39; )
-   &#125;)
-</code></pre>
-<ol start="4">
-<li>启动服务器<br>调用服务器实例的 .listen() 方法，即可启动当前的 web 服务器实例：</li>
-</ol>
-<pre><code>   //调用server.listen(端0号， cb回调)方法，即可启动web服务器
-   server .listen(80, () =&gt; &#123;
-   console log( &#39;http server running at http://127.0.0.1&#39;)
-&#125;)
-</code></pre>
-<ol start="5">
-<li>req请求对象<br>只要服务器接收到了客户端的请求，就会调用通过 server.on() 为服务器绑定的 request 事件处理函数。<br>如果想在事件处理函数中，访问与客户端相关的数据或属性，可以使用如下的方式：</li>
-</ol>
-<pre><code>server .on( &#39;request&#39;, (req) &gt; &#123;
-// req是请求对象，它包含了与客户端相关的数据和属性，例如:
-// req.url是客户端请求的URL 地址
-// req.method 是客户端的method请求类型
-const str . Your request url is $&#123;req.ur1&#125;, and request method is $&#123;req . method&#125;
-console. log(str )
-&#125;)
-</code></pre>
-<ol start="6">
-<li>res 响应对象<br>在服务器的 request 事件处理函数中，如果想访问与服务器相关的数据或属性，可以使用如下的方式：<pre><code>server . on( &#39;request&#39;, (req, res) =&gt; &#123;
-// res 是响应对象，它包含了与服务器相关的数据和属性，例如:
-//要发送到客户端的字符串
-const str = &quot;Your request url is $&#123;req,ur1&#125;, and request method is $&#123;req. method&#125;
-// res .end( )方法的作用:
-//向客户端发送指定的内容，并结束这次请求的处理过程
-res . end(str )
-&#125;)
-</code></pre>
+<li><p>结果如下：</p>
 </li>
-<li>解决中文乱码的问题<br>当调用 res.end() 方法，向客户端发送中文内容的时候，会出现乱码问题，此时，需要手动设置内容的编码格式：<pre><code>server . on( &#39;request&#39;, (req, res) =&gt; &#123;
-//发送的内容包含中文
-const str =。 您请求的url地址是$&#123;req.ur1&#125;, 请求的method类型是$&#123;req . method&#125;
-// 为了防止中文显示乱码的问题， 需要设置响应头Content -Type的值为text/html; charset=utf-8
-res . setHeader &#39; Content-Type&#39;, &#39; text/html; charset=utf-8&#39;)
-//把包含中文的内容，响应给客户端
-res . end(str)
-&#125;)
-</code></pre>
-</li>
-</ol>
+</ul>
+<p><img src="/picture/Snipaste_2022-02-14_22-11-01.png"></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><ul>
+<li>代码行：前后添加 &#96; 一个即可</li>
+<li>代码块：前后添加 &#96;&#96;&#96;  三个即可</li>
+<li>或者快捷键 CTRL+K<h2 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h2><pre class="line-numbers language-none"><code class="language-none"> \\ 反斜杠 
+\&#96; 反引号 
+\* 星号 
+\_ 下划线 
+\&#123;&#125; 大括号 
+\[] 中括号 
+\() 小括号 
+\# 井号 
+\+ 加号 
+\- 减号 
+\. 英文句号 
+\! 感叹号<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><pre class="line-numbers language-none"><code class="language-none">      ctrl+1 一级标题 
+   ctrl+2 二级标题 
+····
+ctrl+shift+o 有序列表
+ctrl+u 无序列表
+ctrl+g 插入图片
+ctrl+L 插入超链接
+Ctrl+B　粗体 
+Ctrl+I　斜体
+Ctrl+Q　引用 
+Ctrl+K　代码块
+   Ctrl+R  分割线 
+   Ctrl+T  时间戳<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
                 
             </div>
@@ -693,7 +579,7 @@ res . end(str)
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://zhezhe0723.github.io/2022/03/04/NodeJs%E5%9F%BA%E7%A1%80/">http://zhezhe0723.github.io/2022/03/04/NodeJs%E5%9F%BA%E7%A1%80/</a>
+                    <a href="http://zhezhe0723.github.io/2022/02/14/markdownpad-yu-fa/">http://zhezhe0723.github.io/2022/02/14/markdownpad-yu-fa/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -731,8 +617,8 @@ res . end(str)
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Node/">
-                                    <span class="chip bg-color">Node</span>
+                                <a href="/tags/MarkdownPad%E8%AF%AD%E6%B3%95/">
+                                    <span class="chip bg-color">MarkdownPad语法</span>
                                 </a>
                             
                         </div>
@@ -910,28 +796,25 @@ res . end(str)
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/03/10/Node-js%E7%9A%84%E6%A8%A1%E5%9D%97%E5%8C%96/">
+                <a href="/2022/02/27/kua-yu-yu-jsonp-md/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Node.js的模块化">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="跨域与JSONP.md">
                         
-                        <span class="card-title">Node.js的模块化</span>
+                        <span class="card-title">跨域与JSONP.md</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            什么是模块化编程领域中的模块化，就是遵守固定的规则，把一个大文件拆成独立并互相依赖的多个小模块。把代码进行模块化拆分的好处：
-
-提高了代码的复用性
-提高了代码的可维护性
-可以实现按需加载
+                            前言————同源策略，跨域，JSONP的实现原理，防抖和节流。
+了解同源策略和跨域  同源指的是如果两个页面的协议，域名，端口都相同，则两个页面具有相同的源（如果没有给出端口号，默认是80端口）。
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-10
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-02-27
                         </span>
                         <span class="publish-author">
                             
@@ -948,8 +831,8 @@ res . end(str)
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Node-js%E7%9A%84%E6%A8%A1%E5%9D%97%E5%8C%96/">
-                        <span class="chip bg-color">Node.js的模块化</span>
+                    <a href="/tags/%E8%B7%A8%E5%9F%9F%E4%B8%8EJSONP/">
+                        <span class="chip bg-color">跨域与JSONP</span>
                     </a>
                     
                 </div>
@@ -960,48 +843,42 @@ res . end(str)
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/01/Github%E7%9A%84%E4%BD%BF%E7%94%A8/">
+                <a href="/2022/02/14/markdownpad-yu-fa/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Github的使用">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="MarkdownPad语法">
                         
-                        <span class="card-title">Github的使用</span>
+                        <span class="card-title">MarkdownPad语法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            开源项目托管平台专门用于免费存放开源项目源代码的网站，叫做开源项目托管平台。目前世界上比较出名的开源项目托管平台主要有以下 3 个：
-
-Github（全球最牛的开源项目托管平台，没有之一）
-Gitlab（对代码私有性支持较好，因此企业用户较
+                            前言 我之前记笔记一直用OneNote，但是年前心血来潮，就自己建了博客，想着把自己的学习心得发到博客上。但是博客算是完工了，但是写文章又成了一大难题，就自己在网上查找写博客的编辑器，发现用Markdown Pad来编写文章很方便。但是刚接
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-14
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" class="post-category">
-                                    Git版本控制
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            哲哲
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Github%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
-                        <span class="chip bg-color">Github的基本使用</span>
+                    <a href="/tags/MarkdownPad%E8%AF%AD%E6%B3%95/">
+                        <span class="chip bg-color">MarkdownPad语法</span>
                     </a>
                     
                 </div>
@@ -1373,6 +1250,15 @@ $(function () {
 
     
 
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
     
 
     <!-- 雪花特效 -->

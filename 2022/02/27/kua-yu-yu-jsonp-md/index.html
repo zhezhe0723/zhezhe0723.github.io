@@ -4,11 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Github的使用, 可可托海">
-    <meta name="description" content="开源项目托管平台专门用于免费存放开源项目源代码的网站，叫做开源项目托管平台。目前世界上比较出名的开源项目托管平台主要有以下 3 个：
-
-Github（全球最牛的开源项目托管平台，没有之一）
-Gitlab（对代码私有性支持较好，因此企业用户较">
+    <meta name="keywords" content="跨域与JSONP.md, 可可托海">
+    <meta name="description" content="前言————同源策略，跨域，JSONP的实现原理，防抖和节流。
+了解同源策略和跨域  同源指的是如果两个页面的协议，域名，端口都相同，则两个页面具有相同的源（如果没有给出端口号，默认是80端口）。
+同源策略是浏览器提供的一个安全功能
+跨域是">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -22,7 +22,7 @@ Gitlab（对代码私有性支持较好，因此企业用户较">
 
     
 
-    <title>Github的使用 | 可可托海</title>
+    <title>跨域与JSONP.md | 可可托海</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -313,12 +313,12 @@ Gitlab（对代码私有性支持较好，因此企业用户较">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Github的使用</h1>
+                    <h1 class="description center-align post-title">跨域与JSONP.md</h1>
                 </div>
             </div>
         </div>
@@ -434,8 +434,8 @@ Gitlab（对代码私有性支持较好，因此企业用户较">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Github%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
-                                <span class="chip bg-color">Github的基本使用</span>
+                            <a href="/tags/%E8%B7%A8%E5%9F%9F%E4%B8%8EJSONP/">
+                                <span class="chip bg-color">跨域与JSONP</span>
                             </a>
                         
                     </div>
@@ -446,8 +446,8 @@ Gitlab（对代码私有性支持较好，因此企业用户较">
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" class="post-category">
-                                Git版本控制
+                            <a href="/categories/%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92/" class="post-category">
+                                前后端交互
                             </a>
                         
                     </div>
@@ -459,7 +459,7 @@ Gitlab（对代码私有性支持较好，因此企业用户较">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-01
+                    2022-02-27
                 </div>
                 
 
@@ -475,130 +475,102 @@ Gitlab（对代码私有性支持较好，因此企业用户较">
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="开源项目托管平台"><a href="#开源项目托管平台" class="headerlink" title="开源项目托管平台"></a>开源项目托管平台</h1><p>专门用于免费存放开源项目源代码的网站，叫做开源项目托管平台。目前世界上比较出名的开源项目托管平台<br>主要有以下 3 个：</p>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>————同源策略，跨域，JSONP的实现原理，防抖和节流。</p>
+<h1 id="了解同源策略和跨域"><a href="#了解同源策略和跨域" class="headerlink" title="了解同源策略和跨域"></a>了解同源策略和跨域</h1><p>  同源指的是如果两个页面的协议，域名，端口都相同，则两个页面具有相同的源（如果没有给出端口号，默认是80端口）。<span id="more"></span></p>
+<p><strong>同源策略</strong>是浏览器提供的一个安全功能</p>
+<p><strong>跨域</strong>是指两个URL的协议，域名，端口有一个或一个以上不一致。出现跨域的根本原因：浏览器的同源策略不允许非同源的URL之间进行资源的交互<br>（浏览器允许发起跨域请求，但是，跨域请求回来的数据会被浏览器拦截，无法被页面获取到）</p>
+<p>如何实现跨域数据请求解决方案：JSONP和CORS<br> JSONP：出现的早，兼容性好，缺点是只支持GET请求，不支持POST请求；<br> CORS：出现的较晚，W3C标准，两种请求都支持，缺点是不兼容低版本浏览器</p>
+<h1 id="JSONP的实现原理"><a href="#JSONP的实现原理" class="headerlink" title="JSONP的实现原理"></a>JSONP的实现原理</h1><p>  JSONP的实现原理就是通过<code>&lt;script&gt;</code>标签的src属性，请求跨域的数据接口，并通过函数调用的形式，接收跨域接口响应回来的数据</p>
+<h2 id="jQuery中的JSONP"><a href="#jQuery中的JSONP" class="headerlink" title="jQuery中的JSONP"></a>jQuery中的JSONP</h2><p>  jQuery 提供的 $.ajax() 函数，除了可以发起真正的 Ajax 数据请求之外，还能够发起 JSONP 数据请求</p>
+<pre><code>$.ajax(&#123;
+  url: &#39;http://ajax.frontend.itheima.net:3006/api/jsonp?name=zs&amp;age=20&#39;,
+  // 如果要使用 $.ajax() 发起 JSONP 请求，必须指定 datatype 为 jsonp
+  dataType: &#39;jsonp&#39;,
+   success: function(res) &#123;
+   console.log(res)
+&#125;
+&#125;)
+</code></pre>
+<p>在使用 jQuery 发起 JSONP 请求时，如果想要自定义 JSONP 的参数以及回调函数名称，可以通过如下两个参数来指定：</p>
+<pre><code>$.ajax(&#123;
+  url: &#39;http://ajax.frontend.itheima.net:3006/api/jsonp?name=zs&amp;age=20&#39;,
+  dataType: &#39;jsonp&#39;,
+  // 发送到服务端的参数名称，默认值为 callback
+  jsonp: &#39;callback&#39;,
+  // 自定义的回调函数名称，默认值为 jQueryxxx 格式
+  jsonpCallback: &#39;abc&#39;,
+  success: function(res) &#123;
+  console.log(res)
+&#125;
+</code></pre>
+<p> })</p>
+<h2 id="jQuery中JSONP的实现过程"><a href="#jQuery中JSONP的实现过程" class="headerlink" title="jQuery中JSONP的实现过程"></a>jQuery中JSONP的实现过程</h2><p> jQuery 中的 JSONP，也是通过 <code>&lt;script&gt;</code> 标签的 src 属性实现跨域数据访问的，只不过，jQuery 采用的是动态创建和移除<code>&lt;script&gt;</code>标签的方式，来发起 JSONP 数据请求。</p>
 <ul>
-<li>Github（全球最牛的开源项目托管平台，没有之一）</li>
-<li>Gitlab（对代码私有性支持较好，因此企业用户较多）</li>
-<li>Gitee（又叫做码云，是国产的开源项目托管平台。访问速度快、纯中文界面、使用友好）<span id="more"></span></li>
+<li><p>在发起 JSONP 请求的时候，动态向 <code>&lt;header&gt;</code> 中 append 一个 <code>&lt;script&gt;</code> 标签；</p>
+</li>
+<li><p>在 JSONP 请求成功以后，动态从 <code>&lt;header&gt;</code> 中移除刚才 append 进去的<code> &lt;script&gt;</code> 标签；</p>
+</li>
 </ul>
-<h1 id="Github的使用"><a href="#Github的使用" class="headerlink" title="Github的使用"></a>Github的使用</h1><h2 id="注册Github账号"><a href="#注册Github账号" class="headerlink" title="注册Github账号"></a>注册Github账号</h2><p>① 访问 Github 的官网首页 <a target="_blank" rel="noopener" href="https://github.com/">https://github.com/</a><br>② 点击“Sign up”按钮跳转到注册页面<br>③ 填写可用的用户名、邮箱、密码<br>④ 通过点击箭头的形式，将验证图片摆正<br>⑤ 点击“Create account”按钮注册新用户<br>⑥ 登录到第三步填写的邮箱中，点击激活链接，完成注册</p>
-<h2 id="远程仓库的使用"><a href="#远程仓库的使用" class="headerlink" title="远程仓库的使用"></a>远程仓库的使用</h2><h3 id="远程仓库的两种访问方式"><a href="#远程仓库的两种访问方式" class="headerlink" title="远程仓库的两种访问方式"></a>远程仓库的两种访问方式</h3><p>Github 上的远程仓库，有两种访问方式，分别是 HTTPS 和 SSH。它们的区别是：<br>① HTTPS：零配置；但是每次访问仓库时，需要重复输入 Github 的账号和密码才能访问成功<br>② SSH：需要进行额外的配置；但是配置成功后，每次访问仓库时，不需重复输入 Github 的账号和密码<br>注意：在实际开发中，推荐使用 SSH 的方式访问远程仓库</p>
-<h3 id="基于HTTPS将本地仓库上传到Github"><a href="#基于HTTPS将本地仓库上传到Github" class="headerlink" title="基于HTTPS将本地仓库上传到Github"></a>基于HTTPS将本地仓库上传到Github</h3><p>第一种情况：本地没有现成的Git仓库</p>
-<ol>
-<li>使用终端命令创建README.md文档，并写入初始内容为project_02<pre><code> echo &quot;# project_02&quot; &gt;&gt; README.md
+<h1 id="防抖与节流"><a href="#防抖与节流" class="headerlink" title="防抖与节流"></a>防抖与节流</h1><h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><p>———<strong>防抖策略</strong>是当事件被触发后，延迟n秒后再执行回调，如果在这n秒内事件又被触发，则重新计时。</p>
+<p>防抖的应用场景：用户在输入框中连续输入一串字符是时，可以通过防抖策略，只在输入完成时，才执行查询的请求，这样可以有效减少请求次数，节约请求资源。</p>
+<pre><code>var timer = null                    // 1. 防抖动的 timer
+  function debounceSearch(keywords) &#123; // 2. 定义防抖的函数
+  timer = setTimeout(function() &#123;
+  // 发起 JSONP 请求
+  getSuggestList(keywords)
+  &#125;, 500)
+  &#125;
+
+  $(&#39;#ipt&#39;).on(&#39;keyup&#39;, function() &#123; 
+  // 3. 在触发 keyup 事件时，立即清空 timer    
+    clearTimeout(timer)
+   debounceSearch(keywords)
+&#125;)
 </code></pre>
+<h2 id="缓存搜索的建议列表"><a href="#缓存搜索的建议列表" class="headerlink" title="缓存搜索的建议列表"></a>缓存搜索的建议列表</h2><p>1.定义全局缓存对象</p>
+<p><code>// 缓存对象   var cacheObj = &#123;&#125;</code></p>
+<p>2.将搜索结果保存到缓存对象中</p>
+<pre><code> // 渲染建议列表
+ function renderSuggestList(res) &#123;
+   // ...省略其他代码
+   // 将搜索的结果，添加到缓存对象中
+    var k = $(&#39;#ipt&#39;).val().trim()
+    cacheObj[k] = res
+ &#125;
+</code></pre>
+<p>3.优先从缓存中获取搜索建议</p>
+<pre><code> // 监听文本框的 keyup 事件
+ $(&#39;#ipt&#39;).on(&#39;keyup&#39;, function() &#123;
+    // ...省略其他代码
+
+    // 优先从缓存中获取搜索建议
+    if (cacheObj[keywords]) &#123;
+       return renderSuggestList(cacheObj[keywords])
+    &#125;
+    // 获取搜索建议列表
+    debounceSearch(keywords)
+  &#125;)
+</code></pre>
+<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p><strong>节流策略</strong> 就是可以减少一段时间内事件的触发频率</p>
+<p>节流的应用场景：</p>
+<ul>
+<li><p>鼠标连续不断地触发某事件，只在单位时间内只触发一次</p>
 </li>
-<li>初始化本地Git仓库，并将文件的修改提交到本地的Git仓库中<pre><code> git init 
- git add README.md
- git commit -m &quot;第一次提交&quot;
-</code></pre>
+<li><p>懒加载时要监听计算滚动条的位置，但不必每次滑动都触发，可以降低计算的频率，而不必去浪费cpu资源。</p>
 </li>
-<li>将本地仓库和远程仓库进行关联，并把远程仓库命名为origin<pre><code> git remote add origin https://github.com/用户名/project_02.git
-</code></pre>
-</li>
-<li>将本地仓库中的内容推送到远程的origin 仓库中<pre><code> git push -u origin master`
-</code></pre>
-第二种情况：本地有现成的Git仓库</li>
-<li>将本地仓库和远程仓库进行关联，并把远程仓库命名为origin<pre><code>git remote add origin https://github.com/用户名/project_02.git
-</code></pre>
-</li>
-<li>将本地仓库中的内容推送到远程的origin 仓库中<pre><code>git push -u origin master
-</code></pre>
-(只有第一次推送内容需要-u origin master，往后都不用了)<h2 id="SSH-key"><a href="#SSH-key" class="headerlink" title="SSH key"></a>SSH key</h2></li>
-</ol>
-<p><strong>SSH key介绍</strong><br>SSH key 的作用：实现本地仓库和 Github 之间免登录的加密数据传输。<br>SSH key 的好处：免登录身份认证、数据加密传输。<br>SSH key 由两部分组成，分别是：<br>① id_rsa（私钥文件，存放于客户端的电脑中即可）<br>② id_rsa.pub（公钥文件，需要配置到 Github 中）<br><strong>生成SSH key</strong></p>
-<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#x79;&#111;&#x75;&#x72;&#95;&#x65;&#109;&#97;&#105;&#x6c;&#64;&#101;&#x78;&#x61;&#109;&#x70;&#108;&#101;&#46;&#x63;&#x6f;&#x6d;">&#x79;&#111;&#x75;&#x72;&#95;&#x65;&#109;&#97;&#105;&#x6c;&#64;&#101;&#x78;&#x61;&#109;&#x70;&#108;&#101;&#46;&#x63;&#x6f;&#x6d;</a> 替换为注册 Github 账号时填写的邮箱：</p>
-<pre><code>   ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;
-</code></pre>
-<p>③ 连续敲击 3 次回车，即可在 C:\Users\用户名文件夹.ssh 目录中生成 id_rsa 和 id_rsa.pub 两个文件</p>
-<p><strong>配置SSH key</strong><br>① 使用记事本打开 id_rsa.pub 文件，复制里面的文本内容<br>② 在浏览器中登录 Github，点击头像 -&gt; Settings -&gt; SSH and GPG Keys -&gt; New SSH key<br>③ 将 id_rsa.pub 文件中的内容，粘贴到 Key 对应的文本框中<br>④ 在 Title 文本框中任意填写一个名称，来标识这个 Key 从何而来</p>
-<p><strong>检测SSH key</strong>　</p>
-<p>打开 Git Bash，输入如下的命令并回车执行：</p>
-<pre><code>   git -T git@github.com
-　
-</code></pre>
-<p>出现用户名证明已经配置成功</p>
-<h3 id="基于SSH将本地仓库上传到Github"><a href="#基于SSH将本地仓库上传到Github" class="headerlink" title="基于SSH将本地仓库上传到Github"></a>基于SSH将本地仓库上传到Github</h3><p>将本地仓库和远程仓库进行关联，并把远程仓库命名为origin</p>
-<pre><code>   git remote add origin git@github.com:用户名/project_02.git
-</code></pre>
-<p>将本地仓库中的内容推送到远程的origin 仓库中</p>
-<pre><code>   git push -u origin master
-</code></pre>
-<p> 将远程仓库克隆到本地</p>
-<pre><code>    git clone 远程仓库的地址
-</code></pre>
-<h1 id="Git分支"><a href="#Git分支" class="headerlink" title="Git分支"></a>Git分支</h1><p>——在进行多人协作开发的时候，为了防止互相干扰，提高协同开发的体验，建议每个开发者都基于分支进行项目功能的开发</p>
-<h2 id="本地分支操作"><a href="#本地分支操作" class="headerlink" title="本地分支操作"></a>本地分支操作</h2><p><strong>查看分支列表</strong>使用如下的命令，可以查看当前 Git 仓库中所有的分支列表：</p>
-<pre><code>    git branch //分支名字前面的 * 号表示当前所处的分支。
-</code></pre>
-<p><strong>创建分支列表</strong>使用如下的命令，可以基于当前分支，创建一个新的分支，此时，新分支中的代码和当前分支完全一样：</p>
-<pre><code>   git branch 分支名称
-</code></pre>
-<p><strong>切换分支</strong>使用如下的命令，可以切换到指定的分支上进行开发</p>
-<pre><code>    git checkout login
-</code></pre>
-<p><strong>分支的快速创建和切换</strong>使用如下的命令，可以创建指定名称的新分支，并立即切换到新分支上：</p>
-<pre><code>     git checkout -b 分支名称
-     //-b 表示创建一个新分支
-     //checkout 表示切换到刚才创建的新分支上
-</code></pre>
-<p><strong>合并分支</strong>功能分支的代码开发测试完毕之后，可以使用如下的命令，将完成后的代码合并到 master 主分支上：</p>
-<pre><code>    //首先切换到master分支
-     git checkout master
-    // 在master分支上运行如下命令
-     git merge login
-</code></pre>
-<p><strong>删除分支</strong>当把功能分支的代码合并到 master 主分支上以后，就可以使用如下的命令，删除对应的功能分支：</p>
-<pre><code>    git branch -d 分支名称
-</code></pre>
-<p><strong>遇到冲突时的分支合并</strong>如果在两个不同的分支中，对同一个文件进行了不同的修改，Git 就没法干净的合并它们。 此时，我们需要打开这些包含冲突的文件然后手动解决冲突，再提交文件就可以了</p>
-<h2 id="远程分支操作"><a href="#远程分支操作" class="headerlink" title="远程分支操作"></a>远程分支操作</h2><p><strong>将本地分支推送到远程仓库</strong> 如果是第一次将本地分支推送到远程仓库，需要运行如下的命令：(第一次推送分支需要带 -u 参数，此后可以直接使用 git push 推送代码到远程分支。)</p>
-<pre><code>    //-U表示把本地分支和远程分支进行关联，只在第一次推送的时候需要带-u参数
-      git push -u远程仓库的别名本地分支名称:远程分支名称
-    //实际案例:
-      git push -U origin payment :pay
-    //如果希望远程分支的名称和本地分支名称保持一致，可以对命令进行简化:
-       git push -U origin payment
-</code></pre>
-<p><strong>查看远程仓库中所有的分支列表</strong></p>
-<pre><code>   git remote show 远程仓库名称
-</code></pre>
-<p><strong>跟踪分支</strong>  跟踪分支指的是：从远程仓库中，把远程分支下载到本地仓库中</p>
-<pre><code>    //从远程仓库中，把对应的远程分支下载到本地仓库，保持本地分支和远程分支名称相同
-      git checkout 远程分支的名称
-    //示例:
-      git checkout pay
-    //从远程仓库中，把对应的远程分支下载到本地仓库，并把下载的本地分支进行重命名
-      git checkout -b本地分支名称远程仓库名称/远程分支名称
-    //示例:
-      git checkout -b payment origin/pay
-</code></pre>
-<p><strong>拉取远程分支的最新的代码</strong>可以使用如下的命令，把远程分支最新的代码下载到本地对应的分支中</p>
-<pre><code>    //从远程仓库，拉取当前分支最新的代码，保持当前分支的代码和远程分支代码一致
-       git pull
-</code></pre>
-<p><strong>删除远程分支</strong>  删除远程仓库中指定的分支</p>
-<pre><code>    //删除远程仓库中，指定名称的远程分支
-      git push 远程仓库名称--delete 远程分支名称
-    //示例:
-      git push origin--delete pay   
-</code></pre>
-<h1 id="Github的搜索说明"><a href="#Github的搜索说明" class="headerlink" title="Github的搜索说明"></a>Github的搜索说明</h1><pre><code>in:name xxx  名称条件
-in:name xxx xxx 多个名称条件
-stars:&gt;xxx 点赞大于xxx的条件
-in:readme xxx 搜索readme里的内容
-fork:&gt;xxx， 按照项目fork数量，大于xxx的
-size:&gt;=xxx,  项目大小，单位是kb
-pushed:&gt;2022-01-01, 按照最后更新的时间
-language:xxx  项目使用的开发语言
-user:xxx,   按作者名字进行搜索
-in:description xxx   按照项目描述description 搜索  
-</code></pre>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>防抖：如果事件被频繁触发，防抖能保证只有最有一次触发生效！前面 N 多次的触发都会被忽略！</li>
+<li>节流：如果事件被频繁触发，节流能够减少事件触发的频率，因此，节流是有选择性地执行一部分事件！</li>
+</ul>
 
                 
             </div>
@@ -625,7 +597,7 @@ in:description xxx   按照项目描述description 搜索
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://zhezhe0723.github.io/2022/03/01/Github%E7%9A%84%E4%BD%BF%E7%94%A8/">http://zhezhe0723.github.io/2022/03/01/Github%E7%9A%84%E4%BD%BF%E7%94%A8/</a>
+                    <a href="http://zhezhe0723.github.io/2022/02/27/kua-yu-yu-jsonp-md/">http://zhezhe0723.github.io/2022/02/27/kua-yu-yu-jsonp-md/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -663,8 +635,8 @@ in:description xxx   按照项目描述description 搜索
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Github%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
-                                    <span class="chip bg-color">Github的基本使用</span>
+                                <a href="/tags/%E8%B7%A8%E5%9F%9F%E4%B8%8EJSONP/">
+                                    <span class="chip bg-color">跨域与JSONP</span>
                                 </a>
                             
                         </div>
@@ -842,24 +814,26 @@ in:description xxx   按照项目描述description 搜索
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/03/04/NodeJs%E5%9F%BA%E7%A1%80/">
+                <a href="/2022/02/28/http-xie-yi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="NodeJs基础">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="HTTP协议">
                         
-                        <span class="card-title">NodeJs基础</span>
+                        <span class="card-title">HTTP协议</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            初始Node.js什么是Node.jsNode.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js 的官网地址： https://nodejs.org/zh-cn/
+                            HTTP协议简介什么是通信——通信就是信息的传递和交换
+通信三要素：主体，内容，方式。
+（服务器把张三的文章通过响应的方式发送给客户端浏览器）其中通信的主体是服务器和客服端浏览器，内容是张三的文章，方式是响应
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-04
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-02-28
                         </span>
                         <span class="publish-author">
                             
@@ -876,8 +850,8 @@ in:description xxx   按照项目描述description 搜索
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Node/">
-                        <span class="chip bg-color">Node</span>
+                    <a href="/tags/HTTP%E5%8D%8F%E8%AE%AE/">
+                        <span class="chip bg-color">HTTP协议</span>
                     </a>
                     
                 </div>
@@ -891,34 +865,29 @@ in:description xxx   按照项目描述description 搜索
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/01/git%E5%9F%BA%E7%A1%80/">
+                <a href="/2022/02/14/markdownpad-yu-fa/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="git基础">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="MarkdownPad语法">
                         
-                        <span class="card-title">git基础</span>
+                        <span class="card-title">MarkdownPad语法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            版本控制软件版本控制软件是一个用来记录文件变化，以便将来查阅特定版本修订情况的系统，因此有时也叫做版本控制系统。
-版本控制系统的分类：本地版本控制系统；集中化的版本控制系统；分布式版本控制系统。现在主要使用分布式版本控制系统，前面两种已经淘
+                            前言 我之前记笔记一直用OneNote，但是年前心血来潮，就自己建了博客，想着把自己的学习心得发到博客上。但是博客算是完工了，但是写文章又成了一大难题，就自己在网上查找写博客的编辑器，发现用Markdown Pad来编写文章很方便。但是刚接
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-14
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" class="post-category">
-                                    Git版本控制
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            哲哲
                             
                         </span>
                     </div>
@@ -926,8 +895,8 @@ in:description xxx   按照项目描述description 搜索
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Git%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/">
-                        <span class="chip bg-color">Git基础命令使用</span>
+                    <a href="/tags/MarkdownPad%E8%AF%AD%E6%B3%95/">
+                        <span class="chip bg-color">MarkdownPad语法</span>
                     </a>
                     
                 </div>
@@ -1299,6 +1268,15 @@ $(function () {
 
     
 
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura.js"><\/script>');
+            }
+        </script>
     
 
     <!-- 雪花特效 -->
