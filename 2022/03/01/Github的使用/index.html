@@ -30,7 +30,7 @@
 <meta property="og:description" content="开源项目托管平台专门用于免费存放开源项目源代码的网站，叫做开源项目托管平台。目前世界上比较出名的开源项目托管平台主要有以下 3 个：  Github（全球最牛的开源项目托管平台，没有之一） Gitlab（对代码私有性支持较好，因此企业用户较多） Gitee（又叫做码云，是国产的开源项目托管平台。访问速度快、纯中文界面、使用友好）">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-01T12:49:11.000Z">
-<meta property="article:modified_time" content="2022-03-02T01:12:40.347Z">
+<meta property="article:modified_time" content="2022-04-05T02:01:09.649Z">
 <meta property="article:author" content="哲哲">
 <meta property="article:tag" content="Github的基本使用">
 <meta name="twitter:card" content="summary">
@@ -128,7 +128,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E6%89%98%E7%AE%A1%E5%B9%B3%E5%8F%B0"><span class="nav-number">1.</span> <span class="nav-text">开源项目托管平台</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Github%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">Github的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E5%86%8CGithub%E8%B4%A6%E5%8F%B7"><span class="nav-number">2.1.</span> <span class="nav-text">注册Github账号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">2.2.</span> <span class="nav-text">远程仓库的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E4%B8%A4%E7%A7%8D%E8%AE%BF%E9%97%AE%E6%96%B9%E5%BC%8F"><span class="nav-number">2.2.1.</span> <span class="nav-text">远程仓库的两种访问方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8EHTTPS%E5%B0%86%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E4%B8%8A%E4%BC%A0%E5%88%B0Github"><span class="nav-number">2.2.2.</span> <span class="nav-text">基于HTTPS将本地仓库上传到Github</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH-key"><span class="nav-number">2.3.</span> <span class="nav-text">SSH key</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8ESSH%E5%B0%86%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E4%B8%8A%E4%BC%A0%E5%88%B0Github"><span class="nav-number">2.3.1.</span> <span class="nav-text">基于SSH将本地仓库上传到Github</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git%E5%88%86%E6%94%AF"><span class="nav-number">3.</span> <span class="nav-text">Git分支</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF%E6%93%8D%E4%BD%9C"><span class="nav-number">3.1.</span> <span class="nav-text">本地分支操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E6%93%8D%E4%BD%9C"><span class="nav-number">3.2.</span> <span class="nav-text">远程分支操作</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE%E6%89%98%E7%AE%A1%E5%B9%B3%E5%8F%B0"><span class="nav-number">1.</span> <span class="nav-text">开源项目托管平台</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Github%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">Github的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E5%86%8CGithub%E8%B4%A6%E5%8F%B7"><span class="nav-number">2.1.</span> <span class="nav-text">注册Github账号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">2.2.</span> <span class="nav-text">远程仓库的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E4%B8%A4%E7%A7%8D%E8%AE%BF%E9%97%AE%E6%96%B9%E5%BC%8F"><span class="nav-number">2.2.1.</span> <span class="nav-text">远程仓库的两种访问方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8EHTTPS%E5%B0%86%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E4%B8%8A%E4%BC%A0%E5%88%B0Github"><span class="nav-number">2.2.2.</span> <span class="nav-text">基于HTTPS将本地仓库上传到Github</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH-key"><span class="nav-number">2.3.</span> <span class="nav-text">SSH key</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8ESSH%E5%B0%86%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E4%B8%8A%E4%BC%A0%E5%88%B0Github"><span class="nav-number">2.3.1.</span> <span class="nav-text">基于SSH将本地仓库上传到Github</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git%E5%88%86%E6%94%AF"><span class="nav-number">3.</span> <span class="nav-text">Git分支</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF%E6%93%8D%E4%BD%9C"><span class="nav-number">3.1.</span> <span class="nav-text">本地分支操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E6%93%8D%E4%BD%9C"><span class="nav-number">3.2.</span> <span class="nav-text">远程分支操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Github%E7%9A%84%E6%90%9C%E7%B4%A2%E8%AF%B4%E6%98%8E"><span class="nav-number">4.</span> <span class="nav-text">Github的搜索说明</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -245,7 +245,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-03-02 09:12:40" itemprop="dateModified" datetime="2022-03-02T09:12:40+08:00">2022-03-02</time>
+      <time title="修改时间：2022-04-05 10:01:09" itemprop="dateModified" datetime="2022-04-05T10:01:09+08:00">2022-04-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -271,7 +271,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.2k</span>
+      <span>3.4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -309,7 +309,7 @@
 (只有第一次推送内容需要-u origin master，往后都不用了)<h2 id="SSH-key"><a href="#SSH-key" class="headerlink" title="SSH key"></a>SSH key</h2></li>
 </ol>
 <p><strong>SSH key介绍</strong><br>SSH key 的作用：实现本地仓库和 Github 之间免登录的加密数据传输。<br>SSH key 的好处：免登录身份认证、数据加密传输。<br>SSH key 由两部分组成，分别是：<br>① id_rsa（私钥文件，存放于客户端的电脑中即可）<br>② id_rsa.pub（公钥文件，需要配置到 Github 中）<br><strong>生成SSH key</strong></p>
-<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#x79;&#111;&#x75;&#114;&#x5f;&#101;&#x6d;&#x61;&#105;&#108;&#64;&#x65;&#120;&#97;&#x6d;&#x70;&#x6c;&#101;&#46;&#99;&#x6f;&#x6d;">&#x79;&#111;&#x75;&#114;&#x5f;&#101;&#x6d;&#x61;&#105;&#108;&#64;&#x65;&#120;&#97;&#x6d;&#x70;&#x6c;&#101;&#46;&#99;&#x6f;&#x6d;</a> 替换为注册 Github 账号时填写的邮箱：</p>
+<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#x79;&#111;&#x75;&#114;&#x5f;&#101;&#x6d;&#x61;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#112;&#x6c;&#101;&#x2e;&#99;&#111;&#x6d;">&#x79;&#111;&#x75;&#114;&#x5f;&#101;&#x6d;&#x61;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#112;&#x6c;&#101;&#x2e;&#99;&#111;&#x6d;</a> 替换为注册 Github 账号时填写的邮箱：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</span><br></pre></td></tr></table></figure>
 <p>③ 连续敲击 3 次回车，即可在 C:\Users\用户名文件夹.ssh 目录中生成 id_rsa 和 id_rsa.pub 两个文件</p>
 <p><strong>配置SSH key</strong><br>① 使用记事本打开 id_rsa.pub 文件，复制里面的文本内容<br>② 在浏览器中登录 Github，点击头像 -&gt; Settings -&gt; SSH and GPG Keys -&gt; New SSH key<br>③ 将 id_rsa.pub 文件中的内容，粘贴到 Key 对应的文本框中<br>④ 在 Title 文本框中任意填写一个名称，来标识这个 Key 从何而来</p>
@@ -357,6 +357,8 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//从远程仓库，拉取当前分支最新的代码，保持当前分支的代码和远程分支代码一致</span><br><span class="line">   git pull</span><br></pre></td></tr></table></figure>
 <p><strong>删除远程分支</strong>  删除远程仓库中指定的分支</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//删除远程仓库中，指定名称的远程分支</span><br><span class="line">  git push 远程仓库名称--delete 远程分支名称</span><br><span class="line">//示例:</span><br><span class="line">  git push origin--delete pay   </span><br></pre></td></tr></table></figure>
+
+<h1 id="Github的搜索说明"><a href="#Github的搜索说明" class="headerlink" title="Github的搜索说明"></a>Github的搜索说明</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">in:name xxx  名称条件</span><br><span class="line">in:name xxx xxx 多个名称条件</span><br><span class="line">stars:&gt;xxx 点赞大于xxx的条件</span><br><span class="line">in:readme xxx 搜索readme里的内容</span><br><span class="line">fork:&gt;xxx， 按照项目fork数量，大于xxx的</span><br><span class="line">size:&gt;=xxx,  项目大小，单位是kb</span><br><span class="line">pushed:&gt;2022-01-01, 按照最后更新的时间</span><br><span class="line">language:xxx  项目使用的开发语言</span><br><span class="line">user:xxx,   按作者名字进行搜索</span><br><span class="line">in:description xxx   按照项目描述description 搜索  </span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -464,7 +466,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">32k</span>
+    <span title="站点总字数">33k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
