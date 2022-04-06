@@ -684,7 +684,7 @@ App.vue 是项目的根组件。<span aria-hidden="true" class="line-numbers-row
 <li>template 中只能包含唯一的根节点</li>
 </ul>
 <ol start="2">
-<li>script<br>vue 规定：开发者可以在 <script> 节点中封装组件的 JavaScript 业务逻辑。<script > 节点的基本结构如下</li>
+<li>script<br>vue 规定：开发者可以在<code>&lt;script&gt;</code>节点中封装组件的 JavaScript 业务逻辑。<code>&lt;script &gt;</code> 节点的基本结构如下</li>
 </ol>
 <pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token operator">&lt;</span>script<span class="token operator">></span>
   <span class="token comment">//今后组件相关的 data 数据，methods 方法</span>
@@ -695,7 +695,7 @@ App.vue 是项目的根组件。<span aria-hidden="true" class="line-numbers-row
 <p>vue 规定：.vue 组件中的 data 必须是一个函数，不能直接指向一个数据对象。会导致多个组件实例共用同一份数据的问题</p>
 </blockquote>
 <ol start="3">
-<li>style<br>vue 规定：组件内的 <style> 节点是可选的，开发者可以在 <style> 节点中编写样式美化当前组件的 UI 结构。<script > 节点的基本结构如下：</li>
+<li>style<br>vue 规定：组件内的 <code>&lt;style&gt;</code> 节点是可选的，开发者可以在 <code>&lt;style&gt;</code> 节点中编写样式美化当前组件的 UI 结构。<code>&lt;script &gt;</code> 节点的基本结构如下：</li>
 </ol>
 <pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">&lt;style>
   h1</span> <span class="token punctuation">&#123;</span>
@@ -703,7 +703,7 @@ App.vue 是项目的根组件。<span aria-hidden="true" class="line-numbers-row
   <span class="token punctuation">&#125;</span>
 &lt;/style><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
-<p>在 <style> 标签上添加 lang="less" 属性，即可使用 less 语法编写组件的样式</p>
+<p>在 <code>&lt;style&gt;</code> 标签上添加 lang&#x3D;”less” 属性，即可使用 less 语法编写组件的样式</p>
 </blockquote>
 <h3 id="4-4-组件之间的关系（父子，兄弟）"><a href="#4-4-组件之间的关系（父子，兄弟）" class="headerlink" title="4.4 组件之间的关系（父子，兄弟）"></a>4.4 组件之间的关系（父子，兄弟）</h3><ol>
 <li>使用组件的三个步骤</li>
