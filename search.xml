@@ -136,7 +136,7 @@ git commit -m &quot;第一次提交&quot;<span aria-hidden="true" class="line-nu
 (只有第一次推送内容需要-u origin master，往后都不用了)<h2 id="SSH-key"><a href="#SSH-key" class="headerlink" title="SSH key"></a>SSH key</h2></li>
 </ol>
 <p><strong>SSH key介绍</strong><br>SSH key 的作用：实现本地仓库和 Github 之间免登录的加密数据传输。<br>SSH key 的好处：免登录身份认证、数据加密传输。<br>SSH key 由两部分组成，分别是：<br>① id_rsa（私钥文件，存放于客户端的电脑中即可）<br>② id_rsa.pub（公钥文件，需要配置到 Github 中）<br><strong>生成SSH key</strong></p>
-<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#x79;&#x6f;&#x75;&#x72;&#95;&#x65;&#x6d;&#x61;&#x69;&#108;&#x40;&#101;&#x78;&#x61;&#x6d;&#112;&#108;&#x65;&#46;&#x63;&#111;&#109;">&#x79;&#x6f;&#x75;&#x72;&#95;&#x65;&#x6d;&#x61;&#x69;&#108;&#x40;&#101;&#x78;&#x61;&#x6d;&#112;&#108;&#x65;&#46;&#x63;&#111;&#109;</a> 替换为注册 Github 账号时填写的邮箱：</p>
+<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#121;&#x6f;&#117;&#x72;&#95;&#x65;&#x6d;&#97;&#x69;&#x6c;&#x40;&#101;&#x78;&#97;&#109;&#x70;&#108;&#x65;&#46;&#99;&#x6f;&#x6d;">&#121;&#x6f;&#117;&#x72;&#95;&#x65;&#x6d;&#97;&#x69;&#x6c;&#x40;&#101;&#x78;&#97;&#109;&#x70;&#108;&#x65;&#46;&#99;&#x6f;&#x6d;</a> 替换为注册 Github 账号时填写的邮箱：</p>
 <pre class="line-numbers language-none"><code class="language-none">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>③ 连续敲击 3 次回车，即可在 C:\Users\用户名文件夹.ssh 目录中生成 id_rsa 和 id_rsa.pub 两个文件</p>
 <p><strong>配置SSH key</strong><br>① 使用记事本打开 id_rsa.pub 文件，复制里面的文本内容<br>② 在浏览器中登录 Github，点击头像 -&gt; Settings -&gt; SSH and GPG Keys -&gt; New SSH key<br>③ 将 id_rsa.pub 文件中的内容，粘贴到 Key 对应的文本框中<br>④ 在 Title 文本框中任意填写一个名称，来标识这个 Key 从何而来</p>
@@ -414,6 +414,63 @@ in:description xxx   按照项目描述description 搜索  <span aria-hidden="tr
       </tags>
   </entry>
   <entry>
+    <title>Node.js的模块化</title>
+    <url>/2022/03/10/node-js-de-mo-kuai-hua/</url>
+    <content><![CDATA[<h1 id="什么是模块化"><a href="#什么是模块化" class="headerlink" title="什么是模块化"></a>什么是模块化</h1><p>编程领域中的模块化，就是遵守固定的规则，把一个大文件拆成独立并互相依赖的多个小模块。<br>把代码进行模块化拆分的好处：</p>
+<ul>
+<li>提高了代码的复用性</li>
+<li>提高了代码的可维护性</li>
+<li>可以实现按需加载<span id="more"></span>
+<h1 id="Node-js中的模块化"><a href="#Node-js中的模块化" class="headerlink" title="Node.js中的模块化"></a>Node.js中的模块化</h1></li>
+</ul>
+<h2 id="模块的分类"><a href="#模块的分类" class="headerlink" title="模块的分类"></a>模块的分类</h2><p>Node.js 中根据模块来源的不同，将模块分为了 3 大类，分别是：</p>
+<ul>
+<li>内置模块（内置模块是由 Node.js 官方提供的，例如 fs、path、http 等）</li>
+<li>自定义模块（用户创建的每个 .js 文件，都是自定义模块）</li>
+<li>第三方模块（由第三方开发出来的模块，并非官方提供的内置模块，也不是用户创建的自定义模块，使用前需要先下载）</li>
+</ul>
+<h2 id="加载模块"><a href="#加载模块" class="headerlink" title="加载模块"></a>加载模块</h2><p>使用强大的 require() 方法，可以加载需要的内置模块、用户自定义模块、第三方模块进行使用<br>（注意：使用 require() 方法加载其它模块时，会执行被加载模块中的代码）</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 1.加载内置的fs模块
+const fs &#x3D; require(&#39;fs&#39; )
+&#x2F;&#x2F; 2.加载用户的自定义模块
+const custom &#x3D; require( &#39; .&#x2F;custom.js&#39;)
+&#x2F;&#x2F; 3.加载第三方模块(关于第三方模块的下载和使用，会在后面的课程中进行专]的讲解)
+const moment &#x3D; require( &#39; moment &#39; )<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="模块作用域"><a href="#模块作用域" class="headerlink" title="模块作用域"></a>模块作用域</h2><p>与函数作用域类似，在自定义模块中定义的变量、方法等成员，只能在当前模块内被访问，这种模块级别的访问限制，叫做模块作用域；他的好处是：防止全局变量污染的问题</p>
+<h2 id="向外共享模块作用域中的成员"><a href="#向外共享模块作用域中的成员" class="headerlink" title="向外共享模块作用域中的成员"></a>向外共享模块作用域中的成员</h2><ol>
+<li>module对象：在每个 .js 自定义模块中都有一个 module 对象，它里面存储了和当前模块有关的信息</li>
+<li>module.exports 对象：在自定义模块中，可以使用 module.exports 对象，将模块内的成员共享出去，供外界使用。外界用 require() 方法导入自定义模块时，得到的就是 module.exports 所指向的对象。（注意：使用 require() 方法导入模块时，导入的结果，永远以 module.exports 指向的对象为准）</li>
+<li>exports 对象：由于 module.exports 单词写起来比较复杂，为了简化向外共享成员的代码，Node 提供了 exports 对象。默认情况下，exports 和 module.exports 指向同一个对象。最终共享的结果，还是以 module.exports 指向的对象为准。</li>
+</ol>
+<h1 id="模块的加载机制"><a href="#模块的加载机制" class="headerlink" title="模块的加载机制"></a>模块的加载机制</h1><h2 id="优先从缓存中加载"><a href="#优先从缓存中加载" class="headerlink" title="优先从缓存中加载"></a>优先从缓存中加载</h2><p>模块在第一次加载后会被缓存。 这也意味着多次调用 require() 不会导致模块的代码被执行多次。<br>注意：不论是内置模块、用户自定义模块、还是第三方模块，它们都会优先从缓存中加载，从而提高模块的加载效率。</p>
+<h2 id="内置模块的加载机制"><a href="#内置模块的加载机制" class="headerlink" title="内置模块的加载机制"></a>内置模块的加载机制</h2><p>内置模块是由 Node.js 官方提供的模块，内置模块的加载优先级最高。<br>例如，require(‘fs’) 始终返回内置的 fs 模块，即使在 node_modules 目录下有名字相同的包也叫做 fs。</p>
+<h2 id="自定义模块的加载机制"><a href="#自定义模块的加载机制" class="headerlink" title="自定义模块的加载机制"></a>自定义模块的加载机制</h2><p>使用 require() 加载自定义模块时，必须指定以 .&#x2F; 或 ..&#x2F; 开头的路径标识符。在加载自定义模块时，如果没有指定 .&#x2F; 或 ..&#x2F; 这样的路径标识符，则 node 会把它当作内置模块或第三方模块进行加载。</p>
+<p>同时，在使用 require() 导入自定义模块时，如果省略了文件的扩展名，则 Node.js 会按顺序分别尝试加载以下的文件：<br>按照确切的文件名进行加载</p>
+<ul>
+<li>补全 .js 扩展名进行加载</li>
+<li>补全 .json 扩展名进行加载</li>
+<li>补全 .node 扩展名进行加载</li>
+<li>加载失败，终端报错<h2 id="第三方模块的加载机制"><a href="#第三方模块的加载机制" class="headerlink" title="第三方模块的加载机制"></a>第三方模块的加载机制</h2>如果传递给 require() 的模块标识符不是一个内置模块，也没有以 ‘.&#x2F;’ 或 ‘..&#x2F;’ 开头，则 Node.js 会从当前模块的父目录开始，尝试从 &#x2F;node_modules 文件夹中加载第三方模块。<br>如果没有找到对应的第三方模块，则移动到再上一层父目录中，进行加载，直到文件系统的根目录。<br>例如，假设在 ‘C:\Users\itheima\project\foo.js’ 文件里调用了 require(‘tools’)，则 Node.js 会按以下顺序查找：</li>
+<li>C:\Users\itheima\project\node_modules\tools</li>
+<li>C:\Users\itheima\node_modules\tools</li>
+<li>C:\Users\node_modules\tools</li>
+<li>C:\node_modules\tools</li>
+</ul>
+<h2 id="目录作为模块"><a href="#目录作为模块" class="headerlink" title="目录作为模块"></a>目录作为模块</h2><p>当把目录作为模块标识符，传递给 require() 进行加载的时候，有三种加载方式：</p>
+<ul>
+<li>在被加载的目录下查找一个叫做 package.json 的文件，并寻找 main 属性，作为 require() 加载的入口</li>
+<li>如果目录里没有 package.json 文件，或者 main 入口不存在或无法解析，则 Node.js 将会试图加载目录下的 index.js 文件。</li>
+<li>如果以上两步都失败了，则 Node.js 会在终端打印错误消息，报告模块的缺失：Error: Cannot find module ‘xxx’</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前后端交互</category>
+      </categories>
+      <tags>
+        <tag>Node.js的模块化</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MarkdownPad语法</title>
     <url>/2022/02/14/markdownpad-yu-fa/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> 我之前记笔记一直用OneNote，但是年前心血来潮，就自己建了博客，想着把自己的学习心得发到博客上。但是博客算是完工了，但是写文章又成了一大难题，就自己在网上查找写博客的编辑器，发现用Markdown Pad来编写文章很方便。但是刚接触这个编辑器，其中的语法看了几次记不住，于是准备写一下Markdown Pad的写作语法。以供自己写作的时候还要在网上找（麻烦….）。<span id="more"></span></p>
@@ -501,63 +558,6 @@ Ctrl+K　代码块
 ]]></content>
       <tags>
         <tag>MarkdownPad语法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Node.js的模块化</title>
-    <url>/2022/03/10/node-js-de-mo-kuai-hua/</url>
-    <content><![CDATA[<h1 id="什么是模块化"><a href="#什么是模块化" class="headerlink" title="什么是模块化"></a>什么是模块化</h1><p>编程领域中的模块化，就是遵守固定的规则，把一个大文件拆成独立并互相依赖的多个小模块。<br>把代码进行模块化拆分的好处：</p>
-<ul>
-<li>提高了代码的复用性</li>
-<li>提高了代码的可维护性</li>
-<li>可以实现按需加载<span id="more"></span>
-<h1 id="Node-js中的模块化"><a href="#Node-js中的模块化" class="headerlink" title="Node.js中的模块化"></a>Node.js中的模块化</h1></li>
-</ul>
-<h2 id="模块的分类"><a href="#模块的分类" class="headerlink" title="模块的分类"></a>模块的分类</h2><p>Node.js 中根据模块来源的不同，将模块分为了 3 大类，分别是：</p>
-<ul>
-<li>内置模块（内置模块是由 Node.js 官方提供的，例如 fs、path、http 等）</li>
-<li>自定义模块（用户创建的每个 .js 文件，都是自定义模块）</li>
-<li>第三方模块（由第三方开发出来的模块，并非官方提供的内置模块，也不是用户创建的自定义模块，使用前需要先下载）</li>
-</ul>
-<h2 id="加载模块"><a href="#加载模块" class="headerlink" title="加载模块"></a>加载模块</h2><p>使用强大的 require() 方法，可以加载需要的内置模块、用户自定义模块、第三方模块进行使用<br>（注意：使用 require() 方法加载其它模块时，会执行被加载模块中的代码）</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 1.加载内置的fs模块
-const fs &#x3D; require(&#39;fs&#39; )
-&#x2F;&#x2F; 2.加载用户的自定义模块
-const custom &#x3D; require( &#39; .&#x2F;custom.js&#39;)
-&#x2F;&#x2F; 3.加载第三方模块(关于第三方模块的下载和使用，会在后面的课程中进行专]的讲解)
-const moment &#x3D; require( &#39; moment &#39; )<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="模块作用域"><a href="#模块作用域" class="headerlink" title="模块作用域"></a>模块作用域</h2><p>与函数作用域类似，在自定义模块中定义的变量、方法等成员，只能在当前模块内被访问，这种模块级别的访问限制，叫做模块作用域；他的好处是：防止全局变量污染的问题</p>
-<h2 id="向外共享模块作用域中的成员"><a href="#向外共享模块作用域中的成员" class="headerlink" title="向外共享模块作用域中的成员"></a>向外共享模块作用域中的成员</h2><ol>
-<li>module对象：在每个 .js 自定义模块中都有一个 module 对象，它里面存储了和当前模块有关的信息</li>
-<li>module.exports 对象：在自定义模块中，可以使用 module.exports 对象，将模块内的成员共享出去，供外界使用。外界用 require() 方法导入自定义模块时，得到的就是 module.exports 所指向的对象。（注意：使用 require() 方法导入模块时，导入的结果，永远以 module.exports 指向的对象为准）</li>
-<li>exports 对象：由于 module.exports 单词写起来比较复杂，为了简化向外共享成员的代码，Node 提供了 exports 对象。默认情况下，exports 和 module.exports 指向同一个对象。最终共享的结果，还是以 module.exports 指向的对象为准。</li>
-</ol>
-<h1 id="模块的加载机制"><a href="#模块的加载机制" class="headerlink" title="模块的加载机制"></a>模块的加载机制</h1><h2 id="优先从缓存中加载"><a href="#优先从缓存中加载" class="headerlink" title="优先从缓存中加载"></a>优先从缓存中加载</h2><p>模块在第一次加载后会被缓存。 这也意味着多次调用 require() 不会导致模块的代码被执行多次。<br>注意：不论是内置模块、用户自定义模块、还是第三方模块，它们都会优先从缓存中加载，从而提高模块的加载效率。</p>
-<h2 id="内置模块的加载机制"><a href="#内置模块的加载机制" class="headerlink" title="内置模块的加载机制"></a>内置模块的加载机制</h2><p>内置模块是由 Node.js 官方提供的模块，内置模块的加载优先级最高。<br>例如，require(‘fs’) 始终返回内置的 fs 模块，即使在 node_modules 目录下有名字相同的包也叫做 fs。</p>
-<h2 id="自定义模块的加载机制"><a href="#自定义模块的加载机制" class="headerlink" title="自定义模块的加载机制"></a>自定义模块的加载机制</h2><p>使用 require() 加载自定义模块时，必须指定以 .&#x2F; 或 ..&#x2F; 开头的路径标识符。在加载自定义模块时，如果没有指定 .&#x2F; 或 ..&#x2F; 这样的路径标识符，则 node 会把它当作内置模块或第三方模块进行加载。</p>
-<p>同时，在使用 require() 导入自定义模块时，如果省略了文件的扩展名，则 Node.js 会按顺序分别尝试加载以下的文件：<br>按照确切的文件名进行加载</p>
-<ul>
-<li>补全 .js 扩展名进行加载</li>
-<li>补全 .json 扩展名进行加载</li>
-<li>补全 .node 扩展名进行加载</li>
-<li>加载失败，终端报错<h2 id="第三方模块的加载机制"><a href="#第三方模块的加载机制" class="headerlink" title="第三方模块的加载机制"></a>第三方模块的加载机制</h2>如果传递给 require() 的模块标识符不是一个内置模块，也没有以 ‘.&#x2F;’ 或 ‘..&#x2F;’ 开头，则 Node.js 会从当前模块的父目录开始，尝试从 &#x2F;node_modules 文件夹中加载第三方模块。<br>如果没有找到对应的第三方模块，则移动到再上一层父目录中，进行加载，直到文件系统的根目录。<br>例如，假设在 ‘C:\Users\itheima\project\foo.js’ 文件里调用了 require(‘tools’)，则 Node.js 会按以下顺序查找：</li>
-<li>C:\Users\itheima\project\node_modules\tools</li>
-<li>C:\Users\itheima\node_modules\tools</li>
-<li>C:\Users\node_modules\tools</li>
-<li>C:\node_modules\tools</li>
-</ul>
-<h2 id="目录作为模块"><a href="#目录作为模块" class="headerlink" title="目录作为模块"></a>目录作为模块</h2><p>当把目录作为模块标识符，传递给 require() 进行加载的时候，有三种加载方式：</p>
-<ul>
-<li>在被加载的目录下查找一个叫做 package.json 的文件，并寻找 main 属性，作为 require() 加载的入口</li>
-<li>如果目录里没有 package.json 文件，或者 main 入口不存在或无法解析，则 Node.js 将会试图加载目录下的 index.js 文件。</li>
-<li>如果以上两步都失败了，则 Node.js 会在终端打印错误消息，报告模块的缺失：Error: Cannot find module ‘xxx’</li>
-</ul>
-]]></content>
-      <categories>
-        <category>前后端交互</category>
-      </categories>
-      <tags>
-        <tag>Node.js的模块化</tag>
       </tags>
   </entry>
   <entry>
@@ -1311,165 +1311,6 @@ Vue<span class="token punctuation">.</span><span class="token function">filters<
       </tags>
   </entry>
   <entry>
-    <title>git基础</title>
-    <url>/2022/03/01/git-ji-chu/</url>
-    <content><![CDATA[<h1 id="版本控制软件"><a href="#版本控制软件" class="headerlink" title="版本控制软件"></a>版本控制软件</h1><p><strong>版本控制软件</strong>是一个用来记录文件变化，以便将来查阅特定版本修订情况的系统，因此有时也叫做<strong>版本控制系统</strong>。</p>
-<p>版本控制系统的分类：本地版本控制系统；集中化的版本控制系统；分布式版本控制系统。现在主要使用分布式版本控制系统，前面两种已经淘汰掉了</p>
-<p>分布式版本控制系统（Git）的特点：基于服务器，客户端的运行模式</p>
-<ul>
-<li>服务器保存文件的所有更新版本</li>
-<li>客户端是服务器的完整备份，并不是只保留文件的最新版本  <span id="more"></span></li>
-</ul>
-<p><strong>优点：</strong><br>① 联网运行，支持多人协作开发</p>
-<p>② 客户端断网后支持离线本地提交版本更新</p>
-<p>③ 服务器故障或损坏后，可使用任何一个客户端的备份进行恢复</p>
-<h1 id="Git基础"><a href="#Git基础" class="headerlink" title="Git基础"></a>Git基础</h1><h2 id="Git中的三个区域"><a href="#Git中的三个区域" class="headerlink" title="Git中的三个区域"></a>Git中的三个区域</h2><ul>
-<li>工作区：处理工作的区域</li>
-<li>暂存区：已完成的工作的临时存放区域，等待被提交</li>
-<li>Git仓库：最终的存放区域</li>
-</ul>
-<h2 id="Git中的三种状态"><a href="#Git中的三种状态" class="headerlink" title="Git中的三种状态"></a>Git中的三种状态</h2><ul>
-<li><strong>已修改 modified</strong>：表示修改了文件，但还没将修改的结果放到暂存区</li>
-<li><strong>已暂存 staged</strong>：表示对已修改文件的当前版本做了标记，使之包含在下次提交的列表中</li>
-<li><strong>已提交 committed</strong>：表示文件已经安全地保存在本地的 Git 仓库中<h2 id="基本的Git工作流程"><a href="#基本的Git工作流程" class="headerlink" title="基本的Git工作流程"></a>基本的Git工作流程</h2></li>
-</ul>
-<p>基本的 Git 工作流程如下：</p>
-<ol>
-<li>在工作区中修改文件</li>
-<li>将你想要下次提交的更改进行暂存</li>
-<li>提交更新，找到暂存区的文件，将快照永久性存储到 Git 仓库<h2 id="安装并配置Git"><a href="#安装并配置Git" class="headerlink" title="安装并配置Git"></a>安装并配置Git</h2></li>
-</ol>
-<p><strong>1.在 Windows 中下载并安装 Git</strong></p>
-<p>在开始使用 Git 管理项目的版本之前，需要将它安装到计算机上。可以使用浏览器访问如下的网址，根据自己<br>的操作系统，选择下载对应的 Git 安装包：<a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a></p>
-<p><strong>2.配置用户信息</strong></p>
-<p>安装完 Git 之后，要做的第一件事就是设置自己的用户名和邮件地址。因为通过 Git 对项目进行版本管理的时<br>候，Git 需要使用这些基本信息，来记录是谁对项目进行了操作：</p>
-<pre><code>git config --global user.name &quot;用户名&quot;//--global 表示该命令只需要运行一次,即可永久生效
-git config --global uaer.email &quot;邮箱地址&quot;
-</code></pre>
-<p><strong>3.获取帮助信息</strong></p>
-<p>可以使用 git help <verb> 命令，无需联网即可在浏览器中打开帮助手册，</p>
-<pre><code>git help config //打开帮助手册
-git config -h  //用 -h 选项获得更简明的“help”输出
-</code></pre>
-<h2 id="Git的基本操作"><a href="#Git的基本操作" class="headerlink" title="Git的基本操作"></a>Git的基本操作</h2><p><strong>1.获取 Git 仓库的两种方式</strong></p>
-<ul>
-<li>将尚未进行版本控制的本地目录转换为 Git 仓库</li>
-<li>从其它服务器克隆一个已存在的 Git 仓库</li>
-</ul>
-<p><strong>2.在现有目录中初始化仓库</strong></p>
-<p>如果自己有一个尚未进行版本控制的项目目录，想要用 Git 来控制它，需要执行如下两个步骤：</p>
-<p>① 在项目目录中，通过鼠标右键打开“Git Bash”</p>
-<p>② 执行 git init 命令将当前的目录转化为 Git 仓库</p>
-<p>git init 命令会创建一个名为 .git 的隐藏目录，这个 .git 目录就是当前项目的 Git 仓库，里面包含了初始的必要文件，这些文件是 Git 仓库的必要组成部分</p>
-<p><strong>3.工作区中文件的 4 种状态</strong></p>
-<ul>
-<li>未被Git管理: 未跟踪（Untracked）不被 Git 所管理的文件</li>
-<li>已被Git管理:</li>
-</ul>
-<p><strong>未修改（Unmodified）</strong>工作区中文件的内容和 Git 仓库中文件的内容保持一致</p>
-<p><strong>已修改（Modified）</strong>工作区中文件的内容和 Git仓库中文件的内容不一致</p>
-<p><strong>已暂存（Staged）</strong>工作区中被修改的文件已被放到暂存区，准备将修改后的文件保存到 Git 仓库中</p>
-<p><strong>4.检查文件的状态</strong></p>
-<p>   <code>git status  //查看文件处于什么状态</code></p>
-<p>如果看到新建的 index.html 文件出现在 Untracked files（未跟踪的文件） 下面。未跟踪的文件意味着Git 在之前的快照（提交）中没有这些文件；Git 不会自动将之纳入跟踪范围，除非明确地告诉它“我需要使用 Git 跟踪管理该文件”。</p>
-<pre><code>git status -s  //以精简的方式显示文件的状态
-git status --short
-</code></pre>
-<p>未跟踪文件前面有红色的 ?? 标记</p>
-<p><strong>6.跟踪新文件</strong></p>
-<pre><code>git add index.html  //用命令 git add 开始跟踪一个文件
-git add . //向暂存区中一次性添加多个文件
-</code></pre>
-<p>就是把文件放在暂存区</p>
-<p><strong>7.提交更新</strong></p>
-<pre><code>git commit -m &quot;新建文件&quot;  
-//执行 git commit 命令进行提交,其中 -m 选项后面是本次的提交消息，用来对提交的内容做进一步的描述
-</code></pre>
-<p><strong>8.对已提交的文件进行修改</strong></p>
-<p>修改了工作区中 index.html 的内容之后，再次运行 git status 和 git status -s 命令，文件index.html 出现在 Changes not staged for commit 这行下面，说明已跟踪文件的内容发生了变化，但还没有放到暂存区。<br>注意：修改过的、没有放入暂存区的文件前面有红色的 M 标记</p>
-<p><strong>9.暂存已修改的文件</strong></p>
-<p>如果要暂存这次修改，需要再次运行 git add 命令，这个命令是个多功能的命令，主要有如下 3 个功效：</p>
-<ul>
-<li>可以用它开始跟踪新文件</li>
-<li>把已跟踪的、且已修改的文件放到暂存区</li>
-<li>把有冲突的文件标记为已解决状态</li>
-</ul>
-<p><strong>10.提交已暂存的文件</strong></p>
-<p>再次运行 git commit -m “提交消息” 命令，即可将暂存区中记录的 index.html 的快照，提交到 Git仓库中进行保存</p>
-<p><strong>11.撤销对文件的修改</strong></p>
-<pre><code>git checkout --index.html
-</code></pre>
-<p>撤销对文件的修改指的是：把对工作区中对应文件的修改，还原成 Git 仓库中所保存的版本。<br>操作的结果：所有的修改会丢失，且无法恢复！危险性比较高，请慎重操作！</p>
-<p><strong>12.取消暂存的文件</strong></p>
-<pre><code>git reset HEAD  要移除的文件名称
-</code></pre>
-<p><strong>13.跳过使用暂存区域</strong></p>
-<pre><code>git commit -a -m &quot;描述消息&quot;
-</code></pre>
-<p>Git 提供了一个跳过使用暂存区域的方式， 只要在提交的时候，给 git commit 加上 -a 选项，Git 就会自动把所有已经跟踪过的文件暂存起来一并提交，从而跳过 git add 步骤</p>
-<p><strong>14.移除文件</strong></p>
-<pre><code>git rm -f index.js  //从Git仓库和工作区中同时移除index.js
-git rm --cached index.css  //只从Git仓库中移除index.css，但保留工作区中的index.css文件
-</code></pre>
-<p><strong>15.忽略文件</strong><br>一般我们总会有些文件无需纳入 Git 的管理，也不希望它们总出现在未跟踪文件列表。 在这种情况下，我们可以创建一个名为 .gitignore 的配置文件，列出要忽略的文件的匹配模式。</p>
-<p>文件 .gitignore 的格式规范如下：</p>
-<ul>
-<li>① 以 # 开头的是注释</li>
-<li>② 以 &#x2F; 结尾的是目录</li>
-<li>③ 以 &#x2F; 开头防止递归</li>
-<li>④ 以 ! 开头表示取反</li>
-<li>⑤ 可以使用 glob 模式进行文件和文件夹的匹配（glob 指简化了的正则表达式）</li>
-</ul>
-<p><strong>16.glob 模式</strong><br>所谓的 glob 模式是指简化了的正则表达式：</p>
-<ul>
-<li>① 星号 * 匹配零个或多个任意字符</li>
-<li>② [abc] 匹配任何一个列在方括号中的字符 （此案例匹配一个 a 或匹配一个 b 或匹配一个 c）</li>
-<li>③ 问号 ? 只匹配一个任意字符</li>
-<li>④ 在方括号中使用短划线分隔两个字符， 表示所有在这两个字符范围内的都可以匹配（比如 [0-9] 表示匹配所有 0 到 9 的数字）</li>
-<li>⑤ 两个星号 ** 表示匹配任意中间目录（比如 a&#x2F;**&#x2F;z 可以匹配 a&#x2F;z 、 a&#x2F;b&#x2F;z 或 a&#x2F;b&#x2F;c&#x2F;z 等）</li>
-</ul>
-<p><strong>17..gitignore文件的例子</strong></p>
-<pre><code> *.a  //忽略所有的.a文件
-!lib.a  //但跟踪所有的lib.a, 即便你在前面忽略了.a文件 
-/T0D0  //只忽略当前目录下的TODO 文件，而不忽略subdir/T0D0
-build/  //忽略任何目录下名为build 的文件夹
-doc/*. txt  //忽略doc/notes. txt, 但不忽略doc/server /arch. txt 
-doc/**/* .pdf  //忽略doc/ 目录及其所有子目录下的.pdf 文件
-</code></pre>
-<p><strong>18.查看提交历史</strong></p>
-<p>如果希望回顾项目的提交历史，可以使用 git log 这个简单且有效的命令。</p>
-<pre><code>git log //按时间先后顺序列出所有的提交历史，最近的提交排在最上面
-git log -2 //只展示最新的两条提交历史，数字可以按需进行填写
-git log -2 --pretty=one line //在一行上展示最近两条提交历史的信息
-//在一行上展示最近两条提交历史的信息，并自定义输出的格式
-%h提交的简写哈希值
-%an作者名字
-%ar作者修订日期，按多久以前的方式显示
-%s提交说明
-git log -2 --pretty=format:&quot;%hI %an| %ar| %s”
-</code></pre>
-<p><strong>19.回退到指定的版本</strong></p>
-<pre><code>git log --pretty=oneline //在一行上展示所有的提交历史
-git reset --hard &lt;CommitID&gt; //使用git reset --hard 命令，根据指定的提交ID回退到指定版本
-git reflog --pretty=one line //在旧版本中使用git reflog --pretty=oneline 命令，查看命令操作的历史
-git reset --hard &lt;CommitID&gt; //再次根据最新的提交ID,跳转到最新的版本
-</code></pre>
-<p><strong>20.小结</strong></p>
-<ul>
-<li>① 初始化 Git 仓库的命令<br>  <strong>git init</strong></li>
-<li>② 查看文件状态的命令<br> <strong>git status 或 git status -s</strong></li>
-<li>③ 一次性将文件加入暂存区的命令<br>  <strong>git add .</strong></li>
-<li>④ 将暂存区的文件提交到 Git 仓库的命令<br>  <strong>git commit -m “提交消息”</strong></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Git版本控制</category>
-      </categories>
-      <tags>
-        <tag>Git基础命令使用</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>npm与包的简单概念</title>
     <url>/2022/03/10/npm-yu-bao-de-jian-dan-gai-nian/</url>
     <content><![CDATA[<h1 id="包"><a href="#包" class="headerlink" title="包"></a>包</h1><ul>
@@ -1682,6 +1523,165 @@ i5ting_toc -f 要转换的md文件路径 -o<span aria-hidden="true" class="line-
       </categories>
       <tags>
         <tag>跨域与JSONP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git基础</title>
+    <url>/2022/03/01/git-ji-chu/</url>
+    <content><![CDATA[<h1 id="版本控制软件"><a href="#版本控制软件" class="headerlink" title="版本控制软件"></a>版本控制软件</h1><p><strong>版本控制软件</strong>是一个用来记录文件变化，以便将来查阅特定版本修订情况的系统，因此有时也叫做<strong>版本控制系统</strong>。</p>
+<p>版本控制系统的分类：本地版本控制系统；集中化的版本控制系统；分布式版本控制系统。现在主要使用分布式版本控制系统，前面两种已经淘汰掉了</p>
+<p>分布式版本控制系统（Git）的特点：基于服务器，客户端的运行模式</p>
+<ul>
+<li>服务器保存文件的所有更新版本</li>
+<li>客户端是服务器的完整备份，并不是只保留文件的最新版本  <span id="more"></span></li>
+</ul>
+<p><strong>优点：</strong><br>① 联网运行，支持多人协作开发</p>
+<p>② 客户端断网后支持离线本地提交版本更新</p>
+<p>③ 服务器故障或损坏后，可使用任何一个客户端的备份进行恢复</p>
+<h1 id="Git基础"><a href="#Git基础" class="headerlink" title="Git基础"></a>Git基础</h1><h2 id="Git中的三个区域"><a href="#Git中的三个区域" class="headerlink" title="Git中的三个区域"></a>Git中的三个区域</h2><ul>
+<li>工作区：处理工作的区域</li>
+<li>暂存区：已完成的工作的临时存放区域，等待被提交</li>
+<li>Git仓库：最终的存放区域</li>
+</ul>
+<h2 id="Git中的三种状态"><a href="#Git中的三种状态" class="headerlink" title="Git中的三种状态"></a>Git中的三种状态</h2><ul>
+<li><strong>已修改 modified</strong>：表示修改了文件，但还没将修改的结果放到暂存区</li>
+<li><strong>已暂存 staged</strong>：表示对已修改文件的当前版本做了标记，使之包含在下次提交的列表中</li>
+<li><strong>已提交 committed</strong>：表示文件已经安全地保存在本地的 Git 仓库中<h2 id="基本的Git工作流程"><a href="#基本的Git工作流程" class="headerlink" title="基本的Git工作流程"></a>基本的Git工作流程</h2></li>
+</ul>
+<p>基本的 Git 工作流程如下：</p>
+<ol>
+<li>在工作区中修改文件</li>
+<li>将你想要下次提交的更改进行暂存</li>
+<li>提交更新，找到暂存区的文件，将快照永久性存储到 Git 仓库<h2 id="安装并配置Git"><a href="#安装并配置Git" class="headerlink" title="安装并配置Git"></a>安装并配置Git</h2></li>
+</ol>
+<p><strong>1.在 Windows 中下载并安装 Git</strong></p>
+<p>在开始使用 Git 管理项目的版本之前，需要将它安装到计算机上。可以使用浏览器访问如下的网址，根据自己<br>的操作系统，选择下载对应的 Git 安装包：<a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a></p>
+<p><strong>2.配置用户信息</strong></p>
+<p>安装完 Git 之后，要做的第一件事就是设置自己的用户名和邮件地址。因为通过 Git 对项目进行版本管理的时<br>候，Git 需要使用这些基本信息，来记录是谁对项目进行了操作：</p>
+<pre><code>git config --global user.name &quot;用户名&quot;//--global 表示该命令只需要运行一次,即可永久生效
+git config --global uaer.email &quot;邮箱地址&quot;
+</code></pre>
+<p><strong>3.获取帮助信息</strong></p>
+<p>可以使用 git help <verb> 命令，无需联网即可在浏览器中打开帮助手册，</p>
+<pre><code>git help config //打开帮助手册
+git config -h  //用 -h 选项获得更简明的“help”输出
+</code></pre>
+<h2 id="Git的基本操作"><a href="#Git的基本操作" class="headerlink" title="Git的基本操作"></a>Git的基本操作</h2><p><strong>1.获取 Git 仓库的两种方式</strong></p>
+<ul>
+<li>将尚未进行版本控制的本地目录转换为 Git 仓库</li>
+<li>从其它服务器克隆一个已存在的 Git 仓库</li>
+</ul>
+<p><strong>2.在现有目录中初始化仓库</strong></p>
+<p>如果自己有一个尚未进行版本控制的项目目录，想要用 Git 来控制它，需要执行如下两个步骤：</p>
+<p>① 在项目目录中，通过鼠标右键打开“Git Bash”</p>
+<p>② 执行 git init 命令将当前的目录转化为 Git 仓库</p>
+<p>git init 命令会创建一个名为 .git 的隐藏目录，这个 .git 目录就是当前项目的 Git 仓库，里面包含了初始的必要文件，这些文件是 Git 仓库的必要组成部分</p>
+<p><strong>3.工作区中文件的 4 种状态</strong></p>
+<ul>
+<li>未被Git管理: 未跟踪（Untracked）不被 Git 所管理的文件</li>
+<li>已被Git管理:</li>
+</ul>
+<p><strong>未修改（Unmodified）</strong>工作区中文件的内容和 Git 仓库中文件的内容保持一致</p>
+<p><strong>已修改（Modified）</strong>工作区中文件的内容和 Git仓库中文件的内容不一致</p>
+<p><strong>已暂存（Staged）</strong>工作区中被修改的文件已被放到暂存区，准备将修改后的文件保存到 Git 仓库中</p>
+<p><strong>4.检查文件的状态</strong></p>
+<p>   <code>git status  //查看文件处于什么状态</code></p>
+<p>如果看到新建的 index.html 文件出现在 Untracked files（未跟踪的文件） 下面。未跟踪的文件意味着Git 在之前的快照（提交）中没有这些文件；Git 不会自动将之纳入跟踪范围，除非明确地告诉它“我需要使用 Git 跟踪管理该文件”。</p>
+<pre><code>git status -s  //以精简的方式显示文件的状态
+git status --short
+</code></pre>
+<p>未跟踪文件前面有红色的 ?? 标记</p>
+<p><strong>6.跟踪新文件</strong></p>
+<pre><code>git add index.html  //用命令 git add 开始跟踪一个文件
+git add . //向暂存区中一次性添加多个文件
+</code></pre>
+<p>就是把文件放在暂存区</p>
+<p><strong>7.提交更新</strong></p>
+<pre><code>git commit -m &quot;新建文件&quot;  
+//执行 git commit 命令进行提交,其中 -m 选项后面是本次的提交消息，用来对提交的内容做进一步的描述
+</code></pre>
+<p><strong>8.对已提交的文件进行修改</strong></p>
+<p>修改了工作区中 index.html 的内容之后，再次运行 git status 和 git status -s 命令，文件index.html 出现在 Changes not staged for commit 这行下面，说明已跟踪文件的内容发生了变化，但还没有放到暂存区。<br>注意：修改过的、没有放入暂存区的文件前面有红色的 M 标记</p>
+<p><strong>9.暂存已修改的文件</strong></p>
+<p>如果要暂存这次修改，需要再次运行 git add 命令，这个命令是个多功能的命令，主要有如下 3 个功效：</p>
+<ul>
+<li>可以用它开始跟踪新文件</li>
+<li>把已跟踪的、且已修改的文件放到暂存区</li>
+<li>把有冲突的文件标记为已解决状态</li>
+</ul>
+<p><strong>10.提交已暂存的文件</strong></p>
+<p>再次运行 git commit -m “提交消息” 命令，即可将暂存区中记录的 index.html 的快照，提交到 Git仓库中进行保存</p>
+<p><strong>11.撤销对文件的修改</strong></p>
+<pre><code>git checkout --index.html
+</code></pre>
+<p>撤销对文件的修改指的是：把对工作区中对应文件的修改，还原成 Git 仓库中所保存的版本。<br>操作的结果：所有的修改会丢失，且无法恢复！危险性比较高，请慎重操作！</p>
+<p><strong>12.取消暂存的文件</strong></p>
+<pre><code>git reset HEAD  要移除的文件名称
+</code></pre>
+<p><strong>13.跳过使用暂存区域</strong></p>
+<pre><code>git commit -a -m &quot;描述消息&quot;
+</code></pre>
+<p>Git 提供了一个跳过使用暂存区域的方式， 只要在提交的时候，给 git commit 加上 -a 选项，Git 就会自动把所有已经跟踪过的文件暂存起来一并提交，从而跳过 git add 步骤</p>
+<p><strong>14.移除文件</strong></p>
+<pre><code>git rm -f index.js  //从Git仓库和工作区中同时移除index.js
+git rm --cached index.css  //只从Git仓库中移除index.css，但保留工作区中的index.css文件
+</code></pre>
+<p><strong>15.忽略文件</strong><br>一般我们总会有些文件无需纳入 Git 的管理，也不希望它们总出现在未跟踪文件列表。 在这种情况下，我们可以创建一个名为 .gitignore 的配置文件，列出要忽略的文件的匹配模式。</p>
+<p>文件 .gitignore 的格式规范如下：</p>
+<ul>
+<li>① 以 # 开头的是注释</li>
+<li>② 以 &#x2F; 结尾的是目录</li>
+<li>③ 以 &#x2F; 开头防止递归</li>
+<li>④ 以 ! 开头表示取反</li>
+<li>⑤ 可以使用 glob 模式进行文件和文件夹的匹配（glob 指简化了的正则表达式）</li>
+</ul>
+<p><strong>16.glob 模式</strong><br>所谓的 glob 模式是指简化了的正则表达式：</p>
+<ul>
+<li>① 星号 * 匹配零个或多个任意字符</li>
+<li>② [abc] 匹配任何一个列在方括号中的字符 （此案例匹配一个 a 或匹配一个 b 或匹配一个 c）</li>
+<li>③ 问号 ? 只匹配一个任意字符</li>
+<li>④ 在方括号中使用短划线分隔两个字符， 表示所有在这两个字符范围内的都可以匹配（比如 [0-9] 表示匹配所有 0 到 9 的数字）</li>
+<li>⑤ 两个星号 ** 表示匹配任意中间目录（比如 a&#x2F;**&#x2F;z 可以匹配 a&#x2F;z 、 a&#x2F;b&#x2F;z 或 a&#x2F;b&#x2F;c&#x2F;z 等）</li>
+</ul>
+<p><strong>17..gitignore文件的例子</strong></p>
+<pre><code> *.a  //忽略所有的.a文件
+!lib.a  //但跟踪所有的lib.a, 即便你在前面忽略了.a文件 
+/T0D0  //只忽略当前目录下的TODO 文件，而不忽略subdir/T0D0
+build/  //忽略任何目录下名为build 的文件夹
+doc/*. txt  //忽略doc/notes. txt, 但不忽略doc/server /arch. txt 
+doc/**/* .pdf  //忽略doc/ 目录及其所有子目录下的.pdf 文件
+</code></pre>
+<p><strong>18.查看提交历史</strong></p>
+<p>如果希望回顾项目的提交历史，可以使用 git log 这个简单且有效的命令。</p>
+<pre><code>git log //按时间先后顺序列出所有的提交历史，最近的提交排在最上面
+git log -2 //只展示最新的两条提交历史，数字可以按需进行填写
+git log -2 --pretty=one line //在一行上展示最近两条提交历史的信息
+//在一行上展示最近两条提交历史的信息，并自定义输出的格式
+%h提交的简写哈希值
+%an作者名字
+%ar作者修订日期，按多久以前的方式显示
+%s提交说明
+git log -2 --pretty=format:&quot;%hI %an| %ar| %s”
+</code></pre>
+<p><strong>19.回退到指定的版本</strong></p>
+<pre><code>git log --pretty=oneline //在一行上展示所有的提交历史
+git reset --hard &lt;CommitID&gt; //使用git reset --hard 命令，根据指定的提交ID回退到指定版本
+git reflog --pretty=one line //在旧版本中使用git reflog --pretty=oneline 命令，查看命令操作的历史
+git reset --hard &lt;CommitID&gt; //再次根据最新的提交ID,跳转到最新的版本
+</code></pre>
+<p><strong>20.小结</strong></p>
+<ul>
+<li>① 初始化 Git 仓库的命令<br>  <strong>git init</strong></li>
+<li>② 查看文件状态的命令<br> <strong>git status 或 git status -s</strong></li>
+<li>③ 一次性将文件加入暂存区的命令<br>  <strong>git add .</strong></li>
+<li>④ 将暂存区的文件提交到 Git 仓库的命令<br>  <strong>git commit -m “提交消息”</strong></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Git版本控制</category>
+      </categories>
+      <tags>
+        <tag>Git基础命令使用</tag>
       </tags>
   </entry>
 </search>
