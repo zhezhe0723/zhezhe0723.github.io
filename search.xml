@@ -136,7 +136,7 @@ git commit -m &quot;第一次提交&quot;<span aria-hidden="true" class="line-nu
 (只有第一次推送内容需要-u origin master，往后都不用了)<h2 id="SSH-key"><a href="#SSH-key" class="headerlink" title="SSH key"></a>SSH key</h2></li>
 </ol>
 <p><strong>SSH key介绍</strong><br>SSH key 的作用：实现本地仓库和 Github 之间免登录的加密数据传输。<br>SSH key 的好处：免登录身份认证、数据加密传输。<br>SSH key 由两部分组成，分别是：<br>① id_rsa（私钥文件，存放于客户端的电脑中即可）<br>② id_rsa.pub（公钥文件，需要配置到 Github 中）<br><strong>生成SSH key</strong></p>
-<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#x79;&#111;&#x75;&#x72;&#95;&#x65;&#109;&#97;&#105;&#108;&#64;&#x65;&#x78;&#97;&#109;&#112;&#108;&#x65;&#x2e;&#x63;&#x6f;&#x6d;">&#x79;&#111;&#x75;&#x72;&#95;&#x65;&#109;&#97;&#105;&#108;&#64;&#x65;&#x78;&#97;&#109;&#112;&#108;&#x65;&#x2e;&#x63;&#x6f;&#x6d;</a> 替换为注册 Github 账号时填写的邮箱：</p>
+<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#x79;&#x6f;&#x75;&#x72;&#95;&#101;&#109;&#x61;&#105;&#108;&#x40;&#x65;&#x78;&#x61;&#x6d;&#x70;&#108;&#101;&#x2e;&#x63;&#111;&#109;">&#x79;&#x6f;&#x75;&#x72;&#95;&#101;&#109;&#x61;&#105;&#108;&#x40;&#x65;&#x78;&#x61;&#x6d;&#x70;&#108;&#101;&#x2e;&#x63;&#111;&#109;</a> 替换为注册 Github 账号时填写的邮箱：</p>
 <pre class="line-numbers language-none"><code class="language-none">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>③ 连续敲击 3 次回车，即可在 C:\Users\用户名文件夹.ssh 目录中生成 id_rsa 和 id_rsa.pub 两个文件</p>
 <p><strong>配置SSH key</strong><br>① 使用记事本打开 id_rsa.pub 文件，复制里面的文本内容<br>② 在浏览器中登录 Github，点击头像 -&gt; Settings -&gt; SSH and GPG Keys -&gt; New SSH key<br>③ 将 id_rsa.pub 文件中的内容，粘贴到 Key 对应的文本框中<br>④ 在 Title 文本框中任意填写一个名称，来标识这个 Key 从何而来</p>
@@ -1586,6 +1586,105 @@ i5ting_toc -f 要转换的md文件路径 -o<span aria-hidden="true" class="line-
       </tags>
   </entry>
   <entry>
+    <title>跨域与JSONP.md</title>
+    <url>/2022/02/27/kua-yu-yu-jsonp-md/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>————同源策略，跨域，JSONP的实现原理，防抖和节流。</p>
+<h1 id="了解同源策略和跨域"><a href="#了解同源策略和跨域" class="headerlink" title="了解同源策略和跨域"></a>了解同源策略和跨域</h1><p>  同源指的是如果两个页面的协议，域名，端口都相同，则两个页面具有相同的源（如果没有给出端口号，默认是80端口）。<span id="more"></span></p>
+<p><strong>同源策略</strong>是浏览器提供的一个安全功能</p>
+<p><strong>跨域</strong>是指两个URL的协议，域名，端口有一个或一个以上不一致。出现跨域的根本原因：浏览器的同源策略不允许非同源的URL之间进行资源的交互<br>（浏览器允许发起跨域请求，但是，跨域请求回来的数据会被浏览器拦截，无法被页面获取到）</p>
+<p>如何实现跨域数据请求解决方案：JSONP和CORS<br> JSONP：出现的早，兼容性好，缺点是只支持GET请求，不支持POST请求；<br> CORS：出现的较晚，W3C标准，两种请求都支持，缺点是不兼容低版本浏览器</p>
+<h1 id="JSONP的实现原理"><a href="#JSONP的实现原理" class="headerlink" title="JSONP的实现原理"></a>JSONP的实现原理</h1><p>  JSONP的实现原理就是通过<code>&lt;script&gt;</code>标签的src属性，请求跨域的数据接口，并通过函数调用的形式，接收跨域接口响应回来的数据</p>
+<h2 id="jQuery中的JSONP"><a href="#jQuery中的JSONP" class="headerlink" title="jQuery中的JSONP"></a>jQuery中的JSONP</h2><p>  jQuery 提供的 $.ajax() 函数，除了可以发起真正的 Ajax 数据请求之外，还能够发起 JSONP 数据请求</p>
+<pre><code>$.ajax(&#123;
+  url: &#39;http://ajax.frontend.itheima.net:3006/api/jsonp?name=zs&amp;age=20&#39;,
+  // 如果要使用 $.ajax() 发起 JSONP 请求，必须指定 datatype 为 jsonp
+  dataType: &#39;jsonp&#39;,
+   success: function(res) &#123;
+   console.log(res)
+&#125;
+&#125;)
+</code></pre>
+<p>在使用 jQuery 发起 JSONP 请求时，如果想要自定义 JSONP 的参数以及回调函数名称，可以通过如下两个参数来指定：</p>
+<pre><code>$.ajax(&#123;
+  url: &#39;http://ajax.frontend.itheima.net:3006/api/jsonp?name=zs&amp;age=20&#39;,
+  dataType: &#39;jsonp&#39;,
+  // 发送到服务端的参数名称，默认值为 callback
+  jsonp: &#39;callback&#39;,
+  // 自定义的回调函数名称，默认值为 jQueryxxx 格式
+  jsonpCallback: &#39;abc&#39;,
+  success: function(res) &#123;
+  console.log(res)
+&#125;
+</code></pre>
+<p> })</p>
+<h2 id="jQuery中JSONP的实现过程"><a href="#jQuery中JSONP的实现过程" class="headerlink" title="jQuery中JSONP的实现过程"></a>jQuery中JSONP的实现过程</h2><p> jQuery 中的 JSONP，也是通过 <code>&lt;script&gt;</code> 标签的 src 属性实现跨域数据访问的，只不过，jQuery 采用的是动态创建和移除<code>&lt;script&gt;</code>标签的方式，来发起 JSONP 数据请求。</p>
+<ul>
+<li><p>在发起 JSONP 请求的时候，动态向 <code>&lt;header&gt;</code> 中 append 一个 <code>&lt;script&gt;</code> 标签；</p>
+</li>
+<li><p>在 JSONP 请求成功以后，动态从 <code>&lt;header&gt;</code> 中移除刚才 append 进去的<code> &lt;script&gt;</code> 标签；</p>
+</li>
+</ul>
+<h1 id="防抖与节流"><a href="#防抖与节流" class="headerlink" title="防抖与节流"></a>防抖与节流</h1><h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><p>———<strong>防抖策略</strong>是当事件被触发后，延迟n秒后再执行回调，如果在这n秒内事件又被触发，则重新计时。</p>
+<p>防抖的应用场景：用户在输入框中连续输入一串字符是时，可以通过防抖策略，只在输入完成时，才执行查询的请求，这样可以有效减少请求次数，节约请求资源。</p>
+<pre><code>var timer = null                    // 1. 防抖动的 timer
+  function debounceSearch(keywords) &#123; // 2. 定义防抖的函数
+  timer = setTimeout(function() &#123;
+  // 发起 JSONP 请求
+  getSuggestList(keywords)
+  &#125;, 500)
+  &#125;
+
+  $(&#39;#ipt&#39;).on(&#39;keyup&#39;, function() &#123; 
+  // 3. 在触发 keyup 事件时，立即清空 timer    
+    clearTimeout(timer)
+   debounceSearch(keywords)
+&#125;)
+</code></pre>
+<h2 id="缓存搜索的建议列表"><a href="#缓存搜索的建议列表" class="headerlink" title="缓存搜索的建议列表"></a>缓存搜索的建议列表</h2><p>1.定义全局缓存对象</p>
+<p><code>// 缓存对象   var cacheObj = &#123;&#125;</code></p>
+<p>2.将搜索结果保存到缓存对象中</p>
+<pre><code> // 渲染建议列表
+ function renderSuggestList(res) &#123;
+   // ...省略其他代码
+   // 将搜索的结果，添加到缓存对象中
+    var k = $(&#39;#ipt&#39;).val().trim()
+    cacheObj[k] = res
+ &#125;
+</code></pre>
+<p>3.优先从缓存中获取搜索建议</p>
+<pre><code> // 监听文本框的 keyup 事件
+ $(&#39;#ipt&#39;).on(&#39;keyup&#39;, function() &#123;
+    // ...省略其他代码
+
+    // 优先从缓存中获取搜索建议
+    if (cacheObj[keywords]) &#123;
+       return renderSuggestList(cacheObj[keywords])
+    &#125;
+    // 获取搜索建议列表
+    debounceSearch(keywords)
+  &#125;)
+</code></pre>
+<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p><strong>节流策略</strong> 就是可以减少一段时间内事件的触发频率</p>
+<p>节流的应用场景：</p>
+<ul>
+<li><p>鼠标连续不断地触发某事件，只在单位时间内只触发一次</p>
+</li>
+<li><p>懒加载时要监听计算滚动条的位置，但不必每次滑动都触发，可以降低计算的频率，而不必去浪费cpu资源。</p>
+</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>防抖：如果事件被频繁触发，防抖能保证只有最有一次触发生效！前面 N 多次的触发都会被忽略！</li>
+<li>节流：如果事件被频繁触发，节流能够减少事件触发的频率，因此，节流是有选择性地执行一部分事件！</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前后端交互</category>
+      </categories>
+      <tags>
+        <tag>跨域与JSONP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>前端工程化与webpack</title>
     <url>/2022/06/01/qian-duan-gong-cheng-hua-yu-webpack/</url>
     <content><![CDATA[<h2 id="前端工程化"><a href="#前端工程化" class="headerlink" title="前端工程化"></a>前端工程化</h2><p>  在企业级的前端项目开发中，把前端开发所需的工具，技术，流程，经验等进行规范化，标准化。实际就是实现前端的四个现代化：模块化；组件化；规范化；自动化。<br>它的好处主要体现在：</p>
@@ -1738,105 +1837,6 @@ plugins: [htmlPlugin, cleanPlugin], <span aria-hidden="true" class="line-numbers
       </categories>
       <tags>
         <tag>打包构建</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>跨域与JSONP.md</title>
-    <url>/2022/02/27/kua-yu-yu-jsonp-md/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>————同源策略，跨域，JSONP的实现原理，防抖和节流。</p>
-<h1 id="了解同源策略和跨域"><a href="#了解同源策略和跨域" class="headerlink" title="了解同源策略和跨域"></a>了解同源策略和跨域</h1><p>  同源指的是如果两个页面的协议，域名，端口都相同，则两个页面具有相同的源（如果没有给出端口号，默认是80端口）。<span id="more"></span></p>
-<p><strong>同源策略</strong>是浏览器提供的一个安全功能</p>
-<p><strong>跨域</strong>是指两个URL的协议，域名，端口有一个或一个以上不一致。出现跨域的根本原因：浏览器的同源策略不允许非同源的URL之间进行资源的交互<br>（浏览器允许发起跨域请求，但是，跨域请求回来的数据会被浏览器拦截，无法被页面获取到）</p>
-<p>如何实现跨域数据请求解决方案：JSONP和CORS<br> JSONP：出现的早，兼容性好，缺点是只支持GET请求，不支持POST请求；<br> CORS：出现的较晚，W3C标准，两种请求都支持，缺点是不兼容低版本浏览器</p>
-<h1 id="JSONP的实现原理"><a href="#JSONP的实现原理" class="headerlink" title="JSONP的实现原理"></a>JSONP的实现原理</h1><p>  JSONP的实现原理就是通过<code>&lt;script&gt;</code>标签的src属性，请求跨域的数据接口，并通过函数调用的形式，接收跨域接口响应回来的数据</p>
-<h2 id="jQuery中的JSONP"><a href="#jQuery中的JSONP" class="headerlink" title="jQuery中的JSONP"></a>jQuery中的JSONP</h2><p>  jQuery 提供的 $.ajax() 函数，除了可以发起真正的 Ajax 数据请求之外，还能够发起 JSONP 数据请求</p>
-<pre><code>$.ajax(&#123;
-  url: &#39;http://ajax.frontend.itheima.net:3006/api/jsonp?name=zs&amp;age=20&#39;,
-  // 如果要使用 $.ajax() 发起 JSONP 请求，必须指定 datatype 为 jsonp
-  dataType: &#39;jsonp&#39;,
-   success: function(res) &#123;
-   console.log(res)
-&#125;
-&#125;)
-</code></pre>
-<p>在使用 jQuery 发起 JSONP 请求时，如果想要自定义 JSONP 的参数以及回调函数名称，可以通过如下两个参数来指定：</p>
-<pre><code>$.ajax(&#123;
-  url: &#39;http://ajax.frontend.itheima.net:3006/api/jsonp?name=zs&amp;age=20&#39;,
-  dataType: &#39;jsonp&#39;,
-  // 发送到服务端的参数名称，默认值为 callback
-  jsonp: &#39;callback&#39;,
-  // 自定义的回调函数名称，默认值为 jQueryxxx 格式
-  jsonpCallback: &#39;abc&#39;,
-  success: function(res) &#123;
-  console.log(res)
-&#125;
-</code></pre>
-<p> })</p>
-<h2 id="jQuery中JSONP的实现过程"><a href="#jQuery中JSONP的实现过程" class="headerlink" title="jQuery中JSONP的实现过程"></a>jQuery中JSONP的实现过程</h2><p> jQuery 中的 JSONP，也是通过 <code>&lt;script&gt;</code> 标签的 src 属性实现跨域数据访问的，只不过，jQuery 采用的是动态创建和移除<code>&lt;script&gt;</code>标签的方式，来发起 JSONP 数据请求。</p>
-<ul>
-<li><p>在发起 JSONP 请求的时候，动态向 <code>&lt;header&gt;</code> 中 append 一个 <code>&lt;script&gt;</code> 标签；</p>
-</li>
-<li><p>在 JSONP 请求成功以后，动态从 <code>&lt;header&gt;</code> 中移除刚才 append 进去的<code> &lt;script&gt;</code> 标签；</p>
-</li>
-</ul>
-<h1 id="防抖与节流"><a href="#防抖与节流" class="headerlink" title="防抖与节流"></a>防抖与节流</h1><h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><p>———<strong>防抖策略</strong>是当事件被触发后，延迟n秒后再执行回调，如果在这n秒内事件又被触发，则重新计时。</p>
-<p>防抖的应用场景：用户在输入框中连续输入一串字符是时，可以通过防抖策略，只在输入完成时，才执行查询的请求，这样可以有效减少请求次数，节约请求资源。</p>
-<pre><code>var timer = null                    // 1. 防抖动的 timer
-  function debounceSearch(keywords) &#123; // 2. 定义防抖的函数
-  timer = setTimeout(function() &#123;
-  // 发起 JSONP 请求
-  getSuggestList(keywords)
-  &#125;, 500)
-  &#125;
-
-  $(&#39;#ipt&#39;).on(&#39;keyup&#39;, function() &#123; 
-  // 3. 在触发 keyup 事件时，立即清空 timer    
-    clearTimeout(timer)
-   debounceSearch(keywords)
-&#125;)
-</code></pre>
-<h2 id="缓存搜索的建议列表"><a href="#缓存搜索的建议列表" class="headerlink" title="缓存搜索的建议列表"></a>缓存搜索的建议列表</h2><p>1.定义全局缓存对象</p>
-<p><code>// 缓存对象   var cacheObj = &#123;&#125;</code></p>
-<p>2.将搜索结果保存到缓存对象中</p>
-<pre><code> // 渲染建议列表
- function renderSuggestList(res) &#123;
-   // ...省略其他代码
-   // 将搜索的结果，添加到缓存对象中
-    var k = $(&#39;#ipt&#39;).val().trim()
-    cacheObj[k] = res
- &#125;
-</code></pre>
-<p>3.优先从缓存中获取搜索建议</p>
-<pre><code> // 监听文本框的 keyup 事件
- $(&#39;#ipt&#39;).on(&#39;keyup&#39;, function() &#123;
-    // ...省略其他代码
-
-    // 优先从缓存中获取搜索建议
-    if (cacheObj[keywords]) &#123;
-       return renderSuggestList(cacheObj[keywords])
-    &#125;
-    // 获取搜索建议列表
-    debounceSearch(keywords)
-  &#125;)
-</code></pre>
-<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p><strong>节流策略</strong> 就是可以减少一段时间内事件的触发频率</p>
-<p>节流的应用场景：</p>
-<ul>
-<li><p>鼠标连续不断地触发某事件，只在单位时间内只触发一次</p>
-</li>
-<li><p>懒加载时要监听计算滚动条的位置，但不必每次滑动都触发，可以降低计算的频率，而不必去浪费cpu资源。</p>
-</li>
-</ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li>防抖：如果事件被频繁触发，防抖能保证只有最有一次触发生效！前面 N 多次的触发都会被忽略！</li>
-<li>节流：如果事件被频繁触发，节流能够减少事件触发的频率，因此，节流是有选择性地执行一部分事件！</li>
-</ul>
-]]></content>
-      <categories>
-        <category>前后端交互</category>
-      </categories>
-      <tags>
-        <tag>跨域与JSONP</tag>
       </tags>
   </entry>
 </search>
