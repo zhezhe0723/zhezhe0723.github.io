@@ -4,11 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Github的使用, 可可托海">
-    <meta name="description" content="开源项目托管平台专门用于免费存放开源项目源代码的网站，叫做开源项目托管平台。目前世界上比较出名的开源项目托管平台主要有以下 3 个：
+    <meta name="keywords" content="前端工程化与webpack, 可可托海">
+    <meta name="description" content="前端工程化  在企业级的前端项目开发中，把前端开发所需的工具，技术，流程，经验等进行规范化，标准化。实际就是实现前端的四个现代化：模块化；组件化；规范化；自动化。它的好处主要体现在：
 
-Github（全球最牛的开源项目托管平台，没有之一）
-Gitlab（对代码私有性支持较好，因此企业用户较">
+前端工程化让前端开发能够“自成体系”，覆盖了前端项目从">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -31,7 +30,7 @@ Gitlab（对代码私有性支持较好，因此企业用户较">
     </style>
 
 
-    <title>Github的使用 | 可可托海</title>
+    <title>前端工程化与webpack | 可可托海</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -468,12 +467,12 @@ Gitlab（对代码私有性支持较好，因此企业用户较">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Github的使用</h1>
+                    <h1 class="description center-align post-title">前端工程化与webpack</h1>
                 </div>
             </div>
         </div>
@@ -587,25 +586,12 @@ Gitlab（对代码私有性支持较好，因此企业用户较">
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/Github%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
-                                <span class="chip bg-color">Github的基本使用</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" class="post-category">
-                                Git版本控制
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -614,7 +600,7 @@ Gitlab（对代码私有性支持较好，因此企业用户较">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-01
+                    2022-06-01
                 </div>
                 
 
@@ -638,108 +624,151 @@ Gitlab（对代码私有性支持较好，因此企业用户较">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="开源项目托管平台"><a href="#开源项目托管平台" class="headerlink" title="开源项目托管平台"></a>开源项目托管平台</h1><p>专门用于免费存放开源项目源代码的网站，叫做开源项目托管平台。目前世界上比较出名的开源项目托管平台<br>主要有以下 3 个：</p>
-<ul>
-<li>Github（全球最牛的开源项目托管平台，没有之一）</li>
-<li>Gitlab（对代码私有性支持较好，因此企业用户较多）</li>
-<li>Gitee（又叫做码云，是国产的开源项目托管平台。访问速度快、纯中文界面、使用友好）<span id="more"></span></li>
-</ul>
-<h1 id="Github的使用"><a href="#Github的使用" class="headerlink" title="Github的使用"></a>Github的使用</h1><h2 id="注册Github账号"><a href="#注册Github账号" class="headerlink" title="注册Github账号"></a>注册Github账号</h2><p>① 访问 Github 的官网首页 <a target="_blank" rel="noopener" href="https://github.com/">https://github.com/</a><br>② 点击“Sign up”按钮跳转到注册页面<br>③ 填写可用的用户名、邮箱、密码<br>④ 通过点击箭头的形式，将验证图片摆正<br>⑤ 点击“Create account”按钮注册新用户<br>⑥ 登录到第三步填写的邮箱中，点击激活链接，完成注册</p>
-<h2 id="远程仓库的使用"><a href="#远程仓库的使用" class="headerlink" title="远程仓库的使用"></a>远程仓库的使用</h2><h3 id="远程仓库的两种访问方式"><a href="#远程仓库的两种访问方式" class="headerlink" title="远程仓库的两种访问方式"></a>远程仓库的两种访问方式</h3><p>Github 上的远程仓库，有两种访问方式，分别是 HTTPS 和 SSH。它们的区别是：<br>① HTTPS：零配置；但是每次访问仓库时，需要重复输入 Github 的账号和密码才能访问成功<br>② SSH：需要进行额外的配置；但是配置成功后，每次访问仓库时，不需重复输入 Github 的账号和密码<br>注意：在实际开发中，推荐使用 SSH 的方式访问远程仓库</p>
-<h3 id="基于HTTPS将本地仓库上传到Github"><a href="#基于HTTPS将本地仓库上传到Github" class="headerlink" title="基于HTTPS将本地仓库上传到Github"></a>基于HTTPS将本地仓库上传到Github</h3><p>第一种情况：本地没有现成的Git仓库</p>
+                <h2 id="前端工程化"><a href="#前端工程化" class="headerlink" title="前端工程化"></a>前端工程化</h2><p>  在企业级的前端项目开发中，把前端开发所需的工具，技术，流程，经验等进行规范化，标准化。实际就是实现前端的四个现代化：模块化；组件化；规范化；自动化。<br>它的好处主要体现在：</p>
 <ol>
-<li>使用终端命令创建README.md文档，并写入初始内容为project_02<pre class="line-numbers language-none"><code class="language-none">echo &quot;# project_02&quot; &gt;&gt; README.md<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>初始化本地Git仓库，并将文件的修改提交到本地的Git仓库中<pre class="line-numbers language-none"><code class="language-none">git init 
-git add README.md
-git commit -m &quot;第一次提交&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
-<li>将本地仓库和远程仓库进行关联，并把远程仓库命名为origin<pre class="line-numbers language-none"><code class="language-none">git remote add origin https:&#x2F;&#x2F;github.com&#x2F;用户名&#x2F;project_02.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>将本地仓库中的内容推送到远程的origin 仓库中<pre class="line-numbers language-none"><code class="language-none">git push -u origin master&#96;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-第二种情况：本地有现成的Git仓库</li>
-<li>将本地仓库和远程仓库进行关联，并把远程仓库命名为origin<pre class="line-numbers language-none"><code class="language-none">git remote add origin https:&#x2F;&#x2F;github.com&#x2F;用户名&#x2F;project_02.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>将本地仓库中的内容推送到远程的origin 仓库中<pre class="line-numbers language-none"><code class="language-none">git push -u origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-(只有第一次推送内容需要-u origin master，往后都不用了)<h2 id="SSH-key"><a href="#SSH-key" class="headerlink" title="SSH key"></a>SSH key</h2></li>
+<li>前端工程化让前端开发能够“自成体系”，覆盖了前端项目从创建到部署的方方面面</li>
+<li>最大程度地提高了前端的开发效率，降低了技术选型、前后端联调等带来的协调沟通成本<br>目前主流的前端工程化解决方案：</li>
 </ol>
-<p><strong>SSH key介绍</strong><br>SSH key 的作用：实现本地仓库和 Github 之间免登录的加密数据传输。<br>SSH key 的好处：免登录身份认证、数据加密传输。<br>SSH key 由两部分组成，分别是：<br>① id_rsa（私钥文件，存放于客户端的电脑中即可）<br>② id_rsa.pub（公钥文件，需要配置到 Github 中）<br><strong>生成SSH key</strong></p>
-<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#121;&#111;&#117;&#114;&#x5f;&#x65;&#x6d;&#97;&#x69;&#x6c;&#64;&#x65;&#x78;&#97;&#109;&#112;&#108;&#101;&#x2e;&#99;&#x6f;&#109;">&#121;&#111;&#117;&#114;&#x5f;&#x65;&#x6d;&#97;&#x69;&#x6c;&#64;&#x65;&#x78;&#97;&#109;&#112;&#108;&#101;&#x2e;&#99;&#x6f;&#109;</a> 替换为注册 Github 账号时填写的邮箱：</p>
-<pre class="line-numbers language-none"><code class="language-none">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>③ 连续敲击 3 次回车，即可在 C:\Users\用户名文件夹.ssh 目录中生成 id_rsa 和 id_rsa.pub 两个文件</p>
-<p><strong>配置SSH key</strong><br>① 使用记事本打开 id_rsa.pub 文件，复制里面的文本内容<br>② 在浏览器中登录 Github，点击头像 -&gt; Settings -&gt; SSH and GPG Keys -&gt; New SSH key<br>③ 将 id_rsa.pub 文件中的内容，粘贴到 Key 对应的文本框中<br>④ 在 Title 文本框中任意填写一个名称，来标识这个 Key 从何而来</p>
-<p><strong>检测SSH key</strong>　</p>
-<p>打开 Git Bash，输入如下的命令并回车执行：</p>
-<pre><code>   git -T git@github.com
-　
-</code></pre>
-<p>出现用户名证明已经配置成功</p>
-<h3 id="基于SSH将本地仓库上传到Github"><a href="#基于SSH将本地仓库上传到Github" class="headerlink" title="基于SSH将本地仓库上传到Github"></a>基于SSH将本地仓库上传到Github</h3><p>将本地仓库和远程仓库进行关联，并把远程仓库命名为origin</p>
-<pre class="line-numbers language-none"><code class="language-none">git remote add origin git@github.com:用户名&#x2F;project_02.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>将本地仓库中的内容推送到远程的origin 仓库中</p>
-<pre class="line-numbers language-none"><code class="language-none">git push -u origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>webpack <a target="_blank" rel="noopener" href="https://www.webpackjs.com/">https://www.webpackjs.com/</a> 常用</li>
+<li>parcel <a target="_blank" rel="noopener" href="https://zh.parceljs.org/">https://zh.parceljs.org/</a></li>
+</ul>
+<h2 id="webpack-的基本使用"><a href="#webpack-的基本使用" class="headerlink" title="webpack 的基本使用"></a>webpack 的基本使用</h2><h3 id="在项目中安装-webpack"><a href="#在项目中安装-webpack" class="headerlink" title="在项目中安装 webpack"></a>在项目中安装 webpack</h3><p>在终端运行如下的命令，安装webpack 相关的两个包<code>npm i webpack@5.5.1 webpack-cli@4.2.0 -D</code></p>
+<h3 id="在项目中配置webpack"><a href="#在项目中配置webpack" class="headerlink" title="在项目中配置webpack"></a>在项目中配置webpack</h3><p>① 在项目根目录中，创建名为 webpack.config.js 的 webpack 配置文件，并初始化如下的基本配置：</p>
+<pre class="line-numbers language-none"><code class="language-none">module.exports &#x3D; &#123;
+  mode: &#39;development&#39;, 
+&#x2F;&#x2F; 开发环境：development 不会对打包生成的文件进行代码压缩和性能优化,打包速度快，适合在开发阶段使用
+&#x2F;&#x2F; 生产环境：production 会对打包生成的文件进行代码压缩和性能优化，打包速度很慢，仅适合在项目发布阶段使用
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>② 在 package.json 的 scripts 节点下，新增 dev 脚本如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">&quot;scripts&quot;: &#123;
+    &quot;dev&quot;: &quot;webpack&quot;, &#x2F;&#x2F;通过 npm run dev 来执行
+  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>③ 在终端中运行 npm run dev 命令，启动 webpack 进行项目的打包构建</p>
+<p><strong>webpack.config.js 文件的作用：</strong>webpack.config.js 是 webpack 的配置文件。webpack 在真正开始打包构建之前，会先读取这个配置文件，从而基于给定的配置，对项目进行打包。<br>注意：由于 webpack 是基于 node.js 开发出来的打包工具，因此在它的配置文件中，支持使用 node.js 相关<br>的语法和模块进行 webpack 的个性化配置。</p>
+<p><strong>自定义打包的入口与出口：</strong>在 webpack.config.js 配置文件中，通过 entry 节点指定打包的入口。通过 output 节点指定打包的出口。示例代码如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">const path &#x3D; require(&#39;path&#39;)
+module.exports&#x3D;&#123;
+  entry: path.join(__dirname, &#39;.&#x2F;src&#x2F;index.js&#39;),&#x2F;&#x2F;入口文件的路径
+  &#x2F;&#x2F; 指定打包的出口
+  output: &#123;
+    &#x2F;&#x2F; 表示输出文件的存放路径
+    path: path.join(__dirname, &#39;.&#x2F;dist&#39;),
+    &#x2F;&#x2F; 表示输出文件的名称,路径加js为了发布之后文件分类明确
+    filename: &#39;js&#x2F;bundle.js&#39;,
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p> 将远程仓库克隆到本地</p>
-<pre class="line-numbers language-none"><code class="language-none">git clone 远程仓库的地址<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="webpack-中的插件"><a href="#webpack-中的插件" class="headerlink" title="webpack 中的插件"></a>webpack 中的插件</h3><p><strong>webpack-dev-server：</strong>可以让 webpack 监听项目源代码的变化，从而进行自动打包构建。<br>安装：<code>npm i webpack-dev-server@3.11.0 -D</code><br>配置：① 修改 package.json -&gt; scripts 中的 dev 命令如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">&quot;scripts&quot;: &#123;
+    &quot;dev&quot;: &quot;webpack,serve&quot;, &#x2F;&#x2F;通过 npm run dev 来执行
+  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<h1 id="Git分支"><a href="#Git分支" class="headerlink" title="Git分支"></a>Git分支</h1><p>——在进行多人协作开发的时候，为了防止互相干扰，提高协同开发的体验，建议每个开发者都基于分支进行项目功能的开发</p>
-<h2 id="本地分支操作"><a href="#本地分支操作" class="headerlink" title="本地分支操作"></a>本地分支操作</h2><p><strong>查看分支列表</strong>使用如下的命令，可以查看当前 Git 仓库中所有的分支列表：</p>
-<pre class="line-numbers language-none"><code class="language-none">git branch &#x2F;&#x2F;分支名字前面的 * 号表示当前所处的分支。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>② 再次运行 npm run dev 命令，重新进行项目的打包<br>③ 在浏览器中访问 <a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a> 地址，查看自动打包效果</p>
+<blockquote>
+<p>注意：webpack-dev-server 会启动一个实时打包的 http 服务器,配置了 webpack-dev-server 之后，打包生成的文件存放到了内存中,提高了实时打包输出的性能，因为内存比物理磁盘速度快很多。<br>生成到内存中的文件该如何访问？webpack-dev-server 生成到内存中的文件，默认放到了项目的根目录中，而且是虚拟的、不可见的。可以直接用 &#x2F; 表示项目根目录，后面跟上要访问的文件名称，即可访问内存中的文件。<br>例如 &#x2F;bundle.js 就表示要访问 webpack-dev-server 生成到内存中的 bundle.js 文件</p>
+</blockquote>
+<p>**html-webpack-plugin:**是 webpack 中的 HTML 插件，可以通过此插件自定制 index.html 页面的内容。<br>需求：通过 html-webpack-plugin 插件，将 src 目录下的 index.html 首页，复制到项目根目录中一份.<br>安装：<code>npm i html-webpack-plugin@4.5.0 -D</code><br>配置：</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 1. 导入插件，得到构造函数
+const HtmlPlugin &#x3D; require(&#39;html-webpack-plugin&#39;)
+&#x2F;&#x2F; 2. 创建插件的实例对象
+const htmlPlugin &#x3D; new HtmlPlugin(&#123;
+  template: &#39;.&#x2F;src&#x2F;index.html&#39;,
+  filename: &#39;.&#x2F;index.html&#39;,
+&#125;)
+module.exports&#x3D;&#123;
+    modu:&#39;development&#39;,
+    plugins:[htmlPlugin], &#x2F;&#x2F; 3. 挂载插件的实例对象<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><strong>创建分支列表</strong>使用如下的命令，可以基于当前分支，创建一个新的分支，此时，新分支中的代码和当前分支完全一样：</p>
-<pre class="line-numbers language-none"><code class="language-none">git branch 分支名称<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>解惑 html-webpack-plugin,① 通过 HTML 插件复制到项目根目录中的 index.html 页面，也被放到了内存中<br>② HTML 插件在生成的 index.html 页面的底部，自动注入了打包的 bundle.js 文件</p>
+</blockquote>
+<p>**devServer 节点:**在 webpack.config.js 配置文件中，可以通过 devServer 节点对 webpack-dev-server 插件进行更多的配置，示例代码如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">devServer: &#123;
+  open: true,
+  host: &#39;127.0.0.1&#39;,
+  port: 80,
+&#125;,&#x2F;&#x2F;只要修改配置文件，就要重新启动服务器<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="webpack-中的loader"><a href="#webpack-中的loader" class="headerlink" title="webpack 中的loader"></a>webpack 中的loader</h3><p>在实际开发过程中，webpack 默认只能打包处理以 .js 后缀名结尾的模块。其他非 .js 后缀名结尾的模块，<br>webpack 默认处理不了，需要调用 loader 加载器才可以正常打包，否则会报错！<br>loader 加载器的作用：协助 webpack 打包处理特定的文件模块。比如：</p>
+<ul>
+<li>css-loader 可以打包处理 .css 相关的文件</li>
+<li>less-loader 可以打包处理 .less 相关的文件</li>
+<li>babel-loader 可以打包处理 webpack 无法处理的高级 JS 语法</li>
+</ul>
+<p><strong>打包处理css 文件</strong><br>① 运行 <code>npm i style-loader@2.0.0 css-loader@5.0.1 -D</code> 命令，安装处理 css 文件的 loader<br>② 在 webpack.config.js 的 module -&gt; rules 数组中，添加 loader 规则如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">module: &#123;
+    rules: [
+      &#x2F;&#x2F; test 表示匹配的文件类型， use 表示对应要调用的 loader
+      &#x2F;&#x2F;  use 数组中指定的 loader 顺序是固定的;多个 loader 的调用顺序是：从后往前调用
+      &#123; test: &#x2F;\.css$&#x2F;, use: [&#39;style-loader&#39;, &#39;css-loader&#39;] &#125;,
+    ]
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><strong>切换分支</strong>使用如下的命令，可以切换到指定的分支上进行开发</p>
-<pre class="line-numbers language-none"><code class="language-none">git checkout login<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>打包处理 less 文件</strong><br>① 运行 <code>npm i less-loader@7.1.0 less@3.12.2 -D </code>命令<br>② 在 webpack.config.js 的 module -&gt; rules 数组中，添加 loader 规则如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">module: &#123;
+    rules: [
+      &#x2F;&#x2F; test 表示匹配的文件类型， use 表示对应要调用的 loader
+      &#x2F;&#x2F;  use 数组中指定的 loader 顺序是固定的;多个 loader 的调用顺序是：从后往前调用
+      &#123; test: &#x2F;\.less$&#x2F;, use: [&#39;style-loader&#39;, &#39;css-loader&#39;, &#39;less-loader&#39;] &#125;,
+    ]
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><strong>分支的快速创建和切换</strong>使用如下的命令，可以创建指定名称的新分支，并立即切换到新分支上：</p>
-<pre class="line-numbers language-none"><code class="language-none">git checkout -b 分支名称
-&#x2F;&#x2F;-b 表示创建一个新分支
-&#x2F;&#x2F;checkout 表示切换到刚才创建的新分支上<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><strong>打包处理样式表中与 url 路径相关的文件</strong><br>① 运行 <code>npm i url-loader@4.1.1 file-loader@6.2.0 -D</code> 命令<br>② 在 webpack.config.js 的 module -&gt; rules 数组中，添加 loader 规则如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">module: &#123;
+    rules: [
+     &#123;
+        test: &#x2F;\.jpg|png|gif$&#x2F;,
+        use: &#123;
+          loader: &#39;url-loader&#39;,
+          options: &#123;
+            limit: 22228,&#x2F;&#x2F; limit 用来指定图片的大小，单位是字节（byte）只有 ≤ limit 大小的图片，才会被转为 base64 格式的图片
+            outputPath: &#39;image&#39;,  
+          &#125;,
+        &#125;,
+      &#125;,
+    ]
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><strong>合并分支</strong>功能分支的代码开发测试完毕之后，可以使用如下的命令，将完成后的代码合并到 master 主分支上：</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;首先切换到master分支
- git checkout master
-&#x2F;&#x2F; 在master分支上运行如下命令
- git merge login<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>打包处理js 文件中的高级语法</strong><br>webpack 只能打包处理一部分高级的 JavaScript 语法。对于那些 webpack 无法处理的高级 js 语法，需要借<br>助于 babel-loader 进行打包处理。例如 webpack 无法处理下面的 JavaScript 代码：<br>安装 babel-loader 相关的包：<code>npm i babel-loader@8.2.1 @babel/core@7.12.3 @babel/plugin-proposal-class-properties@7.12.1 -D</code><br>配置：在 webpack.config.js 的 module -&gt; rules 数组中，添加 loader 规则如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">&#123;
+  test: &#x2F;\.js$&#x2F;,
+  exclude: &#x2F;node_modules&#x2F;,  &#x2F;&#x2F; exclude 为排除项，不需要处理标注的文件
+  use: &#123;
+    loader: &#39;babel-loader&#39;,
+    options: &#123;
+      plugins: [&#39;@babel&#x2F;plugin-proposal-class-properties&#39;],
+    &#125;,
+  &#125;,
+&#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p><strong>删除分支</strong>当把功能分支的代码合并到 master 主分支上以后，就可以使用如下的命令，删除对应的功能分支：</p>
-<pre class="line-numbers language-none"><code class="language-none">git branch -d 分支名称<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>打包发布</strong><br>项目开发完成之后，使用 webpack 对项目进行打包发布的主要原因有以下两点：<br>① 开发环境下，打包生成的文件存放于内存中，无法获取到最终打包生成的文件<br>② 开发环境下，打包生成的文件不会进行代码压缩和性能优化<br>为了让项目能够在生产环境中高性能的运行，因此需要对项目进行打包发布<br>配置webpack 的打包发布：在 package.json 文件的 scripts 节点下，新增 build 命令如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">&quot;scripts&quot;: &#123;
+  &quot;dev&quot;: &quot;webpack serve&quot;,
+  &#x2F;&#x2F; --model 是一个参数项，用来指定 webpack 的运行模式。production 代表生产环境，会对打包生成的文件进行代码压缩和性能优化。通过 --model 指定的参数项，会覆盖 webpack.config.js 中的 model 选项。
+  &quot;build&quot;: &quot;webpack --mode production&quot;
+&#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>③ 把 JavaScript 文件统一生成到 js 目录中<br>④ 把图片文件统一生成到 image 目录中<br>⑤ 自动清理 dist 目录下的旧文件：为了在每次打包发布时自动清理掉 dist 目录中的旧文件，可以安装并配置 clean-webpack-plugin 插件：<code>npm i clean-webpack-plugin@3.0.0 -D</code></p>
+<pre class="line-numbers language-none"><code class="language-none">const &#123; CleanWebpackPlugin &#125; &#x3D; require(&#39;clean-webpack-plugin&#39;)
+const cleanPlugin &#x3D; new CleanWebpackPlugin()
+plugins: [htmlPlugin, cleanPlugin], <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p><strong>遇到冲突时的分支合并</strong>如果在两个不同的分支中，对同一个文件进行了不同的修改，Git 就没法干净的合并它们。 此时，我们需要打开这些包含冲突的文件然后手动解决冲突，再提交文件就可以了</p>
-<h2 id="远程分支操作"><a href="#远程分支操作" class="headerlink" title="远程分支操作"></a>远程分支操作</h2><p><strong>将本地分支推送到远程仓库</strong> 如果是第一次将本地分支推送到远程仓库，需要运行如下的命令：(第一次推送分支需要带 -u 参数，此后可以直接使用 git push 推送代码到远程分支。)</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;-U表示把本地分支和远程分支进行关联，只在第一次推送的时候需要带-u参数
-  git push -u远程仓库的别名本地分支名称:远程分支名称
-&#x2F;&#x2F;实际案例:
-  git push -U origin payment :pay
-&#x2F;&#x2F;如果希望远程分支的名称和本地分支名称保持一致，可以对命令进行简化:
-   git push -U origin payment<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>查看远程仓库中所有的分支列表</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">git remote show 远程仓库名称<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><strong>跟踪分支</strong>  跟踪分支指的是：从远程仓库中，把远程分支下载到本地仓库中</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;从远程仓库中，把对应的远程分支下载到本地仓库，保持本地分支和远程分支名称相同
-  git checkout 远程分支的名称
-&#x2F;&#x2F;示例:
-  git checkout pay
-&#x2F;&#x2F;从远程仓库中，把对应的远程分支下载到本地仓库，并把下载的本地分支进行重命名
-  git checkout -b本地分支名称远程仓库名称&#x2F;远程分支名称
-&#x2F;&#x2F;示例:
-  git checkout -b payment origin&#x2F;pay<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>拉取远程分支的最新的代码</strong>可以使用如下的命令，把远程分支最新的代码下载到本地对应的分支中</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;从远程仓库，拉取当前分支最新的代码，保持当前分支的代码和远程分支代码一致
-   git pull<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><strong>删除远程分支</strong>  删除远程仓库中指定的分支</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;删除远程仓库中，指定名称的远程分支
-  git push 远程仓库名称--delete 远程分支名称
-&#x2F;&#x2F;示例:
-  git push origin--delete pay   <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="Source-Map"><a href="#Source-Map" class="headerlink" title="Source Map"></a>Source Map</h3><p>Source Map 就是一个信息文件，里面储存着位置信息。也就是说，Source Map 文件中存储着代码压缩混淆前后的对应关系。有了它，出错的时候，除错工具将直接显示原始代码，而不是转换后的代码，能够极大的方便后期的调试。<br>**默认 Source Map 的问题:**开发环境下默认生成的 Source Map，记录的是生成后的代码的位置。会导致运行时报错的行数与源代码的行数不一致的问题。<br>**解决默认 Source Map 的问题:**开发环境下，推荐在 webpack.config.js 中添加如下的配置，即可保证运行时报错的行数与源代码的行数保持一致</p>
+<pre class="line-numbers language-none"><code class="language-none">module.exports&#x3D;&#123;
+  &#x2F;&#x2F; eval-source-map 仅限在开发模式下使用
+  &#x2F;&#x2F; devtool: &#39;eval-source-map&#39;,
+  &#x2F;&#x2F; 生产环境下，建议关闭 SourceMap 或将 devtool 的值设置为 nosources-source-map
+  &#x2F;&#x2F; devtool: &#39;nosources-source-map&#39;,只想定位报错的具体行数，且不想暴露源码
+  &#x2F;&#x2F; devtool: &#39;source-map&#39;,想在定位报错行数的同时，展示具体报错的源码
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h1 id="Github的搜索说明"><a href="#Github的搜索说明" class="headerlink" title="Github的搜索说明"></a>Github的搜索说明</h1><pre class="line-numbers language-none"><code class="language-none">in:name xxx  名称条件
-in:name xxx xxx 多个名称条件
-stars:&gt;xxx 点赞大于xxx的条件
-in:readme xxx 搜索readme里的内容
-fork:&gt;xxx， 按照项目fork数量，大于xxx的
-size:&gt;&#x3D;xxx,  项目大小，单位是kb
-pushed:&gt;2022-01-01, 按照最后更新的时间
-language:xxx  项目使用的开发语言
-user:xxx,   按作者名字进行搜索
-in:description xxx   按照项目描述description 搜索  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>Source Map 的最佳实践:</strong><br>① 开发环境下：</p>
+<ul>
+<li>建议把 devtool 的值设置为 eval-source-map</li>
+<li>好处：可以精准定位到具体的错误行<br>② 生产环境下：</li>
+<li>建议关闭 Source Map 或将 devtool 的值设置为 nosources-source-map</li>
+<li>好处：防止源码泄露，提高网站的安全性</li>
+</ul>
+
                 
             </div>
             <hr/>
@@ -765,7 +794,7 @@ in:description xxx   按照项目描述description 搜索  <span aria-hidden="tr
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://zhezhe0723.github.io/2022/03/01/github-de-shi-yong/">http://zhezhe0723.github.io/2022/03/01/github-de-shi-yong/</a>
+                    <a href="http://zhezhe0723.github.io/2022/06/01/qian-duan-gong-cheng-hua-yu-webpack/">http://zhezhe0723.github.io/2022/06/01/qian-duan-gong-cheng-hua-yu-webpack/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -802,11 +831,7 @@ in:description xxx   按照项目描述description 搜索  <span aria-hidden="tr
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/Github%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
-                                    <span class="chip bg-color">Github的基本使用</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -978,49 +1003,39 @@ in:description xxx   按照项目描述description 搜索  <span aria-hidden="tr
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/03/04/nodejs-ji-chu/">
+                <a href="/2022/06/01/qian-duan-gong-cheng-hua-yu-webpack/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="NodeJs基础">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="前端工程化与webpack">
                         
-                        <span class="card-title">NodeJs基础</span>
+                        <span class="card-title">前端工程化与webpack</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            初始Node.js什么是Node.jsNode.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js 的官网地址： https://nodejs.org/zh-cn/
+                            
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-04
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-01
+                            </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92/" class="post-category">
-                                    前后端交互
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            哲哲
                             
                         </span>
                     </div>
                 </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Node/">
-                        <span class="chip bg-color">Node</span>
-                    </a>
-                    
-                </div>
+
                 
             </div>
         </div>
@@ -1031,32 +1046,31 @@ in:description xxx   按照项目描述description 搜索  <span aria-hidden="tr
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/01/git-ji-chu/">
+                <a href="/2022/04/05/vue-ji-chu-ru-men-er/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="git基础">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="Vue基础入门(二)">
                         
-                        <span class="card-title">git基础</span>
+                        <span class="card-title">Vue基础入门(二)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            版本控制软件版本控制软件是一个用来记录文件变化，以便将来查阅特定版本修订情况的系统，因此有时也叫做版本控制系统。
-版本控制系统的分类：本地版本控制系统；集中化的版本控制系统；分布式版本控制系统。现在主要使用分布式版本控制系统，前面两种已经淘
+                            
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-04-05
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" class="post-category">
-                                    Git版本控制
+                            <a href="/categories/Vue%E7%9A%84%E7%9B%B8%E5%85%B3%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="post-category">
+                                    Vue的相关基础知识
                                 </a>
                             
                             
@@ -1066,8 +1080,8 @@ in:description xxx   按照项目描述description 搜索  <span aria-hidden="tr
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Git%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E4%BD%BF%E7%94%A8/">
-                        <span class="chip bg-color">Git基础命令使用</span>
+                    <a href="/tags/Vue/">
+                        <span class="chip bg-color">Vue</span>
                     </a>
                     
                 </div>
