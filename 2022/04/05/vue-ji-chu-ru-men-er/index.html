@@ -914,7 +914,7 @@ Vue<span class="token punctuation">.</span><span class="token function">componen
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="4-6-组件之间的样式冲突问题"><a href="#4-6-组件之间的样式冲突问题" class="headerlink" title="4.6 组件之间的样式冲突问题"></a>4.6 组件之间的样式冲突问题</h3>默认情况下，写在 .vue 组件中的样式会全局生效，因此很容易造成多个组件之间的样式冲突问题。<br>导致组件之间样式冲突的根本原因是：<br>① 单页面应用程序中，所有组件的 DOM 结构，都是基于唯一的 index.html 页面进行呈现的<br>② 每个组件中的样式，都会影响整个 index.html 页面中的 DOM 元素</li>
 <li>style 节点的 scoped 属性<br>  为了提高开发效率和开发体验，vue 为 style 节点提供了 scoped 属性，从而防止组件之间的样式冲突问题：</li>
-<li>&#x2F;deep&#x2F; 样式穿透<br>  如果给当前组件的 style 节点添加了 scoped 属性，则当前组件的样式对其子组件是不生效的。如果想让某些样式对子组件生效，可以使用 &#x2F;deep&#x2F; 深度选择器</li>
+<li>&#x2F;deep&#x2F; 样式穿透<br>  如果给当前组件的 style 节点添加了 scoped 属性，则当前组件的样式对其子组件是不生效的。如果想让某些样式对子组件生效，可以使用 &#x2F;deep&#x2F; 深度选择器；**&#x2F;deep&#x2F;是vue2.x中使用的，在vue3.x中推荐使用 :deep() 替代 &#x2F;deep&#x2F;**</li>
 </ol>
 <h2 id="5-组件的生命周期"><a href="#5-组件的生命周期" class="headerlink" title="5. 组件的生命周期"></a>5. 组件的生命周期</h2><p>生命周期（Life Cycle）是指一个组件从创建 -&gt; 运行 -&gt; 销毁的整个阶段，强调的是一个时间段。<br>生命周期函数：是由 vue 框架提供的内置函数，会伴随着组件的生命周期，自动按次序执行。</p>
 <blockquote>
