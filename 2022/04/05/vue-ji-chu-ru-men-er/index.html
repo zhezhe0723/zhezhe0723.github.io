@@ -923,10 +923,11 @@ Vue<span class="token punctuation">.</span><span class="token function">componen
 <ol>
 <li>当组件在内存中被<strong>创建完毕</strong>之后，会自动调用 <strong>created</strong> 函数</li>
 <li>当组件被<strong>成功的渲染</strong>到页面上之后，会自动调用 <strong>mounted</strong> 函数</li>
+<li>当组件在页面中被<strong>重新渲染完毕</strong>后，运行阶段可以调用 <strong>updated</strong> 函数</li>
 <li>当组件被<strong>销毁完毕</strong>之后，会自动调用 <strong>unmounted</strong> 函数</li>
 </ol>
 <blockquote>
-<p>注意：生命周期强调的是时间段，生命周期函数强调的是时间点。<br><strong>组件生命周期函数的分类</strong><br>第一阶段：<strong>组件创建阶段：</strong> new Vue() → beforeCreate → created → beforeMount → mounted<br>第二阶段：<strong>组件运行阶段：</strong> beforeUpdate → updated<br>第三阶段：<strong>组件销毁阶段：</strong> beforeDestroy → destroyed</p>
+<p>注意：生命周期强调的是时间段，生命周期函数强调的是时间点。<br><strong>组件生命周期函数的分类</strong><br>第一阶段：<strong>组件创建阶段：</strong> new Vue() → beforeCreate → created （唯一1次：发Ajax请求初始数据）→ beforeMount → mounted（唯一1次：操作DOM元素）<br>第二阶段：<strong>组件运行阶段：</strong> beforeUpdate → updated （可以执行 0或多次）<br>第三阶段：<strong>组件销毁阶段：</strong> beforeUnmount → unmounted (唯一1次)</p>
 </blockquote>
 <h2 id="6-组件之间的数据共享"><a href="#6-组件之间的数据共享" class="headerlink" title="6. 组件之间的数据共享"></a>6. 组件之间的数据共享</h2><h3 id="6-1-组件之间的关系"><a href="#6-1-组件之间的关系" class="headerlink" title="6.1 组件之间的关系"></a>6.1 组件之间的关系</h3><p>在项目开发中，组件之间的最常见的关系分为如下两种：<br>① 父子关系<br>② 兄弟关系</p>
 <h3 id="6-2-父子组件之间的数据共享"><a href="#6-2-父子组件之间的数据共享" class="headerlink" title="6.2 父子组件之间的数据共享"></a>6.2 父子组件之间的数据共享</h3><ol>
