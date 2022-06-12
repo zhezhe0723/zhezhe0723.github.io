@@ -917,7 +917,7 @@ Vue<span class="token punctuation">.</span><span class="token function">componen
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="4-6-组件之间的样式冲突问题"><a href="#4-6-组件之间的样式冲突问题" class="headerlink" title="4.6 组件之间的样式冲突问题"></a>4.6 组件之间的样式冲突问题</h3>默认情况下，写在 .vue 组件中的样式会全局生效，因此很容易造成多个组件之间的样式冲突问题。<br>导致组件之间样式冲突的根本原因是：<br>① 单页面应用程序中，所有组件的 DOM 结构，都是基于唯一的 index.html 页面进行呈现的<br>② 每个组件中的样式，都会影响整个 index.html 页面中的 DOM 元素</li>
 <li>style 节点的 scoped 属性<br> 为了提高开发效率和开发体验，vue 为 style 节点提供了 scoped 属性，从而防止组件之间的样式冲突问题：</li>
-<li>&#x2F;deep&#x2F; 样式穿透<br>如果给当前组件的 style 节点添加了 scoped 属性，则当前组件的样式对其子组件是不生效的。如果想让某些样式对子组件生效，可以使用 &#x2F;deep&#x2F; 深度选择器；**&#x2F;deep&#x2F;是vue2.x中使用的，在vue3.x中推荐使用 :deep() 替代 &#x2F;deep&#x2F;**</li>
+<li>&#x2F;deep&#x2F; 样式穿透<br>如果给当前组件的 style 节点添加了 scoped 属性，则当前组件的样式对其子组件是不生效的。如果想让某些样式对子组件生效，可以使用 &#x2F;deep&#x2F; 深度选择器；  **&#x2F;deep&#x2F;是vue2.x中使用的，在vue3.x中推荐使用 :deep() 替代 &#x2F;deep&#x2F;  **</li>
 </ol>
 <h2 id="5-组件的生命周期"><a href="#5-组件的生命周期" class="headerlink" title="5. 组件的生命周期"></a>5. 组件的生命周期</h2><p>生命周期（Life Cycle）是指一个组件从创建 -&gt; 运行 -&gt; 销毁的整个阶段，强调的是一个时间段。<br>生命周期函数：是由 vue 框架提供的内置函数，会伴随着组件的生命周期，自动按次序执行。</p>
 <ol>
@@ -936,49 +936,49 @@ Vue<span class="token punctuation">.</span><span class="token function">componen
 </ol>
 <h2 id="7-ref-引用"><a href="#7-ref-引用" class="headerlink" title="7. ref 引用"></a>7. ref 引用</h2><h3 id="7-1-ref-引用的概念"><a href="#7-1-ref-引用的概念" class="headerlink" title="7.1 ref 引用的概念"></a>7.1 ref 引用的概念</h3><p>ref 用来辅助开发者在不依赖于 jQuery 的情况下，获取 DOM 元素或组件的引用。<br>每个 vue 的组件实例上，都包含一个 $refs 对象，里面存储着对应的 DOM 元素或组件的引用。默认情况下，<br>组件的 <code>$refs</code> 指向一个空对象。</p>
 <h3 id="7-2-使用-ref-引用DOM-元素"><a href="#7-2-使用-ref-引用DOM-元素" class="headerlink" title="7.2 使用 ref 引用DOM 元素"></a>7.2 使用 ref 引用DOM 元素</h3><p>如果想要使用 ref 引用页面上的 DOM 元素，则可以按照如下的方式进行操作</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;使用 ref 属性，为对应的DOM 添加引用名称
-&lt;h3 ref&#x3D;&quot;myh3&quot;&gt;MyRef 组件 &lt;&#x2F;h3&gt;
-&lt;button @click&#x3D;&quot;getRef&quot;&gt;获取 $refs 引用&lt;&#x2F;button&gt;
-methods:&#123;
-  getRef()&#123;
-    &#x2F;&#x2F;通过 this.$refs.引用的名称  可以获取到 DOM 元素的引用
-    console.log(this.$refs.myh3)
-    &#x2F;&#x2F;操作 DOM 元素，把文本颜色改为红色
-    this.$refs.myh3.style.color&#x3D;&#39;red&#39;
-  &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">//使用 ref 属性，为对应的DOM 添加引用名称</span>
+<span class="token operator">&lt;</span>h3 ref<span class="token operator">=</span><span class="token string">"myh3"</span><span class="token operator">></span>MyRef 组件 <span class="token operator">&lt;</span><span class="token operator">/</span>h3<span class="token operator">></span>
+<span class="token operator">&lt;</span>button @click<span class="token operator">=</span><span class="token string">"getRef"</span><span class="token operator">></span>获取 $refs 引用<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+<span class="token literal-property property">methods</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
+  <span class="token function">getRef</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token comment">//通过 this.$refs.引用的名称  可以获取到 DOM 元素的引用</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>myh3<span class="token punctuation">)</span>
+    <span class="token comment">//操作 DOM 元素，把文本颜色改为红色</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>myh3<span class="token punctuation">.</span>style<span class="token punctuation">.</span>color<span class="token operator">=</span><span class="token string">'red'</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="7-3-使用-ref-引用组件实例"><a href="#7-3-使用-ref-引用组件实例" class="headerlink" title="7.3 使用 ref 引用组件实例"></a>7.3 使用 ref 引用组件实例</h3><p>如果想要使用 ref 引用页面上的组件实例，则可以按照如下的方式进行操作</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;使用 ref 属性，为对应的组件添加引用名称
-&lt;my-counter ref&#x3D;&quot;counterRef&quot;&gt;&lt;&#x2F;my-counter&gt;
-&lt;button @click&#x3D;&quot;getRef&quot;&gt;获取 $refs 引用&lt;&#x2F;button&gt;
-methods:&#123;
-  getRef()&#123;
-    &#x2F;&#x2F;通过 this.$refs.引用的名称 可以引用组件的实例
-    console.log(this.$refs.counterRef)
-    &#x2F;&#x2F;引用到组件的实例后， 就可以调用组件上的methods方法
-    this.$refs.counterRef.add()
-  &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">//使用 ref 属性，为对应的组件添加引用名称</span>
+<span class="token operator">&lt;</span>my<span class="token operator">-</span>counter ref<span class="token operator">=</span><span class="token string">"counterRef"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>my<span class="token operator">-</span>counter<span class="token operator">></span>
+<span class="token operator">&lt;</span>button @click<span class="token operator">=</span><span class="token string">"getRef"</span><span class="token operator">></span>获取 $refs 引用<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+<span class="token literal-property property">methods</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
+  <span class="token function">getRef</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token comment">//通过 this.$refs.引用的名称 可以引用组件的实例</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>counterRef<span class="token punctuation">)</span>
+    <span class="token comment">//引用到组件的实例后， 就可以调用组件上的methods方法</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>counterRef<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="7-4-控制文本框和按钮的按需切换"><a href="#7-4-控制文本框和按钮的按需切换" class="headerlink" title="7.4 控制文本框和按钮的按需切换"></a>7.4 控制文本框和按钮的按需切换</h3><p>通过布尔值 inputVisible 来控制组件中的文本框与按钮的按需切换。示例代码如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">&lt;template&gt;
-  &lt;input type&#x3D;&quot;text&quot; v-if&#x3D;&quot;inputvisible&quot;&gt;
-  &lt;button v-else @click&#x3D;&quot;showInput&quot;&gt;展示input输入框&lt;&#x2F;button&gt;
-&lt;&#x2F;template&gt;
-------------------------
-&lt;script&gt;
-export default &#123;
-  data() &#123;
-    return &#123;
-    &#x2F;&#x2F;控制文本框和按钮的按需切换inputVisible: false,
-    &#125;
-  &#125;,
-  methods : &#123;
-    showInput( &#123; &#x2F;&#x2F;切换布尔值，显示文本框
-      this.inputVisible &#x3D; true
-    &#125;,
-  &#125;,
-&#125;
-&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token operator">&lt;</span>template<span class="token operator">></span>
+  <span class="token operator">&lt;</span>input type<span class="token operator">=</span><span class="token string">"text"</span> v<span class="token operator">-</span><span class="token keyword">if</span><span class="token operator">=</span><span class="token string">"inputvisible"</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span>button v<span class="token operator">-</span><span class="token keyword">else</span> @click<span class="token operator">=</span><span class="token string">"showInput"</span><span class="token operator">></span>展示input输入框<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+<span class="token operator">&lt;</span>script<span class="token operator">></span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">//控制文本框和按钮的按需切换inputVisible: false,</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">methods</span> <span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">showInput</span><span class="token punctuation">(</span> <span class="token punctuation">&#123;</span> <span class="token comment">//切换布尔值，显示文本框</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>inputVisible <span class="token operator">=</span> <span class="token boolean">true</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="7-5-让文本框自动获得焦点"><a href="#7-5-让文本框自动获得焦点" class="headerlink" title="7.5 让文本框自动获得焦点"></a>7.5 让文本框自动获得焦点</h3><blockquote>
 <p>当文本框展示出来之后，如果希望它立即获得焦点，则可以为其添加 ref 引用，并调用原生 DOM 对象的<br>.focus() 方法即可。</p>
 </blockquote>
