@@ -112,6 +112,118 @@ module.exports &#x3D; router<span aria-hidden="true" class="line-numbers-rows"><
       </tags>
   </entry>
   <entry>
+    <title>Github的使用</title>
+    <url>/2022/03/01/github-de-shi-yong/</url>
+    <content><![CDATA[<h1 id="开源项目托管平台"><a href="#开源项目托管平台" class="headerlink" title="开源项目托管平台"></a>开源项目托管平台</h1><p>专门用于免费存放开源项目源代码的网站，叫做开源项目托管平台。目前世界上比较出名的开源项目托管平台<br>主要有以下 3 个：</p>
+<ul>
+<li>Github（全球最牛的开源项目托管平台，没有之一）</li>
+<li>Gitlab（对代码私有性支持较好，因此企业用户较多）</li>
+<li>Gitee（又叫做码云，是国产的开源项目托管平台。访问速度快、纯中文界面、使用友好）<span id="more"></span></li>
+</ul>
+<h1 id="Github的使用"><a href="#Github的使用" class="headerlink" title="Github的使用"></a>Github的使用</h1><h2 id="注册Github账号"><a href="#注册Github账号" class="headerlink" title="注册Github账号"></a>注册Github账号</h2><p>① 访问 Github 的官网首页 <a href="https://github.com/">https://github.com/</a><br>② 点击“Sign up”按钮跳转到注册页面<br>③ 填写可用的用户名、邮箱、密码<br>④ 通过点击箭头的形式，将验证图片摆正<br>⑤ 点击“Create account”按钮注册新用户<br>⑥ 登录到第三步填写的邮箱中，点击激活链接，完成注册</p>
+<h2 id="远程仓库的使用"><a href="#远程仓库的使用" class="headerlink" title="远程仓库的使用"></a>远程仓库的使用</h2><h3 id="远程仓库的两种访问方式"><a href="#远程仓库的两种访问方式" class="headerlink" title="远程仓库的两种访问方式"></a>远程仓库的两种访问方式</h3><p>Github 上的远程仓库，有两种访问方式，分别是 HTTPS 和 SSH。它们的区别是：<br>① HTTPS：零配置；但是每次访问仓库时，需要重复输入 Github 的账号和密码才能访问成功<br>② SSH：需要进行额外的配置；但是配置成功后，每次访问仓库时，不需重复输入 Github 的账号和密码<br>注意：在实际开发中，推荐使用 SSH 的方式访问远程仓库</p>
+<h3 id="基于HTTPS将本地仓库上传到Github"><a href="#基于HTTPS将本地仓库上传到Github" class="headerlink" title="基于HTTPS将本地仓库上传到Github"></a>基于HTTPS将本地仓库上传到Github</h3><p>第一种情况：本地没有现成的Git仓库</p>
+<ol>
+<li>使用终端命令创建README.md文档，并写入初始内容为project_02<pre class="line-numbers language-none"><code class="language-none">echo &quot;# project_02&quot; &gt;&gt; README.md<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>初始化本地Git仓库，并将文件的修改提交到本地的Git仓库中<pre class="line-numbers language-none"><code class="language-none">git init 
+git add README.md
+git commit -m &quot;第一次提交&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+<li>将本地仓库和远程仓库进行关联，并把远程仓库命名为origin<pre class="line-numbers language-none"><code class="language-none">git remote add origin https:&#x2F;&#x2F;github.com&#x2F;用户名&#x2F;project_02.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>将本地仓库中的内容推送到远程的origin 仓库中<pre class="line-numbers language-none"><code class="language-none">git push -u origin master&#96;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+第二种情况：本地有现成的Git仓库</li>
+<li>将本地仓库和远程仓库进行关联，并把远程仓库命名为origin<pre class="line-numbers language-none"><code class="language-none">git remote add origin https:&#x2F;&#x2F;github.com&#x2F;用户名&#x2F;project_02.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>将本地仓库中的内容推送到远程的origin 仓库中<pre class="line-numbers language-none"><code class="language-none">git push -u origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+(只有第一次推送内容需要-u origin master，往后都不用了)<h2 id="SSH-key"><a href="#SSH-key" class="headerlink" title="SSH key"></a>SSH key</h2></li>
+</ol>
+<p><strong>SSH key介绍</strong><br>SSH key 的作用：实现本地仓库和 Github 之间免登录的加密数据传输。<br>SSH key 的好处：免登录身份认证、数据加密传输。<br>SSH key 由两部分组成，分别是：<br>① id_rsa（私钥文件，存放于客户端的电脑中即可）<br>② id_rsa.pub（公钥文件，需要配置到 Github 中）<br><strong>生成SSH key</strong></p>
+<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#x79;&#x6f;&#117;&#114;&#95;&#101;&#109;&#x61;&#105;&#108;&#64;&#x65;&#x78;&#x61;&#x6d;&#112;&#108;&#x65;&#x2e;&#99;&#111;&#109;">&#x79;&#x6f;&#117;&#114;&#95;&#101;&#109;&#x61;&#105;&#108;&#64;&#x65;&#x78;&#x61;&#x6d;&#112;&#108;&#x65;&#x2e;&#99;&#111;&#109;</a> 替换为注册 Github 账号时填写的邮箱：</p>
+<pre class="line-numbers language-none"><code class="language-none">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>③ 连续敲击 3 次回车，即可在 C:\Users\用户名文件夹.ssh 目录中生成 id_rsa 和 id_rsa.pub 两个文件</p>
+<p><strong>配置SSH key</strong><br>① 使用记事本打开 id_rsa.pub 文件，复制里面的文本内容<br>② 在浏览器中登录 Github，点击头像 -&gt; Settings -&gt; SSH and GPG Keys -&gt; New SSH key<br>③ 将 id_rsa.pub 文件中的内容，粘贴到 Key 对应的文本框中<br>④ 在 Title 文本框中任意填写一个名称，来标识这个 Key 从何而来</p>
+<p><strong>检测SSH key</strong>　</p>
+<p>打开 Git Bash，输入如下的命令并回车执行：</p>
+<pre><code>   git -T git@github.com
+　
+</code></pre>
+<p>出现用户名证明已经配置成功</p>
+<h3 id="基于SSH将本地仓库上传到Github"><a href="#基于SSH将本地仓库上传到Github" class="headerlink" title="基于SSH将本地仓库上传到Github"></a>基于SSH将本地仓库上传到Github</h3><p>将本地仓库和远程仓库进行关联，并把远程仓库命名为origin</p>
+<pre class="line-numbers language-none"><code class="language-none">git remote add origin git@github.com:用户名&#x2F;project_02.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>将本地仓库中的内容推送到远程的origin 仓库中</p>
+<pre class="line-numbers language-none"><code class="language-none">git push -u origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p> 将远程仓库克隆到本地</p>
+<pre class="line-numbers language-none"><code class="language-none">git clone 远程仓库的地址<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h1 id="Git分支"><a href="#Git分支" class="headerlink" title="Git分支"></a>Git分支</h1><p>——在进行多人协作开发的时候，为了防止互相干扰，提高协同开发的体验，建议每个开发者都基于分支进行项目功能的开发</p>
+<h2 id="本地分支操作"><a href="#本地分支操作" class="headerlink" title="本地分支操作"></a>本地分支操作</h2><p><strong>查看分支列表</strong>使用如下的命令，可以查看当前 Git 仓库中所有的分支列表：</p>
+<pre class="line-numbers language-none"><code class="language-none">git branch &#x2F;&#x2F;分支名字前面的 * 号表示当前所处的分支。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>创建分支列表</strong>使用如下的命令，可以基于当前分支，创建一个新的分支，此时，新分支中的代码和当前分支完全一样：</p>
+<pre class="line-numbers language-none"><code class="language-none">git branch 分支名称<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>切换分支</strong>使用如下的命令，可以切换到指定的分支上进行开发</p>
+<pre class="line-numbers language-none"><code class="language-none">git checkout login<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>分支的快速创建和切换</strong>使用如下的命令，可以创建指定名称的新分支，并立即切换到新分支上：</p>
+<pre class="line-numbers language-none"><code class="language-none">git checkout -b 分支名称
+&#x2F;&#x2F;-b 表示创建一个新分支
+&#x2F;&#x2F;checkout 表示切换到刚才创建的新分支上<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>合并分支</strong>功能分支的代码开发测试完毕之后，可以使用如下的命令，将完成后的代码合并到 master 主分支上：</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;首先切换到master分支
+ git checkout master
+&#x2F;&#x2F; 在master分支上运行如下命令
+ git merge login<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>删除分支</strong>当把功能分支的代码合并到 master 主分支上以后，就可以使用如下的命令，删除对应的功能分支：</p>
+<pre class="line-numbers language-none"><code class="language-none">git branch -d 分支名称<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>遇到冲突时的分支合并</strong>如果在两个不同的分支中，对同一个文件进行了不同的修改，Git 就没法干净的合并它们。 此时，我们需要打开这些包含冲突的文件然后手动解决冲突，再提交文件就可以了</p>
+<h2 id="远程分支操作"><a href="#远程分支操作" class="headerlink" title="远程分支操作"></a>远程分支操作</h2><p><strong>将本地分支推送到远程仓库</strong> 如果是第一次将本地分支推送到远程仓库，需要运行如下的命令：(第一次推送分支需要带 -u 参数，此后可以直接使用 git push 推送代码到远程分支。)</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;-U表示把本地分支和远程分支进行关联，只在第一次推送的时候需要带-u参数
+  git push -u远程仓库的别名本地分支名称:远程分支名称
+&#x2F;&#x2F;实际案例:
+  git push -U origin payment :pay
+&#x2F;&#x2F;如果希望远程分支的名称和本地分支名称保持一致，可以对命令进行简化:
+   git push -U origin payment<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>查看远程仓库中所有的分支列表</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">git remote show 远程仓库名称<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>跟踪分支</strong>  跟踪分支指的是：从远程仓库中，把远程分支下载到本地仓库中</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;从远程仓库中，把对应的远程分支下载到本地仓库，保持本地分支和远程分支名称相同
+  git checkout 远程分支的名称
+&#x2F;&#x2F;示例:
+  git checkout pay
+&#x2F;&#x2F;从远程仓库中，把对应的远程分支下载到本地仓库，并把下载的本地分支进行重命名
+  git checkout -b本地分支名称远程仓库名称&#x2F;远程分支名称
+&#x2F;&#x2F;示例:
+  git checkout -b payment origin&#x2F;pay<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>拉取远程分支的最新的代码</strong>可以使用如下的命令，把远程分支最新的代码下载到本地对应的分支中</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;从远程仓库，拉取当前分支最新的代码，保持当前分支的代码和远程分支代码一致
+   git pull<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><strong>删除远程分支</strong>  删除远程仓库中指定的分支</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;删除远程仓库中，指定名称的远程分支
+  git push 远程仓库名称--delete 远程分支名称
+&#x2F;&#x2F;示例:
+  git push origin--delete pay   <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="Github的搜索说明"><a href="#Github的搜索说明" class="headerlink" title="Github的搜索说明"></a>Github的搜索说明</h1><pre class="line-numbers language-none"><code class="language-none">in:name xxx  名称条件
+in:name xxx xxx 多个名称条件
+stars:&gt;xxx 点赞大于xxx的条件
+in:readme xxx 搜索readme里的内容
+fork:&gt;xxx， 按照项目fork数量，大于xxx的
+size:&gt;&#x3D;xxx,  项目大小，单位是kb
+pushed:&gt;2022-01-01, 按照最后更新的时间
+language:xxx  项目使用的开发语言
+user:xxx,   按作者名字进行搜索
+in:description xxx   按照项目描述description 搜索  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>Github</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>HTTP协议</title>
     <url>/2022/02/28/http-xie-yi/</url>
     <content><![CDATA[<h1 id="HTTP协议简介"><a href="#HTTP协议简介" class="headerlink" title="HTTP协议简介"></a>HTTP协议简介</h1><h2 id="什么是通信"><a href="#什么是通信" class="headerlink" title="什么是通信"></a>什么是通信</h2><p>——通信就是信息的传递和交换</p>
@@ -302,118 +414,6 @@ module.exports &#x3D; router<span aria-hidden="true" class="line-numbers-rows"><
       </tags>
   </entry>
   <entry>
-    <title>Github的使用</title>
-    <url>/2022/03/01/github-de-shi-yong/</url>
-    <content><![CDATA[<h1 id="开源项目托管平台"><a href="#开源项目托管平台" class="headerlink" title="开源项目托管平台"></a>开源项目托管平台</h1><p>专门用于免费存放开源项目源代码的网站，叫做开源项目托管平台。目前世界上比较出名的开源项目托管平台<br>主要有以下 3 个：</p>
-<ul>
-<li>Github（全球最牛的开源项目托管平台，没有之一）</li>
-<li>Gitlab（对代码私有性支持较好，因此企业用户较多）</li>
-<li>Gitee（又叫做码云，是国产的开源项目托管平台。访问速度快、纯中文界面、使用友好）<span id="more"></span></li>
-</ul>
-<h1 id="Github的使用"><a href="#Github的使用" class="headerlink" title="Github的使用"></a>Github的使用</h1><h2 id="注册Github账号"><a href="#注册Github账号" class="headerlink" title="注册Github账号"></a>注册Github账号</h2><p>① 访问 Github 的官网首页 <a href="https://github.com/">https://github.com/</a><br>② 点击“Sign up”按钮跳转到注册页面<br>③ 填写可用的用户名、邮箱、密码<br>④ 通过点击箭头的形式，将验证图片摆正<br>⑤ 点击“Create account”按钮注册新用户<br>⑥ 登录到第三步填写的邮箱中，点击激活链接，完成注册</p>
-<h2 id="远程仓库的使用"><a href="#远程仓库的使用" class="headerlink" title="远程仓库的使用"></a>远程仓库的使用</h2><h3 id="远程仓库的两种访问方式"><a href="#远程仓库的两种访问方式" class="headerlink" title="远程仓库的两种访问方式"></a>远程仓库的两种访问方式</h3><p>Github 上的远程仓库，有两种访问方式，分别是 HTTPS 和 SSH。它们的区别是：<br>① HTTPS：零配置；但是每次访问仓库时，需要重复输入 Github 的账号和密码才能访问成功<br>② SSH：需要进行额外的配置；但是配置成功后，每次访问仓库时，不需重复输入 Github 的账号和密码<br>注意：在实际开发中，推荐使用 SSH 的方式访问远程仓库</p>
-<h3 id="基于HTTPS将本地仓库上传到Github"><a href="#基于HTTPS将本地仓库上传到Github" class="headerlink" title="基于HTTPS将本地仓库上传到Github"></a>基于HTTPS将本地仓库上传到Github</h3><p>第一种情况：本地没有现成的Git仓库</p>
-<ol>
-<li>使用终端命令创建README.md文档，并写入初始内容为project_02<pre class="line-numbers language-none"><code class="language-none">echo &quot;# project_02&quot; &gt;&gt; README.md<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>初始化本地Git仓库，并将文件的修改提交到本地的Git仓库中<pre class="line-numbers language-none"><code class="language-none">git init 
-git add README.md
-git commit -m &quot;第一次提交&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
-<li>将本地仓库和远程仓库进行关联，并把远程仓库命名为origin<pre class="line-numbers language-none"><code class="language-none">git remote add origin https:&#x2F;&#x2F;github.com&#x2F;用户名&#x2F;project_02.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>将本地仓库中的内容推送到远程的origin 仓库中<pre class="line-numbers language-none"><code class="language-none">git push -u origin master&#96;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-第二种情况：本地有现成的Git仓库</li>
-<li>将本地仓库和远程仓库进行关联，并把远程仓库命名为origin<pre class="line-numbers language-none"><code class="language-none">git remote add origin https:&#x2F;&#x2F;github.com&#x2F;用户名&#x2F;project_02.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>将本地仓库中的内容推送到远程的origin 仓库中<pre class="line-numbers language-none"><code class="language-none">git push -u origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-(只有第一次推送内容需要-u origin master，往后都不用了)<h2 id="SSH-key"><a href="#SSH-key" class="headerlink" title="SSH key"></a>SSH key</h2></li>
-</ol>
-<p><strong>SSH key介绍</strong><br>SSH key 的作用：实现本地仓库和 Github 之间免登录的加密数据传输。<br>SSH key 的好处：免登录身份认证、数据加密传输。<br>SSH key 由两部分组成，分别是：<br>① id_rsa（私钥文件，存放于客户端的电脑中即可）<br>② id_rsa.pub（公钥文件，需要配置到 Github 中）<br><strong>生成SSH key</strong></p>
-<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#121;&#111;&#x75;&#114;&#95;&#101;&#109;&#x61;&#x69;&#108;&#x40;&#x65;&#120;&#97;&#109;&#x70;&#108;&#101;&#46;&#x63;&#x6f;&#x6d;">&#121;&#111;&#x75;&#114;&#95;&#101;&#109;&#x61;&#x69;&#108;&#x40;&#x65;&#120;&#97;&#109;&#x70;&#108;&#101;&#46;&#x63;&#x6f;&#x6d;</a> 替换为注册 Github 账号时填写的邮箱：</p>
-<pre class="line-numbers language-none"><code class="language-none">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>③ 连续敲击 3 次回车，即可在 C:\Users\用户名文件夹.ssh 目录中生成 id_rsa 和 id_rsa.pub 两个文件</p>
-<p><strong>配置SSH key</strong><br>① 使用记事本打开 id_rsa.pub 文件，复制里面的文本内容<br>② 在浏览器中登录 Github，点击头像 -&gt; Settings -&gt; SSH and GPG Keys -&gt; New SSH key<br>③ 将 id_rsa.pub 文件中的内容，粘贴到 Key 对应的文本框中<br>④ 在 Title 文本框中任意填写一个名称，来标识这个 Key 从何而来</p>
-<p><strong>检测SSH key</strong>　</p>
-<p>打开 Git Bash，输入如下的命令并回车执行：</p>
-<pre><code>   git -T git@github.com
-　
-</code></pre>
-<p>出现用户名证明已经配置成功</p>
-<h3 id="基于SSH将本地仓库上传到Github"><a href="#基于SSH将本地仓库上传到Github" class="headerlink" title="基于SSH将本地仓库上传到Github"></a>基于SSH将本地仓库上传到Github</h3><p>将本地仓库和远程仓库进行关联，并把远程仓库命名为origin</p>
-<pre class="line-numbers language-none"><code class="language-none">git remote add origin git@github.com:用户名&#x2F;project_02.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>将本地仓库中的内容推送到远程的origin 仓库中</p>
-<pre class="line-numbers language-none"><code class="language-none">git push -u origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p> 将远程仓库克隆到本地</p>
-<pre class="line-numbers language-none"><code class="language-none">git clone 远程仓库的地址<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h1 id="Git分支"><a href="#Git分支" class="headerlink" title="Git分支"></a>Git分支</h1><p>——在进行多人协作开发的时候，为了防止互相干扰，提高协同开发的体验，建议每个开发者都基于分支进行项目功能的开发</p>
-<h2 id="本地分支操作"><a href="#本地分支操作" class="headerlink" title="本地分支操作"></a>本地分支操作</h2><p><strong>查看分支列表</strong>使用如下的命令，可以查看当前 Git 仓库中所有的分支列表：</p>
-<pre class="line-numbers language-none"><code class="language-none">git branch &#x2F;&#x2F;分支名字前面的 * 号表示当前所处的分支。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><strong>创建分支列表</strong>使用如下的命令，可以基于当前分支，创建一个新的分支，此时，新分支中的代码和当前分支完全一样：</p>
-<pre class="line-numbers language-none"><code class="language-none">git branch 分支名称<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><strong>切换分支</strong>使用如下的命令，可以切换到指定的分支上进行开发</p>
-<pre class="line-numbers language-none"><code class="language-none">git checkout login<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><strong>分支的快速创建和切换</strong>使用如下的命令，可以创建指定名称的新分支，并立即切换到新分支上：</p>
-<pre class="line-numbers language-none"><code class="language-none">git checkout -b 分支名称
-&#x2F;&#x2F;-b 表示创建一个新分支
-&#x2F;&#x2F;checkout 表示切换到刚才创建的新分支上<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>合并分支</strong>功能分支的代码开发测试完毕之后，可以使用如下的命令，将完成后的代码合并到 master 主分支上：</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;首先切换到master分支
- git checkout master
-&#x2F;&#x2F; 在master分支上运行如下命令
- git merge login<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>删除分支</strong>当把功能分支的代码合并到 master 主分支上以后，就可以使用如下的命令，删除对应的功能分支：</p>
-<pre class="line-numbers language-none"><code class="language-none">git branch -d 分支名称<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><strong>遇到冲突时的分支合并</strong>如果在两个不同的分支中，对同一个文件进行了不同的修改，Git 就没法干净的合并它们。 此时，我们需要打开这些包含冲突的文件然后手动解决冲突，再提交文件就可以了</p>
-<h2 id="远程分支操作"><a href="#远程分支操作" class="headerlink" title="远程分支操作"></a>远程分支操作</h2><p><strong>将本地分支推送到远程仓库</strong> 如果是第一次将本地分支推送到远程仓库，需要运行如下的命令：(第一次推送分支需要带 -u 参数，此后可以直接使用 git push 推送代码到远程分支。)</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;-U表示把本地分支和远程分支进行关联，只在第一次推送的时候需要带-u参数
-  git push -u远程仓库的别名本地分支名称:远程分支名称
-&#x2F;&#x2F;实际案例:
-  git push -U origin payment :pay
-&#x2F;&#x2F;如果希望远程分支的名称和本地分支名称保持一致，可以对命令进行简化:
-   git push -U origin payment<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>查看远程仓库中所有的分支列表</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">git remote show 远程仓库名称<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><strong>跟踪分支</strong>  跟踪分支指的是：从远程仓库中，把远程分支下载到本地仓库中</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;从远程仓库中，把对应的远程分支下载到本地仓库，保持本地分支和远程分支名称相同
-  git checkout 远程分支的名称
-&#x2F;&#x2F;示例:
-  git checkout pay
-&#x2F;&#x2F;从远程仓库中，把对应的远程分支下载到本地仓库，并把下载的本地分支进行重命名
-  git checkout -b本地分支名称远程仓库名称&#x2F;远程分支名称
-&#x2F;&#x2F;示例:
-  git checkout -b payment origin&#x2F;pay<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>拉取远程分支的最新的代码</strong>可以使用如下的命令，把远程分支最新的代码下载到本地对应的分支中</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;从远程仓库，拉取当前分支最新的代码，保持当前分支的代码和远程分支代码一致
-   git pull<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><strong>删除远程分支</strong>  删除远程仓库中指定的分支</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;删除远程仓库中，指定名称的远程分支
-  git push 远程仓库名称--delete 远程分支名称
-&#x2F;&#x2F;示例:
-  git push origin--delete pay   <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h1 id="Github的搜索说明"><a href="#Github的搜索说明" class="headerlink" title="Github的搜索说明"></a>Github的搜索说明</h1><pre class="line-numbers language-none"><code class="language-none">in:name xxx  名称条件
-in:name xxx xxx 多个名称条件
-stars:&gt;xxx 点赞大于xxx的条件
-in:readme xxx 搜索readme里的内容
-fork:&gt;xxx， 按照项目fork数量，大于xxx的
-size:&gt;&#x3D;xxx,  项目大小，单位是kb
-pushed:&gt;2022-01-01, 按照最后更新的时间
-language:xxx  项目使用的开发语言
-user:xxx,   按作者名字进行搜索
-in:description xxx   按照项目描述description 搜索  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>Github</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MarkdownPad语法</title>
     <url>/2022/02/14/markdownpad-yu-fa/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> 我之前记笔记一直用OneNote，但是年前心血来潮，就自己建了博客，想着把自己的学习心得发到博客上。但是博客算是完工了，但是写文章又成了一大难题，就自己在网上查找写博客的编辑器，发现用Markdown Pad来编写文章很方便。但是刚接触这个编辑器，其中的语法看了几次记不住，于是准备写一下Markdown Pad的写作语法。以供自己写作的时候还要在网上找（麻烦….）。<span id="more"></span></p>
@@ -558,196 +558,6 @@ const moment &#x3D; require( &#39; moment &#39; )<span aria-hidden="true" class=
       </categories>
       <tags>
         <tag>Node.js的模块化</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>NodeJs基础</title>
-    <url>/2022/03/04/nodejs-ji-chu/</url>
-    <content><![CDATA[<h1 id="初始Node-js"><a href="#初始Node-js" class="headerlink" title="初始Node.js"></a>初始Node.js</h1><h2 id="什么是Node-js"><a href="#什么是Node-js" class="headerlink" title="什么是Node.js"></a>什么是Node.js</h2><p>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。<br>Node.js 的官网地址： <a href="https://nodejs.org/zh-cn/">https://nodejs.org/zh-cn/</a></p>
-<span id="more"></span>
-
-<ul>
-<li>浏览器是 JavaScript 的前端运行环境;</li>
-<li>Node.js 是 JavaScript 的后端运行环境;</li>
-<li>Node.js 中无法调用 DOM 和 BOM 等浏览器内置 API。</li>
-</ul>
-<h2 id="Node-js-可以做什么"><a href="#Node-js-可以做什么" class="headerlink" title="Node.js 可以做什么"></a>Node.js 可以做什么</h2><p>Node.js 作为一个 JavaScript 的运行环境，仅仅提供了基础的功能和 API。然而，基于 Node.js 提供的这些基础能，很多强大的工具和框架如雨后春笋，层出不穷，所以学会了 Node.js ，可以让前端程序员胜任更多的工作和岗位：</p>
-<ul>
-<li>基于 Express 框架（<a href="http://www.expressjs.com.cn/%EF%BC%89%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA">http://www.expressjs.com.cn/），可以快速构建</a> Web 应用</li>
-<li>基于 Electron 框架（<a href="https://electronjs.org/%EF%BC%89%EF%BC%8C%E5%8F%AF%E4%BB%A5%E6%9E%84%E5%BB%BA%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8">https://electronjs.org/），可以构建跨平台的桌面应用</a></li>
-<li>基于 restify 框架（<a href="http://restify.com/%EF%BC%89%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA">http://restify.com/），可以快速构建</a> API 接口项目</li>
-<li>读写和操作数据库、创建实用的命令行工具辅助前端开发、etc…<br>总之：Node.js 是大前端时代的“大宝剑”，有了 Node.js 这个超级 buff 的加持，前端程序员的行业竞争力会越来越强！</li>
-</ul>
-<h2 id="在-Node-js-环境中执行-JavaScript-代码"><a href="#在-Node-js-环境中执行-JavaScript-代码" class="headerlink" title="在 Node.js 环境中执行 JavaScript 代码"></a>在 Node.js 环境中执行 JavaScript 代码</h2><ol>
-<li>打开终端</li>
-<li>输入node 要执行的js文件的路径</li>
-</ol>
-<h3 id="终端中的快捷键"><a href="#终端中的快捷键" class="headerlink" title="终端中的快捷键"></a>终端中的快捷键</h3><ul>
-<li>使用 ↑ 键，可以快速定位到上一次执行的命令</li>
-<li>使用 tab 键，能够快速补全路径</li>
-<li>使用 esc 键，能够快速清空当前已输入的命令</li>
-<li>输入 cls 命令，可以清空终端</li>
-</ul>
-<h1 id="fs文件系统模块"><a href="#fs文件系统模块" class="headerlink" title="fs文件系统模块"></a>fs文件系统模块</h1><h2 id="什么是-fs-文件系统模块"><a href="#什么是-fs-文件系统模块" class="headerlink" title="什么是 fs 文件系统模块"></a>什么是 fs 文件系统模块</h2><p>fs 模块是 Node.js 官方提供的、用来操作文件的模块。它提供了一系列的方法和属性，用来满足用户对文件的操作需求</p>
-<ul>
-<li>fs.readFile() 方法，用来读取指定文件中的内容</li>
-<li>fs.writeFile() 方法，用来向指定的文件中写入内容<br>如果要在 JavaScript 代码中，使用 fs 模块来操作文件，则需要使用如下的方式先导入它</li>
-</ul>
-<pre class="line-numbers language-none"><code class="language-none">const fs &#x3D; require(&#39;fs&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="fs-readFile-的语法"><a href="#fs-readFile-的语法" class="headerlink" title="fs.readFile()的语法"></a>fs.readFile()的语法</h2><p>用来读取指定文件中的内容<br><strong>格式：</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">fs.readFile(path[,options],callback)
-&#x2F;&#x2F;参数1：必选参数，字符串，表示文件的路径
-&#x2F;&#x2F;参数2：可选参数，表示以什么编码格式来读取文件
-&#x2F;&#x2F;参数3：必选参数，文件读取完成后，通过回调函数拿到读取的结果<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>示例：</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">const fs &#x3D; require( &#39;fs&#39;)
-fs. readFile(&#39; .&#x2F;files&#x2F;11.txt&#39;, &#39;utf8&#39;, function(err, dataStr) &#123;
- console.log(err )
- console. 0og(-----&#39;)
- console. log(dataStr)
-&#125;)
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>判断文件是否读取成功</strong><br>可以判断 err 对象是否为 null，从而知晓文件读取的结果：</p>
-<pre class="line-numbers language-none"><code class="language-none">const fs &#x3D; require(&#39;fs&#39;)
-fs. readFile(&#39; .&#x2F;files&#x2F;1.txt&#39;, &#39;utf8&#39;, function(err, result) &#123;
-     if (err) &#123;
-       return console. log( &#39;文件读取失败! &#39; + err . message)
-     &#125;
-     console. log( &#39;文件读取成功，内容是: + result)
-&#125;)
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="fs-writeFile-的语法"><a href="#fs-writeFile-的语法" class="headerlink" title="fs.writeFile()的语法"></a>fs.writeFile()的语法</h2><p>用来向指定的文件中写入内容<br><strong>格式：</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">fs .writeFile(file, data[, options], callback)
-&#x2F;&#x2F;参数1：必选参数，需要指定一个文件路径的字符串，表示文件的存放路径。
-&#x2F;&#x2F;参数2：必选参数，表示要写入的内容。
-&#x2F;&#x2F;参数3：可选参数，表示以什么格式写入文件内容，默认值是 utf8。
-&#x2F;&#x2F;参数4：必选参数，文件写入完成后的回调函数。
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>示例：</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">const fs &#x3D; require(&#39;fs&#39;)
-fs . writeFile(&#39; .&#x2F;files&#x2F;2.txt&#39;, &#39;Hello Node.js!&#39;, function(err) &#123;
-    console. log(err)
-&#125;)
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>判断文件是否写入成功</strong><br>可以判断 err 对象是否为 null，从而知晓文件写入的结果：</p>
-<pre class="line-numbers language-none"><code class="language-none">const fs &#x3D; require(&#39;fs&#39;)
-fs . writeFile(&#39;F:&#x2F;files&#x2F;2.txt&#39;, &#39;Hello Node.js!&#39;, function(err) &#123;
-   if (err) &#123;
-      return console.log( ‘文件写入失败!”+ err . message )
-   console. log( &#39;文件写入成功! &#39;)
- &#125;)
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h1 id="path-路径模块"><a href="#path-路径模块" class="headerlink" title="path 路径模块"></a>path 路径模块</h1><h2 id="什么是path-路径模块"><a href="#什么是path-路径模块" class="headerlink" title="什么是path 路径模块"></a>什么是path 路径模块</h2><p>path 模块是 Node.js 官方提供的、用来处理路径的模块。它提供了一系列的方法和属性，用来满足用户对路径的处理需求。</p>
-<ul>
-<li>path.join() 方法，用来将多个路径片段拼接成一个完整的路径字符串</li>
-<li>path.basename() 方法，用来从路径字符串中，将文件名解析出来</li>
-<li>path.extname() 方法，可以获取路径中的扩展名部分，<br>如果要在 JavaScript 代码中，使用 path 模块来处理路径，则需要使用如下的方式先导入它</li>
-</ul>
-<pre class="line-numbers language-none"><code class="language-none">const path &#x3D;require(&#39;path&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h2 id="path-join-的语法"><a href="#path-join-的语法" class="headerlink" title="path.join() 的语法"></a>path.join() 的语法</h2><p>用来将多个路径片段拼接成一个完整的路径字符串<br><strong>格式：</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">path.join([...paths])
-&#x2F;&#x2F;...paths&lt;string&gt;路径片段的序列
-&#x2F;&#x2F; 返回值：&lt;string&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p><strong>示例：</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">const pathStr - path. join(&#39;&#x2F;a&#39;, &#39;&#x2F;b&#x2F;c&#39;, ..&#x2F;&#39;，&#39;.&#x2F;d&#39;,&#39;e&#39;)
-console . log(pathStr) &#x2F;1输出\a\bide
-const pathStr2 &#x3D; path.
-join(_ dirname, &#39; .&#x2F;files&#x2F;1.txt&#39;)
-console . log(pathStr2) 11输出当前文件所处目录\files\1. txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="path-basename-的语法"><a href="#path-basename-的语法" class="headerlink" title="path.basename() 的语法"></a>path.basename() 的语法</h2><p>使用 path.basename() 方法，可以获取路径中的最后一部分，经常通过这个方法获取路径中的文件名</p>
-<p><strong>格式：</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">path.basename(path[,ext])
-&#x2F;&#x2F;path &lt;string&gt; 必选参数，表示一个路径的字符串
-&#x2F;&#x2F;ext &lt;string&gt; 可选参数，表示文件扩展名
-&#x2F;&#x2F;返回: &lt;string&gt; 表示路径中的最后一部分<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>示例：</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">const fpath &#x3D; &#39; &#x2F;a&#x2F;b&#x2F;c&#x2F;index.html&#39; &#x2F;&#x2F;文件的存放路径
-
-var fullName &#x3D; path . basename( fpath)
-console. log( fullName) &#x2F;&#x2F; 输出index . html
-
-var nameWi thoutExt &#x3D; path. basename( fpath, &#39; .html &#39; )
-console . logc nameWithoutExt) 1&#x2F;&#x2F; 输出index
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="path-extname-的语法"><a href="#path-extname-的语法" class="headerlink" title="path.extname() 的语法"></a>path.extname() 的语法</h2><p>使用 path.extname() 方法，可以获取路径中的扩展名部分</p>
-<p><strong>格式：</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">path.extname(path)
-&#x2F;&#x2F;path &lt;string&gt;必选参数，表示一个路径的字符串
-&#x2F;&#x2F;返回: &lt;string&gt; 返回得到的扩展名字符串
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p><strong>示例：</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">const fpath &#x3D; &#39; &#x2F;a&#x2F;b&#x2F;c&#x2F;index.html&#39; &#x2F;&#x2F;路径字符串
-const fext &#x3D; path. extname( fpath)
-console. log(fext) &#x2F;&#x2F;输出. html
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h1 id="http-模块"><a href="#http-模块" class="headerlink" title="http 模块"></a>http 模块</h1><h2 id="什么是http-模块"><a href="#什么是http-模块" class="headerlink" title="什么是http 模块"></a>什么是http 模块</h2><p>http 模块是 Node.js 官方提供的、用来创建 web 服务器的模块。通过 http 模块提供的 http.createServer() 方法，就能方便的把一台普通的电脑，变成一台 Web 服务器，从而对外提供 Web 资源服务。</p>
-<p>如果要希望使用 http 模块创建 Web 服务器，则需要先导入它</p>
-<pre class="line-numbers language-none"><code class="language-none">const http&#x3D; require(&#39;http&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h2 id="http-模块的作用"><a href="#http-模块的作用" class="headerlink" title="http 模块的作用"></a>http 模块的作用</h2><p>在 Node.js 中，我们不需要使用 IIS、Apache 等这些第三方 web 服务器软件。因为我们可以基于 Node.js 提供的 http 模块，通过几行简单的代码，就能轻松的手写一个服务器软件，从而对外提供 web 服务。</p>
-<h2 id="创建最基本的web服务器"><a href="#创建最基本的web服务器" class="headerlink" title="创建最基本的web服务器"></a>创建最基本的web服务器</h2><ol>
-<li>导入http 模块</li>
-</ol>
-<pre class="line-numbers language-none"><code class="language-none">const http&#x3D;require(&#39;http&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<ol start="2">
-<li>创建web服务器实例<br>调用 http.createServer() 方法，即可快速创建一个 web 服务器实例：<pre class="line-numbers language-none"><code class="language-none">const server&#x3D;http.createServer()<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>为服务器实例绑定 request 事件<br>为服务器实例绑定 request 事件，即可监听客户端发送过来的网络请求</li>
-</ol>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;使用服务器实例的.on() 方法，为服务器绑定个request 事件
-server . on(&#39;request&#39;，(req, res) &#x3D;&gt; &#123;
-&#x2F;&#x2F;只要有客户端来请求我们自己的服务器，就会触发request 事件，从而调用这个事件处理函数
-console. log( &#39;Someone visit our web server.&#39; )
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ol start="4">
-<li>启动服务器<br>调用服务器实例的 .listen() 方法，即可启动当前的 web 服务器实例：</li>
-</ol>
-<pre class="line-numbers language-none"><code class="language-none">   &#x2F;&#x2F;调用server.listen(端0号， cb回调)方法，即可启动web服务器
-   server .listen(80, () &#x3D;&gt; &#123;
-   console log( &#39;http server running at http:&#x2F;&#x2F;127.0.0.1&#39;)
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<ol start="5">
-<li>req请求对象<br>只要服务器接收到了客户端的请求，就会调用通过 server.on() 为服务器绑定的 request 事件处理函数。<br>如果想在事件处理函数中，访问与客户端相关的数据或属性，可以使用如下的方式：</li>
-</ol>
-<pre class="line-numbers language-none"><code class="language-none">server .on( &#39;request&#39;, (req) &gt; &#123;
-&#x2F;&#x2F; req是请求对象，它包含了与客户端相关的数据和属性，例如:
-&#x2F;&#x2F; req.url是客户端请求的URL 地址
-&#x2F;&#x2F; req.method 是客户端的method请求类型
-const str . Your request url is $&#123;req.ur1&#125;, and request method is $&#123;req . method&#125;
-console. log(str )
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ol start="6">
-<li>res 响应对象<br>在服务器的 request 事件处理函数中，如果想访问与服务器相关的数据或属性，可以使用如下的方式：<pre class="line-numbers language-none"><code class="language-none">server . on( &#39;request&#39;, (req, res) &#x3D;&gt; &#123;
-&#x2F;&#x2F; res 是响应对象，它包含了与服务器相关的数据和属性，例如:
-&#x2F;&#x2F;要发送到客户端的字符串
-const str &#x3D; &quot;Your request url is $&#123;req,ur1&#125;, and request method is $&#123;req. method&#125;
-&#x2F;&#x2F; res .end( )方法的作用:
-&#x2F;&#x2F;向客户端发送指定的内容，并结束这次请求的处理过程
-res . end(str )
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>解决中文乱码的问题<br>当调用 res.end() 方法，向客户端发送中文内容的时候，会出现乱码问题，此时，需要手动设置内容的编码格式：<pre class="line-numbers language-none"><code class="language-none">server . on( &#39;request&#39;, (req, res) &#x3D;&gt; &#123;
-&#x2F;&#x2F;发送的内容包含中文
-const str &#x3D;。 您请求的url地址是$&#123;req.ur1&#125;, 请求的method类型是$&#123;req . method&#125;
-&#x2F;&#x2F; 为了防止中文显示乱码的问题， 需要设置响应头Content -Type的值为text&#x2F;html; charset&#x3D;utf-8
-res . setHeader &#39; Content-Type&#39;, &#39; text&#x2F;html; charset&#x3D;utf-8&#39;)
-&#x2F;&#x2F;把包含中文的内容，响应给客户端
-res . end(str)
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ol>
-]]></content>
-      <categories>
-        <category>前后端交互</category>
-      </categories>
-      <tags>
-        <tag>Node</tag>
       </tags>
   </entry>
   <entry>
@@ -1102,6 +912,196 @@ Vue<span class="token punctuation">.</span><span class="token function">componen
       </categories>
       <tags>
         <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>NodeJs基础</title>
+    <url>/2022/03/04/nodejs-ji-chu/</url>
+    <content><![CDATA[<h1 id="初始Node-js"><a href="#初始Node-js" class="headerlink" title="初始Node.js"></a>初始Node.js</h1><h2 id="什么是Node-js"><a href="#什么是Node-js" class="headerlink" title="什么是Node.js"></a>什么是Node.js</h2><p>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。<br>Node.js 的官网地址： <a href="https://nodejs.org/zh-cn/">https://nodejs.org/zh-cn/</a></p>
+<span id="more"></span>
+
+<ul>
+<li>浏览器是 JavaScript 的前端运行环境;</li>
+<li>Node.js 是 JavaScript 的后端运行环境;</li>
+<li>Node.js 中无法调用 DOM 和 BOM 等浏览器内置 API。</li>
+</ul>
+<h2 id="Node-js-可以做什么"><a href="#Node-js-可以做什么" class="headerlink" title="Node.js 可以做什么"></a>Node.js 可以做什么</h2><p>Node.js 作为一个 JavaScript 的运行环境，仅仅提供了基础的功能和 API。然而，基于 Node.js 提供的这些基础能，很多强大的工具和框架如雨后春笋，层出不穷，所以学会了 Node.js ，可以让前端程序员胜任更多的工作和岗位：</p>
+<ul>
+<li>基于 Express 框架（<a href="http://www.expressjs.com.cn/%EF%BC%89%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA">http://www.expressjs.com.cn/），可以快速构建</a> Web 应用</li>
+<li>基于 Electron 框架（<a href="https://electronjs.org/%EF%BC%89%EF%BC%8C%E5%8F%AF%E4%BB%A5%E6%9E%84%E5%BB%BA%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8">https://electronjs.org/），可以构建跨平台的桌面应用</a></li>
+<li>基于 restify 框架（<a href="http://restify.com/%EF%BC%89%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA">http://restify.com/），可以快速构建</a> API 接口项目</li>
+<li>读写和操作数据库、创建实用的命令行工具辅助前端开发、etc…<br>总之：Node.js 是大前端时代的“大宝剑”，有了 Node.js 这个超级 buff 的加持，前端程序员的行业竞争力会越来越强！</li>
+</ul>
+<h2 id="在-Node-js-环境中执行-JavaScript-代码"><a href="#在-Node-js-环境中执行-JavaScript-代码" class="headerlink" title="在 Node.js 环境中执行 JavaScript 代码"></a>在 Node.js 环境中执行 JavaScript 代码</h2><ol>
+<li>打开终端</li>
+<li>输入node 要执行的js文件的路径</li>
+</ol>
+<h3 id="终端中的快捷键"><a href="#终端中的快捷键" class="headerlink" title="终端中的快捷键"></a>终端中的快捷键</h3><ul>
+<li>使用 ↑ 键，可以快速定位到上一次执行的命令</li>
+<li>使用 tab 键，能够快速补全路径</li>
+<li>使用 esc 键，能够快速清空当前已输入的命令</li>
+<li>输入 cls 命令，可以清空终端</li>
+</ul>
+<h1 id="fs文件系统模块"><a href="#fs文件系统模块" class="headerlink" title="fs文件系统模块"></a>fs文件系统模块</h1><h2 id="什么是-fs-文件系统模块"><a href="#什么是-fs-文件系统模块" class="headerlink" title="什么是 fs 文件系统模块"></a>什么是 fs 文件系统模块</h2><p>fs 模块是 Node.js 官方提供的、用来操作文件的模块。它提供了一系列的方法和属性，用来满足用户对文件的操作需求</p>
+<ul>
+<li>fs.readFile() 方法，用来读取指定文件中的内容</li>
+<li>fs.writeFile() 方法，用来向指定的文件中写入内容<br>如果要在 JavaScript 代码中，使用 fs 模块来操作文件，则需要使用如下的方式先导入它</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">const fs &#x3D; require(&#39;fs&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="fs-readFile-的语法"><a href="#fs-readFile-的语法" class="headerlink" title="fs.readFile()的语法"></a>fs.readFile()的语法</h2><p>用来读取指定文件中的内容<br><strong>格式：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">fs.readFile(path[,options],callback)
+&#x2F;&#x2F;参数1：必选参数，字符串，表示文件的路径
+&#x2F;&#x2F;参数2：可选参数，表示以什么编码格式来读取文件
+&#x2F;&#x2F;参数3：必选参数，文件读取完成后，通过回调函数拿到读取的结果<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>示例：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">const fs &#x3D; require( &#39;fs&#39;)
+fs. readFile(&#39; .&#x2F;files&#x2F;11.txt&#39;, &#39;utf8&#39;, function(err, dataStr) &#123;
+ console.log(err )
+ console. 0og(-----&#39;)
+ console. log(dataStr)
+&#125;)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>判断文件是否读取成功</strong><br>可以判断 err 对象是否为 null，从而知晓文件读取的结果：</p>
+<pre class="line-numbers language-none"><code class="language-none">const fs &#x3D; require(&#39;fs&#39;)
+fs. readFile(&#39; .&#x2F;files&#x2F;1.txt&#39;, &#39;utf8&#39;, function(err, result) &#123;
+     if (err) &#123;
+       return console. log( &#39;文件读取失败! &#39; + err . message)
+     &#125;
+     console. log( &#39;文件读取成功，内容是: + result)
+&#125;)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="fs-writeFile-的语法"><a href="#fs-writeFile-的语法" class="headerlink" title="fs.writeFile()的语法"></a>fs.writeFile()的语法</h2><p>用来向指定的文件中写入内容<br><strong>格式：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">fs .writeFile(file, data[, options], callback)
+&#x2F;&#x2F;参数1：必选参数，需要指定一个文件路径的字符串，表示文件的存放路径。
+&#x2F;&#x2F;参数2：必选参数，表示要写入的内容。
+&#x2F;&#x2F;参数3：可选参数，表示以什么格式写入文件内容，默认值是 utf8。
+&#x2F;&#x2F;参数4：必选参数，文件写入完成后的回调函数。
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>示例：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">const fs &#x3D; require(&#39;fs&#39;)
+fs . writeFile(&#39; .&#x2F;files&#x2F;2.txt&#39;, &#39;Hello Node.js!&#39;, function(err) &#123;
+    console. log(err)
+&#125;)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>判断文件是否写入成功</strong><br>可以判断 err 对象是否为 null，从而知晓文件写入的结果：</p>
+<pre class="line-numbers language-none"><code class="language-none">const fs &#x3D; require(&#39;fs&#39;)
+fs . writeFile(&#39;F:&#x2F;files&#x2F;2.txt&#39;, &#39;Hello Node.js!&#39;, function(err) &#123;
+   if (err) &#123;
+      return console.log( ‘文件写入失败!”+ err . message )
+   console. log( &#39;文件写入成功! &#39;)
+ &#125;)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="path-路径模块"><a href="#path-路径模块" class="headerlink" title="path 路径模块"></a>path 路径模块</h1><h2 id="什么是path-路径模块"><a href="#什么是path-路径模块" class="headerlink" title="什么是path 路径模块"></a>什么是path 路径模块</h2><p>path 模块是 Node.js 官方提供的、用来处理路径的模块。它提供了一系列的方法和属性，用来满足用户对路径的处理需求。</p>
+<ul>
+<li>path.join() 方法，用来将多个路径片段拼接成一个完整的路径字符串</li>
+<li>path.basename() 方法，用来从路径字符串中，将文件名解析出来</li>
+<li>path.extname() 方法，可以获取路径中的扩展名部分，<br>如果要在 JavaScript 代码中，使用 path 模块来处理路径，则需要使用如下的方式先导入它</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">const path &#x3D;require(&#39;path&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="path-join-的语法"><a href="#path-join-的语法" class="headerlink" title="path.join() 的语法"></a>path.join() 的语法</h2><p>用来将多个路径片段拼接成一个完整的路径字符串<br><strong>格式：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">path.join([...paths])
+&#x2F;&#x2F;...paths&lt;string&gt;路径片段的序列
+&#x2F;&#x2F; 返回值：&lt;string&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><strong>示例：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">const pathStr - path. join(&#39;&#x2F;a&#39;, &#39;&#x2F;b&#x2F;c&#39;, ..&#x2F;&#39;，&#39;.&#x2F;d&#39;,&#39;e&#39;)
+console . log(pathStr) &#x2F;1输出\a\bide
+const pathStr2 &#x3D; path.
+join(_ dirname, &#39; .&#x2F;files&#x2F;1.txt&#39;)
+console . log(pathStr2) 11输出当前文件所处目录\files\1. txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="path-basename-的语法"><a href="#path-basename-的语法" class="headerlink" title="path.basename() 的语法"></a>path.basename() 的语法</h2><p>使用 path.basename() 方法，可以获取路径中的最后一部分，经常通过这个方法获取路径中的文件名</p>
+<p><strong>格式：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">path.basename(path[,ext])
+&#x2F;&#x2F;path &lt;string&gt; 必选参数，表示一个路径的字符串
+&#x2F;&#x2F;ext &lt;string&gt; 可选参数，表示文件扩展名
+&#x2F;&#x2F;返回: &lt;string&gt; 表示路径中的最后一部分<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>示例：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">const fpath &#x3D; &#39; &#x2F;a&#x2F;b&#x2F;c&#x2F;index.html&#39; &#x2F;&#x2F;文件的存放路径
+
+var fullName &#x3D; path . basename( fpath)
+console. log( fullName) &#x2F;&#x2F; 输出index . html
+
+var nameWi thoutExt &#x3D; path. basename( fpath, &#39; .html &#39; )
+console . logc nameWithoutExt) 1&#x2F;&#x2F; 输出index
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="path-extname-的语法"><a href="#path-extname-的语法" class="headerlink" title="path.extname() 的语法"></a>path.extname() 的语法</h2><p>使用 path.extname() 方法，可以获取路径中的扩展名部分</p>
+<p><strong>格式：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">path.extname(path)
+&#x2F;&#x2F;path &lt;string&gt;必选参数，表示一个路径的字符串
+&#x2F;&#x2F;返回: &lt;string&gt; 返回得到的扩展名字符串
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><strong>示例：</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">const fpath &#x3D; &#39; &#x2F;a&#x2F;b&#x2F;c&#x2F;index.html&#39; &#x2F;&#x2F;路径字符串
+const fext &#x3D; path. extname( fpath)
+console. log(fext) &#x2F;&#x2F;输出. html
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="http-模块"><a href="#http-模块" class="headerlink" title="http 模块"></a>http 模块</h1><h2 id="什么是http-模块"><a href="#什么是http-模块" class="headerlink" title="什么是http 模块"></a>什么是http 模块</h2><p>http 模块是 Node.js 官方提供的、用来创建 web 服务器的模块。通过 http 模块提供的 http.createServer() 方法，就能方便的把一台普通的电脑，变成一台 Web 服务器，从而对外提供 Web 资源服务。</p>
+<p>如果要希望使用 http 模块创建 Web 服务器，则需要先导入它</p>
+<pre class="line-numbers language-none"><code class="language-none">const http&#x3D; require(&#39;http&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="http-模块的作用"><a href="#http-模块的作用" class="headerlink" title="http 模块的作用"></a>http 模块的作用</h2><p>在 Node.js 中，我们不需要使用 IIS、Apache 等这些第三方 web 服务器软件。因为我们可以基于 Node.js 提供的 http 模块，通过几行简单的代码，就能轻松的手写一个服务器软件，从而对外提供 web 服务。</p>
+<h2 id="创建最基本的web服务器"><a href="#创建最基本的web服务器" class="headerlink" title="创建最基本的web服务器"></a>创建最基本的web服务器</h2><ol>
+<li>导入http 模块</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">const http&#x3D;require(&#39;http&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ol start="2">
+<li>创建web服务器实例<br>调用 http.createServer() 方法，即可快速创建一个 web 服务器实例：<pre class="line-numbers language-none"><code class="language-none">const server&#x3D;http.createServer()<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>为服务器实例绑定 request 事件<br>为服务器实例绑定 request 事件，即可监听客户端发送过来的网络请求</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;使用服务器实例的.on() 方法，为服务器绑定个request 事件
+server . on(&#39;request&#39;，(req, res) &#x3D;&gt; &#123;
+&#x2F;&#x2F;只要有客户端来请求我们自己的服务器，就会触发request 事件，从而调用这个事件处理函数
+console. log( &#39;Someone visit our web server.&#39; )
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="4">
+<li>启动服务器<br>调用服务器实例的 .listen() 方法，即可启动当前的 web 服务器实例：</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">   &#x2F;&#x2F;调用server.listen(端0号， cb回调)方法，即可启动web服务器
+   server .listen(80, () &#x3D;&gt; &#123;
+   console log( &#39;http server running at http:&#x2F;&#x2F;127.0.0.1&#39;)
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="5">
+<li>req请求对象<br>只要服务器接收到了客户端的请求，就会调用通过 server.on() 为服务器绑定的 request 事件处理函数。<br>如果想在事件处理函数中，访问与客户端相关的数据或属性，可以使用如下的方式：</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">server .on( &#39;request&#39;, (req) &gt; &#123;
+&#x2F;&#x2F; req是请求对象，它包含了与客户端相关的数据和属性，例如:
+&#x2F;&#x2F; req.url是客户端请求的URL 地址
+&#x2F;&#x2F; req.method 是客户端的method请求类型
+const str . Your request url is $&#123;req.ur1&#125;, and request method is $&#123;req . method&#125;
+console. log(str )
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ol start="6">
+<li>res 响应对象<br>在服务器的 request 事件处理函数中，如果想访问与服务器相关的数据或属性，可以使用如下的方式：<pre class="line-numbers language-none"><code class="language-none">server . on( &#39;request&#39;, (req, res) &#x3D;&gt; &#123;
+&#x2F;&#x2F; res 是响应对象，它包含了与服务器相关的数据和属性，例如:
+&#x2F;&#x2F;要发送到客户端的字符串
+const str &#x3D; &quot;Your request url is $&#123;req,ur1&#125;, and request method is $&#123;req. method&#125;
+&#x2F;&#x2F; res .end( )方法的作用:
+&#x2F;&#x2F;向客户端发送指定的内容，并结束这次请求的处理过程
+res . end(str )
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>解决中文乱码的问题<br>当调用 res.end() 方法，向客户端发送中文内容的时候，会出现乱码问题，此时，需要手动设置内容的编码格式：<pre class="line-numbers language-none"><code class="language-none">server . on( &#39;request&#39;, (req, res) &#x3D;&gt; &#123;
+&#x2F;&#x2F;发送的内容包含中文
+const str &#x3D;。 您请求的url地址是$&#123;req.ur1&#125;, 请求的method类型是$&#123;req . method&#125;
+&#x2F;&#x2F; 为了防止中文显示乱码的问题， 需要设置响应头Content -Type的值为text&#x2F;html; charset&#x3D;utf-8
+res . setHeader &#39; Content-Type&#39;, &#39; text&#x2F;html; charset&#x3D;utf-8&#39;)
+&#x2F;&#x2F;把包含中文的内容，响应给客户端
+res . end(str)
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+]]></content>
+      <categories>
+        <category>前后端交互</category>
+      </categories>
+      <tags>
+        <tag>Node</tag>
       </tags>
   </entry>
   <entry>
@@ -1595,110 +1595,6 @@ i5ting_toc -f 要转换的md文件路径 -o<span aria-hidden="true" class="line-
       </tags>
   </entry>
   <entry>
-    <title>跨域与JSONP.md</title>
-    <url>/2022/02/27/kua-yu-yu-jsonp-md/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>————同源策略，跨域，JSONP的实现原理，防抖和节流。</p>
-<h1 id="了解同源策略和跨域"><a href="#了解同源策略和跨域" class="headerlink" title="了解同源策略和跨域"></a>了解同源策略和跨域</h1><p>  同源指的是如果两个页面的协议，域名，端口都相同，则两个页面具有相同的源（如果没有给出端口号，默认是80端口）。<span id="more"></span></p>
-<p><strong>同源策略</strong>是浏览器提供的一个安全功能</p>
-<p><strong>跨域</strong>是指两个URL的协议，域名，端口有一个或一个以上不一致。出现跨域的根本原因：浏览器的同源策略不允许非同源的URL之间进行资源的交互<br>（浏览器允许发起跨域请求，但是，跨域请求回来的数据会被浏览器拦截，无法被页面获取到）</p>
-<p>如何实现跨域数据请求解决方案：JSONP和CORS<br> JSONP：出现的早，兼容性好，缺点是只支持GET请求，不支持POST请求；<br> CORS：出现的较晚，W3C标准，两种请求都支持，缺点是不兼容低版本浏览器</p>
-<h1 id="JSONP的实现原理"><a href="#JSONP的实现原理" class="headerlink" title="JSONP的实现原理"></a>JSONP的实现原理</h1><p>  JSONP的实现原理就是通过<code>&lt;script&gt;</code>标签的src属性，请求跨域的数据接口，并通过函数调用的形式，接收跨域接口响应回来的数据</p>
-<h2 id="jQuery中的JSONP"><a href="#jQuery中的JSONP" class="headerlink" title="jQuery中的JSONP"></a>jQuery中的JSONP</h2><p>  jQuery 提供的 $.ajax() 函数，除了可以发起真正的 Ajax 数据请求之外，还能够发起 JSONP 数据请求</p>
-<pre><code>$.ajax(&#123;
-  url: &#39;http://ajax.frontend.itheima.net:3006/api/jsonp?name=zs&amp;age=20&#39;,
-  // 如果要使用 $.ajax() 发起 JSONP 请求，必须指定 datatype 为 jsonp
-  dataType: &#39;jsonp&#39;,
-   success: function(res) &#123;
-   console.log(res)
-&#125;
-&#125;)
-</code></pre>
-<p>在使用 jQuery 发起 JSONP 请求时，如果想要自定义 JSONP 的参数以及回调函数名称，可以通过如下两个参数来指定：</p>
-<pre><code>$.ajax(&#123;
-  url: &#39;http://ajax.frontend.itheima.net:3006/api/jsonp?name=zs&amp;age=20&#39;,
-  dataType: &#39;jsonp&#39;,
-  // 发送到服务端的参数名称，默认值为 callback
-  jsonp: &#39;callback&#39;,
-  // 自定义的回调函数名称，默认值为 jQueryxxx 格式
-  jsonpCallback: &#39;abc&#39;,
-  success: function(res) &#123;
-  console.log(res)
-&#125;
-</code></pre>
-<p> })</p>
-<h2 id="jQuery中JSONP的实现过程"><a href="#jQuery中JSONP的实现过程" class="headerlink" title="jQuery中JSONP的实现过程"></a>jQuery中JSONP的实现过程</h2><p> jQuery 中的 JSONP，也是通过 <code>&lt;script&gt;</code> 标签的 src 属性实现跨域数据访问的，只不过，jQuery 采用的是动态创建和移除<code>&lt;script&gt;</code>标签的方式，来发起 JSONP 数据请求。</p>
-<ul>
-<li><p>在发起 JSONP 请求的时候，动态向 <code>&lt;header&gt;</code> 中 append 一个 <code>&lt;script&gt;</code> 标签；</p>
-</li>
-<li><p>在 JSONP 请求成功以后，动态从 <code>&lt;header&gt;</code> 中移除刚才 append 进去的<code> &lt;script&gt;</code> 标签；</p>
-</li>
-</ul>
-<h1 id="防抖与节流"><a href="#防抖与节流" class="headerlink" title="防抖与节流"></a>防抖与节流</h1><h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><p>———<strong>防抖策略</strong>是当事件被触发后，延迟n秒后再执行回调，如果在这n秒内事件又被触发，则重新计时。</p>
-<p>防抖的应用场景：用户在输入框中连续输入一串字符是时，可以通过防抖策略，只在输入完成时，才执行查询的请求，这样可以有效减少请求次数，节约请求资源。</p>
-<pre><code>var timer = null                    // 1. 防抖动的 timer
-  function debounceSearch(keywords) &#123; // 2. 定义防抖的函数
-  timer = setTimeout(function() &#123;
-  // 发起 JSONP 请求
-  getSuggestList(keywords)
-  &#125;, 500)
-  &#125;
-
-  $(&#39;#ipt&#39;).on(&#39;keyup&#39;, function() &#123; 
-  // 3. 在触发 keyup 事件时，立即清空 timer    
-    clearTimeout(timer)
-   debounceSearch(keywords)
-&#125;)
-</code></pre>
-<h2 id="缓存搜索的建议列表"><a href="#缓存搜索的建议列表" class="headerlink" title="缓存搜索的建议列表"></a>缓存搜索的建议列表</h2><p>1.定义全局缓存对象</p>
-<p><code>// 缓存对象   var cacheObj = &#123;&#125;</code></p>
-<p>2.将搜索结果保存到缓存对象中</p>
-<pre><code> // 渲染建议列表
- function renderSuggestList(res) &#123;
-   // ...省略其他代码
-   // 将搜索的结果，添加到缓存对象中
-    var k = $(&#39;#ipt&#39;).val().trim()
-    cacheObj[k] = res
- &#125;
-</code></pre>
-<p>3.优先从缓存中获取搜索建议</p>
-<pre><code> // 监听文本框的 keyup 事件
- $(&#39;#ipt&#39;).on(&#39;keyup&#39;, function() &#123;
-    // ...省略其他代码
-
-    // 优先从缓存中获取搜索建议
-    if (cacheObj[keywords]) &#123;
-       return renderSuggestList(cacheObj[keywords])
-    &#125;
-    // 获取搜索建议列表
-    debounceSearch(keywords)
-  &#125;)
-</code></pre>
-<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p><strong>节流策略</strong> 就是可以减少一段时间内事件的触发频率</p>
-<p>节流的应用场景：</p>
-<ul>
-<li><p>鼠标连续不断地触发某事件，只在单位时间内只触发一次</p>
-</li>
-<li><p>懒加载时要监听计算滚动条的位置，但不必每次滑动都触发，可以降低计算的频率，而不必去浪费cpu资源。</p>
-</li>
-</ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li>防抖：如果事件被频繁触发，防抖能保证只有最有一次触发生效！前面 N 多次的触发都会被忽略！</li>
-<li>节流：如果事件被频繁触发，节流能够减少事件触发的频率，因此，节流是有选择性地执行一部分事件！</li>
-</ul>
-]]></content>
-      <categories>
-        <category>前后端交互</category>
-      </categories>
-      <tags>
-        <tag>跨域与JSONP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>微信小程序</title>
-    <url>/2022/06/16/wei-xin-xiao-cheng-xu/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>前端工程化与webpack</title>
     <url>/2022/06/01/qian-duan-gong-cheng-hua-yu-webpack/</url>
     <content><![CDATA[<h2 id="前端工程化"><a href="#前端工程化" class="headerlink" title="前端工程化"></a>前端工程化</h2><p>  在企业级的前端项目开发中，把前端开发所需的工具，技术，流程，经验等进行规范化，标准化。实际就是实现前端的四个现代化：模块化；组件化；规范化；自动化。<br>它的好处主要体现在：</p>
@@ -1851,6 +1747,105 @@ plugins: [htmlPlugin, cleanPlugin], <span aria-hidden="true" class="line-numbers
       </categories>
       <tags>
         <tag>打包构建</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>跨域与JSONP.md</title>
+    <url>/2022/02/27/kua-yu-yu-jsonp-md/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>————同源策略，跨域，JSONP的实现原理，防抖和节流。</p>
+<h1 id="了解同源策略和跨域"><a href="#了解同源策略和跨域" class="headerlink" title="了解同源策略和跨域"></a>了解同源策略和跨域</h1><p>  同源指的是如果两个页面的协议，域名，端口都相同，则两个页面具有相同的源（如果没有给出端口号，默认是80端口）。<span id="more"></span></p>
+<p><strong>同源策略</strong>是浏览器提供的一个安全功能</p>
+<p><strong>跨域</strong>是指两个URL的协议，域名，端口有一个或一个以上不一致。出现跨域的根本原因：浏览器的同源策略不允许非同源的URL之间进行资源的交互<br>（浏览器允许发起跨域请求，但是，跨域请求回来的数据会被浏览器拦截，无法被页面获取到）</p>
+<p>如何实现跨域数据请求解决方案：JSONP和CORS<br> JSONP：出现的早，兼容性好，缺点是只支持GET请求，不支持POST请求；<br> CORS：出现的较晚，W3C标准，两种请求都支持，缺点是不兼容低版本浏览器</p>
+<h1 id="JSONP的实现原理"><a href="#JSONP的实现原理" class="headerlink" title="JSONP的实现原理"></a>JSONP的实现原理</h1><p>  JSONP的实现原理就是通过<code>&lt;script&gt;</code>标签的src属性，请求跨域的数据接口，并通过函数调用的形式，接收跨域接口响应回来的数据</p>
+<h2 id="jQuery中的JSONP"><a href="#jQuery中的JSONP" class="headerlink" title="jQuery中的JSONP"></a>jQuery中的JSONP</h2><p>  jQuery 提供的 $.ajax() 函数，除了可以发起真正的 Ajax 数据请求之外，还能够发起 JSONP 数据请求</p>
+<pre><code>$.ajax(&#123;
+  url: &#39;http://ajax.frontend.itheima.net:3006/api/jsonp?name=zs&amp;age=20&#39;,
+  // 如果要使用 $.ajax() 发起 JSONP 请求，必须指定 datatype 为 jsonp
+  dataType: &#39;jsonp&#39;,
+   success: function(res) &#123;
+   console.log(res)
+&#125;
+&#125;)
+</code></pre>
+<p>在使用 jQuery 发起 JSONP 请求时，如果想要自定义 JSONP 的参数以及回调函数名称，可以通过如下两个参数来指定：</p>
+<pre><code>$.ajax(&#123;
+  url: &#39;http://ajax.frontend.itheima.net:3006/api/jsonp?name=zs&amp;age=20&#39;,
+  dataType: &#39;jsonp&#39;,
+  // 发送到服务端的参数名称，默认值为 callback
+  jsonp: &#39;callback&#39;,
+  // 自定义的回调函数名称，默认值为 jQueryxxx 格式
+  jsonpCallback: &#39;abc&#39;,
+  success: function(res) &#123;
+  console.log(res)
+&#125;
+</code></pre>
+<p> })</p>
+<h2 id="jQuery中JSONP的实现过程"><a href="#jQuery中JSONP的实现过程" class="headerlink" title="jQuery中JSONP的实现过程"></a>jQuery中JSONP的实现过程</h2><p> jQuery 中的 JSONP，也是通过 <code>&lt;script&gt;</code> 标签的 src 属性实现跨域数据访问的，只不过，jQuery 采用的是动态创建和移除<code>&lt;script&gt;</code>标签的方式，来发起 JSONP 数据请求。</p>
+<ul>
+<li><p>在发起 JSONP 请求的时候，动态向 <code>&lt;header&gt;</code> 中 append 一个 <code>&lt;script&gt;</code> 标签；</p>
+</li>
+<li><p>在 JSONP 请求成功以后，动态从 <code>&lt;header&gt;</code> 中移除刚才 append 进去的<code> &lt;script&gt;</code> 标签；</p>
+</li>
+</ul>
+<h1 id="防抖与节流"><a href="#防抖与节流" class="headerlink" title="防抖与节流"></a>防抖与节流</h1><h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><p>———<strong>防抖策略</strong>是当事件被触发后，延迟n秒后再执行回调，如果在这n秒内事件又被触发，则重新计时。</p>
+<p>防抖的应用场景：用户在输入框中连续输入一串字符是时，可以通过防抖策略，只在输入完成时，才执行查询的请求，这样可以有效减少请求次数，节约请求资源。</p>
+<pre><code>var timer = null                    // 1. 防抖动的 timer
+  function debounceSearch(keywords) &#123; // 2. 定义防抖的函数
+  timer = setTimeout(function() &#123;
+  // 发起 JSONP 请求
+  getSuggestList(keywords)
+  &#125;, 500)
+  &#125;
+
+  $(&#39;#ipt&#39;).on(&#39;keyup&#39;, function() &#123; 
+  // 3. 在触发 keyup 事件时，立即清空 timer    
+    clearTimeout(timer)
+   debounceSearch(keywords)
+&#125;)
+</code></pre>
+<h2 id="缓存搜索的建议列表"><a href="#缓存搜索的建议列表" class="headerlink" title="缓存搜索的建议列表"></a>缓存搜索的建议列表</h2><p>1.定义全局缓存对象</p>
+<p><code>// 缓存对象   var cacheObj = &#123;&#125;</code></p>
+<p>2.将搜索结果保存到缓存对象中</p>
+<pre><code> // 渲染建议列表
+ function renderSuggestList(res) &#123;
+   // ...省略其他代码
+   // 将搜索的结果，添加到缓存对象中
+    var k = $(&#39;#ipt&#39;).val().trim()
+    cacheObj[k] = res
+ &#125;
+</code></pre>
+<p>3.优先从缓存中获取搜索建议</p>
+<pre><code> // 监听文本框的 keyup 事件
+ $(&#39;#ipt&#39;).on(&#39;keyup&#39;, function() &#123;
+    // ...省略其他代码
+
+    // 优先从缓存中获取搜索建议
+    if (cacheObj[keywords]) &#123;
+       return renderSuggestList(cacheObj[keywords])
+    &#125;
+    // 获取搜索建议列表
+    debounceSearch(keywords)
+  &#125;)
+</code></pre>
+<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p><strong>节流策略</strong> 就是可以减少一段时间内事件的触发频率</p>
+<p>节流的应用场景：</p>
+<ul>
+<li><p>鼠标连续不断地触发某事件，只在单位时间内只触发一次</p>
+</li>
+<li><p>懒加载时要监听计算滚动条的位置，但不必每次滑动都触发，可以降低计算的频率，而不必去浪费cpu资源。</p>
+</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>防抖：如果事件被频繁触发，防抖能保证只有最有一次触发生效！前面 N 多次的触发都会被忽略！</li>
+<li>节流：如果事件被频繁触发，节流能够减少事件触发的频率，因此，节流是有选择性地执行一部分事件！</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前后端交互</category>
+      </categories>
+      <tags>
+        <tag>跨域与JSONP</tag>
       </tags>
   </entry>
 </search>
