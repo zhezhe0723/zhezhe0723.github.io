@@ -5,8 +5,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="git基础, 可可托海">
-    <meta name="description" content="版本控制软件版本控制软件是一个用来记录文件变化，以便将来查阅特定版本修订情况的系统，因此有时也叫做版本控制系统。
-版本控制系统的分类：本地版本控制系统；集中化的版本控制系统；分布式版本控制系统。现在主要使用分布式版本控制系统，前面两种已经淘">
+    <meta name="description" content="版本控制软件总结一下常用的 Git 命令：
+
+git init //初始化仓库
+git config -h  //查看帮助手册
+git status -s  //显示文件状态   未跟踪文件前面有红色的？？标记
+git add .   //">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -636,7 +640,23 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="版本控制软件"><a href="#版本控制软件" class="headerlink" title="版本控制软件"></a>版本控制软件</h1><p><strong>版本控制软件</strong>是一个用来记录文件变化，以便将来查阅特定版本修订情况的系统，因此有时也叫做<strong>版本控制系统</strong>。</p>
+                <h1 id="版本控制软件"><a href="#版本控制软件" class="headerlink" title="版本控制软件"></a>版本控制软件</h1><p>总结一下常用的 Git 命令：</p>
+<ul>
+<li><code>git init //初始化仓库</code></li>
+<li><code>git config -h  //查看帮助手册</code></li>
+<li><code>git status -s  //显示文件状态</code>   <strong>未跟踪文件前面有红色的？？标记</strong></li>
+<li><code>git add .   //向暂存区一次性添加多个文件</code></li>
+<li><code>git commit -m &quot;新建文件&quot;  //提交更新</code></li>
+<li><code>git push -u origin master  //把代码提交到远程仓库的主分支</code></li>
+<li><code>git branch -v  //查看分支</code></li>
+<li><code>git branch + name  //创建分支</code></li>
+<li><code>git branch -D  分支名  //不能删除当前工作分支或者不存在的分支</code></li>
+<li><code>git branch -d  分支名  //  -d 会提示还没有合并，不能删除</code></li>
+<li><code>git checkout 分支名字   //切换分支</code></li>
+<li><code>git merge  分支名  //合并分支 如果想把mall 分支合并到master分支上，应该位于master分支上，输入合并分支命令</code></li>
+<li><code>git pull  //将远程仓库上的代码拉去到本地的当前分支上</code></li>
+</ul>
+<p><strong>版本控制软件</strong>是一个用来记录文件变化，以便将来查阅特定版本修订情况的系统，因此有时也叫做<strong>版本控制系统</strong>。</p>
 <p>版本控制系统的分类：本地版本控制系统；集中化的版本控制系统；分布式版本控制系统。现在主要使用分布式版本控制系统，前面两种已经淘汰掉了</p>
 <p>分布式版本控制系统（Git）的特点：基于服务器，客户端的运行模式</p>
 <ul>
