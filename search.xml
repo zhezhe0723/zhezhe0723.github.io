@@ -1,6 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Array的常见用法</title>
+    <url>/2022/08/17/array-de-chang-jian-yong-fa/</url>
+    <content><![CDATA[<h3 id="JS-中截取数组的方法"><a href="#JS-中截取数组的方法" class="headerlink" title="JS 中截取数组的方法"></a>JS 中截取数组的方法</h3><ol>
+<li><strong>splice()方法</strong></li>
+</ol>
+<p>​         splice()方法通过删除或者替换现有元素或者原地添加新的元素来修改数组，并以数组的形式返回被修改的内容。这个方法会改变原数组。</p>
+<p>​      <strong>–语法–</strong></p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">array<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span>start<span class="token punctuation">[</span><span class="token punctuation">,</span>deleteCount<span class="token punctuation">[</span><span class="token punctuation">,</span>item1<span class="token punctuation">[</span><span class="token punctuation">,</span>item2<span class="token punctuation">[</span><span class="token punctuation">,</span><span class="token operator">...</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment">//start :指定修改的开始位置（从0开始计数），如果超出了数组的长度，则从数组末尾开始添加内容；如果是负值，则表示从数组末位（从后往前数）开始的第n 位；如果负数的绝对值大于数组的长度，则表示开始的位置为第0位。</span>
+<span class="token comment">//deleteCount(可选) :整数，表示要删除的数组元素的个数。如果deleteCount大于start之后的元素的总数，则从start后面的元素都将被删除（包含第start位）；如果 deleteCount 是 0 或者负数，则不移除元素。这种情况下，至少应添加一个新元素。</span>
+<span class="token comment">// item1,item2(可选) :要添加进数组的元素，从start 位置开始。如果不指定，则 splice() 将只删除数组元素。</span>
+<span class="token comment">// 返回值 由被删除的元素组成的一个数组。如果只删除了一个元素，则返回只包含一个元素的数组。如果没有删除元素，则返回空数组。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>​     <strong>–案例–</strong></p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token string">"d"</span><span class="token punctuation">,</span><span class="token string">"e"</span><span class="token punctuation">]</span>
+<span class="token keyword">var</span> arr1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">"f"</span><span class="token punctuation">)</span> 
+<span class="token comment">// 3 表示从索引为3的位置开始删除，</span>
+<span class="token comment">// 1 删除元素的个数</span>
+<span class="token comment">// 最后面是表示向原数组中添加元素，位置就是前面两个数字所定义的位置添加数据</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span> <span class="token comment">//原数组：arr["a", "b", "c", "f", "e"]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span>  <span class="token comment">// 返回值 --被删除的元素 arr1 ["d"]</span>
+
+<span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token string">"d"</span><span class="token punctuation">,</span><span class="token string">"e"</span><span class="token punctuation">]</span>
+<span class="token keyword">var</span> arr1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>  
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>  <span class="token comment">//原数组：arr ["a", "b", "e"]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span> <span class="token comment">// 返回值 --被删除的元素 arr1 ["c", "d"]</span>
+
+<span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token string">"d"</span><span class="token punctuation">,</span><span class="token string">"e"</span><span class="token punctuation">]</span>
+<span class="token keyword">var</span> arr1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>  <span class="token comment">//从索引 1 的位置开始删除所有元素</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>  <span class="token comment">//原数组：arr["a"]   </span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span> <span class="token comment">//返回值 --被删除的元素 arr1 ["b", "c", "d", "e"]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+]]></content>
+      <categories>
+        <category>Array</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Express</title>
     <url>/2022/03/16/express/</url>
     <content><![CDATA[<h2 id="Express简介"><a href="#Express简介" class="headerlink" title="Express简介"></a>Express简介</h2><h3 id="什么是Express"><a href="#什么是Express" class="headerlink" title="什么是Express"></a>什么是Express</h3><p>官方给出的概念：Express 是基于 Node.js 平台，快速、开放、极简的 Web 开发框架。<br>通俗的理解：Express 的作用和 Node.js 内置的 http 模块类似，是专门用来创建 Web 服务器的。<br>Express 的本质：就是一个 npm 上的第三方包，提供了快速创建 Web 服务器的便捷方法。<br>Express 的中文官网：<a href="http://www.expressjs.com.cn/">http://www.expressjs.com.cn/</a> </p>
@@ -112,176 +153,6 @@ module.exports &#x3D; router<span aria-hidden="true" class="line-numbers-rows"><
       </tags>
   </entry>
   <entry>
-    <title>Array的常见用法</title>
-    <url>/2022/08/17/array-de-chang-jian-yong-fa/</url>
-    <content><![CDATA[<h3 id="JS-中截取数组的方法"><a href="#JS-中截取数组的方法" class="headerlink" title="JS 中截取数组的方法"></a>JS 中截取数组的方法</h3><ol>
-<li><strong>splice()方法</strong></li>
-</ol>
-<p>​         splice()方法通过删除或者替换现有元素或者原地添加新的元素来修改数组，并以数组的形式返回被修改的内容。这个方法会改变原数组。</p>
-<p>​      <strong>–语法–</strong></p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">array<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span>start<span class="token punctuation">[</span><span class="token punctuation">,</span>deleteCount<span class="token punctuation">[</span><span class="token punctuation">,</span>item1<span class="token punctuation">[</span><span class="token punctuation">,</span>item2<span class="token punctuation">[</span><span class="token punctuation">,</span><span class="token operator">...</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token comment">//start :指定修改的开始位置（从0开始计数），如果超出了数组的长度，则从数组末尾开始添加内容；如果是负值，则表示从数组末位（从后往前数）开始的第n 位；如果负数的绝对值大于数组的长度，则表示开始的位置为第0位。</span>
-<span class="token comment">//deleteCount(可选) :整数，表示要删除的数组元素的个数。如果deleteCount大于start之后的元素的总数，则从start后面的元素都将被删除（包含第start位）；如果 deleteCount 是 0 或者负数，则不移除元素。这种情况下，至少应添加一个新元素。</span>
-<span class="token comment">// item1,item2(可选) :要添加进数组的元素，从start 位置开始。如果不指定，则 splice() 将只删除数组元素。</span>
-<span class="token comment">// 返回值 由被删除的元素组成的一个数组。如果只删除了一个元素，则返回只包含一个元素的数组。如果没有删除元素，则返回空数组。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>​     <strong>–案例–</strong></p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token string">"d"</span><span class="token punctuation">,</span><span class="token string">"e"</span><span class="token punctuation">]</span>
-<span class="token keyword">var</span> arr1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">"f"</span><span class="token punctuation">)</span> 
-<span class="token comment">// 3 表示从索引为3的位置开始删除，</span>
-<span class="token comment">// 1 删除元素的个数</span>
-<span class="token comment">// 最后面是表示向原数组中添加元素，位置就是前面两个数字所定义的位置添加数据</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span> <span class="token comment">//原数组：arr["a", "b", "c", "f", "e"]</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span>  <span class="token comment">// 返回值 --被删除的元素 arr1 ["d"]</span>
-
-<span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token string">"d"</span><span class="token punctuation">,</span><span class="token string">"e"</span><span class="token punctuation">]</span>
-<span class="token keyword">var</span> arr1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>  
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>  <span class="token comment">//原数组：arr ["a", "b", "e"]</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span> <span class="token comment">// 返回值 --被删除的元素 arr1 ["c", "d"]</span>
-
-<span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token string">"d"</span><span class="token punctuation">,</span><span class="token string">"e"</span><span class="token punctuation">]</span>
-<span class="token keyword">var</span> arr1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>  <span class="token comment">//从索引 1 的位置开始删除所有元素</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>  <span class="token comment">//原数组：arr["a"]   </span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span> <span class="token comment">//返回值 --被删除的元素 arr1 ["b", "c", "d", "e"]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-]]></content>
-      <categories>
-        <category>Array</category>
-      </categories>
-      <tags>
-        <tag>JS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Flex布局</title>
-    <url>/2022/07/10/flex-bu-ju/</url>
-    <content><![CDATA[<h3 id="Flex-布局的定义"><a href="#Flex-布局的定义" class="headerlink" title="Flex 布局的定义"></a>Flex 布局的定义</h3><p>Flex 是Flexible Box 的缩写，意为“弹性布局” ，用来为盒状模型提供最大的灵活性。</p>
-<p>任何一个容器都可以指定为Flex 布局。 <code>.box&#123; display:flex;&#125;</code></p>
-<p>行内元素也可以使用Flex 布局。 <code> .box &#123; display:inline-flex;&#125;</code></p>
-<blockquote>
-<p>Webkit 内核的浏览器，必须加上 <strong>-webkit</strong>  前缀 <code> .box &#123;display: -webkit-flex; display:flex;&#125;</code></p>
-<p>在设置了Flex 布局之后，子元素中的  float, clear, vertical-align 属性将失效</p>
-</blockquote>
-<h3 id="Flex-的基本概念"><a href="#Flex-的基本概念" class="headerlink" title="Flex 的基本概念"></a>Flex 的基本概念</h3><p>  在采用了Flex 布局的元素，称为 Flex 容器 （flex container），简称“ 容器”。 它的所有子元素自动成为容器成员，称为 Flex 项目（ flex item）,简称“项目”。</p>
-<p>容器默认存在两根轴： 水平的主轴（main axis） 和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做 main start, 结束位置 叫做 main end; 交叉轴的开始位置叫做 cross start,结束位置叫做 cross end。</p>
-<blockquote>
-<p>项目默认沿主轴排列，单个项目占据的主轴空间叫做 main size,占据的交叉轴空间 叫做 cross size</p>
-</blockquote>
-<h3 id="容器的属性"><a href="#容器的属性" class="headerlink" title="容器的属性"></a>容器的属性</h3><ul>
-<li>flex-direction   决定主轴的方向，即项目的排列方向</li>
-<li>flex-wrap  换行方式</li>
-<li>flex-flow   上边两个属性的简写形式</li>
-<li>justify-content   主轴上的对齐方式</li>
-<li>align-items   交叉轴上的对齐方式</li>
-<li>align-content    多根轴线的对齐方式</li>
-</ul>
-<h4 id="flex-direction属性"><a href="#flex-direction属性" class="headerlink" title="flex-direction属性"></a>flex-direction属性</h4><p>flex-direction 属性决定主轴的方向，（即项目的排列方向）</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.box</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">flex-direction</span><span class="token punctuation">:</span>row<span class="token punctuation">;</span>   //主轴为水平方向，起点在左端
-  <span class="token property">flex-direction</span><span class="token punctuation">:</span>row-reverse<span class="token punctuation">;</span>  //起点在右端
-  <span class="token property">flex-direction</span><span class="token punctuation">:</span>column<span class="token punctuation">;</span>  //主轴为垂直方向，起点在上方
-  <span class="token property">flex-direction</span><span class="token punctuation">:</span>column-reverse<span class="token punctuation">;</span>  //起点在下方
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="flex-wrap属性"><a href="#flex-wrap属性" class="headerlink" title="flex-wrap属性"></a>flex-wrap属性</h4><p> flex-wrap 属性，在默认情况下，项目都排在一条线（轴线）上，flex-wrap属性定义，如果一条轴线排不下，如何换行。</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.box</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">flex-wrap</span><span class="token punctuation">:</span> nowrap<span class="token punctuation">;</span>  //默认，不换行
-  <span class="token property">flex-wrap</span><span class="token punctuation">:</span> wrap<span class="token punctuation">;</span>  //换行，第一行在上方或左方（根据主轴方向）
-  <span class="token property">flex-wrap</span><span class="token punctuation">:</span> wrap-reverse<span class="token punctuation">;</span>  //换行，第一行在下方或右方（根据主轴方向）
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="flex-flow-属性"><a href="#flex-flow-属性" class="headerlink" title="flex-flow 属性"></a>flex-flow 属性</h4><p>  flex-flow 属性是 flex-direction 和 flex-wrap 的简写形式，默认值为 ** row  nowrap**。</p>
-<h4 id="justify-content-属性"><a href="#justify-content-属性" class="headerlink" title="justify-content 属性"></a>justify-content 属性</h4><p>  justify-content 属性定义了项目在主轴上的对齐方式。</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.box</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">justify-content</span><span class="token punctuation">:</span> flex-start<span class="token punctuation">;</span>  // 默认值 左对齐
-  <span class="token property">justify-content</span><span class="token punctuation">:</span> flex-end<span class="token punctuation">;</span>  // 右对齐
-  <span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>  //居中
-  <span class="token property">justify-content</span><span class="token punctuation">:</span> space-between<span class="token punctuation">;</span>  //两端对齐，项目之间的间隔都相等
-  <span class="token property">justify-content</span><span class="token punctuation">:</span> space-around<span class="token punctuation">;</span>  //每个项目两侧的间隔相等，所以，项目之间的间隔比项目与边框的间隔大一倍
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="align-items-属性"><a href="#align-items-属性" class="headerlink" title="align-items 属性"></a>align-items 属性</h4><p>  align-items 属性定义项目在交叉轴上如何对齐。</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.box</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">align-items</span><span class="token punctuation">:</span> flex-start<span class="token punctuation">;</span>  // 交叉轴的起点对齐
-  <span class="token property">align-items</span><span class="token punctuation">:</span> flex-end<span class="token punctuation">;</span>  //交叉轴的终点对齐
-  <span class="token property">align-items</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>  //交叉轴的中点对齐
-  <span class="token property">align-items</span><span class="token punctuation">:</span> baseline<span class="token punctuation">;</span>  //项目的第一行文字的基线对齐
-  <span class="token property">align-items</span><span class="token punctuation">:</span> stretch<span class="token punctuation">;</span>  //如果项目未设置高度或设为auto<span class="token punctuation">,</span>将占满整个容器的高度
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="align-content-属性"><a href="#align-content-属性" class="headerlink" title="align-content 属性"></a>align-content 属性</h4><p> align-content 属性定义了多根轴线的对齐方式，如果项目只有一根轴线，则该属性不起作用。</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.box</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">align-content</span><span class="token punctuation">:</span> flex-start<span class="token punctuation">;</span>  //与交叉轴的起点对齐
-  <span class="token property">align-content</span><span class="token punctuation">:</span> flex-end<span class="token punctuation">;</span>  //与交叉轴的终点对齐
-  <span class="token property">align-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>  //与交叉轴的中点对齐
-  <span class="token property">align-content</span><span class="token punctuation">:</span> space-between<span class="token punctuation">;</span>  //与交叉轴两端对齐，轴线之间的间隔平均分布
-  <span class="token property">align-content</span><span class="token punctuation">:</span> sapce-around<span class="token punctuation">;</span>  //每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。
-  <span class="token property">align-content</span><span class="token punctuation">:</span> stretch<span class="token punctuation">;</span>  //默认值，轴线占满整个交叉轴
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="项目的属性"><a href="#项目的属性" class="headerlink" title="项目的属性"></a>项目的属性</h3><ul>
-<li>order   项目的排列顺序</li>
-<li>flex-grow</li>
-<li>flex-shrink</li>
-<li>flex-basis</li>
-<li>flex</li>
-<li>align-self</li>
-</ul>
-<h4 id="order-属性"><a href="#order-属性" class="headerlink" title="order 属性"></a>order 属性</h4><p>  order 属性定义项目的排列顺序，数值越小，排列越靠前，默认为 0 。</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.item</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">order</span><span class="token punctuation">:</span> &lt;<span class="token function">integer</span><span class="token punctuation">(</span>整数<span class="token punctuation">)</span>><span class="token punctuation">;</span>  //<span class="token property">order</span><span class="token punctuation">:</span> 2<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="flex-grow-属性"><a href="#flex-grow-属性" class="headerlink" title="flex-grow 属性"></a>flex-grow 属性</h4><p>  flex-grow 属性定义项目的放大比例，默认为 0 ，即如果存在剩余空间，也不放大。</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.item</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">flex-grow</span><span class="token punctuation">:</span> &lt;number><span class="token punctuation">;</span>  //default 0 
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<blockquote>
-<p>如果所有项目的<code>flex-grow</code>属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的<code>flex-grow</code>属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。</p>
-</blockquote>
-<h4 id="flex-shrink-属性"><a href="#flex-shrink-属性" class="headerlink" title="flex-shrink 属性"></a>flex-shrink 属性</h4><p>  flex-shrink 属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.item</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">flex-shrink</span><span class="token punctuation">:</span> &lt;number><span class="token punctuation">;</span> //default 1
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<blockquote>
-<p>如果所有项目的<code>flex-shrink</code>属性都为1，当空间不足时，都将等比例缩小。如果一个项目的<code>flex-shrink</code>属性为0，其他项目都为1，则空间不足时，前者不缩小。</p>
-</blockquote>
-<h4 id="flex-basis-属性"><a href="#flex-basis-属性" class="headerlink" title="flex-basis 属性"></a>flex-basis 属性</h4><p>   <code>flex-basis</code>属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为<code>auto</code>，即项目的本来大小。</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.item</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">flex-basis</span><span class="token punctuation">:</span> &lt;length>  //default auto
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<blockquote>
-<p>它可以设为跟<code>width</code>或<code>height</code>属性一样的值（比如350px），则项目将占据固定空间。</p>
-</blockquote>
-<h4 id="flex-属性"><a href="#flex-属性" class="headerlink" title="flex 属性"></a>flex 属性</h4><p>  <code>flex</code>属性是<code>flex-grow</code>, <code>flex-shrink</code> 和 <code>flex-basis</code>的简写，默认值为<code>0 1 auto</code>。后两个属性可选。</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.item</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">flex</span><span class="token punctuation">:</span> none | [ &lt;<span class="token string">'flex-grow'</span>> &lt;<span class="token string">'flex-shrink'</span>>? || &lt;<span class="token string">'flex-basis'</span>> ]
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<blockquote>
-<p>该属性有两个快捷值：<code>auto</code> (<code>1 1 auto</code>) 和 none (<code>0 0 auto</code>)。</p>
-<p>建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。</p>
-</blockquote>
-<h4 id="align-self-属性"><a href="#align-self-属性" class="headerlink" title="align-self 属性"></a>align-self 属性</h4><p>  <code>align-self</code>属性允许单个项目有与其他项目不一样的对齐方式，可覆盖<code>align-items</code>属性。默认值为<code>auto</code>，表示继承父元素的<code>align-items</code>属性，如果没有父元素，则等同于<code>stretch</code>。</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.item</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">align-self</span><span class="token punctuation">:</span> auto | flex-start | flex-end | center | baseline | stretch<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<blockquote>
-<p>该属性可能取6个值，除了auto，其他都与align-items属性完全一致。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>布局</category>
-      </categories>
-      <tags>
-        <tag>使用手册</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Github的使用</title>
     <url>/2022/03/01/github-de-shi-yong/</url>
     <content><![CDATA[<h1 id="开源项目托管平台"><a href="#开源项目托管平台" class="headerlink" title="开源项目托管平台"></a>开源项目托管平台</h1><p>专门用于免费存放开源项目源代码的网站，叫做开源项目托管平台。目前世界上比较出名的开源项目托管平台<br>主要有以下 3 个：</p>
@@ -306,7 +177,7 @@ git commit -m &quot;第一次提交&quot;<span aria-hidden="true" class="line-nu
 (只有第一次推送内容需要-u origin master，往后都不用了)<h2 id="SSH-key"><a href="#SSH-key" class="headerlink" title="SSH key"></a>SSH key</h2></li>
 </ol>
 <p><strong>SSH key介绍</strong><br>SSH key 的作用：实现本地仓库和 Github 之间免登录的加密数据传输。<br>SSH key 的好处：免登录身份认证、数据加密传输。<br>SSH key 由两部分组成，分别是：<br>① id_rsa（私钥文件，存放于客户端的电脑中即可）<br>② id_rsa.pub（公钥文件，需要配置到 Github 中）<br><strong>生成SSH key</strong></p>
-<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#x79;&#111;&#x75;&#114;&#95;&#101;&#109;&#x61;&#105;&#108;&#x40;&#x65;&#120;&#97;&#109;&#112;&#108;&#101;&#x2e;&#99;&#x6f;&#109;">&#x79;&#111;&#x75;&#114;&#95;&#101;&#109;&#x61;&#105;&#108;&#x40;&#x65;&#120;&#97;&#109;&#112;&#108;&#101;&#x2e;&#99;&#x6f;&#109;</a> 替换为注册 Github 账号时填写的邮箱：</p>
+<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#121;&#111;&#x75;&#114;&#95;&#x65;&#109;&#x61;&#105;&#108;&#x40;&#x65;&#120;&#97;&#x6d;&#x70;&#108;&#x65;&#x2e;&#99;&#x6f;&#109;">&#121;&#111;&#x75;&#114;&#95;&#x65;&#109;&#x61;&#105;&#108;&#x40;&#x65;&#120;&#97;&#x6d;&#x70;&#108;&#x65;&#x2e;&#99;&#x6f;&#109;</a> 替换为注册 Github 账号时填写的邮箱：</p>
 <pre class="line-numbers language-none"><code class="language-none">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>③ 连续敲击 3 次回车，即可在 C:\Users\用户名文件夹.ssh 目录中生成 id_rsa 和 id_rsa.pub 两个文件</p>
 <p><strong>配置SSH key</strong><br>① 使用记事本打开 id_rsa.pub 文件，复制里面的文本内容<br>② 在浏览器中登录 Github，点击头像 -&gt; Settings -&gt; SSH and GPG Keys -&gt; New SSH key<br>③ 将 id_rsa.pub 文件中的内容，粘贴到 Key 对应的文本框中<br>④ 在 Title 文本框中任意填写一个名称，来标识这个 Key 从何而来</p>
@@ -581,6 +452,135 @@ in:description xxx   按照项目描述description 搜索  <span aria-hidden="tr
       </categories>
       <tags>
         <tag>HTTP协议</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Flex布局</title>
+    <url>/2022/07/10/flex-bu-ju/</url>
+    <content><![CDATA[<h3 id="Flex-布局的定义"><a href="#Flex-布局的定义" class="headerlink" title="Flex 布局的定义"></a>Flex 布局的定义</h3><p>Flex 是Flexible Box 的缩写，意为“弹性布局” ，用来为盒状模型提供最大的灵活性。</p>
+<p>任何一个容器都可以指定为Flex 布局。 <code>.box&#123; display:flex;&#125;</code></p>
+<p>行内元素也可以使用Flex 布局。 <code> .box &#123; display:inline-flex;&#125;</code></p>
+<blockquote>
+<p>Webkit 内核的浏览器，必须加上 <strong>-webkit</strong>  前缀 <code> .box &#123;display: -webkit-flex; display:flex;&#125;</code></p>
+<p>在设置了Flex 布局之后，子元素中的  float, clear, vertical-align 属性将失效</p>
+</blockquote>
+<h3 id="Flex-的基本概念"><a href="#Flex-的基本概念" class="headerlink" title="Flex 的基本概念"></a>Flex 的基本概念</h3><p>  在采用了Flex 布局的元素，称为 Flex 容器 （flex container），简称“ 容器”。 它的所有子元素自动成为容器成员，称为 Flex 项目（ flex item）,简称“项目”。</p>
+<p>容器默认存在两根轴： 水平的主轴（main axis） 和垂直的交叉轴（cross axis）。主轴的开始位置（与边框的交叉点）叫做 main start, 结束位置 叫做 main end; 交叉轴的开始位置叫做 cross start,结束位置叫做 cross end。</p>
+<blockquote>
+<p>项目默认沿主轴排列，单个项目占据的主轴空间叫做 main size,占据的交叉轴空间 叫做 cross size</p>
+</blockquote>
+<h3 id="容器的属性"><a href="#容器的属性" class="headerlink" title="容器的属性"></a>容器的属性</h3><ul>
+<li>flex-direction   决定主轴的方向，即项目的排列方向</li>
+<li>flex-wrap  换行方式</li>
+<li>flex-flow   上边两个属性的简写形式</li>
+<li>justify-content   主轴上的对齐方式</li>
+<li>align-items   交叉轴上的对齐方式</li>
+<li>align-content    多根轴线的对齐方式</li>
+</ul>
+<h4 id="flex-direction属性"><a href="#flex-direction属性" class="headerlink" title="flex-direction属性"></a>flex-direction属性</h4><p>flex-direction 属性决定主轴的方向，（即项目的排列方向）</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.box</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">flex-direction</span><span class="token punctuation">:</span>row<span class="token punctuation">;</span>   //主轴为水平方向，起点在左端
+  <span class="token property">flex-direction</span><span class="token punctuation">:</span>row-reverse<span class="token punctuation">;</span>  //起点在右端
+  <span class="token property">flex-direction</span><span class="token punctuation">:</span>column<span class="token punctuation">;</span>  //主轴为垂直方向，起点在上方
+  <span class="token property">flex-direction</span><span class="token punctuation">:</span>column-reverse<span class="token punctuation">;</span>  //起点在下方
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="flex-wrap属性"><a href="#flex-wrap属性" class="headerlink" title="flex-wrap属性"></a>flex-wrap属性</h4><p> flex-wrap 属性，在默认情况下，项目都排在一条线（轴线）上，flex-wrap属性定义，如果一条轴线排不下，如何换行。</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.box</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">flex-wrap</span><span class="token punctuation">:</span> nowrap<span class="token punctuation">;</span>  //默认，不换行
+  <span class="token property">flex-wrap</span><span class="token punctuation">:</span> wrap<span class="token punctuation">;</span>  //换行，第一行在上方或左方（根据主轴方向）
+  <span class="token property">flex-wrap</span><span class="token punctuation">:</span> wrap-reverse<span class="token punctuation">;</span>  //换行，第一行在下方或右方（根据主轴方向）
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="flex-flow-属性"><a href="#flex-flow-属性" class="headerlink" title="flex-flow 属性"></a>flex-flow 属性</h4><p>  flex-flow 属性是 flex-direction 和 flex-wrap 的简写形式，默认值为 ** row  nowrap**。</p>
+<h4 id="justify-content-属性"><a href="#justify-content-属性" class="headerlink" title="justify-content 属性"></a>justify-content 属性</h4><p>  justify-content 属性定义了项目在主轴上的对齐方式。</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.box</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">justify-content</span><span class="token punctuation">:</span> flex-start<span class="token punctuation">;</span>  // 默认值 左对齐
+  <span class="token property">justify-content</span><span class="token punctuation">:</span> flex-end<span class="token punctuation">;</span>  // 右对齐
+  <span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>  //居中
+  <span class="token property">justify-content</span><span class="token punctuation">:</span> space-between<span class="token punctuation">;</span>  //两端对齐，项目之间的间隔都相等
+  <span class="token property">justify-content</span><span class="token punctuation">:</span> space-around<span class="token punctuation">;</span>  //每个项目两侧的间隔相等，所以，项目之间的间隔比项目与边框的间隔大一倍
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="align-items-属性"><a href="#align-items-属性" class="headerlink" title="align-items 属性"></a>align-items 属性</h4><p>  align-items 属性定义项目在交叉轴上如何对齐。</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.box</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">align-items</span><span class="token punctuation">:</span> flex-start<span class="token punctuation">;</span>  // 交叉轴的起点对齐
+  <span class="token property">align-items</span><span class="token punctuation">:</span> flex-end<span class="token punctuation">;</span>  //交叉轴的终点对齐
+  <span class="token property">align-items</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>  //交叉轴的中点对齐
+  <span class="token property">align-items</span><span class="token punctuation">:</span> baseline<span class="token punctuation">;</span>  //项目的第一行文字的基线对齐
+  <span class="token property">align-items</span><span class="token punctuation">:</span> stretch<span class="token punctuation">;</span>  //如果项目未设置高度或设为auto<span class="token punctuation">,</span>将占满整个容器的高度
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="align-content-属性"><a href="#align-content-属性" class="headerlink" title="align-content 属性"></a>align-content 属性</h4><p> align-content 属性定义了多根轴线的对齐方式，如果项目只有一根轴线，则该属性不起作用。</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.box</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">align-content</span><span class="token punctuation">:</span> flex-start<span class="token punctuation">;</span>  //与交叉轴的起点对齐
+  <span class="token property">align-content</span><span class="token punctuation">:</span> flex-end<span class="token punctuation">;</span>  //与交叉轴的终点对齐
+  <span class="token property">align-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>  //与交叉轴的中点对齐
+  <span class="token property">align-content</span><span class="token punctuation">:</span> space-between<span class="token punctuation">;</span>  //与交叉轴两端对齐，轴线之间的间隔平均分布
+  <span class="token property">align-content</span><span class="token punctuation">:</span> sapce-around<span class="token punctuation">;</span>  //每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。
+  <span class="token property">align-content</span><span class="token punctuation">:</span> stretch<span class="token punctuation">;</span>  //默认值，轴线占满整个交叉轴
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="项目的属性"><a href="#项目的属性" class="headerlink" title="项目的属性"></a>项目的属性</h3><ul>
+<li>order   项目的排列顺序</li>
+<li>flex-grow</li>
+<li>flex-shrink</li>
+<li>flex-basis</li>
+<li>flex</li>
+<li>align-self</li>
+</ul>
+<h4 id="order-属性"><a href="#order-属性" class="headerlink" title="order 属性"></a>order 属性</h4><p>  order 属性定义项目的排列顺序，数值越小，排列越靠前，默认为 0 。</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.item</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">order</span><span class="token punctuation">:</span> &lt;<span class="token function">integer</span><span class="token punctuation">(</span>整数<span class="token punctuation">)</span>><span class="token punctuation">;</span>  //<span class="token property">order</span><span class="token punctuation">:</span> 2<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="flex-grow-属性"><a href="#flex-grow-属性" class="headerlink" title="flex-grow 属性"></a>flex-grow 属性</h4><p>  flex-grow 属性定义项目的放大比例，默认为 0 ，即如果存在剩余空间，也不放大。</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.item</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">flex-grow</span><span class="token punctuation">:</span> &lt;number><span class="token punctuation">;</span>  //default 0 
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>如果所有项目的<code>flex-grow</code>属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的<code>flex-grow</code>属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。</p>
+</blockquote>
+<h4 id="flex-shrink-属性"><a href="#flex-shrink-属性" class="headerlink" title="flex-shrink 属性"></a>flex-shrink 属性</h4><p>  flex-shrink 属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.item</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">flex-shrink</span><span class="token punctuation">:</span> &lt;number><span class="token punctuation">;</span> //default 1
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>如果所有项目的<code>flex-shrink</code>属性都为1，当空间不足时，都将等比例缩小。如果一个项目的<code>flex-shrink</code>属性为0，其他项目都为1，则空间不足时，前者不缩小。</p>
+</blockquote>
+<h4 id="flex-basis-属性"><a href="#flex-basis-属性" class="headerlink" title="flex-basis 属性"></a>flex-basis 属性</h4><p>   <code>flex-basis</code>属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为<code>auto</code>，即项目的本来大小。</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.item</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">flex-basis</span><span class="token punctuation">:</span> &lt;length>  //default auto
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>它可以设为跟<code>width</code>或<code>height</code>属性一样的值（比如350px），则项目将占据固定空间。</p>
+</blockquote>
+<h4 id="flex-属性"><a href="#flex-属性" class="headerlink" title="flex 属性"></a>flex 属性</h4><p>  <code>flex</code>属性是<code>flex-grow</code>, <code>flex-shrink</code> 和 <code>flex-basis</code>的简写，默认值为<code>0 1 auto</code>。后两个属性可选。</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.item</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">flex</span><span class="token punctuation">:</span> none | [ &lt;<span class="token string">'flex-grow'</span>> &lt;<span class="token string">'flex-shrink'</span>>? || &lt;<span class="token string">'flex-basis'</span>> ]
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>该属性有两个快捷值：<code>auto</code> (<code>1 1 auto</code>) 和 none (<code>0 0 auto</code>)。</p>
+<p>建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。</p>
+</blockquote>
+<h4 id="align-self-属性"><a href="#align-self-属性" class="headerlink" title="align-self 属性"></a>align-self 属性</h4><p>  <code>align-self</code>属性允许单个项目有与其他项目不一样的对齐方式，可覆盖<code>align-items</code>属性。默认值为<code>auto</code>，表示继承父元素的<code>align-items</code>属性，如果没有父元素，则等同于<code>stretch</code>。</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.item</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">align-self</span><span class="token punctuation">:</span> auto | flex-start | flex-end | center | baseline | stretch<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>该属性可能取6个值，除了auto，其他都与align-items属性完全一致。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>布局</category>
+      </categories>
+      <tags>
+        <tag>使用手册</tag>
       </tags>
   </entry>
   <entry>
@@ -921,218 +921,119 @@ res . end(str)
       </tags>
   </entry>
   <entry>
-    <title>Vue基础入门</title>
-    <url>/2022/04/01/vue-ji-chu-ru-men/</url>
-    <content><![CDATA[<h2 id="什么是vue"><a href="#什么是vue" class="headerlink" title="什么是vue"></a>什么是vue</h2><ol>
-<li>构建用户界面</li>
+    <title>npm与包的简单概念</title>
+    <url>/2022/03/10/npm-yu-bao-de-jian-dan-gai-nian/</url>
+    <content><![CDATA[<h1 id="包"><a href="#包" class="headerlink" title="包"></a>包</h1><ul>
+<li><strong>包的概念：</strong>Node.js 中的第三方模块又叫做包。</li>
+<li><strong>包的来源：</strong>不同于 Node.js 中的内置模块与自定义模块，包是由第三方个人或团队开发出来的，免费供所有人使用。注意：Node.js 中的包都是免费且开源的，不需要付费即可免费下载使用。</li>
+<li><strong>为什么需要包：</strong>由于 Node.js 的内置模块仅提供了一些底层的 API，导致在基于内置模块进行项目开发的时，效率很低。<br>包是基于内置模块封装出来的，提供了更高级、更方便的 API，极大的提高了开发效率。<br>包和内置模块之间的关系，类似于 jQuery 和 浏览器内置 API 之间的关系<span id="more"></span></li>
+<li><strong>从哪里下载包：</strong>国外有一家 IT 公司，叫做 npm, Inc. 这家公司旗下有一个非常著名的网站： <a href="https://www.npmjs.com/">https://www.npmjs.com/</a> ，它是全球最大的包共享平台，你可以从这个网站上搜索到任何你需要的包，只要你有足够的耐心！<br>到目前位置，全球约 1100 多万的开发人员，通过这个包共享平台，开发并共享了超过 120 多万个包 供我们使用。<br>npm, Inc. 公司提供了一个地址为 <a href="https://registry.npmjs.org/">https://registry.npmjs.org/</a> 的服务器，来对外共享所有的包，我们可以从这个服务器上下载自己所需要的包。</li>
+</ul>
+<p>注意：<br> 从 <a href="https://www.npmjs.com/">https://www.npmjs.com/</a> 网站上搜索自己所需要的包<br> 从 <a href="https://registry.npmjs.org/">https://registry.npmjs.org/</a>  服务器上下载自己需要的包</p>
+<ul>
+<li><strong>如何下载包：</strong>npm, Inc. 公司提供了一个包管理工具，我们可以使用这个包管理工具，从 <a href="https://registry.npmjs.org/">https://registry.npmjs.org/</a> 服务器把需要的包下载到本地使用。<br>这个包管理工具的名字叫做 Node Package Manager（简称 npm 包管理工具），这个包管理工具随着 Node.js 的安装包一起被安装到了用户的电脑上。</li>
+</ul>
+<h1 id="npm-的使用"><a href="#npm-的使用" class="headerlink" title="npm 的使用"></a>npm 的使用</h1><ul>
+<li>格式化时间的传统做法</li>
+</ul>
+<p>创建格式化时间的自定义模块<br>定义格式化时间的方法<br>创建补零函数<br>从自定义模块中导出格式化时间的函数<br>导入格式化时间的自定义模块<br>调用格式化时间的函数</p>
+<ul>
+<li>格式化时间的高级做法</li>
+</ul>
+<p>使用 npm 包管理工具，在项目中安装格式化时间的包 moment<br>使用 require() 导入格式化时间的包<br>参考 moment 的官方 API 文档对时间进行格式化</p>
+<h2 id="在项目中安装包的命令"><a href="#在项目中安装包的命令" class="headerlink" title="在项目中安装包的命令"></a>在项目中安装包的命令</h2><p>如果想在项目中安装指定名称的包，需要运行如下的命令</p>
+<pre class="line-numbers language-none"><code class="language-none">npm install 包的完整名称
+&#x2F;&#x2F;简写格式
+npm i 包的完整名称<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="初次装包后多了哪些文件"><a href="#初次装包后多了哪些文件" class="headerlink" title="初次装包后多了哪些文件"></a>初次装包后多了哪些文件</h2><p>初次装包完成后，在项目文件夹下多一个叫做 node_modules 的文件夹和 package-lock.json 的配置文件。<br>其中：</p>
+<ul>
+<li>node_modules 文件夹用来存放所有已安装到项目中的包。require() 导入第三方包时，就是从这个目录中查找并加载包。</li>
+<li>package-lock.json 配置文件用来记录 node_modules 目录下的每一个包的下载信息，例如包的名字、版本号、下载地址等。<br>注意：程序员不要手动修改 node_modules 或 package-lock.json 文件中的任何代码，npm 包管理工具会自动维护它们。<h2 id="安装指定版本的包"><a href="#安装指定版本的包" class="headerlink" title="安装指定版本的包"></a>安装指定版本的包</h2>默认情况下，使用 npm install 命令安装包的时候，会自动安装最新版本的包。如果需要安装指定版本的包，可以在包名之后，通过 @ 符号指定具体的版本，<pre class="line-numbers language-none"><code class="language-none">npm i moment@2.22.2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="包管理配置文件"><a href="#包管理配置文件" class="headerlink" title="包管理配置文件"></a>包管理配置文件</h1>npm 规定，在项目根目录中，必须提供一个叫做 package.json 的包管理配置文件。用来记录与项目有关的一些配置信息。例如：</li>
+<li>项目的名称、版本号、描述等</li>
+<li>项目中都用到了哪些包</li>
+<li>哪些包只在开发期间会用到 </li>
+<li>那些包在开发和部署时都需要用到</li>
+</ul>
+<h2 id="如何记录项目中安装了哪些包"><a href="#如何记录项目中安装了哪些包" class="headerlink" title="如何记录项目中安装了哪些包"></a>如何记录项目中安装了哪些包</h2><p>在项目根目录中，创建一个叫做 package.json 的配置文件，即可用来记录项目中安装了哪些包。从而方便剔除 node_modules 目录之后，在团队成员之间共享项目的源代码。</p>
+<p>注意：今后在项目开发中，一定要把 node_modules 文件夹，添加到 .gitignore 忽略文件中。</p>
+<h2 id="快速创建-package-json"><a href="#快速创建-package-json" class="headerlink" title="快速创建 package.json"></a>快速创建 package.json</h2><p>npm 包管理工具提供了一个快捷命令，可以在执行命令时所处的目录中，快速创建 package.json 这个包管理配置文件</p>
+<pre class="line-numbers language-none"><code class="language-none">npm init -y<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>注意:</strong></p>
+<ul>
+<li>上述命令只能在英文的目录下成功运行！所以，项目文件夹的名称一定要使用英文命名，不要使用中文，不能出现空格。</li>
+<li>运行 npm install 命令安装包的时候，npm 包管理工具会自动把包的名称和版本号，记录到 package.json 中。</li>
+</ul>
+<h2 id="一次性安装所有的包"><a href="#一次性安装所有的包" class="headerlink" title="一次性安装所有的包"></a>一次性安装所有的包</h2><p>当我们拿到一个剔除了 node_modules 的项目之后，需要先把所有的包下载到项目中，才能将项目运行起来<br>可以运行 npm install 命令（或 npm i）一次性安装所有的依赖包</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;执行npm install 命令时，npm包管理工具会先读取package. json中的dependencies 节点，
+&#x2F;&#x2F;读取到记录的所有依赖包名称和版本号之后，npm包管理工具会把这些包次性下载到项目中
+npm install<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="卸载包"><a href="#卸载包" class="headerlink" title="卸载包"></a>卸载包</h2><p>可以运行 npm uninstall 命令，来卸载指定的包</p>
+<pre class="line-numbers language-none"><code class="language-none">npm uninstall 包的完整名称<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h2><ol>
+<li>dependencies 节点<br>package.json 文件中，有一个 dependencies 节点，专门用来记录您使用 npm install 命令安装了哪些包。</li>
+<li>devDependencies 节点<br>如果某些包只在项目开发阶段会用到，在项目上线之后不会用到，则建议把这些包记录到 devDependencies 节点中。与之对应的，如果某些包在开发和项目上线之后都需要用到，则建议把这些包记录到 dependencies 节点中。<br>您可以使用如下的命令，将包记录到 devDependencies 节点中<pre class="line-numbers language-none"><code class="language-none">npm install 包名 --save-dev   &#x2F;&#x2F;完整写法
+npm i 包名 -D     &#x2F;&#x2F;简写<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="切换-npm-的下包镜像源"><a href="#切换-npm-的下包镜像源" class="headerlink" title="切换 npm 的下包镜像源"></a>切换 npm 的下包镜像源</h2>下包的镜像源，指的就是下包的服务器地址<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;查看当前的下包镜像源
+npm config get registry
+&#x2F;&#x2F;将下包的镜像源切换为淘宝镜像源
+npm config set registry&#x3D;https :&#x2F;&#x2F;registry .npm. taobao .org&#x2F;
+&#x2F;&#x2F;检查镜像源是否下载成功
+npm config get registry<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="nrm"><a href="#nrm" class="headerlink" title="nrm"></a>nrm</h2>为了更方便的切换下包的镜像源，我们可以安装 nrm 这个小工具，利用 nrm 提供的终端命令，可以快速查看和切换下包的镜像源。<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;通过npm包管理器，将nrm安装为全局可用的工具
+npm i nrm -g
+&#x2F;&#x2F;查看所有可用的镜像源
+nrm ls
+&#x2F;&#x2F;将下包的镜像源切换为taobao 镜像
+nrm use taobao<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1 id="包的分类"><a href="#包的分类" class="headerlink" title="包的分类"></a>包的分类</h1>分为项目包和全局包<h2 id="项目包"><a href="#项目包" class="headerlink" title="项目包"></a>项目包</h2>那些被安装到项目的 node_modules 目录中的包，都是项目包。</li>
 </ol>
+<p>项目包又分为两类，分别是：</p>
 <ul>
-<li>用vue往HTML页面中填充数据，非常方便</li>
+<li>开发依赖包（被记录到 devDependencies 节点中的包，只在开发期间会用到）</li>
+<li>核心依赖包（被记录到 dependencies 节点中的包，在开发期间和项目上线之后都会用到）</li>
 </ul>
-<ol start="2">
-<li>框架</li>
+<pre class="line-numbers language-none"><code class="language-none">npm i 包名 -D
+&#x2F;&#x2F;开发依赖包(会被记录到devDependencies 节点下)
+npm i包名
+&#x2F;&#x2F;核心依赖包(会被记录到dependencies 节点下<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="全局包"><a href="#全局包" class="headerlink" title="全局包"></a>全局包</h2><p>在执行 npm install 命令时，如果提供了 -g 参数，则会把包安装为全局包。<br>全局包会被安装到 C:\Users\用户目录\AppData\Roaming\npm\node_modules 目录下。</p>
+<pre class="line-numbers language-none"><code class="language-none">npm i 包名 -g    &#x2F;&#x2F;全局安装指定的包
+npm uninstall 包名 -g   &#x2F;&#x2F;卸载全局安装的包<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>注意：</p>
+<ul>
+<li>只有工具性质的包，才有全局安装的必要性。因为它们提供了好用的终端命令。</li>
+<li>判断某个包是否需要全局安装后才能使用，可以参考官方提供的使用说明即可</li>
+</ul>
+<h2 id="i5ting-toc"><a href="#i5ting-toc" class="headerlink" title="i5ting_toc"></a>i5ting_toc</h2><p>i5ting_toc 是一个可以把 md 文档转为 html 页面的小工具，使用步骤如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;将i5ting toc安装为全局包
+npm install -g i5ting_toc
+&#x2F;&#x2F;调用i5ting toc,轻松实现md转html的功能
+i5ting_toc -f 要转换的md文件路径 -o<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="规范的包结构"><a href="#规范的包结构" class="headerlink" title="规范的包结构"></a>规范的包结构</h2><p>在清楚了包的概念、以及如何下载和使用包之后，接下来，我们深入了解一下包的内部结构。<br>一个规范的包，它的组成结构，必须符合以下 3 点要求：</p>
+<ul>
+<li>包必须以单独的目录而存在</li>
+<li>包的顶级目录下要必须包含 package.json 这个包管理配置文件</li>
+<li>package.json 中必须包含 name，version，main 这三个属性，分别代表包的名字、版本号、包的入口。<br>注意：以上 3 点要求是一个规范的包结构必须遵守的格式，关于更多的约束，可以参考如下网址：<br><a href="https://yarnpkg.com/zh-Hans/docs/package-json">https://yarnpkg.com/zh-Hans/docs/package-json</a></li>
+</ul>
+<h2 id="发布包"><a href="#发布包" class="headerlink" title="发布包"></a>发布包</h2><ol>
+<li>注册npm 账号</li>
+<li>登录npm 账号<br>npm 账号注册完成后，可以在终端中执行 npm login 命令，依次输入用户名、密码、邮箱后，即可登录成功<br>注意：在运行 npm login 命令之前，必须先把下包的服务器地址切换为 npm 的官方服务器。否则会导致发布包失败！</li>
+<li>把包发布到npm上<br>将终端切换到包的根目录之后，运行 npm publish 命令，即可将包发布到 npm 上（注意：包名不能雷同）</li>
+<li>删除已发布的包</li>
 </ol>
+<p>运行 npm unpublish 包名 –force 命令，即可从 npm 删除已发布的包。注意：</p>
 <ul>
-<li>框架是一套现成的解决方案，程序员只能遵守框架内的规范，去编写自己的业务功能！</li>
-<li>要学习vue，就是在学习vue框架中规定的用法！</li>
-<li>vue的指令，组件（是对UI结构的复用），路由，Vuex，vue组件库</li>
-<li>只有把上面罗列的知识，掌握之后，才有开发vue项目的能力</li>
-</ul>
-<span id="more"></span>
-
-<p><strong>重点：</strong></p>
-<ol>
-<li>能够知道 vue 的基本使用步骤：①导入vue.js文件，②new Vue()构造函数，得到vm实例对象，③声明 el 和 data 数据节点，④ MVVM 的对应关系</li>
-<li>掌握 vue 中常见指令的基本用法：插值表达式，v-bind(:),v-on(@),v-if和v-else;v-for,:key,v-model</li>
-</ol>
-<h2 id="vue-的特性"><a href="#vue-的特性" class="headerlink" title="vue 的特性"></a>vue 的特性</h2><p>1.数据驱动视图</p>
-<ul>
-<li>数据的变化<strong>会驱动视图</strong>自动更新</li>
-<li>好处：程序员只管把数据维护好，那么页面结构会被vue自动渲染出来!</li>
-</ul>
-<p>2.双向数据绑定</p>
-<blockquote>
-<p>在网页中，form表单负责<strong>采集数据</strong>，Ajax负责<strong>提交数据</strong>！</p>
-</blockquote>
-<ul>
-<li>js数据的变化，会被自动渲染到页面上，开发者不需要手动操作DOM元素</li>
-<li>页面上表单采集的数据发生变化的时候，会被vue自动获取到，并更新到js数据中<blockquote>
-<p>注意：数据驱动视图和双向数据绑定的底层原理是 MVVM（Mode 数据源、View 视图、ViewModel 就是 vue 的实例）</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="vue的使用"><a href="#vue的使用" class="headerlink" title="vue的使用"></a>vue的使用</h2><ol>
-<li>导入vue.js的script脚本文件</li>
-<li>在页面中声明一个将要被vue所控制的DOM区域</li>
-<li>创建vm 实例对象（vue实例对象）</li>
-</ol>
-<pre class="line-numbers language-none"><code class="language-none">&lt;!-- 希望Vue能够控制下面的这个div 帮我们在把数据填充到div 内部 --&gt;
-&lt;div id&#x3D;&quot;app&quot;&gt;&#123;&#123; username &#125;&#125;&lt;&#x2F;div&gt;
-&lt;!-- 1.导入Vue的库文件，在Windows全局就有了Vue构造函数 --&gt;
-&lt;script src&#x3D;&quot;.&#x2F;lib&#x2F;vue-2.6.12.js&quot;&gt;&lt;&#x2F;script&gt;
-&lt;!-- 2.创建Vue实例对象 --&gt;
-&lt;script&gt;
-    &#x2F;&#x2F; 创建Vue的实例对象
-    const vm &#x3D; new Vue(&#123;
-        &#x2F;&#x2F; el 属性是固定写法，表示当前vm实例要控制页面上的哪个区域，接收的值是一个选择器
-        el: &#39;#app&#39;,
-        &#x2F;&#x2F; data 对象就是要渲染到页面上的数据
-        data: &#123;
-            username: &#39;zhangsan&#39;
-        &#125;
-    &#125;)
-&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="vue-的调试工具"><a href="#vue-的调试工具" class="headerlink" title="vue 的调试工具"></a>vue 的调试工具</h2><ol>
-<li>安装vue-devtools调试工具：vue官方提供的vue-devtools调试工具，能够方便对开发者对vue项目进行调试与开发<blockquote>
-<p>Chrome浏览器在线安装 <a href="https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd">vue-devtools</a></p>
-</blockquote>
-</li>
-</ol>
-<h2 id="vue-的指令"><a href="#vue-的指令" class="headerlink" title="vue 的指令"></a>vue 的指令</h2><h3 id="内容渲染指令"><a href="#内容渲染指令" class="headerlink" title="内容渲染指令"></a>内容渲染指令</h3><ol>
-<li><code>v-text</code> ：<code>&lt;p v-text=&quot;gender&quot;&gt;性别&lt;/p&gt;</code>指令的缺点：会覆盖元素内部原有的内容！</li>
-<li><code>&#123;&#123; &#125;&#125;</code> 插值表达式：在实际开发中用的最多，只是内容的占位符，不会覆盖原有的内容！</li>
-<li><code>v-html</code> 指令的作用：可以把带有标签的字符串，渲染成真正的 HTML 内容！<blockquote>
-<p> 注意：插值表达式只能用在元素的<strong>内容节点</strong>中，不能用在元素的<strong>属性节点</strong>中！</p>
-</blockquote>
-<h3 id="属性绑定指令"><a href="#属性绑定指令" class="headerlink" title="属性绑定指令"></a>属性绑定指令</h3></li>
-</ol>
-<ul>
-<li>在 vue 中，可以使用 <code>v-bind:</code> 指令，为元素的属性动态绑定值；</li>
-<li>简写是英文的 <code>:</code></li>
-<li>在使用 v-bind 属性绑定期间，如果绑定内容需要进行动态拼接，则字符串的外面应该包裹单引号，例如 <pre class="line-numbers language-none"><code class="language-none">&lt;div :title&#x3D;&quot;&#39;box&#39; + index&quot;&gt;这是一个 div&lt;&#x2F;div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h3 id="事件绑定指令"><a href="#事件绑定指令" class="headerlink" title="事件绑定指令"></a>事件绑定指令</h3></li>
-</ul>
-<ol>
-<li><code>v-on</code>事件绑定指令，用来辅助程序员为DOM元素绑定事件监听，简写形式：<code>@</code></li>
-<li>语法格式为：通过v-on绑定的事件处理函数，需要在<code>methods</code>节点中进行声明</li>
-</ol>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token operator">&lt;</span>button @click<span class="token operator">=</span><span class="token string">"add"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
-<span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-   <span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-			<span class="token comment">// 如果在方法中要修改 data 中的数据，可以通过 this 访问到</span>
-			<span class="token keyword">this</span><span class="token punctuation">.</span>count <span class="token operator">+=</span> <span class="token number">1</span>
-   <span class="token punctuation">&#125;</span>
-   <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<blockquote>
-<p>注意：原生 DOM 对象有 onclick、oninput、onkeyup 等原生事件，替换为 vue 的事件绑定形式后，<br>分别为：v-on:click、v-on:input、v-on:keyup</p>
-</blockquote>
-<p>3.<code>$event</code> 的应用场景：如果默认的事件对象 e 被覆盖了，则可以手动传递一个 $event。例如：</p>
-<pre class="line-numbers language-none"><code class="language-none">&lt;button @click&#x3D;&quot;add(3, $event)&quot;&gt;&lt;&#x2F;button&gt;
-  methods: &#123;
-     add(n, e) &#123;
-  			&#x2F;&#x2F; 如果在方法中要修改 data 中的数据，可以通过 this 访问到
-  			this.count +&#x3D; 1
-     &#125;
-  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>4.事件修饰符：在事件处理函数中调用 event.preventDefault() 或 event.stopPropagation() 是非常常见的需求。因此，vue 提供了事件修饰符的概念，来辅助程序员更方便的对事件的触发进行控制</p>
-<ul>
-<li><p><code>.prevent</code>：阻止默认行为</p>
-   <pre class="line-numbers language-none"><code class="language-none">&lt;a @click.prevent&#x3D;&quot;xxx&quot;&gt;链接&lt;&#x2F;a&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><code>.stop</code> ：阻止事件冒泡</p>
-   <pre class="line-numbers language-none"><code class="language-none">&lt;button @click.stop&#x3D;&quot;xxx&quot;&gt;按钮&lt;&#x2F;button&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-</ul>
-<p>5.案件修饰符：在监听键盘事件时，我们经常需要判断详细的按键。此时，可以为键盘相关的事件添加按键修饰符，</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;只有在 key 是  Enter 时调用  vm.submit() 
-&lt;input @keyup.enter&#x3D;&quot;submit&quot;&gt;
-&#x2F;&#x2F;只有在 key 是  Esc 时调用  vm.clearInput() 
-&lt;input @keyup.esc&#x3D;&quot;clearInput&quot;&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="双向绑定指令"><a href="#双向绑定指令" class="headerlink" title="双向绑定指令"></a>双向绑定指令</h3><p>vue 提供了 <code>v-model</code> 双向数据绑定指令，用来辅助开发者在不操作 DOM 的前提下，快速获取表单的数据。</p>
-<ol>
-<li>input 输入框<ul>
-<li>type&#x3D;”radio”</li>
-<li>type&#x3D;”checkbox”</li>
-<li>type&#x3D;”xxxx”</li>
-</ul>
-</li>
-<li>textarea</li>
-<li>select</li>
-<li>v-model 指令的修饰符<ul>
-<li>.number:自动将用户的输入值转为数值类型 <code>&lt;input v-model.number=&quot;age&quot;/&gt;</code></li>
-</ul>
-<ul>
-<li>.trim: 自动过滤用户输入的首尾空白字符  <code>&lt;inut v-model.trim=&quot;msg&quot;/&gt;</code></li>
-<li>.lazy： 在”change”时而非”input”时更新 <code>&lt;input v-model.lazy=&quot;msg&quot;/&gt;</code></li>
-</ul>
-</li>
-</ol>
-<h3 id="条件渲染指令"><a href="#条件渲染指令" class="headerlink" title="条件渲染指令"></a>条件渲染指令</h3><p>条件渲染指令用来辅助开发者按需控制 DOM 的显示与隐藏。条件渲染指令有如下两个，分别是：</p>
-<ul>
-<li>v-if</li>
-<li>v-show</li>
-</ul>
-<ol>
-<li><code>v-show</code> 的原理是：动态为元素添加或移除 <code>display: none</code> 样式，来实现元素的显示和隐藏<ul>
-<li>如果要频繁的切换元素的显示状态，用 v-show 性能会更好</li>
-</ul>
-</li>
-<li><code>v-if</code> 的原理是：每次动态创建或移除元素，实现元素的显示和隐藏<ul>
-<li>如果刚进入页面的时候，某些元素默认不需要被展示，而且后期这个元素很可能也不需要被展示出来，此时 v-if 性能更好</li>
-</ul>
-</li>
-</ol>
-<blockquote>
-<p> 在实际开发中，绝大多数情况，不用考虑性能问题，直接使用 v-if 就好了！！！</p>
-</blockquote>
-<ol start="3">
-<li><p><code>v-else</code> : v-if 可以单独使用，或配合 v-else 指令一起使用：v-else 指令必须配合 v-if 指令一起使用，否则它将不会被识别！</p>
-<h3 id="列表渲染指令"><a href="#列表渲染指令" class="headerlink" title="列表渲染指令"></a>列表渲染指令</h3><p>vue 提供了 <code>v-for</code> 列表渲染指令，用来辅助开发者基于一个数组来循环渲染一个列表结构。v-for 指令需要使<br>用 <code>item in items</code> 形式的特殊语法，其中：</p>
-<ul>
-<li>items 是待循环的数组</li>
-<li>item 是被循环的每一项</li>
-</ul>
-</li>
-</ol>
-<ul>
-<li>v-for 指令还支持一个可选的第二个参数，即当前项的索引。语法格式为 (item, index) in items，<blockquote>
-<p>注意：v-for 指令中的 item 项和 index 索引都是形参，可以根据需要进行重命名。例如 (user, i) in userlist</p>
-</blockquote>
-</li>
-</ul>
-<p><strong>使用 key 维护列表的状态</strong>:<br>当列表的数据变化时，默认情况下，vue 会尽可能的复用已存在的 DOM 元素，从而提升渲染的性能。但这种默认的性能优化策略，会导致有状态的列表无法被正确更新。<br>为了给 vue 一个提示，以便它能跟踪每个节点的身份，从而在保证有状态的列表被正确更新的前提下，提升渲<br>染的性能。此时，需要为每项提供一个唯一的 key 属性：<br><strong>key 的注意事项</strong>:<br>① key 的值只能是字符串或数字类型<br>② key 的值必须具有唯一性（即：key 的值不能重复）<br>③ 建议把数据项 id 属性的值作为 key 的值（因为 id 属性的值具有唯一性）<br>④ 使用 index 的值当作 key 的值没有任何意义（因为 index 的值不具有唯一性）<br>⑤ 建议使用 v-for 指令时一定要指定 key 的值（既提升性能、又防止列表状态紊乱）</p>
-<h2 id="Vue的过滤器"><a href="#Vue的过滤器" class="headerlink" title="Vue的过滤器"></a>Vue的过滤器</h2><h3 id="定义过滤器"><a href="#定义过滤器" class="headerlink" title="定义过滤器"></a>定义过滤器</h3><p>  在创建vue 实例期间，可以在 <code>filters</code> 节点中定义过滤器，</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">count vm<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
-  <span class="token literal-property property">el</span><span class="token operator">:</span><span class="token string">'#app'</span><span class="token punctuation">,</span>
-  <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-     <span class="token literal-property property">message</span><span class="token operator">:</span> <span class="token string">'hello vue.js'</span><span class="token punctuation">,</span>
-     <span class="token literal-property property">info</span><span class="token operator">:</span> <span class="token string">'title info'</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token literal-property property">filters</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>    <span class="token comment">//在filters 节点下定义"过滤器"</span>
-    <span class="token function">capitalize</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>    <span class="token comment">//把首字母转为大写的过滤器</span>
-       <span class="token keyword">return</span> str<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> str<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-   <span class="token punctuation">&#125;</span>
-  <span class="token punctuation">&#125;</span>
-  
-
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="私有过滤器和全局过滤器"><a href="#私有过滤器和全局过滤器" class="headerlink" title="私有过滤器和全局过滤器"></a>私有过滤器和全局过滤器</h3><p>在 filters 节点下定义的过滤器，称为“私有过滤器”，因为它只能在当前 vm 实例所控制的 el 区域内使用。<br>如果希望在多个 vue 实例之间共享过滤器，则可以按照如下的格式定义全局过滤器：</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">  <span class="token comment">//全局过滤器--独立于每个 vm 实例之外</span>
-  <span class="token comment">//Vue.filters() 方法，接收两个参数</span>
-  <span class="token comment">//第一个参数，是全局过滤器的 "名字"</span>
-  <span class="token comment">//第二个参数，是全局过滤器的 "处理函数"</span>
-Vue<span class="token punctuation">.</span><span class="token function">filters</span><span class="token punctuation">(</span><span class="token string">'capitalize'</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token operator">=></span><span class="token punctuation">&#123;</span>
-   <span class="token keyword">return</span> str<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span> str<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'~~'</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="过滤器的调用"><a href="#过滤器的调用" class="headerlink" title="过滤器的调用"></a>过滤器的调用</h3><p>过滤器可以串联的进行调用 <code>&#123;&#123;message | filterA | filterB&#125;&#125;</code>  中间用 ‘|’ 隔开<br>A–处理过的值传递给 B ，最终把 B处理的结果渲染到页面上</p>
-<h3 id="过滤器传参"><a href="#过滤器传参" class="headerlink" title="过滤器传参"></a>过滤器传参</h3><p>  过滤器的本质是JavaScript 函数，因此可以接收参数，</p>
-<pre class="line-numbers language-none"><code class="language-none">  &lt;p&gt;&#123;&#123;message | filterA(arg1,arg2) &#125;&#125;&lt;&#x2F;p&gt;
-   Vue.filter(&#39;filterA&#39;,(msg,arg1,arg2)&#x3D;&gt;&#123;
-   &#x2F;&#x2F;过滤器代码逻辑
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="过滤器的兼容性"><a href="#过滤器的兼容性" class="headerlink" title="过滤器的兼容性"></a>过滤器的兼容性</h3><p>过滤器仅在 vue 2.x 和 1.x 中受支持，在 vue 3.x 的版本中剔除了过滤器相关的功能。<br>在企业级项目开发中：</p>
-<ul>
-<li>如果使用的是 2.x 版本的 vue，则依然可以使用过滤器相关的功能</li>
-<li>如果项目已经升级到了 3.x 版本的 vue，官方建议使用计算属性或方法代替被剔除的过滤器功能<br>具体的迁移指南，请参考 vue 3.x 的官方文档给出的说明：<a href="https://v3.vuejs.org/guide/migration/filters.html#migration-strategy">https://v3.vuejs.org/guide/migration/filters.html#migration-strategy</a></li>
+<li>npm unpublish 命令只能删除 72 小时以内发布的包</li>
+<li>npm unpublish 删除的包，在 24 小时内不允许重复发布</li>
+<li>发布包的时候要慎重，尽量不要往 npm 上发布没有意义的包！</li>
 </ul>
 ]]></content>
       <categories>
-        <category>Vue的相关基础知识</category>
+        <category>工具</category>
       </categories>
       <tags>
-        <tag>Vue</tag>
+        <tag>npm与包</tag>
       </tags>
   </entry>
   <entry>
@@ -1355,119 +1256,218 @@ git reset <span class="token operator">--</span>hard <span class="token operator
       </tags>
   </entry>
   <entry>
-    <title>npm与包的简单概念</title>
-    <url>/2022/03/10/npm-yu-bao-de-jian-dan-gai-nian/</url>
-    <content><![CDATA[<h1 id="包"><a href="#包" class="headerlink" title="包"></a>包</h1><ul>
-<li><strong>包的概念：</strong>Node.js 中的第三方模块又叫做包。</li>
-<li><strong>包的来源：</strong>不同于 Node.js 中的内置模块与自定义模块，包是由第三方个人或团队开发出来的，免费供所有人使用。注意：Node.js 中的包都是免费且开源的，不需要付费即可免费下载使用。</li>
-<li><strong>为什么需要包：</strong>由于 Node.js 的内置模块仅提供了一些底层的 API，导致在基于内置模块进行项目开发的时，效率很低。<br>包是基于内置模块封装出来的，提供了更高级、更方便的 API，极大的提高了开发效率。<br>包和内置模块之间的关系，类似于 jQuery 和 浏览器内置 API 之间的关系<span id="more"></span></li>
-<li><strong>从哪里下载包：</strong>国外有一家 IT 公司，叫做 npm, Inc. 这家公司旗下有一个非常著名的网站： <a href="https://www.npmjs.com/">https://www.npmjs.com/</a> ，它是全球最大的包共享平台，你可以从这个网站上搜索到任何你需要的包，只要你有足够的耐心！<br>到目前位置，全球约 1100 多万的开发人员，通过这个包共享平台，开发并共享了超过 120 多万个包 供我们使用。<br>npm, Inc. 公司提供了一个地址为 <a href="https://registry.npmjs.org/">https://registry.npmjs.org/</a> 的服务器，来对外共享所有的包，我们可以从这个服务器上下载自己所需要的包。</li>
-</ul>
-<p>注意：<br> 从 <a href="https://www.npmjs.com/">https://www.npmjs.com/</a> 网站上搜索自己所需要的包<br> 从 <a href="https://registry.npmjs.org/">https://registry.npmjs.org/</a>  服务器上下载自己需要的包</p>
-<ul>
-<li><strong>如何下载包：</strong>npm, Inc. 公司提供了一个包管理工具，我们可以使用这个包管理工具，从 <a href="https://registry.npmjs.org/">https://registry.npmjs.org/</a> 服务器把需要的包下载到本地使用。<br>这个包管理工具的名字叫做 Node Package Manager（简称 npm 包管理工具），这个包管理工具随着 Node.js 的安装包一起被安装到了用户的电脑上。</li>
-</ul>
-<h1 id="npm-的使用"><a href="#npm-的使用" class="headerlink" title="npm 的使用"></a>npm 的使用</h1><ul>
-<li>格式化时间的传统做法</li>
-</ul>
-<p>创建格式化时间的自定义模块<br>定义格式化时间的方法<br>创建补零函数<br>从自定义模块中导出格式化时间的函数<br>导入格式化时间的自定义模块<br>调用格式化时间的函数</p>
-<ul>
-<li>格式化时间的高级做法</li>
-</ul>
-<p>使用 npm 包管理工具，在项目中安装格式化时间的包 moment<br>使用 require() 导入格式化时间的包<br>参考 moment 的官方 API 文档对时间进行格式化</p>
-<h2 id="在项目中安装包的命令"><a href="#在项目中安装包的命令" class="headerlink" title="在项目中安装包的命令"></a>在项目中安装包的命令</h2><p>如果想在项目中安装指定名称的包，需要运行如下的命令</p>
-<pre class="line-numbers language-none"><code class="language-none">npm install 包的完整名称
-&#x2F;&#x2F;简写格式
-npm i 包的完整名称<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h2 id="初次装包后多了哪些文件"><a href="#初次装包后多了哪些文件" class="headerlink" title="初次装包后多了哪些文件"></a>初次装包后多了哪些文件</h2><p>初次装包完成后，在项目文件夹下多一个叫做 node_modules 的文件夹和 package-lock.json 的配置文件。<br>其中：</p>
-<ul>
-<li>node_modules 文件夹用来存放所有已安装到项目中的包。require() 导入第三方包时，就是从这个目录中查找并加载包。</li>
-<li>package-lock.json 配置文件用来记录 node_modules 目录下的每一个包的下载信息，例如包的名字、版本号、下载地址等。<br>注意：程序员不要手动修改 node_modules 或 package-lock.json 文件中的任何代码，npm 包管理工具会自动维护它们。<h2 id="安装指定版本的包"><a href="#安装指定版本的包" class="headerlink" title="安装指定版本的包"></a>安装指定版本的包</h2>默认情况下，使用 npm install 命令安装包的时候，会自动安装最新版本的包。如果需要安装指定版本的包，可以在包名之后，通过 @ 符号指定具体的版本，<pre class="line-numbers language-none"><code class="language-none">npm i moment@2.22.2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h1 id="包管理配置文件"><a href="#包管理配置文件" class="headerlink" title="包管理配置文件"></a>包管理配置文件</h1>npm 规定，在项目根目录中，必须提供一个叫做 package.json 的包管理配置文件。用来记录与项目有关的一些配置信息。例如：</li>
-<li>项目的名称、版本号、描述等</li>
-<li>项目中都用到了哪些包</li>
-<li>哪些包只在开发期间会用到 </li>
-<li>那些包在开发和部署时都需要用到</li>
-</ul>
-<h2 id="如何记录项目中安装了哪些包"><a href="#如何记录项目中安装了哪些包" class="headerlink" title="如何记录项目中安装了哪些包"></a>如何记录项目中安装了哪些包</h2><p>在项目根目录中，创建一个叫做 package.json 的配置文件，即可用来记录项目中安装了哪些包。从而方便剔除 node_modules 目录之后，在团队成员之间共享项目的源代码。</p>
-<p>注意：今后在项目开发中，一定要把 node_modules 文件夹，添加到 .gitignore 忽略文件中。</p>
-<h2 id="快速创建-package-json"><a href="#快速创建-package-json" class="headerlink" title="快速创建 package.json"></a>快速创建 package.json</h2><p>npm 包管理工具提供了一个快捷命令，可以在执行命令时所处的目录中，快速创建 package.json 这个包管理配置文件</p>
-<pre class="line-numbers language-none"><code class="language-none">npm init -y<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><strong>注意:</strong></p>
-<ul>
-<li>上述命令只能在英文的目录下成功运行！所以，项目文件夹的名称一定要使用英文命名，不要使用中文，不能出现空格。</li>
-<li>运行 npm install 命令安装包的时候，npm 包管理工具会自动把包的名称和版本号，记录到 package.json 中。</li>
-</ul>
-<h2 id="一次性安装所有的包"><a href="#一次性安装所有的包" class="headerlink" title="一次性安装所有的包"></a>一次性安装所有的包</h2><p>当我们拿到一个剔除了 node_modules 的项目之后，需要先把所有的包下载到项目中，才能将项目运行起来<br>可以运行 npm install 命令（或 npm i）一次性安装所有的依赖包</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;执行npm install 命令时，npm包管理工具会先读取package. json中的dependencies 节点，
-&#x2F;&#x2F;读取到记录的所有依赖包名称和版本号之后，npm包管理工具会把这些包次性下载到项目中
-npm install<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h2 id="卸载包"><a href="#卸载包" class="headerlink" title="卸载包"></a>卸载包</h2><p>可以运行 npm uninstall 命令，来卸载指定的包</p>
-<pre class="line-numbers language-none"><code class="language-none">npm uninstall 包的完整名称<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h2><ol>
-<li>dependencies 节点<br>package.json 文件中，有一个 dependencies 节点，专门用来记录您使用 npm install 命令安装了哪些包。</li>
-<li>devDependencies 节点<br>如果某些包只在项目开发阶段会用到，在项目上线之后不会用到，则建议把这些包记录到 devDependencies 节点中。与之对应的，如果某些包在开发和项目上线之后都需要用到，则建议把这些包记录到 dependencies 节点中。<br>您可以使用如下的命令，将包记录到 devDependencies 节点中<pre class="line-numbers language-none"><code class="language-none">npm install 包名 --save-dev   &#x2F;&#x2F;完整写法
-npm i 包名 -D     &#x2F;&#x2F;简写<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h2 id="切换-npm-的下包镜像源"><a href="#切换-npm-的下包镜像源" class="headerlink" title="切换 npm 的下包镜像源"></a>切换 npm 的下包镜像源</h2>下包的镜像源，指的就是下包的服务器地址<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;查看当前的下包镜像源
-npm config get registry
-&#x2F;&#x2F;将下包的镜像源切换为淘宝镜像源
-npm config set registry&#x3D;https :&#x2F;&#x2F;registry .npm. taobao .org&#x2F;
-&#x2F;&#x2F;检查镜像源是否下载成功
-npm config get registry<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="nrm"><a href="#nrm" class="headerlink" title="nrm"></a>nrm</h2>为了更方便的切换下包的镜像源，我们可以安装 nrm 这个小工具，利用 nrm 提供的终端命令，可以快速查看和切换下包的镜像源。<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;通过npm包管理器，将nrm安装为全局可用的工具
-npm i nrm -g
-&#x2F;&#x2F;查看所有可用的镜像源
-nrm ls
-&#x2F;&#x2F;将下包的镜像源切换为taobao 镜像
-nrm use taobao<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="包的分类"><a href="#包的分类" class="headerlink" title="包的分类"></a>包的分类</h1>分为项目包和全局包<h2 id="项目包"><a href="#项目包" class="headerlink" title="项目包"></a>项目包</h2>那些被安装到项目的 node_modules 目录中的包，都是项目包。</li>
+    <title>Vue基础入门</title>
+    <url>/2022/04/01/vue-ji-chu-ru-men/</url>
+    <content><![CDATA[<h2 id="什么是vue"><a href="#什么是vue" class="headerlink" title="什么是vue"></a>什么是vue</h2><ol>
+<li>构建用户界面</li>
 </ol>
-<p>项目包又分为两类，分别是：</p>
 <ul>
-<li>开发依赖包（被记录到 devDependencies 节点中的包，只在开发期间会用到）</li>
-<li>核心依赖包（被记录到 dependencies 节点中的包，在开发期间和项目上线之后都会用到）</li>
+<li>用vue往HTML页面中填充数据，非常方便</li>
 </ul>
-<pre class="line-numbers language-none"><code class="language-none">npm i 包名 -D
-&#x2F;&#x2F;开发依赖包(会被记录到devDependencies 节点下)
-npm i包名
-&#x2F;&#x2F;核心依赖包(会被记录到dependencies 节点下<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="全局包"><a href="#全局包" class="headerlink" title="全局包"></a>全局包</h2><p>在执行 npm install 命令时，如果提供了 -g 参数，则会把包安装为全局包。<br>全局包会被安装到 C:\Users\用户目录\AppData\Roaming\npm\node_modules 目录下。</p>
-<pre class="line-numbers language-none"><code class="language-none">npm i 包名 -g    &#x2F;&#x2F;全局安装指定的包
-npm uninstall 包名 -g   &#x2F;&#x2F;卸载全局安装的包<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>注意：</p>
-<ul>
-<li>只有工具性质的包，才有全局安装的必要性。因为它们提供了好用的终端命令。</li>
-<li>判断某个包是否需要全局安装后才能使用，可以参考官方提供的使用说明即可</li>
-</ul>
-<h2 id="i5ting-toc"><a href="#i5ting-toc" class="headerlink" title="i5ting_toc"></a>i5ting_toc</h2><p>i5ting_toc 是一个可以把 md 文档转为 html 页面的小工具，使用步骤如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;将i5ting toc安装为全局包
-npm install -g i5ting_toc
-&#x2F;&#x2F;调用i5ting toc,轻松实现md转html的功能
-i5ting_toc -f 要转换的md文件路径 -o<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="规范的包结构"><a href="#规范的包结构" class="headerlink" title="规范的包结构"></a>规范的包结构</h2><p>在清楚了包的概念、以及如何下载和使用包之后，接下来，我们深入了解一下包的内部结构。<br>一个规范的包，它的组成结构，必须符合以下 3 点要求：</p>
-<ul>
-<li>包必须以单独的目录而存在</li>
-<li>包的顶级目录下要必须包含 package.json 这个包管理配置文件</li>
-<li>package.json 中必须包含 name，version，main 这三个属性，分别代表包的名字、版本号、包的入口。<br>注意：以上 3 点要求是一个规范的包结构必须遵守的格式，关于更多的约束，可以参考如下网址：<br><a href="https://yarnpkg.com/zh-Hans/docs/package-json">https://yarnpkg.com/zh-Hans/docs/package-json</a></li>
-</ul>
-<h2 id="发布包"><a href="#发布包" class="headerlink" title="发布包"></a>发布包</h2><ol>
-<li>注册npm 账号</li>
-<li>登录npm 账号<br>npm 账号注册完成后，可以在终端中执行 npm login 命令，依次输入用户名、密码、邮箱后，即可登录成功<br>注意：在运行 npm login 命令之前，必须先把下包的服务器地址切换为 npm 的官方服务器。否则会导致发布包失败！</li>
-<li>把包发布到npm上<br>将终端切换到包的根目录之后，运行 npm publish 命令，即可将包发布到 npm 上（注意：包名不能雷同）</li>
-<li>删除已发布的包</li>
+<ol start="2">
+<li>框架</li>
 </ol>
-<p>运行 npm unpublish 包名 –force 命令，即可从 npm 删除已发布的包。注意：</p>
 <ul>
-<li>npm unpublish 命令只能删除 72 小时以内发布的包</li>
-<li>npm unpublish 删除的包，在 24 小时内不允许重复发布</li>
-<li>发布包的时候要慎重，尽量不要往 npm 上发布没有意义的包！</li>
+<li>框架是一套现成的解决方案，程序员只能遵守框架内的规范，去编写自己的业务功能！</li>
+<li>要学习vue，就是在学习vue框架中规定的用法！</li>
+<li>vue的指令，组件（是对UI结构的复用），路由，Vuex，vue组件库</li>
+<li>只有把上面罗列的知识，掌握之后，才有开发vue项目的能力</li>
+</ul>
+<span id="more"></span>
+
+<p><strong>重点：</strong></p>
+<ol>
+<li>能够知道 vue 的基本使用步骤：①导入vue.js文件，②new Vue()构造函数，得到vm实例对象，③声明 el 和 data 数据节点，④ MVVM 的对应关系</li>
+<li>掌握 vue 中常见指令的基本用法：插值表达式，v-bind(:),v-on(@),v-if和v-else;v-for,:key,v-model</li>
+</ol>
+<h2 id="vue-的特性"><a href="#vue-的特性" class="headerlink" title="vue 的特性"></a>vue 的特性</h2><p>1.数据驱动视图</p>
+<ul>
+<li>数据的变化<strong>会驱动视图</strong>自动更新</li>
+<li>好处：程序员只管把数据维护好，那么页面结构会被vue自动渲染出来!</li>
+</ul>
+<p>2.双向数据绑定</p>
+<blockquote>
+<p>在网页中，form表单负责<strong>采集数据</strong>，Ajax负责<strong>提交数据</strong>！</p>
+</blockquote>
+<ul>
+<li>js数据的变化，会被自动渲染到页面上，开发者不需要手动操作DOM元素</li>
+<li>页面上表单采集的数据发生变化的时候，会被vue自动获取到，并更新到js数据中<blockquote>
+<p>注意：数据驱动视图和双向数据绑定的底层原理是 MVVM（Mode 数据源、View 视图、ViewModel 就是 vue 的实例）</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="vue的使用"><a href="#vue的使用" class="headerlink" title="vue的使用"></a>vue的使用</h2><ol>
+<li>导入vue.js的script脚本文件</li>
+<li>在页面中声明一个将要被vue所控制的DOM区域</li>
+<li>创建vm 实例对象（vue实例对象）</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">&lt;!-- 希望Vue能够控制下面的这个div 帮我们在把数据填充到div 内部 --&gt;
+&lt;div id&#x3D;&quot;app&quot;&gt;&#123;&#123; username &#125;&#125;&lt;&#x2F;div&gt;
+&lt;!-- 1.导入Vue的库文件，在Windows全局就有了Vue构造函数 --&gt;
+&lt;script src&#x3D;&quot;.&#x2F;lib&#x2F;vue-2.6.12.js&quot;&gt;&lt;&#x2F;script&gt;
+&lt;!-- 2.创建Vue实例对象 --&gt;
+&lt;script&gt;
+    &#x2F;&#x2F; 创建Vue的实例对象
+    const vm &#x3D; new Vue(&#123;
+        &#x2F;&#x2F; el 属性是固定写法，表示当前vm实例要控制页面上的哪个区域，接收的值是一个选择器
+        el: &#39;#app&#39;,
+        &#x2F;&#x2F; data 对象就是要渲染到页面上的数据
+        data: &#123;
+            username: &#39;zhangsan&#39;
+        &#125;
+    &#125;)
+&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="vue-的调试工具"><a href="#vue-的调试工具" class="headerlink" title="vue 的调试工具"></a>vue 的调试工具</h2><ol>
+<li>安装vue-devtools调试工具：vue官方提供的vue-devtools调试工具，能够方便对开发者对vue项目进行调试与开发<blockquote>
+<p>Chrome浏览器在线安装 <a href="https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd">vue-devtools</a></p>
+</blockquote>
+</li>
+</ol>
+<h2 id="vue-的指令"><a href="#vue-的指令" class="headerlink" title="vue 的指令"></a>vue 的指令</h2><h3 id="内容渲染指令"><a href="#内容渲染指令" class="headerlink" title="内容渲染指令"></a>内容渲染指令</h3><ol>
+<li><code>v-text</code> ：<code>&lt;p v-text=&quot;gender&quot;&gt;性别&lt;/p&gt;</code>指令的缺点：会覆盖元素内部原有的内容！</li>
+<li><code>&#123;&#123; &#125;&#125;</code> 插值表达式：在实际开发中用的最多，只是内容的占位符，不会覆盖原有的内容！</li>
+<li><code>v-html</code> 指令的作用：可以把带有标签的字符串，渲染成真正的 HTML 内容！<blockquote>
+<p> 注意：插值表达式只能用在元素的<strong>内容节点</strong>中，不能用在元素的<strong>属性节点</strong>中！</p>
+</blockquote>
+<h3 id="属性绑定指令"><a href="#属性绑定指令" class="headerlink" title="属性绑定指令"></a>属性绑定指令</h3></li>
+</ol>
+<ul>
+<li>在 vue 中，可以使用 <code>v-bind:</code> 指令，为元素的属性动态绑定值；</li>
+<li>简写是英文的 <code>:</code></li>
+<li>在使用 v-bind 属性绑定期间，如果绑定内容需要进行动态拼接，则字符串的外面应该包裹单引号，例如 <pre class="line-numbers language-none"><code class="language-none">&lt;div :title&#x3D;&quot;&#39;box&#39; + index&quot;&gt;这是一个 div&lt;&#x2F;div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="事件绑定指令"><a href="#事件绑定指令" class="headerlink" title="事件绑定指令"></a>事件绑定指令</h3></li>
+</ul>
+<ol>
+<li><code>v-on</code>事件绑定指令，用来辅助程序员为DOM元素绑定事件监听，简写形式：<code>@</code></li>
+<li>语法格式为：通过v-on绑定的事件处理函数，需要在<code>methods</code>节点中进行声明</li>
+</ol>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token operator">&lt;</span>button @click<span class="token operator">=</span><span class="token string">"add"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+<span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+   <span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			<span class="token comment">// 如果在方法中要修改 data 中的数据，可以通过 this 访问到</span>
+			<span class="token keyword">this</span><span class="token punctuation">.</span>count <span class="token operator">+=</span> <span class="token number">1</span>
+   <span class="token punctuation">&#125;</span>
+   <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>注意：原生 DOM 对象有 onclick、oninput、onkeyup 等原生事件，替换为 vue 的事件绑定形式后，<br>分别为：v-on:click、v-on:input、v-on:keyup</p>
+</blockquote>
+<p>3.<code>$event</code> 的应用场景：如果默认的事件对象 e 被覆盖了，则可以手动传递一个 $event。例如：</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;button @click&#x3D;&quot;add(3, $event)&quot;&gt;&lt;&#x2F;button&gt;
+  methods: &#123;
+     add(n, e) &#123;
+  			&#x2F;&#x2F; 如果在方法中要修改 data 中的数据，可以通过 this 访问到
+  			this.count +&#x3D; 1
+     &#125;
+  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>4.事件修饰符：在事件处理函数中调用 event.preventDefault() 或 event.stopPropagation() 是非常常见的需求。因此，vue 提供了事件修饰符的概念，来辅助程序员更方便的对事件的触发进行控制</p>
+<ul>
+<li><p><code>.prevent</code>：阻止默认行为</p>
+   <pre class="line-numbers language-none"><code class="language-none">&lt;a @click.prevent&#x3D;&quot;xxx&quot;&gt;链接&lt;&#x2F;a&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p><code>.stop</code> ：阻止事件冒泡</p>
+   <pre class="line-numbers language-none"><code class="language-none">&lt;button @click.stop&#x3D;&quot;xxx&quot;&gt;按钮&lt;&#x2F;button&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<p>5.案件修饰符：在监听键盘事件时，我们经常需要判断详细的按键。此时，可以为键盘相关的事件添加按键修饰符，</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;只有在 key 是  Enter 时调用  vm.submit() 
+&lt;input @keyup.enter&#x3D;&quot;submit&quot;&gt;
+&#x2F;&#x2F;只有在 key 是  Esc 时调用  vm.clearInput() 
+&lt;input @keyup.esc&#x3D;&quot;clearInput&quot;&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="双向绑定指令"><a href="#双向绑定指令" class="headerlink" title="双向绑定指令"></a>双向绑定指令</h3><p>vue 提供了 <code>v-model</code> 双向数据绑定指令，用来辅助开发者在不操作 DOM 的前提下，快速获取表单的数据。</p>
+<ol>
+<li>input 输入框<ul>
+<li>type&#x3D;”radio”</li>
+<li>type&#x3D;”checkbox”</li>
+<li>type&#x3D;”xxxx”</li>
+</ul>
+</li>
+<li>textarea</li>
+<li>select</li>
+<li>v-model 指令的修饰符<ul>
+<li>.number:自动将用户的输入值转为数值类型 <code>&lt;input v-model.number=&quot;age&quot;/&gt;</code></li>
+</ul>
+<ul>
+<li>.trim: 自动过滤用户输入的首尾空白字符  <code>&lt;inut v-model.trim=&quot;msg&quot;/&gt;</code></li>
+<li>.lazy： 在”change”时而非”input”时更新 <code>&lt;input v-model.lazy=&quot;msg&quot;/&gt;</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="条件渲染指令"><a href="#条件渲染指令" class="headerlink" title="条件渲染指令"></a>条件渲染指令</h3><p>条件渲染指令用来辅助开发者按需控制 DOM 的显示与隐藏。条件渲染指令有如下两个，分别是：</p>
+<ul>
+<li>v-if</li>
+<li>v-show</li>
+</ul>
+<ol>
+<li><code>v-show</code> 的原理是：动态为元素添加或移除 <code>display: none</code> 样式，来实现元素的显示和隐藏<ul>
+<li>如果要频繁的切换元素的显示状态，用 v-show 性能会更好</li>
+</ul>
+</li>
+<li><code>v-if</code> 的原理是：每次动态创建或移除元素，实现元素的显示和隐藏<ul>
+<li>如果刚进入页面的时候，某些元素默认不需要被展示，而且后期这个元素很可能也不需要被展示出来，此时 v-if 性能更好</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p> 在实际开发中，绝大多数情况，不用考虑性能问题，直接使用 v-if 就好了！！！</p>
+</blockquote>
+<ol start="3">
+<li><p><code>v-else</code> : v-if 可以单独使用，或配合 v-else 指令一起使用：v-else 指令必须配合 v-if 指令一起使用，否则它将不会被识别！</p>
+<h3 id="列表渲染指令"><a href="#列表渲染指令" class="headerlink" title="列表渲染指令"></a>列表渲染指令</h3><p>vue 提供了 <code>v-for</code> 列表渲染指令，用来辅助开发者基于一个数组来循环渲染一个列表结构。v-for 指令需要使<br>用 <code>item in items</code> 形式的特殊语法，其中：</p>
+<ul>
+<li>items 是待循环的数组</li>
+<li>item 是被循环的每一项</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>v-for 指令还支持一个可选的第二个参数，即当前项的索引。语法格式为 (item, index) in items，<blockquote>
+<p>注意：v-for 指令中的 item 项和 index 索引都是形参，可以根据需要进行重命名。例如 (user, i) in userlist</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>使用 key 维护列表的状态</strong>:<br>当列表的数据变化时，默认情况下，vue 会尽可能的复用已存在的 DOM 元素，从而提升渲染的性能。但这种默认的性能优化策略，会导致有状态的列表无法被正确更新。<br>为了给 vue 一个提示，以便它能跟踪每个节点的身份，从而在保证有状态的列表被正确更新的前提下，提升渲<br>染的性能。此时，需要为每项提供一个唯一的 key 属性：<br><strong>key 的注意事项</strong>:<br>① key 的值只能是字符串或数字类型<br>② key 的值必须具有唯一性（即：key 的值不能重复）<br>③ 建议把数据项 id 属性的值作为 key 的值（因为 id 属性的值具有唯一性）<br>④ 使用 index 的值当作 key 的值没有任何意义（因为 index 的值不具有唯一性）<br>⑤ 建议使用 v-for 指令时一定要指定 key 的值（既提升性能、又防止列表状态紊乱）</p>
+<h2 id="Vue的过滤器"><a href="#Vue的过滤器" class="headerlink" title="Vue的过滤器"></a>Vue的过滤器</h2><h3 id="定义过滤器"><a href="#定义过滤器" class="headerlink" title="定义过滤器"></a>定义过滤器</h3><p>  在创建vue 实例期间，可以在 <code>filters</code> 节点中定义过滤器，</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">count vm<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">el</span><span class="token operator">:</span><span class="token string">'#app'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+     <span class="token literal-property property">message</span><span class="token operator">:</span> <span class="token string">'hello vue.js'</span><span class="token punctuation">,</span>
+     <span class="token literal-property property">info</span><span class="token operator">:</span> <span class="token string">'title info'</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">filters</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>    <span class="token comment">//在filters 节点下定义"过滤器"</span>
+    <span class="token function">capitalize</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>    <span class="token comment">//把首字母转为大写的过滤器</span>
+       <span class="token keyword">return</span> str<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> str<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+   <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+  
+
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="私有过滤器和全局过滤器"><a href="#私有过滤器和全局过滤器" class="headerlink" title="私有过滤器和全局过滤器"></a>私有过滤器和全局过滤器</h3><p>在 filters 节点下定义的过滤器，称为“私有过滤器”，因为它只能在当前 vm 实例所控制的 el 区域内使用。<br>如果希望在多个 vue 实例之间共享过滤器，则可以按照如下的格式定义全局过滤器：</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">  <span class="token comment">//全局过滤器--独立于每个 vm 实例之外</span>
+  <span class="token comment">//Vue.filters() 方法，接收两个参数</span>
+  <span class="token comment">//第一个参数，是全局过滤器的 "名字"</span>
+  <span class="token comment">//第二个参数，是全局过滤器的 "处理函数"</span>
+Vue<span class="token punctuation">.</span><span class="token function">filters</span><span class="token punctuation">(</span><span class="token string">'capitalize'</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token operator">=></span><span class="token punctuation">&#123;</span>
+   <span class="token keyword">return</span> str<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span> str<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'~~'</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="过滤器的调用"><a href="#过滤器的调用" class="headerlink" title="过滤器的调用"></a>过滤器的调用</h3><p>过滤器可以串联的进行调用 <code>&#123;&#123;message | filterA | filterB&#125;&#125;</code>  中间用 ‘|’ 隔开<br>A–处理过的值传递给 B ，最终把 B处理的结果渲染到页面上</p>
+<h3 id="过滤器传参"><a href="#过滤器传参" class="headerlink" title="过滤器传参"></a>过滤器传参</h3><p>  过滤器的本质是JavaScript 函数，因此可以接收参数，</p>
+<pre class="line-numbers language-none"><code class="language-none">  &lt;p&gt;&#123;&#123;message | filterA(arg1,arg2) &#125;&#125;&lt;&#x2F;p&gt;
+   Vue.filter(&#39;filterA&#39;,(msg,arg1,arg2)&#x3D;&gt;&#123;
+   &#x2F;&#x2F;过滤器代码逻辑
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="过滤器的兼容性"><a href="#过滤器的兼容性" class="headerlink" title="过滤器的兼容性"></a>过滤器的兼容性</h3><p>过滤器仅在 vue 2.x 和 1.x 中受支持，在 vue 3.x 的版本中剔除了过滤器相关的功能。<br>在企业级项目开发中：</p>
+<ul>
+<li>如果使用的是 2.x 版本的 vue，则依然可以使用过滤器相关的功能</li>
+<li>如果项目已经升级到了 3.x 版本的 vue，官方建议使用计算属性或方法代替被剔除的过滤器功能<br>具体的迁移指南，请参考 vue 3.x 的官方文档给出的说明：<a href="https://v3.vuejs.org/guide/migration/filters.html#migration-strategy">https://v3.vuejs.org/guide/migration/filters.html#migration-strategy</a></li>
 </ul>
 ]]></content>
       <categories>
-        <category>工具</category>
+        <category>Vue的相关基础知识</category>
       </categories>
       <tags>
-        <tag>npm与包</tag>
+        <tag>Vue</tag>
       </tags>
   </entry>
   <entry>
@@ -1526,6 +1526,291 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p><strong>完美解决 uni-app 的 rich-text组件 中图片宽高自适应问题</strong> </p>
 <p>加油加油加油！！！</p>
 ]]></content>
+      <categories>
+        <category>框架</category>
+      </categories>
+      <tags>
+        <tag>uni-app</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>跨域与JSONP.md</title>
+    <url>/2022/02/27/kua-yu-yu-jsonp-md/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>————同源策略，跨域，JSONP的实现原理，防抖和节流。</p>
+<h1 id="了解同源策略和跨域"><a href="#了解同源策略和跨域" class="headerlink" title="了解同源策略和跨域"></a>了解同源策略和跨域</h1><p>  同源指的是如果两个页面的协议，域名，端口都相同，则两个页面具有相同的源（如果没有给出端口号，默认是80端口）。<span id="more"></span></p>
+<p><strong>同源策略</strong>是浏览器提供的一个安全功能</p>
+<p><strong>跨域</strong>是指两个URL的协议，域名，端口有一个或一个以上不一致。出现跨域的根本原因：浏览器的同源策略不允许非同源的URL之间进行资源的交互<br>（浏览器允许发起跨域请求，但是，跨域请求回来的数据会被浏览器拦截，无法被页面获取到）</p>
+<p>如何实现跨域数据请求解决方案：JSONP和CORS<br> JSONP：出现的早，兼容性好，缺点是只支持GET请求，不支持POST请求；<br> CORS：出现的较晚，W3C标准，两种请求都支持，缺点是不兼容低版本浏览器</p>
+<h1 id="JSONP的实现原理"><a href="#JSONP的实现原理" class="headerlink" title="JSONP的实现原理"></a>JSONP的实现原理</h1><p>  JSONP的实现原理就是通过<code>&lt;script&gt;</code>标签的src属性，请求跨域的数据接口，并通过函数调用的形式，接收跨域接口响应回来的数据</p>
+<h2 id="jQuery中的JSONP"><a href="#jQuery中的JSONP" class="headerlink" title="jQuery中的JSONP"></a>jQuery中的JSONP</h2><p>  jQuery 提供的 $.ajax() 函数，除了可以发起真正的 Ajax 数据请求之外，还能够发起 JSONP 数据请求</p>
+<pre><code>$.ajax(&#123;
+  url: &#39;http://ajax.frontend.itheima.net:3006/api/jsonp?name=zs&amp;age=20&#39;,
+  // 如果要使用 $.ajax() 发起 JSONP 请求，必须指定 datatype 为 jsonp
+  dataType: &#39;jsonp&#39;,
+   success: function(res) &#123;
+   console.log(res)
+&#125;
+&#125;)
+</code></pre>
+<p>在使用 jQuery 发起 JSONP 请求时，如果想要自定义 JSONP 的参数以及回调函数名称，可以通过如下两个参数来指定：</p>
+<pre><code>$.ajax(&#123;
+  url: &#39;http://ajax.frontend.itheima.net:3006/api/jsonp?name=zs&amp;age=20&#39;,
+  dataType: &#39;jsonp&#39;,
+  // 发送到服务端的参数名称，默认值为 callback
+  jsonp: &#39;callback&#39;,
+  // 自定义的回调函数名称，默认值为 jQueryxxx 格式
+  jsonpCallback: &#39;abc&#39;,
+  success: function(res) &#123;
+  console.log(res)
+&#125;
+</code></pre>
+<p> })</p>
+<h2 id="jQuery中JSONP的实现过程"><a href="#jQuery中JSONP的实现过程" class="headerlink" title="jQuery中JSONP的实现过程"></a>jQuery中JSONP的实现过程</h2><p> jQuery 中的 JSONP，也是通过 <code>&lt;script&gt;</code> 标签的 src 属性实现跨域数据访问的，只不过，jQuery 采用的是动态创建和移除<code>&lt;script&gt;</code>标签的方式，来发起 JSONP 数据请求。</p>
+<ul>
+<li><p>在发起 JSONP 请求的时候，动态向 <code>&lt;header&gt;</code> 中 append 一个 <code>&lt;script&gt;</code> 标签；</p>
+</li>
+<li><p>在 JSONP 请求成功以后，动态从 <code>&lt;header&gt;</code> 中移除刚才 append 进去的<code> &lt;script&gt;</code> 标签；</p>
+</li>
+</ul>
+<h1 id="防抖与节流"><a href="#防抖与节流" class="headerlink" title="防抖与节流"></a>防抖与节流</h1><h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><p>———<strong>防抖策略</strong>是当事件被触发后，延迟n秒后再执行回调，如果在这n秒内事件又被触发，则重新计时。</p>
+<p>防抖的应用场景：用户在输入框中连续输入一串字符是时，可以通过防抖策略，只在输入完成时，才执行查询的请求，这样可以有效减少请求次数，节约请求资源。</p>
+<pre><code>var timer = null                    // 1. 防抖动的 timer
+  function debounceSearch(keywords) &#123; // 2. 定义防抖的函数
+  timer = setTimeout(function() &#123;
+  // 发起 JSONP 请求
+  getSuggestList(keywords)
+  &#125;, 500)
+  &#125;
+
+  $(&#39;#ipt&#39;).on(&#39;keyup&#39;, function() &#123; 
+  // 3. 在触发 keyup 事件时，立即清空 timer    
+    clearTimeout(timer)
+   debounceSearch(keywords)
+&#125;)
+</code></pre>
+<h2 id="缓存搜索的建议列表"><a href="#缓存搜索的建议列表" class="headerlink" title="缓存搜索的建议列表"></a>缓存搜索的建议列表</h2><p>1.定义全局缓存对象</p>
+<p><code>// 缓存对象   var cacheObj = &#123;&#125;</code></p>
+<p>2.将搜索结果保存到缓存对象中</p>
+<pre><code> // 渲染建议列表
+ function renderSuggestList(res) &#123;
+   // ...省略其他代码
+   // 将搜索的结果，添加到缓存对象中
+    var k = $(&#39;#ipt&#39;).val().trim()
+    cacheObj[k] = res
+ &#125;
+</code></pre>
+<p>3.优先从缓存中获取搜索建议</p>
+<pre><code> // 监听文本框的 keyup 事件
+ $(&#39;#ipt&#39;).on(&#39;keyup&#39;, function() &#123;
+    // ...省略其他代码
+
+    // 优先从缓存中获取搜索建议
+    if (cacheObj[keywords]) &#123;
+       return renderSuggestList(cacheObj[keywords])
+    &#125;
+    // 获取搜索建议列表
+    debounceSearch(keywords)
+  &#125;)
+</code></pre>
+<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p><strong>节流策略</strong> 就是可以减少一段时间内事件的触发频率</p>
+<p>节流的应用场景：</p>
+<ul>
+<li><p>鼠标连续不断地触发某事件，只在单位时间内只触发一次</p>
+</li>
+<li><p>懒加载时要监听计算滚动条的位置，但不必每次滑动都触发，可以降低计算的频率，而不必去浪费cpu资源。</p>
+</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>防抖：如果事件被频繁触发，防抖能保证只有最有一次触发生效！前面 N 多次的触发都会被忽略！</li>
+<li>节流：如果事件被频繁触发，节流能够减少事件触发的频率，因此，节流是有选择性地执行一部分事件！</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前后端交互</category>
+      </categories>
+      <tags>
+        <tag>跨域与JSONP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>前端工程化与webpack</title>
+    <url>/2022/06/01/qian-duan-gong-cheng-hua-yu-webpack/</url>
+    <content><![CDATA[<h2 id="前端工程化"><a href="#前端工程化" class="headerlink" title="前端工程化"></a>前端工程化</h2><p>  在企业级的前端项目开发中，把前端开发所需的工具，技术，流程，经验等进行规范化，标准化。实际就是实现前端的四个现代化：模块化；组件化；规范化；自动化。<br>它的好处主要体现在：</p>
+<ol>
+<li>前端工程化让前端开发能够“自成体系”，覆盖了前端项目从创建到部署的方方面面</li>
+<li>最大程度地提高了前端的开发效率，降低了技术选型、前后端联调等带来的协调沟通成本<br>目前主流的前端工程化解决方案：</li>
+</ol>
+<ul>
+<li>webpack <a href="https://www.webpackjs.com/">https://www.webpackjs.com/</a> 常用</li>
+<li>parcel <a href="https://zh.parceljs.org/">https://zh.parceljs.org/</a></li>
+</ul>
+<h2 id="webpack-的基本使用"><a href="#webpack-的基本使用" class="headerlink" title="webpack 的基本使用"></a>webpack 的基本使用</h2><h3 id="在项目中安装-webpack"><a href="#在项目中安装-webpack" class="headerlink" title="在项目中安装 webpack"></a>在项目中安装 webpack</h3><p>在终端运行如下的命令，安装webpack 相关的两个包<code>npm i webpack@5.5.1 webpack-cli@4.2.0 -D</code></p>
+<h3 id="在项目中配置webpack"><a href="#在项目中配置webpack" class="headerlink" title="在项目中配置webpack"></a>在项目中配置webpack</h3><p>① 在项目根目录中，创建名为 webpack.config.js 的 webpack 配置文件，并初始化如下的基本配置：</p>
+<pre class="line-numbers language-none"><code class="language-none">module.exports &#x3D; &#123;
+  mode: &#39;development&#39;, 
+&#x2F;&#x2F; 开发环境：development 不会对打包生成的文件进行代码压缩和性能优化,打包速度快，适合在开发阶段使用
+&#x2F;&#x2F; 生产环境：production 会对打包生成的文件进行代码压缩和性能优化，打包速度很慢，仅适合在项目发布阶段使用
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>② 在 package.json 的 scripts 节点下，新增 dev 脚本如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">&quot;scripts&quot;: &#123;
+    &quot;dev&quot;: &quot;webpack&quot;, &#x2F;&#x2F;通过 npm run dev 来执行
+  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>③ 在终端中运行 npm run dev 命令，启动 webpack 进行项目的打包构建</p>
+<p><strong>webpack.config.js 文件的作用：</strong>webpack.config.js 是 webpack 的配置文件。webpack 在真正开始打包构建之前，会先读取这个配置文件，从而基于给定的配置，对项目进行打包。<br>注意：由于 webpack 是基于 node.js 开发出来的打包工具，因此在它的配置文件中，支持使用 node.js 相关<br>的语法和模块进行 webpack 的个性化配置。</p>
+<p><strong>自定义打包的入口与出口：</strong>在 webpack.config.js 配置文件中，通过 entry 节点指定打包的入口。通过 output 节点指定打包的出口。示例代码如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">const path &#x3D; require(&#39;path&#39;)
+module.exports&#x3D;&#123;
+  entry: path.join(__dirname, &#39;.&#x2F;src&#x2F;index.js&#39;),&#x2F;&#x2F;入口文件的路径
+  &#x2F;&#x2F; 指定打包的出口
+  output: &#123;
+    &#x2F;&#x2F; 表示输出文件的存放路径
+    path: path.join(__dirname, &#39;.&#x2F;dist&#39;),
+    &#x2F;&#x2F; 表示输出文件的名称,路径加js为了发布之后文件分类明确
+    filename: &#39;js&#x2F;bundle.js&#39;,
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="webpack-中的插件"><a href="#webpack-中的插件" class="headerlink" title="webpack 中的插件"></a>webpack 中的插件</h3><p><strong>webpack-dev-server：</strong>可以让 webpack 监听项目源代码的变化，从而进行自动打包构建。<br>安装：<code>npm i webpack-dev-server@3.11.0 -D</code><br>配置：① 修改 package.json -&gt; scripts 中的 dev 命令如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">&quot;scripts&quot;: &#123;
+    &quot;dev&quot;: &quot;webpack,serve&quot;, &#x2F;&#x2F;通过 npm run dev 来执行
+  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>② 再次运行 npm run dev 命令，重新进行项目的打包<br>③ 在浏览器中访问 <a href="http://localhost:8080/">http://localhost:8080</a> 地址，查看自动打包效果</p>
+<blockquote>
+<p>注意：webpack-dev-server 会启动一个实时打包的 http 服务器,配置了 webpack-dev-server 之后，打包生成的文件存放到了内存中,提高了实时打包输出的性能，因为内存比物理磁盘速度快很多。<br>生成到内存中的文件该如何访问？webpack-dev-server 生成到内存中的文件，默认放到了项目的根目录中，而且是虚拟的、不可见的。可以直接用 &#x2F; 表示项目根目录，后面跟上要访问的文件名称，即可访问内存中的文件。<br>例如 &#x2F;bundle.js 就表示要访问 webpack-dev-server 生成到内存中的 bundle.js 文件</p>
+</blockquote>
+<p>**html-webpack-plugin:**是 webpack 中的 HTML 插件，可以通过此插件自定制 index.html 页面的内容。<br>需求：通过 html-webpack-plugin 插件，将 src 目录下的 index.html 首页，复制到项目根目录中一份.<br>安装：<code>npm i html-webpack-plugin@4.5.0 -D</code><br>配置：</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 1. 导入插件，得到构造函数
+const HtmlPlugin &#x3D; require(&#39;html-webpack-plugin&#39;)
+&#x2F;&#x2F; 2. 创建插件的实例对象
+const htmlPlugin &#x3D; new HtmlPlugin(&#123;
+  template: &#39;.&#x2F;src&#x2F;index.html&#39;,
+  filename: &#39;.&#x2F;index.html&#39;,
+&#125;)
+module.exports&#x3D;&#123;
+    modu:&#39;development&#39;,
+    plugins:[htmlPlugin], &#x2F;&#x2F; 3. 挂载插件的实例对象<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>解惑 html-webpack-plugin,① 通过 HTML 插件复制到项目根目录中的 index.html 页面，也被放到了内存中<br>② HTML 插件在生成的 index.html 页面的底部，自动注入了打包的 bundle.js 文件</p>
+</blockquote>
+<p>**devServer 节点:**在 webpack.config.js 配置文件中，可以通过 devServer 节点对 webpack-dev-server 插件进行更多的配置，示例代码如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">devServer: &#123;
+  open: true,
+  host: &#39;127.0.0.1&#39;,
+  port: 80,
+&#125;,&#x2F;&#x2F;只要修改配置文件，就要重新启动服务器<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="webpack-中的loader"><a href="#webpack-中的loader" class="headerlink" title="webpack 中的loader"></a>webpack 中的loader</h3><p>在实际开发过程中，webpack 默认只能打包处理以 .js 后缀名结尾的模块。其他非 .js 后缀名结尾的模块，<br>webpack 默认处理不了，需要调用 loader 加载器才可以正常打包，否则会报错！<br>loader 加载器的作用：协助 webpack 打包处理特定的文件模块。比如：</p>
+<ul>
+<li>css-loader 可以打包处理 .css 相关的文件</li>
+<li>less-loader 可以打包处理 .less 相关的文件</li>
+<li>babel-loader 可以打包处理 webpack 无法处理的高级 JS 语法</li>
+</ul>
+<p><strong>打包处理css 文件</strong><br>① 运行 <code>npm i style-loader@2.0.0 css-loader@5.0.1 -D</code> 命令，安装处理 css 文件的 loader<br>② 在 webpack.config.js 的 module -&gt; rules 数组中，添加 loader 规则如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">module: &#123;
+    rules: [
+      &#x2F;&#x2F; test 表示匹配的文件类型， use 表示对应要调用的 loader
+      &#x2F;&#x2F;  use 数组中指定的 loader 顺序是固定的;多个 loader 的调用顺序是：从后往前调用
+      &#123; test: &#x2F;\.css$&#x2F;, use: [&#39;style-loader&#39;, &#39;css-loader&#39;] &#125;,
+    ]
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>打包处理 less 文件</strong><br>① 运行 <code>npm i less-loader@7.1.0 less@3.12.2 -D </code>命令<br>② 在 webpack.config.js 的 module -&gt; rules 数组中，添加 loader 规则如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">module: &#123;
+    rules: [
+      &#x2F;&#x2F; test 表示匹配的文件类型， use 表示对应要调用的 loader
+      &#x2F;&#x2F;  use 数组中指定的 loader 顺序是固定的;多个 loader 的调用顺序是：从后往前调用
+      &#123; test: &#x2F;\.less$&#x2F;, use: [&#39;style-loader&#39;, &#39;css-loader&#39;, &#39;less-loader&#39;] &#125;,
+    ]
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>打包处理样式表中与 url 路径相关的文件</strong><br>① 运行 <code>npm i url-loader@4.1.1 file-loader@6.2.0 -D</code> 命令<br>② 在 webpack.config.js 的 module -&gt; rules 数组中，添加 loader 规则如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">module: &#123;
+    rules: [
+     &#123;
+        test: &#x2F;\.jpg|png|gif$&#x2F;,
+        use: &#123;
+          loader: &#39;url-loader&#39;,
+          options: &#123;
+            limit: 22228,&#x2F;&#x2F; limit 用来指定图片的大小，单位是字节（byte）只有 ≤ limit 大小的图片，才会被转为 base64 格式的图片
+            outputPath: &#39;image&#39;,  
+          &#125;,
+        &#125;,
+      &#125;,
+    ]
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>打包处理js 文件中的高级语法</strong><br>webpack 只能打包处理一部分高级的 JavaScript 语法。对于那些 webpack 无法处理的高级 js 语法，需要借<br>助于 babel-loader 进行打包处理。例如 webpack 无法处理下面的 JavaScript 代码：<br>安装 babel-loader 相关的包：<code>npm i babel-loader@8.2.1 @babel/core@7.12.3 @babel/plugin-proposal-class-properties@7.12.1 -D</code><br>配置：在 webpack.config.js 的 module -&gt; rules 数组中，添加 loader 规则如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">&#123;
+  test: &#x2F;\.js$&#x2F;,
+  exclude: &#x2F;node_modules&#x2F;,  &#x2F;&#x2F; exclude 为排除项，不需要处理标注的文件
+  use: &#123;
+    loader: &#39;babel-loader&#39;,
+    options: &#123;
+      plugins: [&#39;@babel&#x2F;plugin-proposal-class-properties&#39;],
+    &#125;,
+  &#125;,
+&#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>打包发布</strong><br>项目开发完成之后，使用 webpack 对项目进行打包发布的主要原因有以下两点：<br>① 开发环境下，打包生成的文件存放于内存中，无法获取到最终打包生成的文件<br>② 开发环境下，打包生成的文件不会进行代码压缩和性能优化<br>为了让项目能够在生产环境中高性能的运行，因此需要对项目进行打包发布<br>配置webpack 的打包发布：在 package.json 文件的 scripts 节点下，新增 build 命令如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">&quot;scripts&quot;: &#123;
+  &quot;dev&quot;: &quot;webpack serve&quot;,
+  &#x2F;&#x2F; --model 是一个参数项，用来指定 webpack 的运行模式。production 代表生产环境，会对打包生成的文件进行代码压缩和性能优化。通过 --model 指定的参数项，会覆盖 webpack.config.js 中的 model 选项。
+  &quot;build&quot;: &quot;webpack --mode production&quot;
+&#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>③ 把 JavaScript 文件统一生成到 js 目录中<br>④ 把图片文件统一生成到 image 目录中<br>⑤ 自动清理 dist 目录下的旧文件：为了在每次打包发布时自动清理掉 dist 目录中的旧文件，可以安装并配置 clean-webpack-plugin 插件：<code>npm i clean-webpack-plugin@3.0.0 -D</code></p>
+<pre class="line-numbers language-none"><code class="language-none">const &#123; CleanWebpackPlugin &#125; &#x3D; require(&#39;clean-webpack-plugin&#39;)
+const cleanPlugin &#x3D; new CleanWebpackPlugin()
+plugins: [htmlPlugin, cleanPlugin], <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Source-Map"><a href="#Source-Map" class="headerlink" title="Source Map"></a>Source Map</h3><p>Source Map 就是一个信息文件，里面储存着位置信息。也就是说，Source Map 文件中存储着代码压缩混淆前后的对应关系。有了它，出错的时候，除错工具将直接显示原始代码，而不是转换后的代码，能够极大的方便后期的调试。<br>**默认 Source Map 的问题:**开发环境下默认生成的 Source Map，记录的是生成后的代码的位置。会导致运行时报错的行数与源代码的行数不一致的问题。<br>**解决默认 Source Map 的问题:**开发环境下，推荐在 webpack.config.js 中添加如下的配置，即可保证运行时报错的行数与源代码的行数保持一致</p>
+<pre class="line-numbers language-none"><code class="language-none">module.exports&#x3D;&#123;
+  &#x2F;&#x2F; eval-source-map 仅限在开发模式下使用
+  &#x2F;&#x2F; devtool: &#39;eval-source-map&#39;,
+  &#x2F;&#x2F; 生产环境下，建议关闭 SourceMap 或将 devtool 的值设置为 nosources-source-map
+  &#x2F;&#x2F; devtool: &#39;nosources-source-map&#39;,只想定位报错的具体行数，且不想暴露源码
+  &#x2F;&#x2F; devtool: &#39;source-map&#39;,想在定位报错行数的同时，展示具体报错的源码
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>Source Map 的最佳实践:</strong><br>① 开发环境下：</p>
+<ul>
+<li>建议把 devtool 的值设置为 eval-source-map</li>
+<li>好处：可以精准定位到具体的错误行<br>② 生产环境下：</li>
+<li>建议关闭 Source Map 或将 devtool 的值设置为 nosources-source-map</li>
+<li>好处：防止源码泄露，提高网站的安全性</li>
+</ul>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>打包构建</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>商城项目问题汇总</title>
+    <url>/2022/08/01/shang-cheng-xiang-mu-wen-ti-hui-zong/</url>
+    <content><![CDATA[<h3 id="在请求数据的时候后台报30001错"><a href="#在请求数据的时候后台报30001错" class="headerlink" title="在请求数据的时候后台报30001错"></a>在请求数据的时候后台报30001错</h3><p>  有一种可能是在数据请求的时候，请求头header 的格式不对,需要在请求的方法中写一个header 请求头</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">getAddcart</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> req<span class="token punctuation">.</span><span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+		<span class="token literal-property property">url</span><span class="token operator">:</span><span class="token string">'/jingli-multishop/buyer/trade/carts'</span><span class="token punctuation">,</span>
+		<span class="token literal-property property">method</span><span class="token operator">:</span><span class="token string">'post'</span><span class="token punctuation">,</span>
+		data<span class="token punctuation">,</span>
+		<span class="token literal-property property">header</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token string-property property">'content-type'</span><span class="token operator">:</span><span class="token string">'application/x-www-form-urlencoded'</span><span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>工作问题</category>
+      </categories>
+      <tags>
+        <tag>项目总结</tag>
+      </tags>
   </entry>
   <entry>
     <title>vuex</title>
@@ -1719,279 +2004,6 @@ store<span class="token punctuation">.</span>state<span class="token punctuation
       <tags>
         <tag>Vue</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>前端工程化与webpack</title>
-    <url>/2022/06/01/qian-duan-gong-cheng-hua-yu-webpack/</url>
-    <content><![CDATA[<h2 id="前端工程化"><a href="#前端工程化" class="headerlink" title="前端工程化"></a>前端工程化</h2><p>  在企业级的前端项目开发中，把前端开发所需的工具，技术，流程，经验等进行规范化，标准化。实际就是实现前端的四个现代化：模块化；组件化；规范化；自动化。<br>它的好处主要体现在：</p>
-<ol>
-<li>前端工程化让前端开发能够“自成体系”，覆盖了前端项目从创建到部署的方方面面</li>
-<li>最大程度地提高了前端的开发效率，降低了技术选型、前后端联调等带来的协调沟通成本<br>目前主流的前端工程化解决方案：</li>
-</ol>
-<ul>
-<li>webpack <a href="https://www.webpackjs.com/">https://www.webpackjs.com/</a> 常用</li>
-<li>parcel <a href="https://zh.parceljs.org/">https://zh.parceljs.org/</a></li>
-</ul>
-<h2 id="webpack-的基本使用"><a href="#webpack-的基本使用" class="headerlink" title="webpack 的基本使用"></a>webpack 的基本使用</h2><h3 id="在项目中安装-webpack"><a href="#在项目中安装-webpack" class="headerlink" title="在项目中安装 webpack"></a>在项目中安装 webpack</h3><p>在终端运行如下的命令，安装webpack 相关的两个包<code>npm i webpack@5.5.1 webpack-cli@4.2.0 -D</code></p>
-<h3 id="在项目中配置webpack"><a href="#在项目中配置webpack" class="headerlink" title="在项目中配置webpack"></a>在项目中配置webpack</h3><p>① 在项目根目录中，创建名为 webpack.config.js 的 webpack 配置文件，并初始化如下的基本配置：</p>
-<pre class="line-numbers language-none"><code class="language-none">module.exports &#x3D; &#123;
-  mode: &#39;development&#39;, 
-&#x2F;&#x2F; 开发环境：development 不会对打包生成的文件进行代码压缩和性能优化,打包速度快，适合在开发阶段使用
-&#x2F;&#x2F; 生产环境：production 会对打包生成的文件进行代码压缩和性能优化，打包速度很慢，仅适合在项目发布阶段使用
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>② 在 package.json 的 scripts 节点下，新增 dev 脚本如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">&quot;scripts&quot;: &#123;
-    &quot;dev&quot;: &quot;webpack&quot;, &#x2F;&#x2F;通过 npm run dev 来执行
-  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>③ 在终端中运行 npm run dev 命令，启动 webpack 进行项目的打包构建</p>
-<p><strong>webpack.config.js 文件的作用：</strong>webpack.config.js 是 webpack 的配置文件。webpack 在真正开始打包构建之前，会先读取这个配置文件，从而基于给定的配置，对项目进行打包。<br>注意：由于 webpack 是基于 node.js 开发出来的打包工具，因此在它的配置文件中，支持使用 node.js 相关<br>的语法和模块进行 webpack 的个性化配置。</p>
-<p><strong>自定义打包的入口与出口：</strong>在 webpack.config.js 配置文件中，通过 entry 节点指定打包的入口。通过 output 节点指定打包的出口。示例代码如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">const path &#x3D; require(&#39;path&#39;)
-module.exports&#x3D;&#123;
-  entry: path.join(__dirname, &#39;.&#x2F;src&#x2F;index.js&#39;),&#x2F;&#x2F;入口文件的路径
-  &#x2F;&#x2F; 指定打包的出口
-  output: &#123;
-    &#x2F;&#x2F; 表示输出文件的存放路径
-    path: path.join(__dirname, &#39;.&#x2F;dist&#39;),
-    &#x2F;&#x2F; 表示输出文件的名称,路径加js为了发布之后文件分类明确
-    filename: &#39;js&#x2F;bundle.js&#39;,
-  &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="webpack-中的插件"><a href="#webpack-中的插件" class="headerlink" title="webpack 中的插件"></a>webpack 中的插件</h3><p><strong>webpack-dev-server：</strong>可以让 webpack 监听项目源代码的变化，从而进行自动打包构建。<br>安装：<code>npm i webpack-dev-server@3.11.0 -D</code><br>配置：① 修改 package.json -&gt; scripts 中的 dev 命令如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">&quot;scripts&quot;: &#123;
-    &quot;dev&quot;: &quot;webpack,serve&quot;, &#x2F;&#x2F;通过 npm run dev 来执行
-  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>② 再次运行 npm run dev 命令，重新进行项目的打包<br>③ 在浏览器中访问 <a href="http://localhost:8080/">http://localhost:8080</a> 地址，查看自动打包效果</p>
-<blockquote>
-<p>注意：webpack-dev-server 会启动一个实时打包的 http 服务器,配置了 webpack-dev-server 之后，打包生成的文件存放到了内存中,提高了实时打包输出的性能，因为内存比物理磁盘速度快很多。<br>生成到内存中的文件该如何访问？webpack-dev-server 生成到内存中的文件，默认放到了项目的根目录中，而且是虚拟的、不可见的。可以直接用 &#x2F; 表示项目根目录，后面跟上要访问的文件名称，即可访问内存中的文件。<br>例如 &#x2F;bundle.js 就表示要访问 webpack-dev-server 生成到内存中的 bundle.js 文件</p>
-</blockquote>
-<p>**html-webpack-plugin:**是 webpack 中的 HTML 插件，可以通过此插件自定制 index.html 页面的内容。<br>需求：通过 html-webpack-plugin 插件，将 src 目录下的 index.html 首页，复制到项目根目录中一份.<br>安装：<code>npm i html-webpack-plugin@4.5.0 -D</code><br>配置：</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 1. 导入插件，得到构造函数
-const HtmlPlugin &#x3D; require(&#39;html-webpack-plugin&#39;)
-&#x2F;&#x2F; 2. 创建插件的实例对象
-const htmlPlugin &#x3D; new HtmlPlugin(&#123;
-  template: &#39;.&#x2F;src&#x2F;index.html&#39;,
-  filename: &#39;.&#x2F;index.html&#39;,
-&#125;)
-module.exports&#x3D;&#123;
-    modu:&#39;development&#39;,
-    plugins:[htmlPlugin], &#x2F;&#x2F; 3. 挂载插件的实例对象<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<blockquote>
-<p>解惑 html-webpack-plugin,① 通过 HTML 插件复制到项目根目录中的 index.html 页面，也被放到了内存中<br>② HTML 插件在生成的 index.html 页面的底部，自动注入了打包的 bundle.js 文件</p>
-</blockquote>
-<p>**devServer 节点:**在 webpack.config.js 配置文件中，可以通过 devServer 节点对 webpack-dev-server 插件进行更多的配置，示例代码如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">devServer: &#123;
-  open: true,
-  host: &#39;127.0.0.1&#39;,
-  port: 80,
-&#125;,&#x2F;&#x2F;只要修改配置文件，就要重新启动服务器<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="webpack-中的loader"><a href="#webpack-中的loader" class="headerlink" title="webpack 中的loader"></a>webpack 中的loader</h3><p>在实际开发过程中，webpack 默认只能打包处理以 .js 后缀名结尾的模块。其他非 .js 后缀名结尾的模块，<br>webpack 默认处理不了，需要调用 loader 加载器才可以正常打包，否则会报错！<br>loader 加载器的作用：协助 webpack 打包处理特定的文件模块。比如：</p>
-<ul>
-<li>css-loader 可以打包处理 .css 相关的文件</li>
-<li>less-loader 可以打包处理 .less 相关的文件</li>
-<li>babel-loader 可以打包处理 webpack 无法处理的高级 JS 语法</li>
-</ul>
-<p><strong>打包处理css 文件</strong><br>① 运行 <code>npm i style-loader@2.0.0 css-loader@5.0.1 -D</code> 命令，安装处理 css 文件的 loader<br>② 在 webpack.config.js 的 module -&gt; rules 数组中，添加 loader 规则如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">module: &#123;
-    rules: [
-      &#x2F;&#x2F; test 表示匹配的文件类型， use 表示对应要调用的 loader
-      &#x2F;&#x2F;  use 数组中指定的 loader 顺序是固定的;多个 loader 的调用顺序是：从后往前调用
-      &#123; test: &#x2F;\.css$&#x2F;, use: [&#39;style-loader&#39;, &#39;css-loader&#39;] &#125;,
-    ]
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>打包处理 less 文件</strong><br>① 运行 <code>npm i less-loader@7.1.0 less@3.12.2 -D </code>命令<br>② 在 webpack.config.js 的 module -&gt; rules 数组中，添加 loader 规则如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">module: &#123;
-    rules: [
-      &#x2F;&#x2F; test 表示匹配的文件类型， use 表示对应要调用的 loader
-      &#x2F;&#x2F;  use 数组中指定的 loader 顺序是固定的;多个 loader 的调用顺序是：从后往前调用
-      &#123; test: &#x2F;\.less$&#x2F;, use: [&#39;style-loader&#39;, &#39;css-loader&#39;, &#39;less-loader&#39;] &#125;,
-    ]
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>打包处理样式表中与 url 路径相关的文件</strong><br>① 运行 <code>npm i url-loader@4.1.1 file-loader@6.2.0 -D</code> 命令<br>② 在 webpack.config.js 的 module -&gt; rules 数组中，添加 loader 规则如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">module: &#123;
-    rules: [
-     &#123;
-        test: &#x2F;\.jpg|png|gif$&#x2F;,
-        use: &#123;
-          loader: &#39;url-loader&#39;,
-          options: &#123;
-            limit: 22228,&#x2F;&#x2F; limit 用来指定图片的大小，单位是字节（byte）只有 ≤ limit 大小的图片，才会被转为 base64 格式的图片
-            outputPath: &#39;image&#39;,  
-          &#125;,
-        &#125;,
-      &#125;,
-    ]
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>打包处理js 文件中的高级语法</strong><br>webpack 只能打包处理一部分高级的 JavaScript 语法。对于那些 webpack 无法处理的高级 js 语法，需要借<br>助于 babel-loader 进行打包处理。例如 webpack 无法处理下面的 JavaScript 代码：<br>安装 babel-loader 相关的包：<code>npm i babel-loader@8.2.1 @babel/core@7.12.3 @babel/plugin-proposal-class-properties@7.12.1 -D</code><br>配置：在 webpack.config.js 的 module -&gt; rules 数组中，添加 loader 规则如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">&#123;
-  test: &#x2F;\.js$&#x2F;,
-  exclude: &#x2F;node_modules&#x2F;,  &#x2F;&#x2F; exclude 为排除项，不需要处理标注的文件
-  use: &#123;
-    loader: &#39;babel-loader&#39;,
-    options: &#123;
-      plugins: [&#39;@babel&#x2F;plugin-proposal-class-properties&#39;],
-    &#125;,
-  &#125;,
-&#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>打包发布</strong><br>项目开发完成之后，使用 webpack 对项目进行打包发布的主要原因有以下两点：<br>① 开发环境下，打包生成的文件存放于内存中，无法获取到最终打包生成的文件<br>② 开发环境下，打包生成的文件不会进行代码压缩和性能优化<br>为了让项目能够在生产环境中高性能的运行，因此需要对项目进行打包发布<br>配置webpack 的打包发布：在 package.json 文件的 scripts 节点下，新增 build 命令如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">&quot;scripts&quot;: &#123;
-  &quot;dev&quot;: &quot;webpack serve&quot;,
-  &#x2F;&#x2F; --model 是一个参数项，用来指定 webpack 的运行模式。production 代表生产环境，会对打包生成的文件进行代码压缩和性能优化。通过 --model 指定的参数项，会覆盖 webpack.config.js 中的 model 选项。
-  &quot;build&quot;: &quot;webpack --mode production&quot;
-&#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>③ 把 JavaScript 文件统一生成到 js 目录中<br>④ 把图片文件统一生成到 image 目录中<br>⑤ 自动清理 dist 目录下的旧文件：为了在每次打包发布时自动清理掉 dist 目录中的旧文件，可以安装并配置 clean-webpack-plugin 插件：<code>npm i clean-webpack-plugin@3.0.0 -D</code></p>
-<pre class="line-numbers language-none"><code class="language-none">const &#123; CleanWebpackPlugin &#125; &#x3D; require(&#39;clean-webpack-plugin&#39;)
-const cleanPlugin &#x3D; new CleanWebpackPlugin()
-plugins: [htmlPlugin, cleanPlugin], <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="Source-Map"><a href="#Source-Map" class="headerlink" title="Source Map"></a>Source Map</h3><p>Source Map 就是一个信息文件，里面储存着位置信息。也就是说，Source Map 文件中存储着代码压缩混淆前后的对应关系。有了它，出错的时候，除错工具将直接显示原始代码，而不是转换后的代码，能够极大的方便后期的调试。<br>**默认 Source Map 的问题:**开发环境下默认生成的 Source Map，记录的是生成后的代码的位置。会导致运行时报错的行数与源代码的行数不一致的问题。<br>**解决默认 Source Map 的问题:**开发环境下，推荐在 webpack.config.js 中添加如下的配置，即可保证运行时报错的行数与源代码的行数保持一致</p>
-<pre class="line-numbers language-none"><code class="language-none">module.exports&#x3D;&#123;
-  &#x2F;&#x2F; eval-source-map 仅限在开发模式下使用
-  &#x2F;&#x2F; devtool: &#39;eval-source-map&#39;,
-  &#x2F;&#x2F; 生产环境下，建议关闭 SourceMap 或将 devtool 的值设置为 nosources-source-map
-  &#x2F;&#x2F; devtool: &#39;nosources-source-map&#39;,只想定位报错的具体行数，且不想暴露源码
-  &#x2F;&#x2F; devtool: &#39;source-map&#39;,想在定位报错行数的同时，展示具体报错的源码
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>Source Map 的最佳实践:</strong><br>① 开发环境下：</p>
-<ul>
-<li>建议把 devtool 的值设置为 eval-source-map</li>
-<li>好处：可以精准定位到具体的错误行<br>② 生产环境下：</li>
-<li>建议关闭 Source Map 或将 devtool 的值设置为 nosources-source-map</li>
-<li>好处：防止源码泄露，提高网站的安全性</li>
-</ul>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>打包构建</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>跨域与JSONP.md</title>
-    <url>/2022/02/27/kua-yu-yu-jsonp-md/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>————同源策略，跨域，JSONP的实现原理，防抖和节流。</p>
-<h1 id="了解同源策略和跨域"><a href="#了解同源策略和跨域" class="headerlink" title="了解同源策略和跨域"></a>了解同源策略和跨域</h1><p>  同源指的是如果两个页面的协议，域名，端口都相同，则两个页面具有相同的源（如果没有给出端口号，默认是80端口）。<span id="more"></span></p>
-<p><strong>同源策略</strong>是浏览器提供的一个安全功能</p>
-<p><strong>跨域</strong>是指两个URL的协议，域名，端口有一个或一个以上不一致。出现跨域的根本原因：浏览器的同源策略不允许非同源的URL之间进行资源的交互<br>（浏览器允许发起跨域请求，但是，跨域请求回来的数据会被浏览器拦截，无法被页面获取到）</p>
-<p>如何实现跨域数据请求解决方案：JSONP和CORS<br> JSONP：出现的早，兼容性好，缺点是只支持GET请求，不支持POST请求；<br> CORS：出现的较晚，W3C标准，两种请求都支持，缺点是不兼容低版本浏览器</p>
-<h1 id="JSONP的实现原理"><a href="#JSONP的实现原理" class="headerlink" title="JSONP的实现原理"></a>JSONP的实现原理</h1><p>  JSONP的实现原理就是通过<code>&lt;script&gt;</code>标签的src属性，请求跨域的数据接口，并通过函数调用的形式，接收跨域接口响应回来的数据</p>
-<h2 id="jQuery中的JSONP"><a href="#jQuery中的JSONP" class="headerlink" title="jQuery中的JSONP"></a>jQuery中的JSONP</h2><p>  jQuery 提供的 $.ajax() 函数，除了可以发起真正的 Ajax 数据请求之外，还能够发起 JSONP 数据请求</p>
-<pre><code>$.ajax(&#123;
-  url: &#39;http://ajax.frontend.itheima.net:3006/api/jsonp?name=zs&amp;age=20&#39;,
-  // 如果要使用 $.ajax() 发起 JSONP 请求，必须指定 datatype 为 jsonp
-  dataType: &#39;jsonp&#39;,
-   success: function(res) &#123;
-   console.log(res)
-&#125;
-&#125;)
-</code></pre>
-<p>在使用 jQuery 发起 JSONP 请求时，如果想要自定义 JSONP 的参数以及回调函数名称，可以通过如下两个参数来指定：</p>
-<pre><code>$.ajax(&#123;
-  url: &#39;http://ajax.frontend.itheima.net:3006/api/jsonp?name=zs&amp;age=20&#39;,
-  dataType: &#39;jsonp&#39;,
-  // 发送到服务端的参数名称，默认值为 callback
-  jsonp: &#39;callback&#39;,
-  // 自定义的回调函数名称，默认值为 jQueryxxx 格式
-  jsonpCallback: &#39;abc&#39;,
-  success: function(res) &#123;
-  console.log(res)
-&#125;
-</code></pre>
-<p> })</p>
-<h2 id="jQuery中JSONP的实现过程"><a href="#jQuery中JSONP的实现过程" class="headerlink" title="jQuery中JSONP的实现过程"></a>jQuery中JSONP的实现过程</h2><p> jQuery 中的 JSONP，也是通过 <code>&lt;script&gt;</code> 标签的 src 属性实现跨域数据访问的，只不过，jQuery 采用的是动态创建和移除<code>&lt;script&gt;</code>标签的方式，来发起 JSONP 数据请求。</p>
-<ul>
-<li><p>在发起 JSONP 请求的时候，动态向 <code>&lt;header&gt;</code> 中 append 一个 <code>&lt;script&gt;</code> 标签；</p>
-</li>
-<li><p>在 JSONP 请求成功以后，动态从 <code>&lt;header&gt;</code> 中移除刚才 append 进去的<code> &lt;script&gt;</code> 标签；</p>
-</li>
-</ul>
-<h1 id="防抖与节流"><a href="#防抖与节流" class="headerlink" title="防抖与节流"></a>防抖与节流</h1><h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><p>———<strong>防抖策略</strong>是当事件被触发后，延迟n秒后再执行回调，如果在这n秒内事件又被触发，则重新计时。</p>
-<p>防抖的应用场景：用户在输入框中连续输入一串字符是时，可以通过防抖策略，只在输入完成时，才执行查询的请求，这样可以有效减少请求次数，节约请求资源。</p>
-<pre><code>var timer = null                    // 1. 防抖动的 timer
-  function debounceSearch(keywords) &#123; // 2. 定义防抖的函数
-  timer = setTimeout(function() &#123;
-  // 发起 JSONP 请求
-  getSuggestList(keywords)
-  &#125;, 500)
-  &#125;
-
-  $(&#39;#ipt&#39;).on(&#39;keyup&#39;, function() &#123; 
-  // 3. 在触发 keyup 事件时，立即清空 timer    
-    clearTimeout(timer)
-   debounceSearch(keywords)
-&#125;)
-</code></pre>
-<h2 id="缓存搜索的建议列表"><a href="#缓存搜索的建议列表" class="headerlink" title="缓存搜索的建议列表"></a>缓存搜索的建议列表</h2><p>1.定义全局缓存对象</p>
-<p><code>// 缓存对象   var cacheObj = &#123;&#125;</code></p>
-<p>2.将搜索结果保存到缓存对象中</p>
-<pre><code> // 渲染建议列表
- function renderSuggestList(res) &#123;
-   // ...省略其他代码
-   // 将搜索的结果，添加到缓存对象中
-    var k = $(&#39;#ipt&#39;).val().trim()
-    cacheObj[k] = res
- &#125;
-</code></pre>
-<p>3.优先从缓存中获取搜索建议</p>
-<pre><code> // 监听文本框的 keyup 事件
- $(&#39;#ipt&#39;).on(&#39;keyup&#39;, function() &#123;
-    // ...省略其他代码
-
-    // 优先从缓存中获取搜索建议
-    if (cacheObj[keywords]) &#123;
-       return renderSuggestList(cacheObj[keywords])
-    &#125;
-    // 获取搜索建议列表
-    debounceSearch(keywords)
-  &#125;)
-</code></pre>
-<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p><strong>节流策略</strong> 就是可以减少一段时间内事件的触发频率</p>
-<p>节流的应用场景：</p>
-<ul>
-<li><p>鼠标连续不断地触发某事件，只在单位时间内只触发一次</p>
-</li>
-<li><p>懒加载时要监听计算滚动条的位置，但不必每次滑动都触发，可以降低计算的频率，而不必去浪费cpu资源。</p>
-</li>
-</ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li>防抖：如果事件被频繁触发，防抖能保证只有最有一次触发生效！前面 N 多次的触发都会被忽略！</li>
-<li>节流：如果事件被频繁触发，节流能够减少事件触发的频率，因此，节流是有选择性地执行一部分事件！</li>
-</ul>
-]]></content>
-      <categories>
-        <category>前后端交互</category>
-      </categories>
-      <tags>
-        <tag>跨域与JSONP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>商城项目问题汇总</title>
-    <url>/2022/08/01/shang-cheng-xiang-mu-wen-ti-hui-zong/</url>
-    <content><![CDATA[<h3 id="在请求数据的时候后台报30001错"><a href="#在请求数据的时候后台报30001错" class="headerlink" title="在请求数据的时候后台报30001错"></a>在请求数据的时候后台报30001错</h3><p>  有一种可能是在数据请求的时候，请求头header 的格式不对,需要在请求的方法中写一个header 请求头</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">getAddcart</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-	<span class="token keyword">return</span> req<span class="token punctuation">.</span><span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
-		<span class="token literal-property property">url</span><span class="token operator">:</span><span class="token string">'/jingli-multishop/buyer/trade/carts'</span><span class="token punctuation">,</span>
-		<span class="token literal-property property">method</span><span class="token operator">:</span><span class="token string">'post'</span><span class="token punctuation">,</span>
-		data<span class="token punctuation">,</span>
-		<span class="token literal-property property">header</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token string-property property">'content-type'</span><span class="token operator">:</span><span class="token string">'application/x-www-form-urlencoded'</span><span class="token punctuation">&#125;</span>
-	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-
-
-]]></content>
   </entry>
   <entry>
     <title>Vue基础入门(二)</title>
