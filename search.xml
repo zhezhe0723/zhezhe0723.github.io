@@ -112,6 +112,47 @@ module.exports &#x3D; router<span aria-hidden="true" class="line-numbers-rows"><
       </tags>
   </entry>
   <entry>
+    <title>Array的常见用法</title>
+    <url>/2022/08/17/array-de-chang-jian-yong-fa/</url>
+    <content><![CDATA[<h3 id="JS-中截取数组的方法"><a href="#JS-中截取数组的方法" class="headerlink" title="JS 中截取数组的方法"></a>JS 中截取数组的方法</h3><ol>
+<li><strong>splice()方法</strong></li>
+</ol>
+<p>​         splice()方法通过删除或者替换现有元素或者原地添加新的元素来修改数组，并以数组的形式返回被修改的内容。这个方法会改变原数组。</p>
+<p>​      <strong>–语法–</strong></p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">array<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span>start<span class="token punctuation">[</span><span class="token punctuation">,</span>deleteCount<span class="token punctuation">[</span><span class="token punctuation">,</span>item1<span class="token punctuation">[</span><span class="token punctuation">,</span>item2<span class="token punctuation">[</span><span class="token punctuation">,</span><span class="token operator">...</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment">//start :指定修改的开始位置（从0开始计数），如果超出了数组的长度，则从数组末尾开始添加内容；如果是负值，则表示从数组末位（从后往前数）开始的第n 位；如果负数的绝对值大于数组的长度，则表示开始的位置为第0位。</span>
+<span class="token comment">//deleteCount(可选) :整数，表示要删除的数组元素的个数。如果deleteCount大于start之后的元素的总数，则从start后面的元素都将被删除（包含第start位）；如果 deleteCount 是 0 或者负数，则不移除元素。这种情况下，至少应添加一个新元素。</span>
+<span class="token comment">// item1,item2(可选) :要添加进数组的元素，从start 位置开始。如果不指定，则 splice() 将只删除数组元素。</span>
+<span class="token comment">// 返回值 由被删除的元素组成的一个数组。如果只删除了一个元素，则返回只包含一个元素的数组。如果没有删除元素，则返回空数组。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>​     <strong>–案例–</strong></p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token string">"d"</span><span class="token punctuation">,</span><span class="token string">"e"</span><span class="token punctuation">]</span>
+<span class="token keyword">var</span> arr1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">"f"</span><span class="token punctuation">)</span> 
+<span class="token comment">// 3 表示从索引为3的位置开始删除，</span>
+<span class="token comment">// 1 删除元素的个数</span>
+<span class="token comment">// 最后面是表示向原数组中添加元素，位置就是前面两个数字所定义的位置添加数据</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span> <span class="token comment">//原数组：arr["a", "b", "c", "f", "e"]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span>  <span class="token comment">// 返回值 --被删除的元素 arr1 ["d"]</span>
+
+<span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token string">"d"</span><span class="token punctuation">,</span><span class="token string">"e"</span><span class="token punctuation">]</span>
+<span class="token keyword">var</span> arr1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>  
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>  <span class="token comment">//原数组：arr ["a", "b", "e"]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span> <span class="token comment">// 返回值 --被删除的元素 arr1 ["c", "d"]</span>
+
+<span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token string">"d"</span><span class="token punctuation">,</span><span class="token string">"e"</span><span class="token punctuation">]</span>
+<span class="token keyword">var</span> arr1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>  <span class="token comment">//从索引 1 的位置开始删除所有元素</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>  <span class="token comment">//原数组：arr["a"]   </span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span> <span class="token comment">//返回值 --被删除的元素 arr1 ["b", "c", "d", "e"]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+]]></content>
+      <categories>
+        <category>Array</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Flex布局</title>
     <url>/2022/07/10/flex-bu-ju/</url>
     <content><![CDATA[<h3 id="Flex-布局的定义"><a href="#Flex-布局的定义" class="headerlink" title="Flex 布局的定义"></a>Flex 布局的定义</h3><p>Flex 是Flexible Box 的缩写，意为“弹性布局” ，用来为盒状模型提供最大的灵活性。</p>
@@ -265,7 +306,7 @@ git commit -m &quot;第一次提交&quot;<span aria-hidden="true" class="line-nu
 (只有第一次推送内容需要-u origin master，往后都不用了)<h2 id="SSH-key"><a href="#SSH-key" class="headerlink" title="SSH key"></a>SSH key</h2></li>
 </ol>
 <p><strong>SSH key介绍</strong><br>SSH key 的作用：实现本地仓库和 Github 之间免登录的加密数据传输。<br>SSH key 的好处：免登录身份认证、数据加密传输。<br>SSH key 由两部分组成，分别是：<br>① id_rsa（私钥文件，存放于客户端的电脑中即可）<br>② id_rsa.pub（公钥文件，需要配置到 Github 中）<br><strong>生成SSH key</strong></p>
-<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#121;&#x6f;&#117;&#x72;&#x5f;&#x65;&#x6d;&#x61;&#x69;&#108;&#x40;&#x65;&#x78;&#x61;&#x6d;&#112;&#108;&#101;&#46;&#99;&#x6f;&#x6d;">&#121;&#x6f;&#117;&#x72;&#x5f;&#x65;&#x6d;&#x61;&#x69;&#108;&#x40;&#x65;&#x78;&#x61;&#x6d;&#112;&#108;&#101;&#46;&#99;&#x6f;&#x6d;</a> 替换为注册 Github 账号时填写的邮箱：</p>
+<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#x79;&#111;&#x75;&#114;&#95;&#101;&#109;&#x61;&#105;&#108;&#x40;&#x65;&#120;&#97;&#109;&#112;&#108;&#101;&#x2e;&#99;&#x6f;&#109;">&#x79;&#111;&#x75;&#114;&#95;&#101;&#109;&#x61;&#105;&#108;&#x40;&#x65;&#120;&#97;&#109;&#112;&#108;&#101;&#x2e;&#99;&#x6f;&#109;</a> 替换为注册 Github 账号时填写的邮箱：</p>
 <pre class="line-numbers language-none"><code class="language-none">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>③ 连续敲击 3 次回车，即可在 C:\Users\用户名文件夹.ssh 目录中生成 id_rsa 和 id_rsa.pub 两个文件</p>
 <p><strong>配置SSH key</strong><br>① 使用记事本打开 id_rsa.pub 文件，复制里面的文本内容<br>② 在浏览器中登录 Github，点击头像 -&gt; Settings -&gt; SSH and GPG Keys -&gt; New SSH key<br>③ 将 id_rsa.pub 文件中的内容，粘贴到 Key 对应的文本框中<br>④ 在 Title 文本框中任意填写一个名称，来标识这个 Key 从何而来</p>
@@ -1097,7 +1138,51 @@ Vue<span class="token punctuation">.</span><span class="token function">filters<
   <entry>
     <title>git基础</title>
     <url>/2022/03/01/git-ji-chu/</url>
-    <content><![CDATA[<h1 id="版本控制软件"><a href="#版本控制软件" class="headerlink" title="版本控制软件"></a>版本控制软件</h1><p>总结一下常用的 Git 命令：</p>
+    <content><![CDATA[<h1 id="版本控制软件"><a href="#版本控制软件" class="headerlink" title="版本控制软件"></a>版本控制软件</h1><h4 id="git-提交代码到同一分支时冲突的解决"><a href="#git-提交代码到同一分支时冲突的解决" class="headerlink" title="git 提交代码到同一分支时冲突的解决"></a>git 提交代码到同一分支时冲突的解决</h4><p>​      我们在同一分支上开发代码时，代码冲突是不可避免的。下面通过我今天提交项目就遇到了这个问题，问题就是:同事和我两个人在同一个分支上开发代码，今天他提交之后，我在去用<code>git push -u origin mall</code>提交代码出现一下报错</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">lng@<span class="token constant">DESKTOP</span><span class="token operator">-</span>9TD21KL <span class="token constant">MINGW64</span> <span class="token operator">~</span><span class="token operator">/</span>Desktop<span class="token operator">/</span>kaol<span class="token operator">/</span><span class="token function">kaol</span> <span class="token punctuation">(</span>mall<span class="token punctuation">)</span>
+$ git push <span class="token operator">-</span>u origin mall
+To https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>gitee<span class="token punctuation">.</span>com<span class="token operator">/</span>lingpe<span class="token operator">/</span>kaol<span class="token punctuation">.</span>git
+ <span class="token operator">!</span> <span class="token punctuation">[</span>rejected<span class="token punctuation">]</span>        master <span class="token operator">-</span><span class="token operator">></span> <span class="token function">master</span> <span class="token punctuation">(</span>fetch first<span class="token punctuation">)</span>
+<span class="token literal-property property">error</span><span class="token operator">:</span> failed to push some refs to <span class="token string">'https://gitee.com/lingpe/kaol.git'</span>
+<span class="token literal-property property">hint</span><span class="token operator">:</span> Updates were rejected because the remote contains work that you <span class="token keyword">do</span>
+<span class="token literal-property property">hint</span><span class="token operator">:</span> not have locally<span class="token punctuation">.</span> This is usually caused by another repository pushing
+<span class="token literal-property property">hint</span><span class="token operator">:</span> to the same ref<span class="token punctuation">.</span> You may want to first integrate the remote changes
+<span class="token literal-property property">hint</span><span class="token operator">:</span> <span class="token punctuation">(</span>e<span class="token punctuation">.</span>g<span class="token punctuation">.</span><span class="token punctuation">,</span> <span class="token string">'git pull ...'</span><span class="token punctuation">)</span> before pushing again<span class="token punctuation">.</span>
+<span class="token literal-property property">hint</span><span class="token operator">:</span> See the <span class="token string">'Note about fast-forwards'</span> <span class="token keyword">in</span> <span class="token string">'git push --help'</span> <span class="token keyword">for</span> details<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>接下来我们来解决问题</p>
+<ol>
+<li><p>需要先通过<code>git pull </code> 拉取分支的代码</p>
+ <pre class="line-numbers language-js" data-language="js"><code class="language-js">lng@<span class="token constant">DESKTOP</span><span class="token operator">-</span>9TD21KL <span class="token constant">MINGW64</span> <span class="token operator">~</span><span class="token operator">/</span>Desktop<span class="token operator">/</span>kaol<span class="token operator">/</span><span class="token function">kaol</span> <span class="token punctuation">(</span>mall<span class="token punctuation">)</span>
+$ git pull
+<span class="token literal-property property">remote</span><span class="token operator">:</span> Enumerating objects<span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">,</span> done<span class="token punctuation">.</span>
+<span class="token literal-property property">remote</span><span class="token operator">:</span> Counting objects<span class="token operator">:</span> <span class="token number">100</span><span class="token operator">%</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token operator">/</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">,</span> done<span class="token punctuation">.</span>
+<span class="token literal-property property">remote</span><span class="token operator">:</span> Compressing objects<span class="token operator">:</span> <span class="token number">100</span><span class="token operator">%</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token operator">/</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> done<span class="token punctuation">.</span>
+<span class="token literal-property property">remote</span><span class="token operator">:</span> Total <span class="token number">3</span> <span class="token punctuation">(</span>delta <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> reused <span class="token number">0</span> <span class="token punctuation">(</span>delta <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> pack<span class="token operator">-</span>reused <span class="token number">0</span>
+Unpacking objects<span class="token operator">:</span> <span class="token number">100</span><span class="token operator">%</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token operator">/</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">308</span> bytes <span class="token operator">|</span> <span class="token number">51.00</span> KiB<span class="token operator">/</span>s<span class="token punctuation">,</span> done<span class="token punctuation">.</span>
+From https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>gitee<span class="token punctuation">.</span>com<span class="token operator">/</span>lingpe<span class="token operator">/</span>kaol
+   1bb7c56<span class="token punctuation">.</span><span class="token punctuation">.</span>65d76a9  master     <span class="token operator">-</span><span class="token operator">></span> origin<span class="token operator">/</span>master
+Auto<span class="token operator">-</span>merging main<span class="token punctuation">.</span>cpp
+<span class="token constant">CONFLICT</span> <span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token operator">:</span> Merge conflict <span class="token keyword">in</span> main<span class="token punctuation">.</span>cpp
+Automatic merge failed<span class="token punctuation">;</span> fix conflicts and then commit the result<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>拉取代码之后，打开文件可以看到文件中有一些特殊字符，会提示具体是哪一行代码发生了冲突。</p>
+</li>
+<li><p>特殊字符可以很明白的看到代码哪里出现了问题，一般会分为两端，就是你所冲突的代码，把特殊字符删掉，根据你功能的需要决定删除或保留那些代码。</p>
+</li>
+<li><p>修改完成之后，重新执行提交代码三部曲，<code>git add .   git commit -m &quot;冲突&quot;   git push -u origin mall</code></p>
+</li>
+</ol>
+<p>以上就是我今天在提交代码的时候出现的问题，并解决。记录一下，</p>
+<blockquote>
+<p>公司中实际项目用到的Git 操作：</p>
+<p><code>git add . </code></p>
+<p><code>git commit -m  &quot;主要做了什么工作&quot;</code></p>
+<p><code>git push -u origin 当前分支  //推送到远程仓库</code>  </p>
+<p><code>git checkout master  //切换到master分支</code></p>
+<p><code>git merge tabbar //合并到master分支</code></p>
+</blockquote>
+<p>总结一下常用的 Git 命令：</p>
 <ul>
 <li><code>git init //初始化仓库</code></li>
 <li><code>git config -h  //查看帮助手册</code></li>
@@ -1384,6 +1469,63 @@ i5ting_toc -f 要转换的md文件路径 -o<span aria-hidden="true" class="line-
       <tags>
         <tag>npm与包</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>uni-app使用总结</title>
+    <url>/2022/08/10/uni-app-shi-yong-zong-jie/</url>
+    <content><![CDATA[<h3 id="rich-text-富文本-图片自适应问题-解决"><a href="#rich-text-富文本-图片自适应问题-解决" class="headerlink" title="rich-text 富文本 图片自适应问题 解决"></a>rich-text 富文本 图片自适应问题 解决</h3><p>  <strong>问题：</strong> rich-text是微信小程序的富文本标签，在使用rich-text的时候，需要rich-text内部图片宽高自适应。</p>
+<p>  <strong>解决方法：</strong> 首先新建一个 text.js 文件</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">/**
+ * 处理富文本里的图片宽度自适应
+ * 1.去掉img标签里的style、width、height属性
+ * 2.img标签添加style属性：max-width:100%;height:auto
+ * 3.修改所有style里的width属性为max-width:100%
+ * 4.去掉&lt;br/>标签
+ * @param html
+ * @returns &#123;void|string|*&#125;
+ */</span>
+<span class="token keyword">function</span> <span class="token function">formatRichText</span><span class="token punctuation">(</span><span class="token parameter">html</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">let</span> newContent<span class="token operator">=</span> html<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">&lt;img[^>]*></span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">match<span class="token punctuation">,</span>capture</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    match <span class="token operator">=</span> match<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">style="[^"]+"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">style='[^']+'</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    match <span class="token operator">=</span> match<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">width="[^"]+"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">width='[^']+'</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    match <span class="token operator">=</span> match<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">height="[^"]+"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">height='[^']+'</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> match<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  newContent <span class="token operator">=</span> newContent<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">style="[^"]+"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">match<span class="token punctuation">,</span>capture</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    match <span class="token operator">=</span> match<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">width:[^;]+;</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">'max-width:100%;'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">width:[^;]+;</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">'max-width:100%;'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> match<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  newContent <span class="token operator">=</span> newContent<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">&lt;br[^>]*\/></span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  newContent <span class="token operator">=</span> newContent<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\&lt;img</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">'&lt;img style="max-width:100%;height:auto;display:block;margin-top:0;margin-bottom:0;"'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> newContent<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+ 
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  formatRichText
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>   接下来，那个页面需要进行富文本展示，就把这个js 文件引入</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span>
+		formatRichText
+	<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'xxxxx/text.js'</span>  <span class="token comment">//看自己的路径</span>
+
+
+<span class="token comment">//这个是获取富文本的接口</span>
+<span class="token function">teacher</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span>strings <span class="token operator">=</span> <span class="token function">formatRichText</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span>data<span class="token punctuation">.</span>teacherDetails<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+
+<span class="token comment">//这是需要在页面上展示的内容</span>
+<span class="token operator">&lt;</span>rich<span class="token operator">-</span>text <span class="token operator">:</span>nodes<span class="token operator">=</span><span class="token string">"strings"</span> style<span class="token operator">=</span><span class="token string">"width: 100%;"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>rich<span class="token operator">-</span>text<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p><strong>完美解决 uni-app 的 rich-text组件 中图片宽高自适应问题</strong> </p>
+<p>加油加油加油！！！</p>
+]]></content>
   </entry>
   <entry>
     <title>vuex</title>
@@ -1831,6 +1973,25 @@ plugins: [htmlPlugin, cleanPlugin], <span aria-hidden="true" class="line-numbers
       <tags>
         <tag>跨域与JSONP</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>商城项目问题汇总</title>
+    <url>/2022/08/01/shang-cheng-xiang-mu-wen-ti-hui-zong/</url>
+    <content><![CDATA[<h3 id="在请求数据的时候后台报30001错"><a href="#在请求数据的时候后台报30001错" class="headerlink" title="在请求数据的时候后台报30001错"></a>在请求数据的时候后台报30001错</h3><p>  有一种可能是在数据请求的时候，请求头header 的格式不对,需要在请求的方法中写一个header 请求头</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">getAddcart</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> req<span class="token punctuation">.</span><span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+		<span class="token literal-property property">url</span><span class="token operator">:</span><span class="token string">'/jingli-multishop/buyer/trade/carts'</span><span class="token punctuation">,</span>
+		<span class="token literal-property property">method</span><span class="token operator">:</span><span class="token string">'post'</span><span class="token punctuation">,</span>
+		data<span class="token punctuation">,</span>
+		<span class="token literal-property property">header</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token string-property property">'content-type'</span><span class="token operator">:</span><span class="token string">'application/x-www-form-urlencoded'</span><span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+]]></content>
   </entry>
   <entry>
     <title>Vue基础入门(二)</title>

@@ -5,12 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="git基础, 可可托海">
-    <meta name="description" content="版本控制软件总结一下常用的 Git 命令：
-
-git init //初始化仓库
-git config -h  //查看帮助手册
-git status -s  //显示文件状态   未跟踪文件前面有红色的？？标记
-git add .   //">
+    <meta name="description" content="版本控制软件git 提交代码到同一分支时冲突的解决​      我们在同一分支上开发代码时，代码冲突是不可避免的。下面通过我今天提交项目就遇到了这个问题，问题就是:同事和我两个人在同一个分支上开发代码，今天他提交之后，我在去用git pus">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -640,7 +635,51 @@ git add .   //">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="版本控制软件"><a href="#版本控制软件" class="headerlink" title="版本控制软件"></a>版本控制软件</h1><p>总结一下常用的 Git 命令：</p>
+                <h1 id="版本控制软件"><a href="#版本控制软件" class="headerlink" title="版本控制软件"></a>版本控制软件</h1><h4 id="git-提交代码到同一分支时冲突的解决"><a href="#git-提交代码到同一分支时冲突的解决" class="headerlink" title="git 提交代码到同一分支时冲突的解决"></a>git 提交代码到同一分支时冲突的解决</h4><p>​      我们在同一分支上开发代码时，代码冲突是不可避免的。下面通过我今天提交项目就遇到了这个问题，问题就是:同事和我两个人在同一个分支上开发代码，今天他提交之后，我在去用<code>git push -u origin mall</code>提交代码出现一下报错</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">lng@<span class="token constant">DESKTOP</span><span class="token operator">-</span>9TD21KL <span class="token constant">MINGW64</span> <span class="token operator">~</span><span class="token operator">/</span>Desktop<span class="token operator">/</span>kaol<span class="token operator">/</span><span class="token function">kaol</span> <span class="token punctuation">(</span>mall<span class="token punctuation">)</span>
+$ git push <span class="token operator">-</span>u origin mall
+To https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>gitee<span class="token punctuation">.</span>com<span class="token operator">/</span>lingpe<span class="token operator">/</span>kaol<span class="token punctuation">.</span>git
+ <span class="token operator">!</span> <span class="token punctuation">[</span>rejected<span class="token punctuation">]</span>        master <span class="token operator">-</span><span class="token operator">></span> <span class="token function">master</span> <span class="token punctuation">(</span>fetch first<span class="token punctuation">)</span>
+<span class="token literal-property property">error</span><span class="token operator">:</span> failed to push some refs to <span class="token string">'https://gitee.com/lingpe/kaol.git'</span>
+<span class="token literal-property property">hint</span><span class="token operator">:</span> Updates were rejected because the remote contains work that you <span class="token keyword">do</span>
+<span class="token literal-property property">hint</span><span class="token operator">:</span> not have locally<span class="token punctuation">.</span> This is usually caused by another repository pushing
+<span class="token literal-property property">hint</span><span class="token operator">:</span> to the same ref<span class="token punctuation">.</span> You may want to first integrate the remote changes
+<span class="token literal-property property">hint</span><span class="token operator">:</span> <span class="token punctuation">(</span>e<span class="token punctuation">.</span>g<span class="token punctuation">.</span><span class="token punctuation">,</span> <span class="token string">'git pull ...'</span><span class="token punctuation">)</span> before pushing again<span class="token punctuation">.</span>
+<span class="token literal-property property">hint</span><span class="token operator">:</span> See the <span class="token string">'Note about fast-forwards'</span> <span class="token keyword">in</span> <span class="token string">'git push --help'</span> <span class="token keyword">for</span> details<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>接下来我们来解决问题</p>
+<ol>
+<li><p>需要先通过<code>git pull </code> 拉取分支的代码</p>
+ <pre class="line-numbers language-js" data-language="js"><code class="language-js">lng@<span class="token constant">DESKTOP</span><span class="token operator">-</span>9TD21KL <span class="token constant">MINGW64</span> <span class="token operator">~</span><span class="token operator">/</span>Desktop<span class="token operator">/</span>kaol<span class="token operator">/</span><span class="token function">kaol</span> <span class="token punctuation">(</span>mall<span class="token punctuation">)</span>
+$ git pull
+<span class="token literal-property property">remote</span><span class="token operator">:</span> Enumerating objects<span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">,</span> done<span class="token punctuation">.</span>
+<span class="token literal-property property">remote</span><span class="token operator">:</span> Counting objects<span class="token operator">:</span> <span class="token number">100</span><span class="token operator">%</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token operator">/</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">,</span> done<span class="token punctuation">.</span>
+<span class="token literal-property property">remote</span><span class="token operator">:</span> Compressing objects<span class="token operator">:</span> <span class="token number">100</span><span class="token operator">%</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token operator">/</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> done<span class="token punctuation">.</span>
+<span class="token literal-property property">remote</span><span class="token operator">:</span> Total <span class="token number">3</span> <span class="token punctuation">(</span>delta <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> reused <span class="token number">0</span> <span class="token punctuation">(</span>delta <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> pack<span class="token operator">-</span>reused <span class="token number">0</span>
+Unpacking objects<span class="token operator">:</span> <span class="token number">100</span><span class="token operator">%</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token operator">/</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">308</span> bytes <span class="token operator">|</span> <span class="token number">51.00</span> KiB<span class="token operator">/</span>s<span class="token punctuation">,</span> done<span class="token punctuation">.</span>
+From https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>gitee<span class="token punctuation">.</span>com<span class="token operator">/</span>lingpe<span class="token operator">/</span>kaol
+   1bb7c56<span class="token punctuation">.</span><span class="token punctuation">.</span>65d76a9  master     <span class="token operator">-</span><span class="token operator">></span> origin<span class="token operator">/</span>master
+Auto<span class="token operator">-</span>merging main<span class="token punctuation">.</span>cpp
+<span class="token constant">CONFLICT</span> <span class="token punctuation">(</span>content<span class="token punctuation">)</span><span class="token operator">:</span> Merge conflict <span class="token keyword">in</span> main<span class="token punctuation">.</span>cpp
+Automatic merge failed<span class="token punctuation">;</span> fix conflicts and then commit the result<span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>拉取代码之后，打开文件可以看到文件中有一些特殊字符，会提示具体是哪一行代码发生了冲突。</p>
+</li>
+<li><p>特殊字符可以很明白的看到代码哪里出现了问题，一般会分为两端，就是你所冲突的代码，把特殊字符删掉，根据你功能的需要决定删除或保留那些代码。</p>
+</li>
+<li><p>修改完成之后，重新执行提交代码三部曲，<code>git add .   git commit -m &quot;冲突&quot;   git push -u origin mall</code></p>
+</li>
+</ol>
+<p>以上就是我今天在提交代码的时候出现的问题，并解决。记录一下，</p>
+<blockquote>
+<p>公司中实际项目用到的Git 操作：</p>
+<p><code>git add . </code></p>
+<p><code>git commit -m  &quot;主要做了什么工作&quot;</code></p>
+<p><code>git push -u origin 当前分支  //推送到远程仓库</code>  </p>
+<p><code>git checkout master  //切换到master分支</code></p>
+<p><code>git merge tabbar //合并到master分支</code></p>
+</blockquote>
+<p>总结一下常用的 Git 命令：</p>
 <ul>
 <li><code>git init //初始化仓库</code></li>
 <li><code>git config -h  //查看帮助手册</code></li>
