@@ -42,6 +42,117 @@ console<span class="token punctuation">.</span><span class="token function">log<
       </tags>
   </entry>
   <entry>
+    <title>Express</title>
+    <url>/2022/03/16/express/</url>
+    <content><![CDATA[<h2 id="Express简介"><a href="#Express简介" class="headerlink" title="Express简介"></a>Express简介</h2><h3 id="什么是Express"><a href="#什么是Express" class="headerlink" title="什么是Express"></a>什么是Express</h3><p>官方给出的概念：Express 是基于 Node.js 平台，快速、开放、极简的 Web 开发框架。<br>通俗的理解：Express 的作用和 Node.js 内置的 http 模块类似，是专门用来创建 Web 服务器的。<br>Express 的本质：就是一个 npm 上的第三方包，提供了快速创建 Web 服务器的便捷方法。<br>Express 的中文官网：<a href="http://www.expressjs.com.cn/">http://www.expressjs.com.cn/</a> </p>
+<span id="more"></span>
+
+<h3 id="Express的作用"><a href="#Express的作用" class="headerlink" title="Express的作用"></a>Express的作用</h3><p>对于前端程序员来说，最常见的两种服务器，分别是：</p>
+<ul>
+<li>Web 网站服务器：专门对外提供 Web 网页资源的服务器。</li>
+<li>API 接口服务器：专门对外提供 API 接口的服务器。<br>使用 Express，我们可以方便、快速的创建 Web 网站的服务器或 API 接口的服务器</li>
+</ul>
+<h3 id="Express的基本使用"><a href="#Express的基本使用" class="headerlink" title="Express的基本使用"></a>Express的基本使用</h3><ul>
+<li>安装Express<br>在项目所处的目录中，运行如下的终端命令，即可将 express 安装到项目中使用<pre class="line-numbers language-none"><code class="language-none">npm i express@4.17.1   &#x2F;&#x2F;express版本号可有可无，但是学习的时候必须和老师保持一致<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>创建基本的Web服务器<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;1．导入、express
+  const express &#x3D; require( &quot; express &quot;)
+&#x2F;&#x2F;2，创建web服字果
+ const app &#x3D; express()
+&#x2F;&#x2F;3．调用 app.listen(端口号，启动成功后的回调函数)，启动服务器
+ app.listen(8o,()&#x3D;&gt; &#123;
+   console.log( &#39;express server running at http:&#x2F;&#x2F;127.0.0.1&quot;))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>监听GET请求<br>通过 app.get() 方法，可以监听客户端的 GET 请求，具体的语法格式如下：<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;参数1:客户端请求的URL地址
+&#x2F;&#x2F;参数2:请求对应的处理函数
+req:请求对象(包含了与请求相关的属性与方法)
+res:响应对象(包含了与响应相关的属性与方法)
+app.get( &#39;请求URL&#39;, function(req,res) &#123;&#x2F;*处理函数*&#x2F;&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>监听POST请求<br>通过 app.post() 方法，可以监听客户端的 POST 请求，具体的语法格式如下<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;参数1:客户端请求的URL地址
+&#x2F;&#x2F;参数2:请求对应的处理函数
+&#x2F;&#x2F;  req:请求对象（包含了与请求相关的属性与方法)
+&#x2F;&#x2F;  res:响应对象(包含了与响应相关的属性与方法)
+app.post( &#39;请求URL&#39; function(req,res) &#123;&#x2F;*处理函数*&#x2F;&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>把内容响应给客户端<br>通过 res.send() 方法，可以把处理好的内容，发送给客户端：<pre class="line-numbers language-none"><code class="language-none">app.get(&#39;&#x2F;user&#39;, (req, res) &#x3D;&gt; &#123;
+  &#x2F;&#x2F; 调用 express 提供的 res.send() 方法，向客户端响应一个 JSON 对象
+res.send(&#123; name: &#39;zs&#39;, age: 20, gender: &#39;男&#39; &#125;)
+&#125;)
+app.post(&#39;&#x2F;user&#39;, (req, res) &#x3D;&gt; &#123;
+  &#x2F;&#x2F; 调用 express 提供的 res.send() 方法，向客户端响应一个 文本字符串
+ res.send(&#39;请求成功&#39;)
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>获取URL中携带的查询参数<br>通过 req.query 对象，可以访问到客户端通过查询字符串的形式，发送到服务器的参数：<pre class="line-numbers language-none"><code class="language-none"> app.get(&#39;&#x2F;&#39;, (req, res) &#x3D;&gt; &#123;
+&#x2F;&#x2F; 通过 req.query 可以获取到客户端发送过来的 查询参数
+&#x2F;&#x2F; 注意：默认情况下，req.query 是一个空对象
+console.log(req.query)
+res.send(req.query)
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>获取URL中的动态参数<br>通过 req.params 对象，可以访问到 URL 中，通过 : 匹配到的动态参数：<pre class="line-numbers language-none"><code class="language-none"> &#x2F;&#x2F; 注意：这里的 :id 是一个动态的参数
+app.get(&#39;&#x2F;user&#x2F;:ids&#x2F;:username&#39;, (req, res) &#x3D;&gt; &#123;
+&#x2F;&#x2F; req.params 是动态匹配到的 URL 参数，默认也是一个空对象
+console.log(req.params)
+res.send(req.params)
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="托管静态资源"><a href="#托管静态资源" class="headerlink" title="托管静态资源"></a>托管静态资源</h3>express 提供了一个非常好用的函数，叫做 express.static()，通过它，我们可以非常方便地创建一个静态资源服务器，例如，通过如下代码就可以将 public 目录下的图片、CSS 文件、JavaScript 文件对外开放访问了：<pre class="line-numbers language-none"><code class="language-none">app.use(express.static(&#39;public&#39;))<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+现在，你就可以访问 public 目录中的所有文件了：<br><a href="http://localhost:3000/images/bg.jpg">http://localhost:3000/images/bg.jpg</a><br><a href="http://localhost:3000/css/style.css">http://localhost:3000/css/style.css</a><br><a href="http://localhost:3000/js/login.js">http://localhost:3000/js/login.js</a></li>
+</ul>
+<p><strong>注意：</strong></p>
+<ul>
+<li>Express 在指定的静态目录中查找文件，并对外提供资源的访问路径。因此，存放静态文件的目录名不会出现在 URL 中</li>
+<li>如果要托管多个静态资源目录，就要多次调用express.static()函数，但是函数会根据目录的添加顺序查找所需的文件</li>
+</ul>
+<p><strong>挂载路径前缀：</strong>如果希望在托管的静态资源访问路径之前，挂载路径前缀，则可以使用如下的方式：</p>
+<pre class="line-numbers language-none"><code class="language-none">app.use(&#39;&#x2F;pubic&#39;,express.static(&#39;public&#39;))<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>现在，你就可以通过带有 &#x2F;public 前缀地址来访问 public 目录中的文件了：<br><a href="http://localhost:3000/public/images/kitten.jpg">http://localhost:3000/public/images/kitten.jpg</a><br><a href="http://localhost:3000/public/css/style.css">http://localhost:3000/public/css/style.css</a><br><a href="http://localhost:3000/public/js/app.js">http://localhost:3000/public/js/app.js</a></p>
+<h3 id="nodemon"><a href="#nodemon" class="headerlink" title="nodemon"></a>nodemon</h3><p>在编写调试 Node.js 项目的时候，如果修改了项目的代码，则需要频繁的手动 close 掉，然后再重新启动，非常繁琐。<br>现在，我们可以使用 nodemon <a href="https://www.npmjs.com/package/nodemon">https://www.npmjs.com/package/nodemon</a> 这个工具，它能够监听项目文件的变动，当代码被修改后，nodemon 会自动帮我们重启项目，极大方便了开发和调试。<br>**安装nodemon:**在终端中，运行如下命令，即可将 nodemon 安装为全局可用的工具：</p>
+<pre class="line-numbers language-none"><code class="language-none">npm i -g nodemon  &#x2F;&#x2F;-g  全局<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>当基于 Node.js 编写了一个网站应用的时候，传统的方式，是运行 node app.js 命令，来启动项目。这样做的坏处是：代码被修改之后，需要手动重启项目。<br>现在，我们可以将 node 命令替换为 nodemon 命令，使用 nodemon app.js 来启动项目。这样做的好处是：代码被修改之后，会被 nodemon 监听到，从而实现自动重启项目的效果。</p>
+<h2 id="Express-路由"><a href="#Express-路由" class="headerlink" title="Express 路由"></a>Express 路由</h2><h3 id="路由的概念"><a href="#路由的概念" class="headerlink" title="路由的概念"></a>路由的概念</h3><p>广义上来讲，路由就是映射关系。在 Express 中，路由指的是客户端的请求与服务器处理函数之间的映射关系。<br>Express 中的路由分 3 部分组成，分别是请求的类型、请求的 URL 地址、处理函数，格式如下：<br> <strong>app.METHOD(PATH,HANDLER)</strong><br><strong>路由的匹配过程：</strong><br>每当一个请求到达服务器之后，需要先经过路由的匹配，只有匹配成功之后，才会调用对应的处理函数。<br>在匹配时，会按照路由的顺序进行匹配，如果请求类型和请求的 URL 同时匹配成功，则 Express 会将这次请求，转交给对应的 function 函数进行处理。</p>
+<h3 id="路由的使用"><a href="#路由的使用" class="headerlink" title="路由的使用"></a>路由的使用</h3><ul>
+<li>最简单的用法<br>在 Express 中使用路由最简单的方式，就是把路由挂载到 app 上，示例代码如下：<pre class="line-numbers language-none"><code class="language-none">  const express &#x3D; require(&#39;express&#39;)
+  const app &#x3D; express()
+&#x2F;&#x2F; 挂载路由
+app.get(&#39;&#x2F;&#39;, (req, res) &#x3D;&gt; &#123;
+  res.send(&#39;hello world.&#39;)
+&#125;)
+app.post(&#39;&#x2F;&#39;, (req, res) &#x3D;&gt; &#123;
+ 	res.send(&#39;Post Request.&#39;)
+&#125;)
+  &#x2F;&#x2F;启动Web服务器
+app.listen(80, () &#x3D;&gt; &#123;
+	 console.log(&#39;http:&#x2F;&#x2F;127.0.0.1&#39;)
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>路由的模块化<br>为了方便对路由进行模块化的管理，Express 不建议将路由直接挂载到 app 上，而是推荐将路由抽离为单独的模块。<br>将路由抽离为单独模块的步骤如下：</li>
+</ul>
+<p>1.创建路由模块对应的 .js 文件<br>2.调用 express.Router() 函数创建路由对象<br>3.向路由对象上挂载具体的路由<br>4.使用 module.exports 向外共享路由对象<br>5.使用 app.use() 函数注册路由模块</p>
+<ul>
+<li>创建路由模块<pre class="line-numbers language-none"><code class="language-none">   &#x2F;&#x2F; 这是路由模块
+   &#x2F;&#x2F; 1. 导入 express
+   const express &#x3D; require(&#39;express&#39;)
+   &#x2F;&#x2F; 2. 创建路由对象
+   const router &#x3D; express.Router()
+   &#x2F;&#x2F; 3. 挂载具体的路由
+   router.get(&#39;&#x2F;user&#x2F;list&#39;, (req, res) &#x3D;&gt; &#123;
+     res.send(&#39;Get user list.&#39;)
+   &#125;)
+   router.post(&#39;&#x2F;user&#x2F;add&#39;, (req, res) &#x3D;&gt; &#123;
+     res.send(&#39;Add new user.&#39;)
+   &#125;)
+&#x2F;&#x2F; 4. 向外导出路由对象
+module.exports &#x3D; router<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>注册路由模块<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 1. 导入路由模块
+   const router &#x3D; require(&#39;.&#x2F;03.router&#39;)
+&#x2F;&#x2F; 2. 注册路由模块
+   app.use(&#39;&#x2F;api&#39;, router)
+&#x2F;&#x2F; 注意： app.use() 函数的作用，就是来注册全局中间件<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+]]></content>
+      <categories>
+        <category>前后端交互</category>
+      </categories>
+      <tags>
+        <tag>Express</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Flex布局</title>
     <url>/2022/07/10/flex-bu-ju/</url>
     <content><![CDATA[<h3 id="Flex-布局的定义"><a href="#Flex-布局的定义" class="headerlink" title="Flex 布局的定义"></a>Flex 布局的定义</h3><p>Flex 是Flexible Box 的缩写，意为“弹性布局” ，用来为盒状模型提供最大的灵活性。</p>
@@ -171,117 +282,6 @@ console<span class="token punctuation">.</span><span class="token function">log<
       </tags>
   </entry>
   <entry>
-    <title>Express</title>
-    <url>/2022/03/16/express/</url>
-    <content><![CDATA[<h2 id="Express简介"><a href="#Express简介" class="headerlink" title="Express简介"></a>Express简介</h2><h3 id="什么是Express"><a href="#什么是Express" class="headerlink" title="什么是Express"></a>什么是Express</h3><p>官方给出的概念：Express 是基于 Node.js 平台，快速、开放、极简的 Web 开发框架。<br>通俗的理解：Express 的作用和 Node.js 内置的 http 模块类似，是专门用来创建 Web 服务器的。<br>Express 的本质：就是一个 npm 上的第三方包，提供了快速创建 Web 服务器的便捷方法。<br>Express 的中文官网：<a href="http://www.expressjs.com.cn/">http://www.expressjs.com.cn/</a> </p>
-<span id="more"></span>
-
-<h3 id="Express的作用"><a href="#Express的作用" class="headerlink" title="Express的作用"></a>Express的作用</h3><p>对于前端程序员来说，最常见的两种服务器，分别是：</p>
-<ul>
-<li>Web 网站服务器：专门对外提供 Web 网页资源的服务器。</li>
-<li>API 接口服务器：专门对外提供 API 接口的服务器。<br>使用 Express，我们可以方便、快速的创建 Web 网站的服务器或 API 接口的服务器</li>
-</ul>
-<h3 id="Express的基本使用"><a href="#Express的基本使用" class="headerlink" title="Express的基本使用"></a>Express的基本使用</h3><ul>
-<li>安装Express<br>在项目所处的目录中，运行如下的终端命令，即可将 express 安装到项目中使用<pre class="line-numbers language-none"><code class="language-none">npm i express@4.17.1   &#x2F;&#x2F;express版本号可有可无，但是学习的时候必须和老师保持一致<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>创建基本的Web服务器<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;1．导入、express
-  const express &#x3D; require( &quot; express &quot;)
-&#x2F;&#x2F;2，创建web服字果
- const app &#x3D; express()
-&#x2F;&#x2F;3．调用 app.listen(端口号，启动成功后的回调函数)，启动服务器
- app.listen(8o,()&#x3D;&gt; &#123;
-   console.log( &#39;express server running at http:&#x2F;&#x2F;127.0.0.1&quot;))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>监听GET请求<br>通过 app.get() 方法，可以监听客户端的 GET 请求，具体的语法格式如下：<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;参数1:客户端请求的URL地址
-&#x2F;&#x2F;参数2:请求对应的处理函数
-req:请求对象(包含了与请求相关的属性与方法)
-res:响应对象(包含了与响应相关的属性与方法)
-app.get( &#39;请求URL&#39;, function(req,res) &#123;&#x2F;*处理函数*&#x2F;&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>监听POST请求<br>通过 app.post() 方法，可以监听客户端的 POST 请求，具体的语法格式如下<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;参数1:客户端请求的URL地址
-&#x2F;&#x2F;参数2:请求对应的处理函数
-&#x2F;&#x2F;  req:请求对象（包含了与请求相关的属性与方法)
-&#x2F;&#x2F;  res:响应对象(包含了与响应相关的属性与方法)
-app.post( &#39;请求URL&#39; function(req,res) &#123;&#x2F;*处理函数*&#x2F;&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>把内容响应给客户端<br>通过 res.send() 方法，可以把处理好的内容，发送给客户端：<pre class="line-numbers language-none"><code class="language-none">app.get(&#39;&#x2F;user&#39;, (req, res) &#x3D;&gt; &#123;
-  &#x2F;&#x2F; 调用 express 提供的 res.send() 方法，向客户端响应一个 JSON 对象
-res.send(&#123; name: &#39;zs&#39;, age: 20, gender: &#39;男&#39; &#125;)
-&#125;)
-app.post(&#39;&#x2F;user&#39;, (req, res) &#x3D;&gt; &#123;
-  &#x2F;&#x2F; 调用 express 提供的 res.send() 方法，向客户端响应一个 文本字符串
- res.send(&#39;请求成功&#39;)
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>获取URL中携带的查询参数<br>通过 req.query 对象，可以访问到客户端通过查询字符串的形式，发送到服务器的参数：<pre class="line-numbers language-none"><code class="language-none"> app.get(&#39;&#x2F;&#39;, (req, res) &#x3D;&gt; &#123;
-&#x2F;&#x2F; 通过 req.query 可以获取到客户端发送过来的 查询参数
-&#x2F;&#x2F; 注意：默认情况下，req.query 是一个空对象
-console.log(req.query)
-res.send(req.query)
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>获取URL中的动态参数<br>通过 req.params 对象，可以访问到 URL 中，通过 : 匹配到的动态参数：<pre class="line-numbers language-none"><code class="language-none"> &#x2F;&#x2F; 注意：这里的 :id 是一个动态的参数
-app.get(&#39;&#x2F;user&#x2F;:ids&#x2F;:username&#39;, (req, res) &#x3D;&gt; &#123;
-&#x2F;&#x2F; req.params 是动态匹配到的 URL 参数，默认也是一个空对象
-console.log(req.params)
-res.send(req.params)
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="托管静态资源"><a href="#托管静态资源" class="headerlink" title="托管静态资源"></a>托管静态资源</h3>express 提供了一个非常好用的函数，叫做 express.static()，通过它，我们可以非常方便地创建一个静态资源服务器，例如，通过如下代码就可以将 public 目录下的图片、CSS 文件、JavaScript 文件对外开放访问了：<pre class="line-numbers language-none"><code class="language-none">app.use(express.static(&#39;public&#39;))<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-现在，你就可以访问 public 目录中的所有文件了：<br><a href="http://localhost:3000/images/bg.jpg">http://localhost:3000/images/bg.jpg</a><br><a href="http://localhost:3000/css/style.css">http://localhost:3000/css/style.css</a><br><a href="http://localhost:3000/js/login.js">http://localhost:3000/js/login.js</a></li>
-</ul>
-<p><strong>注意：</strong></p>
-<ul>
-<li>Express 在指定的静态目录中查找文件，并对外提供资源的访问路径。因此，存放静态文件的目录名不会出现在 URL 中</li>
-<li>如果要托管多个静态资源目录，就要多次调用express.static()函数，但是函数会根据目录的添加顺序查找所需的文件</li>
-</ul>
-<p><strong>挂载路径前缀：</strong>如果希望在托管的静态资源访问路径之前，挂载路径前缀，则可以使用如下的方式：</p>
-<pre class="line-numbers language-none"><code class="language-none">app.use(&#39;&#x2F;pubic&#39;,express.static(&#39;public&#39;))<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>现在，你就可以通过带有 &#x2F;public 前缀地址来访问 public 目录中的文件了：<br><a href="http://localhost:3000/public/images/kitten.jpg">http://localhost:3000/public/images/kitten.jpg</a><br><a href="http://localhost:3000/public/css/style.css">http://localhost:3000/public/css/style.css</a><br><a href="http://localhost:3000/public/js/app.js">http://localhost:3000/public/js/app.js</a></p>
-<h3 id="nodemon"><a href="#nodemon" class="headerlink" title="nodemon"></a>nodemon</h3><p>在编写调试 Node.js 项目的时候，如果修改了项目的代码，则需要频繁的手动 close 掉，然后再重新启动，非常繁琐。<br>现在，我们可以使用 nodemon <a href="https://www.npmjs.com/package/nodemon">https://www.npmjs.com/package/nodemon</a> 这个工具，它能够监听项目文件的变动，当代码被修改后，nodemon 会自动帮我们重启项目，极大方便了开发和调试。<br>**安装nodemon:**在终端中，运行如下命令，即可将 nodemon 安装为全局可用的工具：</p>
-<pre class="line-numbers language-none"><code class="language-none">npm i -g nodemon  &#x2F;&#x2F;-g  全局<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>当基于 Node.js 编写了一个网站应用的时候，传统的方式，是运行 node app.js 命令，来启动项目。这样做的坏处是：代码被修改之后，需要手动重启项目。<br>现在，我们可以将 node 命令替换为 nodemon 命令，使用 nodemon app.js 来启动项目。这样做的好处是：代码被修改之后，会被 nodemon 监听到，从而实现自动重启项目的效果。</p>
-<h2 id="Express-路由"><a href="#Express-路由" class="headerlink" title="Express 路由"></a>Express 路由</h2><h3 id="路由的概念"><a href="#路由的概念" class="headerlink" title="路由的概念"></a>路由的概念</h3><p>广义上来讲，路由就是映射关系。在 Express 中，路由指的是客户端的请求与服务器处理函数之间的映射关系。<br>Express 中的路由分 3 部分组成，分别是请求的类型、请求的 URL 地址、处理函数，格式如下：<br> <strong>app.METHOD(PATH,HANDLER)</strong><br><strong>路由的匹配过程：</strong><br>每当一个请求到达服务器之后，需要先经过路由的匹配，只有匹配成功之后，才会调用对应的处理函数。<br>在匹配时，会按照路由的顺序进行匹配，如果请求类型和请求的 URL 同时匹配成功，则 Express 会将这次请求，转交给对应的 function 函数进行处理。</p>
-<h3 id="路由的使用"><a href="#路由的使用" class="headerlink" title="路由的使用"></a>路由的使用</h3><ul>
-<li>最简单的用法<br>在 Express 中使用路由最简单的方式，就是把路由挂载到 app 上，示例代码如下：<pre class="line-numbers language-none"><code class="language-none">  const express &#x3D; require(&#39;express&#39;)
-  const app &#x3D; express()
-&#x2F;&#x2F; 挂载路由
-app.get(&#39;&#x2F;&#39;, (req, res) &#x3D;&gt; &#123;
-  res.send(&#39;hello world.&#39;)
-&#125;)
-app.post(&#39;&#x2F;&#39;, (req, res) &#x3D;&gt; &#123;
- 	res.send(&#39;Post Request.&#39;)
-&#125;)
-  &#x2F;&#x2F;启动Web服务器
-app.listen(80, () &#x3D;&gt; &#123;
-	 console.log(&#39;http:&#x2F;&#x2F;127.0.0.1&#39;)
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>路由的模块化<br>为了方便对路由进行模块化的管理，Express 不建议将路由直接挂载到 app 上，而是推荐将路由抽离为单独的模块。<br>将路由抽离为单独模块的步骤如下：</li>
-</ul>
-<p>1.创建路由模块对应的 .js 文件<br>2.调用 express.Router() 函数创建路由对象<br>3.向路由对象上挂载具体的路由<br>4.使用 module.exports 向外共享路由对象<br>5.使用 app.use() 函数注册路由模块</p>
-<ul>
-<li>创建路由模块<pre class="line-numbers language-none"><code class="language-none">   &#x2F;&#x2F; 这是路由模块
-   &#x2F;&#x2F; 1. 导入 express
-   const express &#x3D; require(&#39;express&#39;)
-   &#x2F;&#x2F; 2. 创建路由对象
-   const router &#x3D; express.Router()
-   &#x2F;&#x2F; 3. 挂载具体的路由
-   router.get(&#39;&#x2F;user&#x2F;list&#39;, (req, res) &#x3D;&gt; &#123;
-     res.send(&#39;Get user list.&#39;)
-   &#125;)
-   router.post(&#39;&#x2F;user&#x2F;add&#39;, (req, res) &#x3D;&gt; &#123;
-     res.send(&#39;Add new user.&#39;)
-   &#125;)
-&#x2F;&#x2F; 4. 向外导出路由对象
-module.exports &#x3D; router<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>注册路由模块<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 1. 导入路由模块
-   const router &#x3D; require(&#39;.&#x2F;03.router&#39;)
-&#x2F;&#x2F; 2. 注册路由模块
-   app.use(&#39;&#x2F;api&#39;, router)
-&#x2F;&#x2F; 注意： app.use() 函数的作用，就是来注册全局中间件<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-]]></content>
-      <categories>
-        <category>前后端交互</category>
-      </categories>
-      <tags>
-        <tag>Express</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Github的使用</title>
     <url>/2022/03/01/github-de-shi-yong/</url>
     <content><![CDATA[<h1 id="开源项目托管平台"><a href="#开源项目托管平台" class="headerlink" title="开源项目托管平台"></a>开源项目托管平台</h1><p>专门用于免费存放开源项目源代码的网站，叫做开源项目托管平台。目前世界上比较出名的开源项目托管平台<br>主要有以下 3 个：</p>
@@ -306,7 +306,7 @@ git commit -m &quot;第一次提交&quot;<span aria-hidden="true" class="line-nu
 (只有第一次推送内容需要-u origin master，往后都不用了)<h2 id="SSH-key"><a href="#SSH-key" class="headerlink" title="SSH key"></a>SSH key</h2></li>
 </ol>
 <p><strong>SSH key介绍</strong><br>SSH key 的作用：实现本地仓库和 Github 之间免登录的加密数据传输。<br>SSH key 的好处：免登录身份认证、数据加密传输。<br>SSH key 由两部分组成，分别是：<br>① id_rsa（私钥文件，存放于客户端的电脑中即可）<br>② id_rsa.pub（公钥文件，需要配置到 Github 中）<br><strong>生成SSH key</strong></p>
-<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#x79;&#x6f;&#117;&#x72;&#95;&#101;&#109;&#97;&#x69;&#108;&#64;&#101;&#x78;&#x61;&#x6d;&#x70;&#108;&#x65;&#46;&#x63;&#111;&#x6d;">&#x79;&#x6f;&#117;&#x72;&#95;&#101;&#109;&#97;&#x69;&#108;&#64;&#101;&#x78;&#x61;&#x6d;&#x70;&#108;&#x65;&#46;&#x63;&#111;&#x6d;</a> 替换为注册 Github 账号时填写的邮箱：</p>
+<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#121;&#111;&#117;&#114;&#95;&#101;&#109;&#97;&#105;&#x6c;&#x40;&#x65;&#120;&#97;&#x6d;&#x70;&#108;&#101;&#46;&#99;&#x6f;&#109;">&#121;&#111;&#117;&#114;&#95;&#101;&#109;&#97;&#105;&#x6c;&#x40;&#x65;&#120;&#97;&#x6d;&#x70;&#108;&#101;&#46;&#99;&#x6f;&#109;</a> 替换为注册 Github 账号时填写的邮箱：</p>
 <pre class="line-numbers language-none"><code class="language-none">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>③ 连续敲击 3 次回车，即可在 C:\Users\用户名文件夹.ssh 目录中生成 id_rsa 和 id_rsa.pub 两个文件</p>
 <p><strong>配置SSH key</strong><br>① 使用记事本打开 id_rsa.pub 文件，复制里面的文本内容<br>② 在浏览器中登录 Github，点击头像 -&gt; Settings -&gt; SSH and GPG Keys -&gt; New SSH key<br>③ 将 id_rsa.pub 文件中的内容，粘贴到 Key 对应的文本框中<br>④ 在 Title 文本框中任意填写一个名称，来标识这个 Key 从何而来</p>
@@ -391,6 +391,108 @@ in:description xxx   按照项目描述description 搜索  <span aria-hidden="tr
       </categories>
       <tags>
         <tag>Github</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>IView ui组件</title>
+    <url>/2022/08/19/iview-ui-zu-jian/</url>
+    <content><![CDATA[<h3 id="Vue使用IView-ui组件库导航栏菜单做嵌套路由跳转，可以通过声明式和编程式路由两种方式"><a href="#Vue使用IView-ui组件库导航栏菜单做嵌套路由跳转，可以通过声明式和编程式路由两种方式" class="headerlink" title="Vue使用IView ui组件库导航栏菜单做嵌套路由跳转，可以通过声明式和编程式路由两种方式"></a>Vue使用IView ui组件库导航栏菜单做嵌套路由跳转，可以通过声明式和编程式路由两种方式</h3><ol>
+<li>声明式路由的跳转</li>
+</ol>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+&lt;div&gt;
+&lt;Menu :theme&#x3D;&quot;theme2&quot; &gt;
+    &lt;MenuGroup title&#x3D;&quot;使用&quot;&gt;
+      &lt;MenuItem
+        v-for&#x3D;&quot;(item,index) in siderMenuData&quot;
+        :key&#x3D;&quot;index&quot;
+        :to&#x3D;&quot;item.name&quot;
+        :name&#x3D;&quot;item.name&quot;
+        &gt;&lt;Icon :type&#x3D;&quot;item.icon&quot; &#x2F;&gt;&#123;&#123; item.title &#125;&#125;&lt;&#x2F;MenuItem
+      &gt;
+    &lt;&#x2F;MenuGroup&gt;
+  &lt;&#x2F;Menu&gt;
+&lt;&#x2F;div&gt;
+&lt;&#x2F;template
+&lt;script&gt;
+data() &#123;
+return &#123; 
+siderMenuData: [
+        &#123;
+          name: &quot;ArticleManage&quot;, &#x2F;&#x2F;此处的name用来路由跳转
+          icon: &quot;md-document&quot;,
+          title: &quot;文章管理&quot;,
+        &#125;,
+        &#123;
+          name: &quot;CommentManage&quot;,
+          icon: &quot;md-chatbubbles&quot;,
+          title: &quot;评论管理&quot;,
+        &#125;,
+        &#123;
+          name: &quot;ReportManage&quot;,
+          icon: &quot;md-heart&quot;,
+          title: &quot;举报管理&quot;,
+        &#125;,
+      ],&#125;
+&#125;
+通过to 中的name跳转
+&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>编程式路由的跳转</li>
+</ol>
+<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
+&lt;div&gt;
+&lt;Menu :theme&#x3D;&quot;theme2&quot; @on-select&#x3D;&quot;onClickChangeMenu&quot; width&#x3D;&quot;200px&quot; height&#x3D;&quot;100%&quot;&gt;
+    &lt;MenuGroup title&#x3D;&quot;使用&quot;&gt;
+      &lt;MenuItem
+        v-for&#x3D;&quot;(item,index) in siderMenuData&quot;
+        :key&#x3D;&quot;index&quot;
+        :name&#x3D;&quot;item.name&quot;
+        &gt;&lt;Icon :type&#x3D;&quot;item.icon&quot; &#x2F;&gt;&#123;&#123; item.title &#125;&#125;&lt;&#x2F;MenuItem
+      &gt;
+    &lt;&#x2F;MenuGroup&gt;
+  &lt;&#x2F;Menu&gt;
+&lt;&#x2F;div&gt;
+&lt;&#x2F;template
+&lt;script&gt;
+data() &#123;
+return &#123; 
+siderMenuData: [
+        &#123;
+          name: &quot;ArticleManage&quot;, &#x2F;&#x2F;此处的name用来路由跳转
+          icon: &quot;md-document&quot;,
+          title: &quot;文章管理&quot;,
+        &#125;,
+        &#123;
+          name: &quot;CommentManage&quot;,
+          icon: &quot;md-chatbubbles&quot;,
+          title: &quot;评论管理&quot;,
+        &#125;,
+        &#123;
+          name: &quot;ReportManage&quot;,
+          icon: &quot;md-heart&quot;,
+          title: &quot;举报管理&quot;,
+        &#125;,
+      ],&#125;,
+      methods:&#123;
+        &#x2F;&#x2F;通过点击事件触发name值，使路由跳转
+		 onClickChangeMenu(name) &#123;
+      		&#x2F;&#x2F;this.$router.push(name);
+            &#x2F;&#x2F; this.$router.push(name) 这个是 this.$router.push(&#123; path: name &#125;) 的简写  这个是通过 路由里面的path值跳转的
+           &#x2F;&#x2F;this.$router.push(&#123; name: name &#125;)  这个是通过name跳转的
+           this.$router.push(&#123; name: name &#125;)
+    &#125;,
+&#125;
+&#125;
+&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+]]></content>
+      <categories>
+        <category>UI组件</category>
+      </categories>
+      <tags>
+        <tag>IView</tag>
       </tags>
   </entry>
   <entry>
@@ -581,108 +683,6 @@ in:description xxx   按照项目描述description 搜索  <span aria-hidden="tr
       </categories>
       <tags>
         <tag>HTTP协议</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>IView ui组件</title>
-    <url>/2022/08/19/iview-ui-zu-jian/</url>
-    <content><![CDATA[<h3 id="Vue使用IView-ui组件库导航栏菜单做嵌套路由跳转，可以通过声明式和编程式路由两种方式"><a href="#Vue使用IView-ui组件库导航栏菜单做嵌套路由跳转，可以通过声明式和编程式路由两种方式" class="headerlink" title="Vue使用IView ui组件库导航栏菜单做嵌套路由跳转，可以通过声明式和编程式路由两种方式"></a>Vue使用IView ui组件库导航栏菜单做嵌套路由跳转，可以通过声明式和编程式路由两种方式</h3><ol>
-<li>声明式路由的跳转</li>
-</ol>
-<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
-&lt;div&gt;
-&lt;Menu :theme&#x3D;&quot;theme2&quot; &gt;
-    &lt;MenuGroup title&#x3D;&quot;使用&quot;&gt;
-      &lt;MenuItem
-        v-for&#x3D;&quot;(item,index) in siderMenuData&quot;
-        :key&#x3D;&quot;index&quot;
-        :to&#x3D;&quot;item.name&quot;
-        :name&#x3D;&quot;item.name&quot;
-        &gt;&lt;Icon :type&#x3D;&quot;item.icon&quot; &#x2F;&gt;&#123;&#123; item.title &#125;&#125;&lt;&#x2F;MenuItem
-      &gt;
-    &lt;&#x2F;MenuGroup&gt;
-  &lt;&#x2F;Menu&gt;
-&lt;&#x2F;div&gt;
-&lt;&#x2F;template
-&lt;script&gt;
-data() &#123;
-return &#123; 
-siderMenuData: [
-        &#123;
-          name: &quot;ArticleManage&quot;, &#x2F;&#x2F;此处的name用来路由跳转
-          icon: &quot;md-document&quot;,
-          title: &quot;文章管理&quot;,
-        &#125;,
-        &#123;
-          name: &quot;CommentManage&quot;,
-          icon: &quot;md-chatbubbles&quot;,
-          title: &quot;评论管理&quot;,
-        &#125;,
-        &#123;
-          name: &quot;ReportManage&quot;,
-          icon: &quot;md-heart&quot;,
-          title: &quot;举报管理&quot;,
-        &#125;,
-      ],&#125;
-&#125;
-通过to 中的name跳转
-&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ol start="2">
-<li>编程式路由的跳转</li>
-</ol>
-<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
-&lt;div&gt;
-&lt;Menu :theme&#x3D;&quot;theme2&quot; @on-select&#x3D;&quot;onClickChangeMenu&quot; width&#x3D;&quot;200px&quot; height&#x3D;&quot;100%&quot;&gt;
-    &lt;MenuGroup title&#x3D;&quot;使用&quot;&gt;
-      &lt;MenuItem
-        v-for&#x3D;&quot;(item,index) in siderMenuData&quot;
-        :key&#x3D;&quot;index&quot;
-        :name&#x3D;&quot;item.name&quot;
-        &gt;&lt;Icon :type&#x3D;&quot;item.icon&quot; &#x2F;&gt;&#123;&#123; item.title &#125;&#125;&lt;&#x2F;MenuItem
-      &gt;
-    &lt;&#x2F;MenuGroup&gt;
-  &lt;&#x2F;Menu&gt;
-&lt;&#x2F;div&gt;
-&lt;&#x2F;template
-&lt;script&gt;
-data() &#123;
-return &#123; 
-siderMenuData: [
-        &#123;
-          name: &quot;ArticleManage&quot;, &#x2F;&#x2F;此处的name用来路由跳转
-          icon: &quot;md-document&quot;,
-          title: &quot;文章管理&quot;,
-        &#125;,
-        &#123;
-          name: &quot;CommentManage&quot;,
-          icon: &quot;md-chatbubbles&quot;,
-          title: &quot;评论管理&quot;,
-        &#125;,
-        &#123;
-          name: &quot;ReportManage&quot;,
-          icon: &quot;md-heart&quot;,
-          title: &quot;举报管理&quot;,
-        &#125;,
-      ],&#125;,
-      methods:&#123;
-        &#x2F;&#x2F;通过点击事件触发name值，使路由跳转
-		 onClickChangeMenu(name) &#123;
-      		&#x2F;&#x2F;this.$router.push(name);
-            &#x2F;&#x2F; this.$router.push(name) 这个是 this.$router.push(&#123; path: name &#125;) 的简写  这个是通过 路由里面的path值跳转的
-           &#x2F;&#x2F;this.$router.push(&#123; name: name &#125;)  这个是通过name跳转的
-           this.$router.push(&#123; name: name &#125;)
-    &#125;,
-&#125;
-&#125;
-&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-]]></content>
-      <categories>
-        <category>UI组件</category>
-      </categories>
-      <tags>
-        <tag>IView</tag>
       </tags>
   </entry>
   <entry>
@@ -1297,6 +1297,221 @@ body
       </tags>
   </entry>
   <entry>
+    <title>Vue基础入门</title>
+    <url>/2022/04/01/vue-ji-chu-ru-men/</url>
+    <content><![CDATA[<h2 id="什么是vue"><a href="#什么是vue" class="headerlink" title="什么是vue"></a>什么是vue</h2><ol>
+<li>构建用户界面</li>
+</ol>
+<ul>
+<li>用vue往HTML页面中填充数据，非常方便</li>
+</ul>
+<ol start="2">
+<li>框架</li>
+</ol>
+<ul>
+<li>框架是一套现成的解决方案，程序员只能遵守框架内的规范，去编写自己的业务功能！</li>
+<li>要学习vue，就是在学习vue框架中规定的用法！</li>
+<li>vue的指令，组件（是对UI结构的复用），路由，Vuex，vue组件库</li>
+<li>只有把上面罗列的知识，掌握之后，才有开发vue项目的能力</li>
+</ul>
+<span id="more"></span>
+
+<p><strong>重点：</strong></p>
+<ol>
+<li>能够知道 vue 的基本使用步骤：①导入vue.js文件，②new Vue()构造函数，得到vm实例对象，③声明 el 和 data 数据节点，④ MVVM 的对应关系</li>
+<li>掌握 vue 中常见指令的基本用法：插值表达式，v-bind(:),v-on(@),v-if和v-else;v-for,:key,v-model</li>
+</ol>
+<h2 id="vue-的特性"><a href="#vue-的特性" class="headerlink" title="vue 的特性"></a>vue 的特性</h2><p>1.数据驱动视图</p>
+<ul>
+<li>数据的变化<strong>会驱动视图</strong>自动更新</li>
+<li>好处：程序员只管把数据维护好，那么页面结构会被vue自动渲染出来!</li>
+</ul>
+<p>2.双向数据绑定</p>
+<blockquote>
+<p>在网页中，form表单负责<strong>采集数据</strong>，Ajax负责<strong>提交数据</strong>！</p>
+</blockquote>
+<ul>
+<li>js数据的变化，会被自动渲染到页面上，开发者不需要手动操作DOM元素</li>
+<li>页面上表单采集的数据发生变化的时候，会被vue自动获取到，并更新到js数据中<blockquote>
+<p>注意：数据驱动视图和双向数据绑定的底层原理是 MVVM（Mode 数据源、View 视图、ViewModel 就是 vue 的实例）</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="vue的使用"><a href="#vue的使用" class="headerlink" title="vue的使用"></a>vue的使用</h2><ol>
+<li>导入vue.js的script脚本文件</li>
+<li>在页面中声明一个将要被vue所控制的DOM区域</li>
+<li>创建vm 实例对象（vue实例对象）</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">&lt;!-- 希望Vue能够控制下面的这个div 帮我们在把数据填充到div 内部 --&gt;
+&lt;div id&#x3D;&quot;app&quot;&gt;&#123;&#123; username &#125;&#125;&lt;&#x2F;div&gt;
+&lt;!-- 1.导入Vue的库文件，在Windows全局就有了Vue构造函数 --&gt;
+&lt;script src&#x3D;&quot;.&#x2F;lib&#x2F;vue-2.6.12.js&quot;&gt;&lt;&#x2F;script&gt;
+&lt;!-- 2.创建Vue实例对象 --&gt;
+&lt;script&gt;
+    &#x2F;&#x2F; 创建Vue的实例对象
+    const vm &#x3D; new Vue(&#123;
+        &#x2F;&#x2F; el 属性是固定写法，表示当前vm实例要控制页面上的哪个区域，接收的值是一个选择器
+        el: &#39;#app&#39;,
+        &#x2F;&#x2F; data 对象就是要渲染到页面上的数据
+        data: &#123;
+            username: &#39;zhangsan&#39;
+        &#125;
+    &#125;)
+&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="vue-的调试工具"><a href="#vue-的调试工具" class="headerlink" title="vue 的调试工具"></a>vue 的调试工具</h2><ol>
+<li>安装vue-devtools调试工具：vue官方提供的vue-devtools调试工具，能够方便对开发者对vue项目进行调试与开发<blockquote>
+<p>Chrome浏览器在线安装 <a href="https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd">vue-devtools</a></p>
+</blockquote>
+</li>
+</ol>
+<h2 id="vue-的指令"><a href="#vue-的指令" class="headerlink" title="vue 的指令"></a>vue 的指令</h2><h3 id="内容渲染指令"><a href="#内容渲染指令" class="headerlink" title="内容渲染指令"></a>内容渲染指令</h3><ol>
+<li><code>v-text</code> ：<code>&lt;p v-text=&quot;gender&quot;&gt;性别&lt;/p&gt;</code>指令的缺点：会覆盖元素内部原有的内容！</li>
+<li><code>&#123;&#123; &#125;&#125;</code> 插值表达式：在实际开发中用的最多，只是内容的占位符，不会覆盖原有的内容！</li>
+<li><code>v-html</code> 指令的作用：可以把带有标签的字符串，渲染成真正的 HTML 内容！<blockquote>
+<p> 注意：插值表达式只能用在元素的<strong>内容节点</strong>中，不能用在元素的<strong>属性节点</strong>中！</p>
+</blockquote>
+<h3 id="属性绑定指令"><a href="#属性绑定指令" class="headerlink" title="属性绑定指令"></a>属性绑定指令</h3></li>
+</ol>
+<ul>
+<li>在 vue 中，可以使用 <code>v-bind:</code> 指令，为元素的属性动态绑定值；</li>
+<li>简写是英文的 <code>:</code></li>
+<li>在使用 v-bind 属性绑定期间，如果绑定内容需要进行动态拼接，则字符串的外面应该包裹单引号，例如 <pre class="line-numbers language-none"><code class="language-none">&lt;div :title&#x3D;&quot;&#39;box&#39; + index&quot;&gt;这是一个 div&lt;&#x2F;div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="事件绑定指令"><a href="#事件绑定指令" class="headerlink" title="事件绑定指令"></a>事件绑定指令</h3></li>
+</ul>
+<ol>
+<li><code>v-on</code>事件绑定指令，用来辅助程序员为DOM元素绑定事件监听，简写形式：<code>@</code></li>
+<li>语法格式为：通过v-on绑定的事件处理函数，需要在<code>methods</code>节点中进行声明</li>
+</ol>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token operator">&lt;</span>button @click<span class="token operator">=</span><span class="token string">"add"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+<span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+   <span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			<span class="token comment">// 如果在方法中要修改 data 中的数据，可以通过 this 访问到</span>
+			<span class="token keyword">this</span><span class="token punctuation">.</span>count <span class="token operator">+=</span> <span class="token number">1</span>
+   <span class="token punctuation">&#125;</span>
+   <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>注意：原生 DOM 对象有 onclick、oninput、onkeyup 等原生事件，替换为 vue 的事件绑定形式后，<br>分别为：v-on:click、v-on:input、v-on:keyup</p>
+</blockquote>
+<p>3.<code>$event</code> 的应用场景：如果默认的事件对象 e 被覆盖了，则可以手动传递一个 $event。例如：</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;button @click&#x3D;&quot;add(3, $event)&quot;&gt;&lt;&#x2F;button&gt;
+  methods: &#123;
+     add(n, e) &#123;
+  			&#x2F;&#x2F; 如果在方法中要修改 data 中的数据，可以通过 this 访问到
+  			this.count +&#x3D; 1
+     &#125;
+  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>4.事件修饰符：在事件处理函数中调用 event.preventDefault() 或 event.stopPropagation() 是非常常见的需求。因此，vue 提供了事件修饰符的概念，来辅助程序员更方便的对事件的触发进行控制</p>
+<ul>
+<li><p><code>.prevent</code>：阻止默认行为</p>
+   <pre class="line-numbers language-none"><code class="language-none">&lt;a @click.prevent&#x3D;&quot;xxx&quot;&gt;链接&lt;&#x2F;a&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p><code>.stop</code> ：阻止事件冒泡</p>
+   <pre class="line-numbers language-none"><code class="language-none">&lt;button @click.stop&#x3D;&quot;xxx&quot;&gt;按钮&lt;&#x2F;button&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<p>5.案件修饰符：在监听键盘事件时，我们经常需要判断详细的按键。此时，可以为键盘相关的事件添加按键修饰符，</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;只有在 key 是  Enter 时调用  vm.submit() 
+&lt;input @keyup.enter&#x3D;&quot;submit&quot;&gt;
+&#x2F;&#x2F;只有在 key 是  Esc 时调用  vm.clearInput() 
+&lt;input @keyup.esc&#x3D;&quot;clearInput&quot;&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="双向绑定指令"><a href="#双向绑定指令" class="headerlink" title="双向绑定指令"></a>双向绑定指令</h3><p>vue 提供了 <code>v-model</code> 双向数据绑定指令，用来辅助开发者在不操作 DOM 的前提下，快速获取表单的数据。</p>
+<ol>
+<li>input 输入框<ul>
+<li>type&#x3D;”radio”</li>
+<li>type&#x3D;”checkbox”</li>
+<li>type&#x3D;”xxxx”</li>
+</ul>
+</li>
+<li>textarea</li>
+<li>select</li>
+<li>v-model 指令的修饰符<ul>
+<li>.number:自动将用户的输入值转为数值类型 <code>&lt;input v-model.number=&quot;age&quot;/&gt;</code></li>
+</ul>
+<ul>
+<li>.trim: 自动过滤用户输入的首尾空白字符  <code>&lt;inut v-model.trim=&quot;msg&quot;/&gt;</code></li>
+<li>.lazy： 在”change”时而非”input”时更新 <code>&lt;input v-model.lazy=&quot;msg&quot;/&gt;</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="条件渲染指令"><a href="#条件渲染指令" class="headerlink" title="条件渲染指令"></a>条件渲染指令</h3><p>条件渲染指令用来辅助开发者按需控制 DOM 的显示与隐藏。条件渲染指令有如下两个，分别是：</p>
+<ul>
+<li>v-if</li>
+<li>v-show</li>
+</ul>
+<ol>
+<li><code>v-show</code> 的原理是：动态为元素添加或移除 <code>display: none</code> 样式，来实现元素的显示和隐藏<ul>
+<li>如果要频繁的切换元素的显示状态，用 v-show 性能会更好</li>
+</ul>
+</li>
+<li><code>v-if</code> 的原理是：每次动态创建或移除元素，实现元素的显示和隐藏<ul>
+<li>如果刚进入页面的时候，某些元素默认不需要被展示，而且后期这个元素很可能也不需要被展示出来，此时 v-if 性能更好</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p> 在实际开发中，绝大多数情况，不用考虑性能问题，直接使用 v-if 就好了！！！</p>
+</blockquote>
+<ol start="3">
+<li><p><code>v-else</code> : v-if 可以单独使用，或配合 v-else 指令一起使用：v-else 指令必须配合 v-if 指令一起使用，否则它将不会被识别！</p>
+<h3 id="列表渲染指令"><a href="#列表渲染指令" class="headerlink" title="列表渲染指令"></a>列表渲染指令</h3><p>vue 提供了 <code>v-for</code> 列表渲染指令，用来辅助开发者基于一个数组来循环渲染一个列表结构。v-for 指令需要使<br>用 <code>item in items</code> 形式的特殊语法，其中：</p>
+<ul>
+<li>items 是待循环的数组</li>
+<li>item 是被循环的每一项</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>v-for 指令还支持一个可选的第二个参数，即当前项的索引。语法格式为 (item, index) in items，<blockquote>
+<p>注意：v-for 指令中的 item 项和 index 索引都是形参，可以根据需要进行重命名。例如 (user, i) in userlist</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>使用 key 维护列表的状态</strong>:<br>当列表的数据变化时，默认情况下，vue 会尽可能的复用已存在的 DOM 元素，从而提升渲染的性能。但这种默认的性能优化策略，会导致有状态的列表无法被正确更新。<br>为了给 vue 一个提示，以便它能跟踪每个节点的身份，从而在保证有状态的列表被正确更新的前提下，提升渲<br>染的性能。此时，需要为每项提供一个唯一的 key 属性：<br><strong>key 的注意事项</strong>:<br>① key 的值只能是字符串或数字类型<br>② key 的值必须具有唯一性（即：key 的值不能重复）<br>③ 建议把数据项 id 属性的值作为 key 的值（因为 id 属性的值具有唯一性）<br>④ 使用 index 的值当作 key 的值没有任何意义（因为 index 的值不具有唯一性）<br>⑤ 建议使用 v-for 指令时一定要指定 key 的值（既提升性能、又防止列表状态紊乱）</p>
+<h2 id="Vue的过滤器"><a href="#Vue的过滤器" class="headerlink" title="Vue的过滤器"></a>Vue的过滤器</h2><h3 id="定义过滤器"><a href="#定义过滤器" class="headerlink" title="定义过滤器"></a>定义过滤器</h3><p>  在创建vue 实例期间，可以在 <code>filters</code> 节点中定义过滤器，</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">count vm<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">el</span><span class="token operator">:</span><span class="token string">'#app'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+     <span class="token literal-property property">message</span><span class="token operator">:</span> <span class="token string">'hello vue.js'</span><span class="token punctuation">,</span>
+     <span class="token literal-property property">info</span><span class="token operator">:</span> <span class="token string">'title info'</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">filters</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>    <span class="token comment">//在filters 节点下定义"过滤器"</span>
+    <span class="token function">capitalize</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>    <span class="token comment">//把首字母转为大写的过滤器</span>
+       <span class="token keyword">return</span> str<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> str<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+   <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+  
+
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="私有过滤器和全局过滤器"><a href="#私有过滤器和全局过滤器" class="headerlink" title="私有过滤器和全局过滤器"></a>私有过滤器和全局过滤器</h3><p>在 filters 节点下定义的过滤器，称为“私有过滤器”，因为它只能在当前 vm 实例所控制的 el 区域内使用。<br>如果希望在多个 vue 实例之间共享过滤器，则可以按照如下的格式定义全局过滤器：</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">  <span class="token comment">//全局过滤器--独立于每个 vm 实例之外</span>
+  <span class="token comment">//Vue.filters() 方法，接收两个参数</span>
+  <span class="token comment">//第一个参数，是全局过滤器的 "名字"</span>
+  <span class="token comment">//第二个参数，是全局过滤器的 "处理函数"</span>
+Vue<span class="token punctuation">.</span><span class="token function">filters</span><span class="token punctuation">(</span><span class="token string">'capitalize'</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token operator">=></span><span class="token punctuation">&#123;</span>
+   <span class="token keyword">return</span> str<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span> str<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'~~'</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="过滤器的调用"><a href="#过滤器的调用" class="headerlink" title="过滤器的调用"></a>过滤器的调用</h3><p>过滤器可以串联的进行调用 <code>&#123;&#123;message | filterA | filterB&#125;&#125;</code>  中间用 ‘|’ 隔开<br>A–处理过的值传递给 B ，最终把 B处理的结果渲染到页面上</p>
+<h3 id="过滤器传参"><a href="#过滤器传参" class="headerlink" title="过滤器传参"></a>过滤器传参</h3><p>  过滤器的本质是JavaScript 函数，因此可以接收参数，</p>
+<pre class="line-numbers language-none"><code class="language-none">  &lt;p&gt;&#123;&#123;message | filterA(arg1,arg2) &#125;&#125;&lt;&#x2F;p&gt;
+   Vue.filter(&#39;filterA&#39;,(msg,arg1,arg2)&#x3D;&gt;&#123;
+   &#x2F;&#x2F;过滤器代码逻辑
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="过滤器的兼容性"><a href="#过滤器的兼容性" class="headerlink" title="过滤器的兼容性"></a>过滤器的兼容性</h3><p>过滤器仅在 vue 2.x 和 1.x 中受支持，在 vue 3.x 的版本中剔除了过滤器相关的功能。<br>在企业级项目开发中：</p>
+<ul>
+<li>如果使用的是 2.x 版本的 vue，则依然可以使用过滤器相关的功能</li>
+<li>如果项目已经升级到了 3.x 版本的 vue，官方建议使用计算属性或方法代替被剔除的过滤器功能<br>具体的迁移指南，请参考 vue 3.x 的官方文档给出的说明：<a href="https://v3.vuejs.org/guide/migration/filters.html#migration-strategy">https://v3.vuejs.org/guide/migration/filters.html#migration-strategy</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Vue的相关基础知识</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>git基础</title>
     <url>/2022/03/01/git-ji-chu/</url>
     <content><![CDATA[<h1 id="版本控制软件"><a href="#版本控制软件" class="headerlink" title="版本控制软件"></a>版本控制软件</h1><h4 id="git-提交代码到同一分支时冲突的解决"><a href="#git-提交代码到同一分支时冲突的解决" class="headerlink" title="git 提交代码到同一分支时冲突的解决"></a>git 提交代码到同一分支时冲突的解决</h4><p>​      我们在同一分支上开发代码时，代码冲突是不可避免的。下面通过我今天提交项目就遇到了这个问题，问题就是:同事和我两个人在同一个分支上开发代码，今天他提交之后，我在去用<code>git push -u origin mall</code>提交代码出现一下报错</p>
@@ -1516,265 +1731,35 @@ git reset <span class="token operator">--</span>hard <span class="token operator
       </tags>
   </entry>
   <entry>
-    <title>Vue基础入门</title>
-    <url>/2022/04/01/vue-ji-chu-ru-men/</url>
-    <content><![CDATA[<h2 id="什么是vue"><a href="#什么是vue" class="headerlink" title="什么是vue"></a>什么是vue</h2><ol>
-<li>构建用户界面</li>
-</ol>
-<ul>
-<li>用vue往HTML页面中填充数据，非常方便</li>
-</ul>
-<ol start="2">
-<li>框架</li>
-</ol>
-<ul>
-<li>框架是一套现成的解决方案，程序员只能遵守框架内的规范，去编写自己的业务功能！</li>
-<li>要学习vue，就是在学习vue框架中规定的用法！</li>
-<li>vue的指令，组件（是对UI结构的复用），路由，Vuex，vue组件库</li>
-<li>只有把上面罗列的知识，掌握之后，才有开发vue项目的能力</li>
-</ul>
-<span id="more"></span>
-
-<p><strong>重点：</strong></p>
-<ol>
-<li>能够知道 vue 的基本使用步骤：①导入vue.js文件，②new Vue()构造函数，得到vm实例对象，③声明 el 和 data 数据节点，④ MVVM 的对应关系</li>
-<li>掌握 vue 中常见指令的基本用法：插值表达式，v-bind(:),v-on(@),v-if和v-else;v-for,:key,v-model</li>
-</ol>
-<h2 id="vue-的特性"><a href="#vue-的特性" class="headerlink" title="vue 的特性"></a>vue 的特性</h2><p>1.数据驱动视图</p>
-<ul>
-<li>数据的变化<strong>会驱动视图</strong>自动更新</li>
-<li>好处：程序员只管把数据维护好，那么页面结构会被vue自动渲染出来!</li>
-</ul>
-<p>2.双向数据绑定</p>
-<blockquote>
-<p>在网页中，form表单负责<strong>采集数据</strong>，Ajax负责<strong>提交数据</strong>！</p>
-</blockquote>
-<ul>
-<li>js数据的变化，会被自动渲染到页面上，开发者不需要手动操作DOM元素</li>
-<li>页面上表单采集的数据发生变化的时候，会被vue自动获取到，并更新到js数据中<blockquote>
-<p>注意：数据驱动视图和双向数据绑定的底层原理是 MVVM（Mode 数据源、View 视图、ViewModel 就是 vue 的实例）</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="vue的使用"><a href="#vue的使用" class="headerlink" title="vue的使用"></a>vue的使用</h2><ol>
-<li>导入vue.js的script脚本文件</li>
-<li>在页面中声明一个将要被vue所控制的DOM区域</li>
-<li>创建vm 实例对象（vue实例对象）</li>
-</ol>
-<pre class="line-numbers language-none"><code class="language-none">&lt;!-- 希望Vue能够控制下面的这个div 帮我们在把数据填充到div 内部 --&gt;
-&lt;div id&#x3D;&quot;app&quot;&gt;&#123;&#123; username &#125;&#125;&lt;&#x2F;div&gt;
-&lt;!-- 1.导入Vue的库文件，在Windows全局就有了Vue构造函数 --&gt;
-&lt;script src&#x3D;&quot;.&#x2F;lib&#x2F;vue-2.6.12.js&quot;&gt;&lt;&#x2F;script&gt;
-&lt;!-- 2.创建Vue实例对象 --&gt;
-&lt;script&gt;
-    &#x2F;&#x2F; 创建Vue的实例对象
-    const vm &#x3D; new Vue(&#123;
-        &#x2F;&#x2F; el 属性是固定写法，表示当前vm实例要控制页面上的哪个区域，接收的值是一个选择器
-        el: &#39;#app&#39;,
-        &#x2F;&#x2F; data 对象就是要渲染到页面上的数据
-        data: &#123;
-            username: &#39;zhangsan&#39;
-        &#125;
-    &#125;)
-&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="vue-的调试工具"><a href="#vue-的调试工具" class="headerlink" title="vue 的调试工具"></a>vue 的调试工具</h2><ol>
-<li>安装vue-devtools调试工具：vue官方提供的vue-devtools调试工具，能够方便对开发者对vue项目进行调试与开发<blockquote>
-<p>Chrome浏览器在线安装 <a href="https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd">vue-devtools</a></p>
-</blockquote>
-</li>
-</ol>
-<h2 id="vue-的指令"><a href="#vue-的指令" class="headerlink" title="vue 的指令"></a>vue 的指令</h2><h3 id="内容渲染指令"><a href="#内容渲染指令" class="headerlink" title="内容渲染指令"></a>内容渲染指令</h3><ol>
-<li><code>v-text</code> ：<code>&lt;p v-text=&quot;gender&quot;&gt;性别&lt;/p&gt;</code>指令的缺点：会覆盖元素内部原有的内容！</li>
-<li><code>&#123;&#123; &#125;&#125;</code> 插值表达式：在实际开发中用的最多，只是内容的占位符，不会覆盖原有的内容！</li>
-<li><code>v-html</code> 指令的作用：可以把带有标签的字符串，渲染成真正的 HTML 内容！<blockquote>
-<p> 注意：插值表达式只能用在元素的<strong>内容节点</strong>中，不能用在元素的<strong>属性节点</strong>中！</p>
-</blockquote>
-<h3 id="属性绑定指令"><a href="#属性绑定指令" class="headerlink" title="属性绑定指令"></a>属性绑定指令</h3></li>
-</ol>
-<ul>
-<li>在 vue 中，可以使用 <code>v-bind:</code> 指令，为元素的属性动态绑定值；</li>
-<li>简写是英文的 <code>:</code></li>
-<li>在使用 v-bind 属性绑定期间，如果绑定内容需要进行动态拼接，则字符串的外面应该包裹单引号，例如 <pre class="line-numbers language-none"><code class="language-none">&lt;div :title&#x3D;&quot;&#39;box&#39; + index&quot;&gt;这是一个 div&lt;&#x2F;div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h3 id="事件绑定指令"><a href="#事件绑定指令" class="headerlink" title="事件绑定指令"></a>事件绑定指令</h3></li>
-</ul>
-<ol>
-<li><code>v-on</code>事件绑定指令，用来辅助程序员为DOM元素绑定事件监听，简写形式：<code>@</code></li>
-<li>语法格式为：通过v-on绑定的事件处理函数，需要在<code>methods</code>节点中进行声明</li>
-</ol>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token operator">&lt;</span>button @click<span class="token operator">=</span><span class="token string">"add"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+    <title>js-封装常用的方法</title>
+    <url>/2022/09/07/js-zhong-guo-biao-zhun-shi-jian-zhuan-hua-wei-nian-yue-ri-shi-fen-miao/</url>
+    <content><![CDATA[<h3 id="js-中国标准时间转化为年月日时分秒"><a href="#js-中国标准时间转化为年月日时分秒" class="headerlink" title="js-中国标准时间转化为年月日时分秒"></a>js-中国标准时间转化为年月日时分秒</h3><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token comment">// 中国标准时间</span>
+<span class="token keyword">let</span> myTime <span class="token operator">=</span> <span class="token string">"Wed Feb 16 2022 00:00:00 GMT+0800"</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> newTime <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">filterTime</span><span class="token punctuation">(</span> myTime<span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newTime<span class="token punctuation">)</span> <span class="token comment">// 2022-02-16 00:00:00</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
 <span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-   <span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-			<span class="token comment">// 如果在方法中要修改 data 中的数据，可以通过 this 访问到</span>
-			<span class="token keyword">this</span><span class="token punctuation">.</span>count <span class="token operator">+=</span> <span class="token number">1</span>
-   <span class="token punctuation">&#125;</span>
-   <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token function">filterTime</span><span class="token punctuation">(</span><span class="token parameter">time</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">let</span> date <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> y <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getFullYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> m <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getMonth</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        m <span class="token operator">=</span> m <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> m <span class="token operator">:</span> m<span class="token punctuation">;</span>
+        <span class="token keyword">let</span> d <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        d <span class="token operator">=</span> d <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> d <span class="token operator">:</span> d<span class="token punctuation">;</span>
+        <span class="token keyword">let</span> h <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getHours</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        h <span class="token operator">=</span> h <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> h <span class="token operator">:</span> h<span class="token punctuation">;</span>
+        <span class="token keyword">let</span> minute <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getMinutes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        minute <span class="token operator">=</span> minute <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> minute <span class="token operator">:</span> minute<span class="token punctuation">;</span>
+        <span class="token keyword">let</span> s <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getSeconds</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        s <span class="token operator">=</span> s <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> s <span class="token operator">:</span> s<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> y <span class="token operator">+</span> <span class="token string">"-"</span> <span class="token operator">+</span> m <span class="token operator">+</span> <span class="token string">"-"</span> <span class="token operator">+</span> d <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> h <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> minute <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> s<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span>    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<blockquote>
-<p>注意：原生 DOM 对象有 onclick、oninput、onkeyup 等原生事件，替换为 vue 的事件绑定形式后，<br>分别为：v-on:click、v-on:input、v-on:keyup</p>
-</blockquote>
-<p>3.<code>$event</code> 的应用场景：如果默认的事件对象 e 被覆盖了，则可以手动传递一个 $event。例如：</p>
-<pre class="line-numbers language-none"><code class="language-none">&lt;button @click&#x3D;&quot;add(3, $event)&quot;&gt;&lt;&#x2F;button&gt;
-  methods: &#123;
-     add(n, e) &#123;
-  			&#x2F;&#x2F; 如果在方法中要修改 data 中的数据，可以通过 this 访问到
-  			this.count +&#x3D; 1
-     &#125;
-  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>4.事件修饰符：在事件处理函数中调用 event.preventDefault() 或 event.stopPropagation() 是非常常见的需求。因此，vue 提供了事件修饰符的概念，来辅助程序员更方便的对事件的触发进行控制</p>
-<ul>
-<li><p><code>.prevent</code>：阻止默认行为</p>
-   <pre class="line-numbers language-none"><code class="language-none">&lt;a @click.prevent&#x3D;&quot;xxx&quot;&gt;链接&lt;&#x2F;a&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><code>.stop</code> ：阻止事件冒泡</p>
-   <pre class="line-numbers language-none"><code class="language-none">&lt;button @click.stop&#x3D;&quot;xxx&quot;&gt;按钮&lt;&#x2F;button&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-</ul>
-<p>5.案件修饰符：在监听键盘事件时，我们经常需要判断详细的按键。此时，可以为键盘相关的事件添加按键修饰符，</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;只有在 key 是  Enter 时调用  vm.submit() 
-&lt;input @keyup.enter&#x3D;&quot;submit&quot;&gt;
-&#x2F;&#x2F;只有在 key 是  Esc 时调用  vm.clearInput() 
-&lt;input @keyup.esc&#x3D;&quot;clearInput&quot;&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="双向绑定指令"><a href="#双向绑定指令" class="headerlink" title="双向绑定指令"></a>双向绑定指令</h3><p>vue 提供了 <code>v-model</code> 双向数据绑定指令，用来辅助开发者在不操作 DOM 的前提下，快速获取表单的数据。</p>
-<ol>
-<li>input 输入框<ul>
-<li>type&#x3D;”radio”</li>
-<li>type&#x3D;”checkbox”</li>
-<li>type&#x3D;”xxxx”</li>
-</ul>
-</li>
-<li>textarea</li>
-<li>select</li>
-<li>v-model 指令的修饰符<ul>
-<li>.number:自动将用户的输入值转为数值类型 <code>&lt;input v-model.number=&quot;age&quot;/&gt;</code></li>
-</ul>
-<ul>
-<li>.trim: 自动过滤用户输入的首尾空白字符  <code>&lt;inut v-model.trim=&quot;msg&quot;/&gt;</code></li>
-<li>.lazy： 在”change”时而非”input”时更新 <code>&lt;input v-model.lazy=&quot;msg&quot;/&gt;</code></li>
-</ul>
-</li>
-</ol>
-<h3 id="条件渲染指令"><a href="#条件渲染指令" class="headerlink" title="条件渲染指令"></a>条件渲染指令</h3><p>条件渲染指令用来辅助开发者按需控制 DOM 的显示与隐藏。条件渲染指令有如下两个，分别是：</p>
-<ul>
-<li>v-if</li>
-<li>v-show</li>
-</ul>
-<ol>
-<li><code>v-show</code> 的原理是：动态为元素添加或移除 <code>display: none</code> 样式，来实现元素的显示和隐藏<ul>
-<li>如果要频繁的切换元素的显示状态，用 v-show 性能会更好</li>
-</ul>
-</li>
-<li><code>v-if</code> 的原理是：每次动态创建或移除元素，实现元素的显示和隐藏<ul>
-<li>如果刚进入页面的时候，某些元素默认不需要被展示，而且后期这个元素很可能也不需要被展示出来，此时 v-if 性能更好</li>
-</ul>
-</li>
-</ol>
-<blockquote>
-<p> 在实际开发中，绝大多数情况，不用考虑性能问题，直接使用 v-if 就好了！！！</p>
-</blockquote>
-<ol start="3">
-<li><p><code>v-else</code> : v-if 可以单独使用，或配合 v-else 指令一起使用：v-else 指令必须配合 v-if 指令一起使用，否则它将不会被识别！</p>
-<h3 id="列表渲染指令"><a href="#列表渲染指令" class="headerlink" title="列表渲染指令"></a>列表渲染指令</h3><p>vue 提供了 <code>v-for</code> 列表渲染指令，用来辅助开发者基于一个数组来循环渲染一个列表结构。v-for 指令需要使<br>用 <code>item in items</code> 形式的特殊语法，其中：</p>
-<ul>
-<li>items 是待循环的数组</li>
-<li>item 是被循环的每一项</li>
-</ul>
-</li>
-</ol>
-<ul>
-<li>v-for 指令还支持一个可选的第二个参数，即当前项的索引。语法格式为 (item, index) in items，<blockquote>
-<p>注意：v-for 指令中的 item 项和 index 索引都是形参，可以根据需要进行重命名。例如 (user, i) in userlist</p>
-</blockquote>
-</li>
-</ul>
-<p><strong>使用 key 维护列表的状态</strong>:<br>当列表的数据变化时，默认情况下，vue 会尽可能的复用已存在的 DOM 元素，从而提升渲染的性能。但这种默认的性能优化策略，会导致有状态的列表无法被正确更新。<br>为了给 vue 一个提示，以便它能跟踪每个节点的身份，从而在保证有状态的列表被正确更新的前提下，提升渲<br>染的性能。此时，需要为每项提供一个唯一的 key 属性：<br><strong>key 的注意事项</strong>:<br>① key 的值只能是字符串或数字类型<br>② key 的值必须具有唯一性（即：key 的值不能重复）<br>③ 建议把数据项 id 属性的值作为 key 的值（因为 id 属性的值具有唯一性）<br>④ 使用 index 的值当作 key 的值没有任何意义（因为 index 的值不具有唯一性）<br>⑤ 建议使用 v-for 指令时一定要指定 key 的值（既提升性能、又防止列表状态紊乱）</p>
-<h2 id="Vue的过滤器"><a href="#Vue的过滤器" class="headerlink" title="Vue的过滤器"></a>Vue的过滤器</h2><h3 id="定义过滤器"><a href="#定义过滤器" class="headerlink" title="定义过滤器"></a>定义过滤器</h3><p>  在创建vue 实例期间，可以在 <code>filters</code> 节点中定义过滤器，</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">count vm<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
-  <span class="token literal-property property">el</span><span class="token operator">:</span><span class="token string">'#app'</span><span class="token punctuation">,</span>
-  <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-     <span class="token literal-property property">message</span><span class="token operator">:</span> <span class="token string">'hello vue.js'</span><span class="token punctuation">,</span>
-     <span class="token literal-property property">info</span><span class="token operator">:</span> <span class="token string">'title info'</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token literal-property property">filters</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>    <span class="token comment">//在filters 节点下定义"过滤器"</span>
-    <span class="token function">capitalize</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>    <span class="token comment">//把首字母转为大写的过滤器</span>
-       <span class="token keyword">return</span> str<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> str<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-   <span class="token punctuation">&#125;</span>
-  <span class="token punctuation">&#125;</span>
-  
-
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="私有过滤器和全局过滤器"><a href="#私有过滤器和全局过滤器" class="headerlink" title="私有过滤器和全局过滤器"></a>私有过滤器和全局过滤器</h3><p>在 filters 节点下定义的过滤器，称为“私有过滤器”，因为它只能在当前 vm 实例所控制的 el 区域内使用。<br>如果希望在多个 vue 实例之间共享过滤器，则可以按照如下的格式定义全局过滤器：</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">  <span class="token comment">//全局过滤器--独立于每个 vm 实例之外</span>
-  <span class="token comment">//Vue.filters() 方法，接收两个参数</span>
-  <span class="token comment">//第一个参数，是全局过滤器的 "名字"</span>
-  <span class="token comment">//第二个参数，是全局过滤器的 "处理函数"</span>
-Vue<span class="token punctuation">.</span><span class="token function">filters</span><span class="token punctuation">(</span><span class="token string">'capitalize'</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token operator">=></span><span class="token punctuation">&#123;</span>
-   <span class="token keyword">return</span> str<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span> str<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'~~'</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="过滤器的调用"><a href="#过滤器的调用" class="headerlink" title="过滤器的调用"></a>过滤器的调用</h3><p>过滤器可以串联的进行调用 <code>&#123;&#123;message | filterA | filterB&#125;&#125;</code>  中间用 ‘|’ 隔开<br>A–处理过的值传递给 B ，最终把 B处理的结果渲染到页面上</p>
-<h3 id="过滤器传参"><a href="#过滤器传参" class="headerlink" title="过滤器传参"></a>过滤器传参</h3><p>  过滤器的本质是JavaScript 函数，因此可以接收参数，</p>
-<pre class="line-numbers language-none"><code class="language-none">  &lt;p&gt;&#123;&#123;message | filterA(arg1,arg2) &#125;&#125;&lt;&#x2F;p&gt;
-   Vue.filter(&#39;filterA&#39;,(msg,arg1,arg2)&#x3D;&gt;&#123;
-   &#x2F;&#x2F;过滤器代码逻辑
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="过滤器的兼容性"><a href="#过滤器的兼容性" class="headerlink" title="过滤器的兼容性"></a>过滤器的兼容性</h3><p>过滤器仅在 vue 2.x 和 1.x 中受支持，在 vue 3.x 的版本中剔除了过滤器相关的功能。<br>在企业级项目开发中：</p>
-<ul>
-<li>如果使用的是 2.x 版本的 vue，则依然可以使用过滤器相关的功能</li>
-<li>如果项目已经升级到了 3.x 版本的 vue，官方建议使用计算属性或方法代替被剔除的过滤器功能<br>具体的迁移指南，请参考 vue 3.x 的官方文档给出的说明：<a href="https://v3.vuejs.org/guide/migration/filters.html#migration-strategy">https://v3.vuejs.org/guide/migration/filters.html#migration-strategy</a></li>
-</ul>
 ]]></content>
       <categories>
-        <category>Vue的相关基础知识</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>js判断数组的方法</title>
-    <url>/2022/09/05/js-pan-duan-shu-zu-de-fang-fa/</url>
-    <content><![CDATA[<h3 id="js-判断数组的四种方法"><a href="#js-判断数组的四种方法" class="headerlink" title="js  判断数组的四种方法"></a>js  判断数组的四种方法</h3><ol>
-<li>通过<strong>instanceof</strong>运算符用于检验构造函数的prototype 属性是否出现在对象的原型链中的任何位置，返回一个布尔值</li>
-</ol>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">let</span> a <span class="token operator">=</span> arr <span class="token keyword">instanceof</span> <span class="token class-name">Array</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//true</span>
-<span class="token keyword">let</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token keyword">let</span> b <span class="token operator">=</span> obj <span class="token keyword">instanceof</span> <span class="token class-name">Array</span><span class="token punctuation">;</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//false</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ol start="2">
-<li>通过 <strong>constructor</strong> 判断</li>
-</ol>
-<p>实例的构造函数属性 constructor 指向构造函数，通过 constructor 属性可以判断是否为一个数组</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">let</span> arr <span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span>
-arr<span class="token punctuation">.</span>constructor <span class="token operator">===</span> Array<span class="token punctuation">;</span> <span class="token comment">//true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<ol start="3">
-<li>通过 <strong>Object.prototype.toString.call()</strong> 进行判断</li>
-</ol>
-<p>Object.prototype.toString.call()  可以获取到对象的不同类型</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span>
-<span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">'[object Array]'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<ol start="4">
-<li>通过 <strong>Array.isArray()</strong>  判断</li>
-</ol>
-<p>Array.isArray() 用于确定传递的值是否是一个数组，返回值是布尔值</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span>
-Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<blockquote>
-<p>有个问题是Array.isArray()是ES5新增的方法，目的就是提供一个稳定可用的数组判断方法，对于ES5之前不支持此方法的问题，我们其实可以做好兼容进行自行封装，如下：</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>Array<span class="token punctuation">.</span>isArray<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    Array<span class="token punctuation">.</span><span class="token function-variable function">isArray</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">argument</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> Object<span class="token punctuation">.</span>protutype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>argument<span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">'[object Array]'</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</blockquote>
-]]></content>
-      <categories>
-        <category>数组</category>
+        <category>js方法</category>
       </categories>
       <tags>
         <tag>js</tag>
@@ -1897,6 +1882,56 @@ i5ting_toc -f 要转换的md文件路径 -o<span aria-hidden="true" class="line-
       </tags>
   </entry>
   <entry>
+    <title>js判断数组的方法</title>
+    <url>/2022/09/05/js-pan-duan-shu-zu-de-fang-fa/</url>
+    <content><![CDATA[<h3 id="js-判断数组的四种方法"><a href="#js-判断数组的四种方法" class="headerlink" title="js  判断数组的四种方法"></a>js  判断数组的四种方法</h3><ol>
+<li>通过<strong>instanceof</strong>运算符用于检验构造函数的prototype 属性是否出现在对象的原型链中的任何位置，返回一个布尔值</li>
+</ol>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> a <span class="token operator">=</span> arr <span class="token keyword">instanceof</span> <span class="token class-name">Array</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//true</span>
+<span class="token keyword">let</span> obj <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> b <span class="token operator">=</span> obj <span class="token keyword">instanceof</span> <span class="token class-name">Array</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//false</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>通过 <strong>constructor</strong> 判断</li>
+</ol>
+<p>实例的构造函数属性 constructor 指向构造函数，通过 constructor 属性可以判断是否为一个数组</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">let</span> arr <span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span>
+arr<span class="token punctuation">.</span>constructor <span class="token operator">===</span> Array<span class="token punctuation">;</span> <span class="token comment">//true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ol start="3">
+<li>通过 <strong>Object.prototype.toString.call()</strong> 进行判断</li>
+</ol>
+<p>Object.prototype.toString.call()  可以获取到对象的不同类型</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span>
+<span class="token class-name">Object</span><span class="token punctuation">.</span>prototype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">'[object Array]'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ol start="4">
+<li>通过 <strong>Array.isArray()</strong>  判断</li>
+</ol>
+<p>Array.isArray() 用于确定传递的值是否是一个数组，返回值是布尔值</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span>
+Array<span class="token punctuation">.</span><span class="token function">isArray</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>有个问题是Array.isArray()是ES5新增的方法，目的就是提供一个稳定可用的数组判断方法，对于ES5之前不支持此方法的问题，我们其实可以做好兼容进行自行封装，如下：</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>Array<span class="token punctuation">.</span>isArray<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    Array<span class="token punctuation">.</span><span class="token function-variable function">isArray</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">argument</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> Object<span class="token punctuation">.</span>protutype<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">.</span><span class="token function">call</span><span class="token punctuation">(</span>argument<span class="token punctuation">)</span> <span class="token operator">===</span> <span class="token string">'[object Array]'</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</blockquote>
+]]></content>
+      <categories>
+        <category>数组</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>uni-app使用总结</title>
     <url>/2022/08/10/uni-app-shi-yong-zong-jie/</url>
     <content><![CDATA[<h3 id="rich-text-富文本-图片自适应问题-解决"><a href="#rich-text-富文本-图片自适应问题-解决" class="headerlink" title="rich-text 富文本 图片自适应问题 解决"></a>rich-text 富文本 图片自适应问题 解决</h3><p>  <strong>问题：</strong> rich-text是微信小程序的富文本标签，在使用rich-text的时候，需要rich-text内部图片宽高自适应。</p>
@@ -1957,285 +1992,6 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       </categories>
       <tags>
         <tag>uni-app</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>前端工程化与webpack</title>
-    <url>/2022/06/01/qian-duan-gong-cheng-hua-yu-webpack/</url>
-    <content><![CDATA[<h2 id="前端工程化"><a href="#前端工程化" class="headerlink" title="前端工程化"></a>前端工程化</h2><p>  在企业级的前端项目开发中，把前端开发所需的工具，技术，流程，经验等进行规范化，标准化。实际就是实现前端的四个现代化：模块化；组件化；规范化；自动化。<br>它的好处主要体现在：</p>
-<ol>
-<li>前端工程化让前端开发能够“自成体系”，覆盖了前端项目从创建到部署的方方面面</li>
-<li>最大程度地提高了前端的开发效率，降低了技术选型、前后端联调等带来的协调沟通成本<br>目前主流的前端工程化解决方案：</li>
-</ol>
-<ul>
-<li>webpack <a href="https://www.webpackjs.com/">https://www.webpackjs.com/</a> 常用</li>
-<li>parcel <a href="https://zh.parceljs.org/">https://zh.parceljs.org/</a></li>
-</ul>
-<h2 id="webpack-的基本使用"><a href="#webpack-的基本使用" class="headerlink" title="webpack 的基本使用"></a>webpack 的基本使用</h2><h3 id="在项目中安装-webpack"><a href="#在项目中安装-webpack" class="headerlink" title="在项目中安装 webpack"></a>在项目中安装 webpack</h3><p>在终端运行如下的命令，安装webpack 相关的两个包<code>npm i webpack@5.5.1 webpack-cli@4.2.0 -D</code></p>
-<h3 id="在项目中配置webpack"><a href="#在项目中配置webpack" class="headerlink" title="在项目中配置webpack"></a>在项目中配置webpack</h3><p>① 在项目根目录中，创建名为 webpack.config.js 的 webpack 配置文件，并初始化如下的基本配置：</p>
-<pre class="line-numbers language-none"><code class="language-none">module.exports &#x3D; &#123;
-  mode: &#39;development&#39;, 
-&#x2F;&#x2F; 开发环境：development 不会对打包生成的文件进行代码压缩和性能优化,打包速度快，适合在开发阶段使用
-&#x2F;&#x2F; 生产环境：production 会对打包生成的文件进行代码压缩和性能优化，打包速度很慢，仅适合在项目发布阶段使用
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>② 在 package.json 的 scripts 节点下，新增 dev 脚本如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">&quot;scripts&quot;: &#123;
-    &quot;dev&quot;: &quot;webpack&quot;, &#x2F;&#x2F;通过 npm run dev 来执行
-  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>③ 在终端中运行 npm run dev 命令，启动 webpack 进行项目的打包构建</p>
-<p><strong>webpack.config.js 文件的作用：</strong>webpack.config.js 是 webpack 的配置文件。webpack 在真正开始打包构建之前，会先读取这个配置文件，从而基于给定的配置，对项目进行打包。<br>注意：由于 webpack 是基于 node.js 开发出来的打包工具，因此在它的配置文件中，支持使用 node.js 相关<br>的语法和模块进行 webpack 的个性化配置。</p>
-<p><strong>自定义打包的入口与出口：</strong>在 webpack.config.js 配置文件中，通过 entry 节点指定打包的入口。通过 output 节点指定打包的出口。示例代码如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">const path &#x3D; require(&#39;path&#39;)
-module.exports&#x3D;&#123;
-  entry: path.join(__dirname, &#39;.&#x2F;src&#x2F;index.js&#39;),&#x2F;&#x2F;入口文件的路径
-  &#x2F;&#x2F; 指定打包的出口
-  output: &#123;
-    &#x2F;&#x2F; 表示输出文件的存放路径
-    path: path.join(__dirname, &#39;.&#x2F;dist&#39;),
-    &#x2F;&#x2F; 表示输出文件的名称,路径加js为了发布之后文件分类明确
-    filename: &#39;js&#x2F;bundle.js&#39;,
-  &#125;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="webpack-中的插件"><a href="#webpack-中的插件" class="headerlink" title="webpack 中的插件"></a>webpack 中的插件</h3><p><strong>webpack-dev-server：</strong>可以让 webpack 监听项目源代码的变化，从而进行自动打包构建。<br>安装：<code>npm i webpack-dev-server@3.11.0 -D</code><br>配置：① 修改 package.json -&gt; scripts 中的 dev 命令如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">&quot;scripts&quot;: &#123;
-    &quot;dev&quot;: &quot;webpack,serve&quot;, &#x2F;&#x2F;通过 npm run dev 来执行
-  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>② 再次运行 npm run dev 命令，重新进行项目的打包<br>③ 在浏览器中访问 <a href="http://localhost:8080/">http://localhost:8080</a> 地址，查看自动打包效果</p>
-<blockquote>
-<p>注意：webpack-dev-server 会启动一个实时打包的 http 服务器,配置了 webpack-dev-server 之后，打包生成的文件存放到了内存中,提高了实时打包输出的性能，因为内存比物理磁盘速度快很多。<br>生成到内存中的文件该如何访问？webpack-dev-server 生成到内存中的文件，默认放到了项目的根目录中，而且是虚拟的、不可见的。可以直接用 &#x2F; 表示项目根目录，后面跟上要访问的文件名称，即可访问内存中的文件。<br>例如 &#x2F;bundle.js 就表示要访问 webpack-dev-server 生成到内存中的 bundle.js 文件</p>
-</blockquote>
-<p>**html-webpack-plugin:**是 webpack 中的 HTML 插件，可以通过此插件自定制 index.html 页面的内容。<br>需求：通过 html-webpack-plugin 插件，将 src 目录下的 index.html 首页，复制到项目根目录中一份.<br>安装：<code>npm i html-webpack-plugin@4.5.0 -D</code><br>配置：</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 1. 导入插件，得到构造函数
-const HtmlPlugin &#x3D; require(&#39;html-webpack-plugin&#39;)
-&#x2F;&#x2F; 2. 创建插件的实例对象
-const htmlPlugin &#x3D; new HtmlPlugin(&#123;
-  template: &#39;.&#x2F;src&#x2F;index.html&#39;,
-  filename: &#39;.&#x2F;index.html&#39;,
-&#125;)
-module.exports&#x3D;&#123;
-    modu:&#39;development&#39;,
-    plugins:[htmlPlugin], &#x2F;&#x2F; 3. 挂载插件的实例对象<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<blockquote>
-<p>解惑 html-webpack-plugin,① 通过 HTML 插件复制到项目根目录中的 index.html 页面，也被放到了内存中<br>② HTML 插件在生成的 index.html 页面的底部，自动注入了打包的 bundle.js 文件</p>
-</blockquote>
-<p>**devServer 节点:**在 webpack.config.js 配置文件中，可以通过 devServer 节点对 webpack-dev-server 插件进行更多的配置，示例代码如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">devServer: &#123;
-  open: true,
-  host: &#39;127.0.0.1&#39;,
-  port: 80,
-&#125;,&#x2F;&#x2F;只要修改配置文件，就要重新启动服务器<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="webpack-中的loader"><a href="#webpack-中的loader" class="headerlink" title="webpack 中的loader"></a>webpack 中的loader</h3><p>在实际开发过程中，webpack 默认只能打包处理以 .js 后缀名结尾的模块。其他非 .js 后缀名结尾的模块，<br>webpack 默认处理不了，需要调用 loader 加载器才可以正常打包，否则会报错！<br>loader 加载器的作用：协助 webpack 打包处理特定的文件模块。比如：</p>
-<ul>
-<li>css-loader 可以打包处理 .css 相关的文件</li>
-<li>less-loader 可以打包处理 .less 相关的文件</li>
-<li>babel-loader 可以打包处理 webpack 无法处理的高级 JS 语法</li>
-</ul>
-<p><strong>打包处理css 文件</strong><br>① 运行 <code>npm i style-loader@2.0.0 css-loader@5.0.1 -D</code> 命令，安装处理 css 文件的 loader<br>② 在 webpack.config.js 的 module -&gt; rules 数组中，添加 loader 规则如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">module: &#123;
-    rules: [
-      &#x2F;&#x2F; test 表示匹配的文件类型， use 表示对应要调用的 loader
-      &#x2F;&#x2F;  use 数组中指定的 loader 顺序是固定的;多个 loader 的调用顺序是：从后往前调用
-      &#123; test: &#x2F;\.css$&#x2F;, use: [&#39;style-loader&#39;, &#39;css-loader&#39;] &#125;,
-    ]
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>打包处理 less 文件</strong><br>① 运行 <code>npm i less-loader@7.1.0 less@3.12.2 -D </code>命令<br>② 在 webpack.config.js 的 module -&gt; rules 数组中，添加 loader 规则如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">module: &#123;
-    rules: [
-      &#x2F;&#x2F; test 表示匹配的文件类型， use 表示对应要调用的 loader
-      &#x2F;&#x2F;  use 数组中指定的 loader 顺序是固定的;多个 loader 的调用顺序是：从后往前调用
-      &#123; test: &#x2F;\.less$&#x2F;, use: [&#39;style-loader&#39;, &#39;css-loader&#39;, &#39;less-loader&#39;] &#125;,
-    ]
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>打包处理样式表中与 url 路径相关的文件</strong><br>① 运行 <code>npm i url-loader@4.1.1 file-loader@6.2.0 -D</code> 命令<br>② 在 webpack.config.js 的 module -&gt; rules 数组中，添加 loader 规则如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">module: &#123;
-    rules: [
-     &#123;
-        test: &#x2F;\.jpg|png|gif$&#x2F;,
-        use: &#123;
-          loader: &#39;url-loader&#39;,
-          options: &#123;
-            limit: 22228,&#x2F;&#x2F; limit 用来指定图片的大小，单位是字节（byte）只有 ≤ limit 大小的图片，才会被转为 base64 格式的图片
-            outputPath: &#39;image&#39;,  
-          &#125;,
-        &#125;,
-      &#125;,
-    ]
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>打包处理js 文件中的高级语法</strong><br>webpack 只能打包处理一部分高级的 JavaScript 语法。对于那些 webpack 无法处理的高级 js 语法，需要借<br>助于 babel-loader 进行打包处理。例如 webpack 无法处理下面的 JavaScript 代码：<br>安装 babel-loader 相关的包：<code>npm i babel-loader@8.2.1 @babel/core@7.12.3 @babel/plugin-proposal-class-properties@7.12.1 -D</code><br>配置：在 webpack.config.js 的 module -&gt; rules 数组中，添加 loader 规则如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">&#123;
-  test: &#x2F;\.js$&#x2F;,
-  exclude: &#x2F;node_modules&#x2F;,  &#x2F;&#x2F; exclude 为排除项，不需要处理标注的文件
-  use: &#123;
-    loader: &#39;babel-loader&#39;,
-    options: &#123;
-      plugins: [&#39;@babel&#x2F;plugin-proposal-class-properties&#39;],
-    &#125;,
-  &#125;,
-&#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>打包发布</strong><br>项目开发完成之后，使用 webpack 对项目进行打包发布的主要原因有以下两点：<br>① 开发环境下，打包生成的文件存放于内存中，无法获取到最终打包生成的文件<br>② 开发环境下，打包生成的文件不会进行代码压缩和性能优化<br>为了让项目能够在生产环境中高性能的运行，因此需要对项目进行打包发布<br>配置webpack 的打包发布：在 package.json 文件的 scripts 节点下，新增 build 命令如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">&quot;scripts&quot;: &#123;
-  &quot;dev&quot;: &quot;webpack serve&quot;,
-  &#x2F;&#x2F; --model 是一个参数项，用来指定 webpack 的运行模式。production 代表生产环境，会对打包生成的文件进行代码压缩和性能优化。通过 --model 指定的参数项，会覆盖 webpack.config.js 中的 model 选项。
-  &quot;build&quot;: &quot;webpack --mode production&quot;
-&#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>③ 把 JavaScript 文件统一生成到 js 目录中<br>④ 把图片文件统一生成到 image 目录中<br>⑤ 自动清理 dist 目录下的旧文件：为了在每次打包发布时自动清理掉 dist 目录中的旧文件，可以安装并配置 clean-webpack-plugin 插件：<code>npm i clean-webpack-plugin@3.0.0 -D</code></p>
-<pre class="line-numbers language-none"><code class="language-none">const &#123; CleanWebpackPlugin &#125; &#x3D; require(&#39;clean-webpack-plugin&#39;)
-const cleanPlugin &#x3D; new CleanWebpackPlugin()
-plugins: [htmlPlugin, cleanPlugin], <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="Source-Map"><a href="#Source-Map" class="headerlink" title="Source Map"></a>Source Map</h3><p>Source Map 就是一个信息文件，里面储存着位置信息。也就是说，Source Map 文件中存储着代码压缩混淆前后的对应关系。有了它，出错的时候，除错工具将直接显示原始代码，而不是转换后的代码，能够极大的方便后期的调试。<br>**默认 Source Map 的问题:**开发环境下默认生成的 Source Map，记录的是生成后的代码的位置。会导致运行时报错的行数与源代码的行数不一致的问题。<br>**解决默认 Source Map 的问题:**开发环境下，推荐在 webpack.config.js 中添加如下的配置，即可保证运行时报错的行数与源代码的行数保持一致</p>
-<pre class="line-numbers language-none"><code class="language-none">module.exports&#x3D;&#123;
-  &#x2F;&#x2F; eval-source-map 仅限在开发模式下使用
-  &#x2F;&#x2F; devtool: &#39;eval-source-map&#39;,
-  &#x2F;&#x2F; 生产环境下，建议关闭 SourceMap 或将 devtool 的值设置为 nosources-source-map
-  &#x2F;&#x2F; devtool: &#39;nosources-source-map&#39;,只想定位报错的具体行数，且不想暴露源码
-  &#x2F;&#x2F; devtool: &#39;source-map&#39;,想在定位报错行数的同时，展示具体报错的源码
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>Source Map 的最佳实践:</strong><br>① 开发环境下：</p>
-<ul>
-<li>建议把 devtool 的值设置为 eval-source-map</li>
-<li>好处：可以精准定位到具体的错误行<br>② 生产环境下：</li>
-<li>建议关闭 Source Map 或将 devtool 的值设置为 nosources-source-map</li>
-<li>好处：防止源码泄露，提高网站的安全性</li>
-</ul>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>打包构建</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>跨域与JSONP.md</title>
-    <url>/2022/02/27/kua-yu-yu-jsonp-md/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>————同源策略，跨域，JSONP的实现原理，防抖和节流。</p>
-<h1 id="了解同源策略和跨域"><a href="#了解同源策略和跨域" class="headerlink" title="了解同源策略和跨域"></a>了解同源策略和跨域</h1><p>  同源指的是如果两个页面的协议，域名，端口都相同，则两个页面具有相同的源（如果没有给出端口号，默认是80端口）。<span id="more"></span></p>
-<p><strong>同源策略</strong>是浏览器提供的一个安全功能</p>
-<p><strong>跨域</strong>是指两个URL的协议，域名，端口有一个或一个以上不一致。出现跨域的根本原因：浏览器的同源策略不允许非同源的URL之间进行资源的交互<br>（浏览器允许发起跨域请求，但是，跨域请求回来的数据会被浏览器拦截，无法被页面获取到）</p>
-<p>如何实现跨域数据请求解决方案：JSONP和CORS<br> JSONP：出现的早，兼容性好，缺点是只支持GET请求，不支持POST请求；<br> CORS：出现的较晚，W3C标准，两种请求都支持，缺点是不兼容低版本浏览器</p>
-<h1 id="JSONP的实现原理"><a href="#JSONP的实现原理" class="headerlink" title="JSONP的实现原理"></a>JSONP的实现原理</h1><p>  JSONP的实现原理就是通过<code>&lt;script&gt;</code>标签的src属性，请求跨域的数据接口，并通过函数调用的形式，接收跨域接口响应回来的数据</p>
-<h2 id="jQuery中的JSONP"><a href="#jQuery中的JSONP" class="headerlink" title="jQuery中的JSONP"></a>jQuery中的JSONP</h2><p>  jQuery 提供的 $.ajax() 函数，除了可以发起真正的 Ajax 数据请求之外，还能够发起 JSONP 数据请求</p>
-<pre><code>$.ajax(&#123;
-  url: &#39;http://ajax.frontend.itheima.net:3006/api/jsonp?name=zs&amp;age=20&#39;,
-  // 如果要使用 $.ajax() 发起 JSONP 请求，必须指定 datatype 为 jsonp
-  dataType: &#39;jsonp&#39;,
-   success: function(res) &#123;
-   console.log(res)
-&#125;
-&#125;)
-</code></pre>
-<p>在使用 jQuery 发起 JSONP 请求时，如果想要自定义 JSONP 的参数以及回调函数名称，可以通过如下两个参数来指定：</p>
-<pre><code>$.ajax(&#123;
-  url: &#39;http://ajax.frontend.itheima.net:3006/api/jsonp?name=zs&amp;age=20&#39;,
-  dataType: &#39;jsonp&#39;,
-  // 发送到服务端的参数名称，默认值为 callback
-  jsonp: &#39;callback&#39;,
-  // 自定义的回调函数名称，默认值为 jQueryxxx 格式
-  jsonpCallback: &#39;abc&#39;,
-  success: function(res) &#123;
-  console.log(res)
-&#125;
-</code></pre>
-<p> })</p>
-<h2 id="jQuery中JSONP的实现过程"><a href="#jQuery中JSONP的实现过程" class="headerlink" title="jQuery中JSONP的实现过程"></a>jQuery中JSONP的实现过程</h2><p> jQuery 中的 JSONP，也是通过 <code>&lt;script&gt;</code> 标签的 src 属性实现跨域数据访问的，只不过，jQuery 采用的是动态创建和移除<code>&lt;script&gt;</code>标签的方式，来发起 JSONP 数据请求。</p>
-<ul>
-<li><p>在发起 JSONP 请求的时候，动态向 <code>&lt;header&gt;</code> 中 append 一个 <code>&lt;script&gt;</code> 标签；</p>
-</li>
-<li><p>在 JSONP 请求成功以后，动态从 <code>&lt;header&gt;</code> 中移除刚才 append 进去的<code> &lt;script&gt;</code> 标签；</p>
-</li>
-</ul>
-<h1 id="防抖与节流"><a href="#防抖与节流" class="headerlink" title="防抖与节流"></a>防抖与节流</h1><h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><p>———<strong>防抖策略</strong>是当事件被触发后，延迟n秒后再执行回调，如果在这n秒内事件又被触发，则重新计时。</p>
-<p>防抖的应用场景：用户在输入框中连续输入一串字符是时，可以通过防抖策略，只在输入完成时，才执行查询的请求，这样可以有效减少请求次数，节约请求资源。</p>
-<pre><code>var timer = null                    // 1. 防抖动的 timer
-  function debounceSearch(keywords) &#123; // 2. 定义防抖的函数
-  timer = setTimeout(function() &#123;
-  // 发起 JSONP 请求
-  getSuggestList(keywords)
-  &#125;, 500)
-  &#125;
-
-  $(&#39;#ipt&#39;).on(&#39;keyup&#39;, function() &#123; 
-  // 3. 在触发 keyup 事件时，立即清空 timer    
-    clearTimeout(timer)
-   debounceSearch(keywords)
-&#125;)
-</code></pre>
-<h2 id="缓存搜索的建议列表"><a href="#缓存搜索的建议列表" class="headerlink" title="缓存搜索的建议列表"></a>缓存搜索的建议列表</h2><p>1.定义全局缓存对象</p>
-<p><code>// 缓存对象   var cacheObj = &#123;&#125;</code></p>
-<p>2.将搜索结果保存到缓存对象中</p>
-<pre><code> // 渲染建议列表
- function renderSuggestList(res) &#123;
-   // ...省略其他代码
-   // 将搜索的结果，添加到缓存对象中
-    var k = $(&#39;#ipt&#39;).val().trim()
-    cacheObj[k] = res
- &#125;
-</code></pre>
-<p>3.优先从缓存中获取搜索建议</p>
-<pre><code> // 监听文本框的 keyup 事件
- $(&#39;#ipt&#39;).on(&#39;keyup&#39;, function() &#123;
-    // ...省略其他代码
-
-    // 优先从缓存中获取搜索建议
-    if (cacheObj[keywords]) &#123;
-       return renderSuggestList(cacheObj[keywords])
-    &#125;
-    // 获取搜索建议列表
-    debounceSearch(keywords)
-  &#125;)
-</code></pre>
-<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p><strong>节流策略</strong> 就是可以减少一段时间内事件的触发频率</p>
-<p>节流的应用场景：</p>
-<ul>
-<li><p>鼠标连续不断地触发某事件，只在单位时间内只触发一次</p>
-</li>
-<li><p>懒加载时要监听计算滚动条的位置，但不必每次滑动都触发，可以降低计算的频率，而不必去浪费cpu资源。</p>
-</li>
-</ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li>防抖：如果事件被频繁触发，防抖能保证只有最有一次触发生效！前面 N 多次的触发都会被忽略！</li>
-<li>节流：如果事件被频繁触发，节流能够减少事件触发的频率，因此，节流是有选择性地执行一部分事件！</li>
-</ul>
-]]></content>
-      <categories>
-        <category>前后端交互</category>
-      </categories>
-      <tags>
-        <tag>跨域与JSONP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>商城项目问题汇总</title>
-    <url>/2022/08/01/shang-cheng-xiang-mu-wen-ti-hui-zong/</url>
-    <content><![CDATA[<h3 id="在请求数据的时候后台报30001错"><a href="#在请求数据的时候后台报30001错" class="headerlink" title="在请求数据的时候后台报30001错"></a>在请求数据的时候后台报30001错</h3><p>  有一种可能是在数据请求的时候，请求头header 的格式不对,需要在请求的方法中写一个header 请求头</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">getAddcart</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-	<span class="token keyword">return</span> req<span class="token punctuation">.</span><span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
-		<span class="token literal-property property">url</span><span class="token operator">:</span><span class="token string">'/jingli-multishop/buyer/trade/carts'</span><span class="token punctuation">,</span>
-		<span class="token literal-property property">method</span><span class="token operator">:</span><span class="token string">'post'</span><span class="token punctuation">,</span>
-		data<span class="token punctuation">,</span>
-		<span class="token literal-property property">header</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token string-property property">'content-type'</span><span class="token operator">:</span><span class="token string">'application/x-www-form-urlencoded'</span><span class="token punctuation">&#125;</span>
-	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>工作问题</category>
-      </categories>
-      <tags>
-        <tag>项目总结</tag>
       </tags>
   </entry>
   <entry>
@@ -2429,6 +2185,285 @@ store<span class="token punctuation">.</span>state<span class="token punctuation
       </categories>
       <tags>
         <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>前端工程化与webpack</title>
+    <url>/2022/06/01/qian-duan-gong-cheng-hua-yu-webpack/</url>
+    <content><![CDATA[<h2 id="前端工程化"><a href="#前端工程化" class="headerlink" title="前端工程化"></a>前端工程化</h2><p>  在企业级的前端项目开发中，把前端开发所需的工具，技术，流程，经验等进行规范化，标准化。实际就是实现前端的四个现代化：模块化；组件化；规范化；自动化。<br>它的好处主要体现在：</p>
+<ol>
+<li>前端工程化让前端开发能够“自成体系”，覆盖了前端项目从创建到部署的方方面面</li>
+<li>最大程度地提高了前端的开发效率，降低了技术选型、前后端联调等带来的协调沟通成本<br>目前主流的前端工程化解决方案：</li>
+</ol>
+<ul>
+<li>webpack <a href="https://www.webpackjs.com/">https://www.webpackjs.com/</a> 常用</li>
+<li>parcel <a href="https://zh.parceljs.org/">https://zh.parceljs.org/</a></li>
+</ul>
+<h2 id="webpack-的基本使用"><a href="#webpack-的基本使用" class="headerlink" title="webpack 的基本使用"></a>webpack 的基本使用</h2><h3 id="在项目中安装-webpack"><a href="#在项目中安装-webpack" class="headerlink" title="在项目中安装 webpack"></a>在项目中安装 webpack</h3><p>在终端运行如下的命令，安装webpack 相关的两个包<code>npm i webpack@5.5.1 webpack-cli@4.2.0 -D</code></p>
+<h3 id="在项目中配置webpack"><a href="#在项目中配置webpack" class="headerlink" title="在项目中配置webpack"></a>在项目中配置webpack</h3><p>① 在项目根目录中，创建名为 webpack.config.js 的 webpack 配置文件，并初始化如下的基本配置：</p>
+<pre class="line-numbers language-none"><code class="language-none">module.exports &#x3D; &#123;
+  mode: &#39;development&#39;, 
+&#x2F;&#x2F; 开发环境：development 不会对打包生成的文件进行代码压缩和性能优化,打包速度快，适合在开发阶段使用
+&#x2F;&#x2F; 生产环境：production 会对打包生成的文件进行代码压缩和性能优化，打包速度很慢，仅适合在项目发布阶段使用
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>② 在 package.json 的 scripts 节点下，新增 dev 脚本如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">&quot;scripts&quot;: &#123;
+    &quot;dev&quot;: &quot;webpack&quot;, &#x2F;&#x2F;通过 npm run dev 来执行
+  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>③ 在终端中运行 npm run dev 命令，启动 webpack 进行项目的打包构建</p>
+<p><strong>webpack.config.js 文件的作用：</strong>webpack.config.js 是 webpack 的配置文件。webpack 在真正开始打包构建之前，会先读取这个配置文件，从而基于给定的配置，对项目进行打包。<br>注意：由于 webpack 是基于 node.js 开发出来的打包工具，因此在它的配置文件中，支持使用 node.js 相关<br>的语法和模块进行 webpack 的个性化配置。</p>
+<p><strong>自定义打包的入口与出口：</strong>在 webpack.config.js 配置文件中，通过 entry 节点指定打包的入口。通过 output 节点指定打包的出口。示例代码如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">const path &#x3D; require(&#39;path&#39;)
+module.exports&#x3D;&#123;
+  entry: path.join(__dirname, &#39;.&#x2F;src&#x2F;index.js&#39;),&#x2F;&#x2F;入口文件的路径
+  &#x2F;&#x2F; 指定打包的出口
+  output: &#123;
+    &#x2F;&#x2F; 表示输出文件的存放路径
+    path: path.join(__dirname, &#39;.&#x2F;dist&#39;),
+    &#x2F;&#x2F; 表示输出文件的名称,路径加js为了发布之后文件分类明确
+    filename: &#39;js&#x2F;bundle.js&#39;,
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="webpack-中的插件"><a href="#webpack-中的插件" class="headerlink" title="webpack 中的插件"></a>webpack 中的插件</h3><p><strong>webpack-dev-server：</strong>可以让 webpack 监听项目源代码的变化，从而进行自动打包构建。<br>安装：<code>npm i webpack-dev-server@3.11.0 -D</code><br>配置：① 修改 package.json -&gt; scripts 中的 dev 命令如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">&quot;scripts&quot;: &#123;
+    &quot;dev&quot;: &quot;webpack,serve&quot;, &#x2F;&#x2F;通过 npm run dev 来执行
+  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>② 再次运行 npm run dev 命令，重新进行项目的打包<br>③ 在浏览器中访问 <a href="http://localhost:8080/">http://localhost:8080</a> 地址，查看自动打包效果</p>
+<blockquote>
+<p>注意：webpack-dev-server 会启动一个实时打包的 http 服务器,配置了 webpack-dev-server 之后，打包生成的文件存放到了内存中,提高了实时打包输出的性能，因为内存比物理磁盘速度快很多。<br>生成到内存中的文件该如何访问？webpack-dev-server 生成到内存中的文件，默认放到了项目的根目录中，而且是虚拟的、不可见的。可以直接用 &#x2F; 表示项目根目录，后面跟上要访问的文件名称，即可访问内存中的文件。<br>例如 &#x2F;bundle.js 就表示要访问 webpack-dev-server 生成到内存中的 bundle.js 文件</p>
+</blockquote>
+<p>**html-webpack-plugin:**是 webpack 中的 HTML 插件，可以通过此插件自定制 index.html 页面的内容。<br>需求：通过 html-webpack-plugin 插件，将 src 目录下的 index.html 首页，复制到项目根目录中一份.<br>安装：<code>npm i html-webpack-plugin@4.5.0 -D</code><br>配置：</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 1. 导入插件，得到构造函数
+const HtmlPlugin &#x3D; require(&#39;html-webpack-plugin&#39;)
+&#x2F;&#x2F; 2. 创建插件的实例对象
+const htmlPlugin &#x3D; new HtmlPlugin(&#123;
+  template: &#39;.&#x2F;src&#x2F;index.html&#39;,
+  filename: &#39;.&#x2F;index.html&#39;,
+&#125;)
+module.exports&#x3D;&#123;
+    modu:&#39;development&#39;,
+    plugins:[htmlPlugin], &#x2F;&#x2F; 3. 挂载插件的实例对象<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>解惑 html-webpack-plugin,① 通过 HTML 插件复制到项目根目录中的 index.html 页面，也被放到了内存中<br>② HTML 插件在生成的 index.html 页面的底部，自动注入了打包的 bundle.js 文件</p>
+</blockquote>
+<p>**devServer 节点:**在 webpack.config.js 配置文件中，可以通过 devServer 节点对 webpack-dev-server 插件进行更多的配置，示例代码如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">devServer: &#123;
+  open: true,
+  host: &#39;127.0.0.1&#39;,
+  port: 80,
+&#125;,&#x2F;&#x2F;只要修改配置文件，就要重新启动服务器<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="webpack-中的loader"><a href="#webpack-中的loader" class="headerlink" title="webpack 中的loader"></a>webpack 中的loader</h3><p>在实际开发过程中，webpack 默认只能打包处理以 .js 后缀名结尾的模块。其他非 .js 后缀名结尾的模块，<br>webpack 默认处理不了，需要调用 loader 加载器才可以正常打包，否则会报错！<br>loader 加载器的作用：协助 webpack 打包处理特定的文件模块。比如：</p>
+<ul>
+<li>css-loader 可以打包处理 .css 相关的文件</li>
+<li>less-loader 可以打包处理 .less 相关的文件</li>
+<li>babel-loader 可以打包处理 webpack 无法处理的高级 JS 语法</li>
+</ul>
+<p><strong>打包处理css 文件</strong><br>① 运行 <code>npm i style-loader@2.0.0 css-loader@5.0.1 -D</code> 命令，安装处理 css 文件的 loader<br>② 在 webpack.config.js 的 module -&gt; rules 数组中，添加 loader 规则如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">module: &#123;
+    rules: [
+      &#x2F;&#x2F; test 表示匹配的文件类型， use 表示对应要调用的 loader
+      &#x2F;&#x2F;  use 数组中指定的 loader 顺序是固定的;多个 loader 的调用顺序是：从后往前调用
+      &#123; test: &#x2F;\.css$&#x2F;, use: [&#39;style-loader&#39;, &#39;css-loader&#39;] &#125;,
+    ]
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>打包处理 less 文件</strong><br>① 运行 <code>npm i less-loader@7.1.0 less@3.12.2 -D </code>命令<br>② 在 webpack.config.js 的 module -&gt; rules 数组中，添加 loader 规则如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">module: &#123;
+    rules: [
+      &#x2F;&#x2F; test 表示匹配的文件类型， use 表示对应要调用的 loader
+      &#x2F;&#x2F;  use 数组中指定的 loader 顺序是固定的;多个 loader 的调用顺序是：从后往前调用
+      &#123; test: &#x2F;\.less$&#x2F;, use: [&#39;style-loader&#39;, &#39;css-loader&#39;, &#39;less-loader&#39;] &#125;,
+    ]
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>打包处理样式表中与 url 路径相关的文件</strong><br>① 运行 <code>npm i url-loader@4.1.1 file-loader@6.2.0 -D</code> 命令<br>② 在 webpack.config.js 的 module -&gt; rules 数组中，添加 loader 规则如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">module: &#123;
+    rules: [
+     &#123;
+        test: &#x2F;\.jpg|png|gif$&#x2F;,
+        use: &#123;
+          loader: &#39;url-loader&#39;,
+          options: &#123;
+            limit: 22228,&#x2F;&#x2F; limit 用来指定图片的大小，单位是字节（byte）只有 ≤ limit 大小的图片，才会被转为 base64 格式的图片
+            outputPath: &#39;image&#39;,  
+          &#125;,
+        &#125;,
+      &#125;,
+    ]
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>打包处理js 文件中的高级语法</strong><br>webpack 只能打包处理一部分高级的 JavaScript 语法。对于那些 webpack 无法处理的高级 js 语法，需要借<br>助于 babel-loader 进行打包处理。例如 webpack 无法处理下面的 JavaScript 代码：<br>安装 babel-loader 相关的包：<code>npm i babel-loader@8.2.1 @babel/core@7.12.3 @babel/plugin-proposal-class-properties@7.12.1 -D</code><br>配置：在 webpack.config.js 的 module -&gt; rules 数组中，添加 loader 规则如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">&#123;
+  test: &#x2F;\.js$&#x2F;,
+  exclude: &#x2F;node_modules&#x2F;,  &#x2F;&#x2F; exclude 为排除项，不需要处理标注的文件
+  use: &#123;
+    loader: &#39;babel-loader&#39;,
+    options: &#123;
+      plugins: [&#39;@babel&#x2F;plugin-proposal-class-properties&#39;],
+    &#125;,
+  &#125;,
+&#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>打包发布</strong><br>项目开发完成之后，使用 webpack 对项目进行打包发布的主要原因有以下两点：<br>① 开发环境下，打包生成的文件存放于内存中，无法获取到最终打包生成的文件<br>② 开发环境下，打包生成的文件不会进行代码压缩和性能优化<br>为了让项目能够在生产环境中高性能的运行，因此需要对项目进行打包发布<br>配置webpack 的打包发布：在 package.json 文件的 scripts 节点下，新增 build 命令如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">&quot;scripts&quot;: &#123;
+  &quot;dev&quot;: &quot;webpack serve&quot;,
+  &#x2F;&#x2F; --model 是一个参数项，用来指定 webpack 的运行模式。production 代表生产环境，会对打包生成的文件进行代码压缩和性能优化。通过 --model 指定的参数项，会覆盖 webpack.config.js 中的 model 选项。
+  &quot;build&quot;: &quot;webpack --mode production&quot;
+&#125;,<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>③ 把 JavaScript 文件统一生成到 js 目录中<br>④ 把图片文件统一生成到 image 目录中<br>⑤ 自动清理 dist 目录下的旧文件：为了在每次打包发布时自动清理掉 dist 目录中的旧文件，可以安装并配置 clean-webpack-plugin 插件：<code>npm i clean-webpack-plugin@3.0.0 -D</code></p>
+<pre class="line-numbers language-none"><code class="language-none">const &#123; CleanWebpackPlugin &#125; &#x3D; require(&#39;clean-webpack-plugin&#39;)
+const cleanPlugin &#x3D; new CleanWebpackPlugin()
+plugins: [htmlPlugin, cleanPlugin], <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Source-Map"><a href="#Source-Map" class="headerlink" title="Source Map"></a>Source Map</h3><p>Source Map 就是一个信息文件，里面储存着位置信息。也就是说，Source Map 文件中存储着代码压缩混淆前后的对应关系。有了它，出错的时候，除错工具将直接显示原始代码，而不是转换后的代码，能够极大的方便后期的调试。<br>**默认 Source Map 的问题:**开发环境下默认生成的 Source Map，记录的是生成后的代码的位置。会导致运行时报错的行数与源代码的行数不一致的问题。<br>**解决默认 Source Map 的问题:**开发环境下，推荐在 webpack.config.js 中添加如下的配置，即可保证运行时报错的行数与源代码的行数保持一致</p>
+<pre class="line-numbers language-none"><code class="language-none">module.exports&#x3D;&#123;
+  &#x2F;&#x2F; eval-source-map 仅限在开发模式下使用
+  &#x2F;&#x2F; devtool: &#39;eval-source-map&#39;,
+  &#x2F;&#x2F; 生产环境下，建议关闭 SourceMap 或将 devtool 的值设置为 nosources-source-map
+  &#x2F;&#x2F; devtool: &#39;nosources-source-map&#39;,只想定位报错的具体行数，且不想暴露源码
+  &#x2F;&#x2F; devtool: &#39;source-map&#39;,想在定位报错行数的同时，展示具体报错的源码
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>Source Map 的最佳实践:</strong><br>① 开发环境下：</p>
+<ul>
+<li>建议把 devtool 的值设置为 eval-source-map</li>
+<li>好处：可以精准定位到具体的错误行<br>② 生产环境下：</li>
+<li>建议关闭 Source Map 或将 devtool 的值设置为 nosources-source-map</li>
+<li>好处：防止源码泄露，提高网站的安全性</li>
+</ul>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>打包构建</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>商城项目问题汇总</title>
+    <url>/2022/08/01/shang-cheng-xiang-mu-wen-ti-hui-zong/</url>
+    <content><![CDATA[<h3 id="在请求数据的时候后台报30001错"><a href="#在请求数据的时候后台报30001错" class="headerlink" title="在请求数据的时候后台报30001错"></a>在请求数据的时候后台报30001错</h3><p>  有一种可能是在数据请求的时候，请求头header 的格式不对,需要在请求的方法中写一个header 请求头</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">getAddcart</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> req<span class="token punctuation">.</span><span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+		<span class="token literal-property property">url</span><span class="token operator">:</span><span class="token string">'/jingli-multishop/buyer/trade/carts'</span><span class="token punctuation">,</span>
+		<span class="token literal-property property">method</span><span class="token operator">:</span><span class="token string">'post'</span><span class="token punctuation">,</span>
+		data<span class="token punctuation">,</span>
+		<span class="token literal-property property">header</span><span class="token operator">:</span><span class="token punctuation">&#123;</span><span class="token string-property property">'content-type'</span><span class="token operator">:</span><span class="token string">'application/x-www-form-urlencoded'</span><span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>工作问题</category>
+      </categories>
+      <tags>
+        <tag>项目总结</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>跨域与JSONP.md</title>
+    <url>/2022/02/27/kua-yu-yu-jsonp-md/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>————同源策略，跨域，JSONP的实现原理，防抖和节流。</p>
+<h1 id="了解同源策略和跨域"><a href="#了解同源策略和跨域" class="headerlink" title="了解同源策略和跨域"></a>了解同源策略和跨域</h1><p>  同源指的是如果两个页面的协议，域名，端口都相同，则两个页面具有相同的源（如果没有给出端口号，默认是80端口）。<span id="more"></span></p>
+<p><strong>同源策略</strong>是浏览器提供的一个安全功能</p>
+<p><strong>跨域</strong>是指两个URL的协议，域名，端口有一个或一个以上不一致。出现跨域的根本原因：浏览器的同源策略不允许非同源的URL之间进行资源的交互<br>（浏览器允许发起跨域请求，但是，跨域请求回来的数据会被浏览器拦截，无法被页面获取到）</p>
+<p>如何实现跨域数据请求解决方案：JSONP和CORS<br> JSONP：出现的早，兼容性好，缺点是只支持GET请求，不支持POST请求；<br> CORS：出现的较晚，W3C标准，两种请求都支持，缺点是不兼容低版本浏览器</p>
+<h1 id="JSONP的实现原理"><a href="#JSONP的实现原理" class="headerlink" title="JSONP的实现原理"></a>JSONP的实现原理</h1><p>  JSONP的实现原理就是通过<code>&lt;script&gt;</code>标签的src属性，请求跨域的数据接口，并通过函数调用的形式，接收跨域接口响应回来的数据</p>
+<h2 id="jQuery中的JSONP"><a href="#jQuery中的JSONP" class="headerlink" title="jQuery中的JSONP"></a>jQuery中的JSONP</h2><p>  jQuery 提供的 $.ajax() 函数，除了可以发起真正的 Ajax 数据请求之外，还能够发起 JSONP 数据请求</p>
+<pre><code>$.ajax(&#123;
+  url: &#39;http://ajax.frontend.itheima.net:3006/api/jsonp?name=zs&amp;age=20&#39;,
+  // 如果要使用 $.ajax() 发起 JSONP 请求，必须指定 datatype 为 jsonp
+  dataType: &#39;jsonp&#39;,
+   success: function(res) &#123;
+   console.log(res)
+&#125;
+&#125;)
+</code></pre>
+<p>在使用 jQuery 发起 JSONP 请求时，如果想要自定义 JSONP 的参数以及回调函数名称，可以通过如下两个参数来指定：</p>
+<pre><code>$.ajax(&#123;
+  url: &#39;http://ajax.frontend.itheima.net:3006/api/jsonp?name=zs&amp;age=20&#39;,
+  dataType: &#39;jsonp&#39;,
+  // 发送到服务端的参数名称，默认值为 callback
+  jsonp: &#39;callback&#39;,
+  // 自定义的回调函数名称，默认值为 jQueryxxx 格式
+  jsonpCallback: &#39;abc&#39;,
+  success: function(res) &#123;
+  console.log(res)
+&#125;
+</code></pre>
+<p> })</p>
+<h2 id="jQuery中JSONP的实现过程"><a href="#jQuery中JSONP的实现过程" class="headerlink" title="jQuery中JSONP的实现过程"></a>jQuery中JSONP的实现过程</h2><p> jQuery 中的 JSONP，也是通过 <code>&lt;script&gt;</code> 标签的 src 属性实现跨域数据访问的，只不过，jQuery 采用的是动态创建和移除<code>&lt;script&gt;</code>标签的方式，来发起 JSONP 数据请求。</p>
+<ul>
+<li><p>在发起 JSONP 请求的时候，动态向 <code>&lt;header&gt;</code> 中 append 一个 <code>&lt;script&gt;</code> 标签；</p>
+</li>
+<li><p>在 JSONP 请求成功以后，动态从 <code>&lt;header&gt;</code> 中移除刚才 append 进去的<code> &lt;script&gt;</code> 标签；</p>
+</li>
+</ul>
+<h1 id="防抖与节流"><a href="#防抖与节流" class="headerlink" title="防抖与节流"></a>防抖与节流</h1><h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><p>———<strong>防抖策略</strong>是当事件被触发后，延迟n秒后再执行回调，如果在这n秒内事件又被触发，则重新计时。</p>
+<p>防抖的应用场景：用户在输入框中连续输入一串字符是时，可以通过防抖策略，只在输入完成时，才执行查询的请求，这样可以有效减少请求次数，节约请求资源。</p>
+<pre><code>var timer = null                    // 1. 防抖动的 timer
+  function debounceSearch(keywords) &#123; // 2. 定义防抖的函数
+  timer = setTimeout(function() &#123;
+  // 发起 JSONP 请求
+  getSuggestList(keywords)
+  &#125;, 500)
+  &#125;
+
+  $(&#39;#ipt&#39;).on(&#39;keyup&#39;, function() &#123; 
+  // 3. 在触发 keyup 事件时，立即清空 timer    
+    clearTimeout(timer)
+   debounceSearch(keywords)
+&#125;)
+</code></pre>
+<h2 id="缓存搜索的建议列表"><a href="#缓存搜索的建议列表" class="headerlink" title="缓存搜索的建议列表"></a>缓存搜索的建议列表</h2><p>1.定义全局缓存对象</p>
+<p><code>// 缓存对象   var cacheObj = &#123;&#125;</code></p>
+<p>2.将搜索结果保存到缓存对象中</p>
+<pre><code> // 渲染建议列表
+ function renderSuggestList(res) &#123;
+   // ...省略其他代码
+   // 将搜索的结果，添加到缓存对象中
+    var k = $(&#39;#ipt&#39;).val().trim()
+    cacheObj[k] = res
+ &#125;
+</code></pre>
+<p>3.优先从缓存中获取搜索建议</p>
+<pre><code> // 监听文本框的 keyup 事件
+ $(&#39;#ipt&#39;).on(&#39;keyup&#39;, function() &#123;
+    // ...省略其他代码
+
+    // 优先从缓存中获取搜索建议
+    if (cacheObj[keywords]) &#123;
+       return renderSuggestList(cacheObj[keywords])
+    &#125;
+    // 获取搜索建议列表
+    debounceSearch(keywords)
+  &#125;)
+</code></pre>
+<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p><strong>节流策略</strong> 就是可以减少一段时间内事件的触发频率</p>
+<p>节流的应用场景：</p>
+<ul>
+<li><p>鼠标连续不断地触发某事件，只在单位时间内只触发一次</p>
+</li>
+<li><p>懒加载时要监听计算滚动条的位置，但不必每次滑动都触发，可以降低计算的频率，而不必去浪费cpu资源。</p>
+</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>防抖：如果事件被频繁触发，防抖能保证只有最有一次触发生效！前面 N 多次的触发都会被忽略！</li>
+<li>节流：如果事件被频繁触发，节流能够减少事件触发的频率，因此，节流是有选择性地执行一部分事件！</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前后端交互</category>
+      </categories>
+      <tags>
+        <tag>跨域与JSONP</tag>
       </tags>
   </entry>
   <entry>
