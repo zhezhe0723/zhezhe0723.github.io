@@ -4,11 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Github的使用, 可可托海">
-    <meta name="description" content="开源项目托管平台专门用于免费存放开源项目源代码的网站，叫做开源项目托管平台。目前世界上比较出名的开源项目托管平台主要有以下 3 个：
+    <meta name="keywords" content="vue-组件间传值, 可可托海">
+    <meta name="description" content="vue 组件间传值一、父组件向子组件传值–详细讲解（自定义属性）
+首先子组件顾名思义就是在一个组件中利用 **components:**包含 Vue 实例可用组件的哈希表,简而言之就是用来注册组件的，一个组件能够生效，必须通过一下步骤：
 
-Github（全球最牛的开源项目托管平台，没有之一）
-Gitlab（对代码私有性支持较好，因此企业用户较">
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -31,7 +31,7 @@ Gitlab（对代码私有性支持较好，因此企业用户较">
     </style>
 
 
-    <title>Github的使用 | 可可托海</title>
+    <title>vue-组件间传值 | 可可托海</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -468,12 +468,12 @@ Gitlab（对代码私有性支持较好，因此企业用户较">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Github的使用</h1>
+                    <h1 class="description center-align post-title">vue-组件间传值</h1>
                 </div>
             </div>
         </div>
@@ -589,8 +589,8 @@ Gitlab（对代码私有性支持较好，因此企业用户较">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Github/">
-                                <span class="chip bg-color">Github</span>
+                            <a href="/tags/vue/">
+                                <span class="chip bg-color">vue</span>
                             </a>
                         
                     </div>
@@ -601,8 +601,8 @@ Gitlab（对代码私有性支持较好，因此企业用户较">
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%B7%A5%E5%85%B7/" class="post-category">
-                                工具
+                            <a href="/categories/%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/" class="post-category">
+                                组件传值
                             </a>
                         
                     </div>
@@ -614,7 +614,7 @@ Gitlab（对代码私有性支持较好，因此企业用户较">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-03-01
+                    2022-10-31
                 </div>
                 
 
@@ -638,108 +638,78 @@ Gitlab（对代码私有性支持较好，因此企业用户较">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="开源项目托管平台"><a href="#开源项目托管平台" class="headerlink" title="开源项目托管平台"></a>开源项目托管平台</h1><p>专门用于免费存放开源项目源代码的网站，叫做开源项目托管平台。目前世界上比较出名的开源项目托管平台<br>主要有以下 3 个：</p>
-<ul>
-<li>Github（全球最牛的开源项目托管平台，没有之一）</li>
-<li>Gitlab（对代码私有性支持较好，因此企业用户较多）</li>
-<li>Gitee（又叫做码云，是国产的开源项目托管平台。访问速度快、纯中文界面、使用友好）<span id="more"></span></li>
-</ul>
-<h1 id="Github的使用"><a href="#Github的使用" class="headerlink" title="Github的使用"></a>Github的使用</h1><h2 id="注册Github账号"><a href="#注册Github账号" class="headerlink" title="注册Github账号"></a>注册Github账号</h2><p>① 访问 Github 的官网首页 <a target="_blank" rel="noopener" href="https://github.com/">https://github.com/</a><br>② 点击“Sign up”按钮跳转到注册页面<br>③ 填写可用的用户名、邮箱、密码<br>④ 通过点击箭头的形式，将验证图片摆正<br>⑤ 点击“Create account”按钮注册新用户<br>⑥ 登录到第三步填写的邮箱中，点击激活链接，完成注册</p>
-<h2 id="远程仓库的使用"><a href="#远程仓库的使用" class="headerlink" title="远程仓库的使用"></a>远程仓库的使用</h2><h3 id="远程仓库的两种访问方式"><a href="#远程仓库的两种访问方式" class="headerlink" title="远程仓库的两种访问方式"></a>远程仓库的两种访问方式</h3><p>Github 上的远程仓库，有两种访问方式，分别是 HTTPS 和 SSH。它们的区别是：<br>① HTTPS：零配置；但是每次访问仓库时，需要重复输入 Github 的账号和密码才能访问成功<br>② SSH：需要进行额外的配置；但是配置成功后，每次访问仓库时，不需重复输入 Github 的账号和密码<br>注意：在实际开发中，推荐使用 SSH 的方式访问远程仓库</p>
-<h3 id="基于HTTPS将本地仓库上传到Github"><a href="#基于HTTPS将本地仓库上传到Github" class="headerlink" title="基于HTTPS将本地仓库上传到Github"></a>基于HTTPS将本地仓库上传到Github</h3><p>第一种情况：本地没有现成的Git仓库</p>
+                <h3 id="vue-组件间传值"><a href="#vue-组件间传值" class="headerlink" title="vue 组件间传值"></a>vue 组件间传值</h3><p>一、父组件向子组件传值–详细讲解（自定义属性）</p>
+<p>首先子组件顾名思义就是在一个组件中利用 **components:**包含 Vue 实例可用组件的哈希表,简而言之就是用来注册组件的，一个组件能够生效，必须通过一下步骤：</p>
 <ol>
-<li>使用终端命令创建README.md文档，并写入初始内容为project_02<pre class="line-numbers language-none"><code class="language-none">echo &quot;# project_02&quot; &gt;&gt; README.md<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>初始化本地Git仓库，并将文件的修改提交到本地的Git仓库中<pre class="line-numbers language-none"><code class="language-none">git init 
-git add README.md
-git commit -m &quot;第一次提交&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
-<li>将本地仓库和远程仓库进行关联，并把远程仓库命名为origin<pre class="line-numbers language-none"><code class="language-none">git remote add origin https:&#x2F;&#x2F;github.com&#x2F;用户名&#x2F;project_02.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>将本地仓库中的内容推送到远程的origin 仓库中<pre class="line-numbers language-none"><code class="language-none">git push -u origin master&#96;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-第二种情况：本地有现成的Git仓库</li>
-<li>将本地仓库和远程仓库进行关联，并把远程仓库命名为origin<pre class="line-numbers language-none"><code class="language-none">git remote add origin https:&#x2F;&#x2F;github.com&#x2F;用户名&#x2F;project_02.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>将本地仓库中的内容推送到远程的origin 仓库中<pre class="line-numbers language-none"><code class="language-none">git push -u origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-(只有第一次推送内容需要-u origin master，往后都不用了)<h2 id="SSH-key"><a href="#SSH-key" class="headerlink" title="SSH key"></a>SSH key</h2></li>
+<li>使用 <strong>import</strong>  引入组件    <code>import myForm from &#39;@/pages/my-form&#39;</code></li>
+<li>用 <strong>components</strong>  来注册这个组件  <code> components:&#123;myForm&#125;</code></li>
+<li>在<strong>template</strong> 中使用这个组件  <code> &lt;my-form&gt;&lt;/my-form&gt;</code></li>
 </ol>
-<p><strong>SSH key介绍</strong><br>SSH key 的作用：实现本地仓库和 Github 之间免登录的加密数据传输。<br>SSH key 的好处：免登录身份认证、数据加密传输。<br>SSH key 由两部分组成，分别是：<br>① id_rsa（私钥文件，存放于客户端的电脑中即可）<br>② id_rsa.pub（公钥文件，需要配置到 Github 中）<br><strong>生成SSH key</strong></p>
-<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#121;&#111;&#x75;&#x72;&#x5f;&#101;&#x6d;&#97;&#x69;&#x6c;&#x40;&#101;&#x78;&#x61;&#109;&#112;&#x6c;&#x65;&#x2e;&#x63;&#111;&#x6d;">&#121;&#111;&#x75;&#x72;&#x5f;&#101;&#x6d;&#97;&#x69;&#x6c;&#x40;&#101;&#x78;&#x61;&#109;&#112;&#x6c;&#x65;&#x2e;&#x63;&#111;&#x6d;</a> 替换为注册 Github 账号时填写的邮箱：</p>
-<pre class="line-numbers language-none"><code class="language-none">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>③ 连续敲击 3 次回车，即可在 C:\Users\用户名文件夹.ssh 目录中生成 id_rsa 和 id_rsa.pub 两个文件</p>
-<p><strong>配置SSH key</strong><br>① 使用记事本打开 id_rsa.pub 文件，复制里面的文本内容<br>② 在浏览器中登录 Github，点击头像 -&gt; Settings -&gt; SSH and GPG Keys -&gt; New SSH key<br>③ 将 id_rsa.pub 文件中的内容，粘贴到 Key 对应的文本框中<br>④ 在 Title 文本框中任意填写一个名称，来标识这个 Key 从何而来</p>
-<p><strong>检测SSH key</strong>　</p>
-<p>打开 Git Bash，输入如下的命令并回车执行：</p>
-<pre><code>   git -T git@github.com
-　
-</code></pre>
-<p>出现用户名证明已经配置成功</p>
-<h3 id="基于SSH将本地仓库上传到Github"><a href="#基于SSH将本地仓库上传到Github" class="headerlink" title="基于SSH将本地仓库上传到Github"></a>基于SSH将本地仓库上传到Github</h3><p>将本地仓库和远程仓库进行关联，并把远程仓库命名为origin</p>
-<pre class="line-numbers language-none"><code class="language-none">git remote add origin git@github.com:用户名&#x2F;project_02.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>将本地仓库中的内容推送到远程的origin 仓库中</p>
-<pre class="line-numbers language-none"><code class="language-none">git push -u origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>下面如何通过自定义属性的方式，把父组件中的值传给子组件？</p>
+<p>需求：把父组件中的<strong>title</strong>  传给子组件</p>
+<ol>
+<li><p>在父组件中的<strong>data</strong>  中定义 </p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">exprot <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">data</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+     <span class="token keyword">return</span><span class="token punctuation">&#123;</span>
+       <span class="token literal-property property">title</span><span class="token operator">:</span><span class="token string">'组件传值'</span>
+     <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>在子组件上通过自定义属性的方式把<strong>title</strong>值绑定到子组件上</p>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>my-form</span>  <span class="token attr-name">:title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>title<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>my-form</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>这时候，<strong>title</strong>值已经传给子组件了，现在需要子组件通过 <strong>props</strong>  属性  来接收 <strong>title</strong>  值</p>
+<pre class="line-numbers language-none"><code class="language-none">exprot default &#123;
+  props:[&quot;title&quot;]
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>这个时候就可以直接把 <strong>title</strong>值拿来用了,这里使用模板字符串来展示</p>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>view</span><span class="token punctuation">></span></span>&#123;&#123;title&#125;&#125;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>view</span><span class="token punctuation">></span></span>  //页面上会显示   组件传值<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ol>
+<p>二、子组件向父组件传值–详细讲解  （自定义事件）</p>
+<p><strong>首先还是需要把子组件引入父组件中，方法同上！！！</strong></p>
+<p>需求：把子组件中的值传给父组件</p>
+<ol>
+<li><p>在子组件中使用 <strong>this.$emit(‘事件’，值)</strong>  ，事件：就是在父组件中使用的函数，值：就是子组件向父组件传递的参数</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">exprot <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  <span class="token function">data</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+     <span class="token keyword">return</span><span class="token punctuation">&#123;</span>
+       <span class="token literal-property property">title</span><span class="token operator">:</span><span class="token string">'子传父'</span>
+     <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">eventEmit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">methods</span><span class="token operator">:</span><span class="token punctuation">&#123;</span>
+    <span class="token function">eventEmit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$emit</span><span class="token punctuation">(</span><span class="token string">'addCount'</span><span class="token punctuation">,</span>title<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>在父组件中子组件引用出使用 <code>@addCount=&quot;add&quot;</code>     注意：<strong>addCount</strong>  必须和子组件中定义的一样，<strong>add</strong>可以一样也可以不一样，看个人习惯， </p>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>my-form</span>  <span class="token attr-name">:title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>title<span class="token punctuation">"</span></span> <span class="token attr-name">@addCount</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>add<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>my-form</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>最后就是把这个方法写到方法体内，</p>
+<pre class="line-numbers language-none"><code class="language-none">exprot default &#123;
+  data ()&#123;
+     return&#123;
+     &#125;
+  &#125;,
+  methods:&#123;
+    add(value)&#123;
+      console.log(value)  &#x2F;&#x2F;&#x3D;&gt; 子传父
+    &#125;
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+<blockquote>
+<p>以上两种方法是基本的组件间传值的方法，组件间传值还有多种方法，还在学习中！！！</p>
+</blockquote>
 
-<p> 将远程仓库克隆到本地</p>
-<pre class="line-numbers language-none"><code class="language-none">git clone 远程仓库的地址<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h1 id="Git分支"><a href="#Git分支" class="headerlink" title="Git分支"></a>Git分支</h1><p>——在进行多人协作开发的时候，为了防止互相干扰，提高协同开发的体验，建议每个开发者都基于分支进行项目功能的开发</p>
-<h2 id="本地分支操作"><a href="#本地分支操作" class="headerlink" title="本地分支操作"></a>本地分支操作</h2><p><strong>查看分支列表</strong>使用如下的命令，可以查看当前 Git 仓库中所有的分支列表：</p>
-<pre class="line-numbers language-none"><code class="language-none">git branch &#x2F;&#x2F;分支名字前面的 * 号表示当前所处的分支。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><strong>创建分支列表</strong>使用如下的命令，可以基于当前分支，创建一个新的分支，此时，新分支中的代码和当前分支完全一样：</p>
-<pre class="line-numbers language-none"><code class="language-none">git branch 分支名称<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><strong>切换分支</strong>使用如下的命令，可以切换到指定的分支上进行开发</p>
-<pre class="line-numbers language-none"><code class="language-none">git checkout login<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><strong>分支的快速创建和切换</strong>使用如下的命令，可以创建指定名称的新分支，并立即切换到新分支上：</p>
-<pre class="line-numbers language-none"><code class="language-none">git checkout -b 分支名称
-&#x2F;&#x2F;-b 表示创建一个新分支
-&#x2F;&#x2F;checkout 表示切换到刚才创建的新分支上<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>合并分支</strong>功能分支的代码开发测试完毕之后，可以使用如下的命令，将完成后的代码合并到 master 主分支上：</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;首先切换到master分支
- git checkout master
-&#x2F;&#x2F; 在master分支上运行如下命令
- git merge login<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>删除分支</strong>当把功能分支的代码合并到 master 主分支上以后，就可以使用如下的命令，删除对应的功能分支：</p>
-<pre class="line-numbers language-none"><code class="language-none">git branch -d 分支名称<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><strong>遇到冲突时的分支合并</strong>如果在两个不同的分支中，对同一个文件进行了不同的修改，Git 就没法干净的合并它们。 此时，我们需要打开这些包含冲突的文件然后手动解决冲突，再提交文件就可以了</p>
-<h2 id="远程分支操作"><a href="#远程分支操作" class="headerlink" title="远程分支操作"></a>远程分支操作</h2><p><strong>将本地分支推送到远程仓库</strong> 如果是第一次将本地分支推送到远程仓库，需要运行如下的命令：(第一次推送分支需要带 -u 参数，此后可以直接使用 git push 推送代码到远程分支。)</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;-U表示把本地分支和远程分支进行关联，只在第一次推送的时候需要带-u参数
-  git push -u远程仓库的别名本地分支名称:远程分支名称
-&#x2F;&#x2F;实际案例:
-  git push -U origin payment :pay
-&#x2F;&#x2F;如果希望远程分支的名称和本地分支名称保持一致，可以对命令进行简化:
-   git push -U origin payment<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>查看远程仓库中所有的分支列表</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">git remote show 远程仓库名称<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><strong>跟踪分支</strong>  跟踪分支指的是：从远程仓库中，把远程分支下载到本地仓库中</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;从远程仓库中，把对应的远程分支下载到本地仓库，保持本地分支和远程分支名称相同
-  git checkout 远程分支的名称
-&#x2F;&#x2F;示例:
-  git checkout pay
-&#x2F;&#x2F;从远程仓库中，把对应的远程分支下载到本地仓库，并把下载的本地分支进行重命名
-  git checkout -b本地分支名称远程仓库名称&#x2F;远程分支名称
-&#x2F;&#x2F;示例:
-  git checkout -b payment origin&#x2F;pay<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>拉取远程分支的最新的代码</strong>可以使用如下的命令，把远程分支最新的代码下载到本地对应的分支中</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;从远程仓库，拉取当前分支最新的代码，保持当前分支的代码和远程分支代码一致
-   git pull<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><strong>删除远程分支</strong>  删除远程仓库中指定的分支</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;删除远程仓库中，指定名称的远程分支
-  git push 远程仓库名称--delete 远程分支名称
-&#x2F;&#x2F;示例:
-  git push origin--delete pay   <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h1 id="Github的搜索说明"><a href="#Github的搜索说明" class="headerlink" title="Github的搜索说明"></a>Github的搜索说明</h1><pre class="line-numbers language-none"><code class="language-none">in:name xxx  名称条件
-in:name xxx xxx 多个名称条件
-stars:&gt;xxx 点赞大于xxx的条件
-in:readme xxx 搜索readme里的内容
-fork:&gt;xxx， 按照项目fork数量，大于xxx的
-size:&gt;&#x3D;xxx,  项目大小，单位是kb
-pushed:&gt;2022-01-01, 按照最后更新的时间
-language:xxx  项目使用的开发语言
-user:xxx,   按作者名字进行搜索
-in:description xxx   按照项目描述description 搜索  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -765,7 +735,7 @@ in:description xxx   按照项目描述description 搜索  <span aria-hidden="tr
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://zhezhe0723.github.io/2022/03/01/github-de-shi-yong/">http://zhezhe0723.github.io/2022/03/01/github-de-shi-yong/</a>
+                    <a href="http://zhezhe0723.github.io/2022/10/31/vue-zu-jian-jian-chuan-zhi/">http://zhezhe0723.github.io/2022/10/31/vue-zu-jian-jian-chuan-zhi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -803,8 +773,8 @@ in:description xxx   按照项目描述description 搜索  <span aria-hidden="tr
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Github/">
-                                    <span class="chip bg-color">Github</span>
+                                <a href="/tags/vue/">
+                                    <span class="chip bg-color">vue</span>
                                 </a>
                             
                         </div>
@@ -978,46 +948,48 @@ in:description xxx   按照项目描述description 搜索  <span aria-hidden="tr
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/03/04/nodejs-ji-chu/">
+                <a href="/2022/10/31/vue-zu-jian-jian-chuan-zhi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="NodeJs基础">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="vue-组件间传值">
                         
-                        <span class="card-title">NodeJs基础</span>
+                        <span class="card-title">vue-组件间传值</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            初始Node.js什么是Node.jsNode.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js 的官网地址： https://nodejs.org/zh-cn/
+                            
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-03-04
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-10-31
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92/" class="post-category">
-                                    前后端交互
+                            <a href="/categories/%E7%BB%84%E4%BB%B6%E4%BC%A0%E5%80%BC/" class="post-category">
+                                    组件传值
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Node/">
-                        <span class="chip bg-color">Node</span>
+                    <a href="/tags/vue/">
+                        <span class="chip bg-color">vue</span>
                     </a>
                     
                 </div>
@@ -1031,31 +1003,31 @@ in:description xxx   按照项目描述description 搜索  <span aria-hidden="tr
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/03/01/git-ji-chu/">
+                <a href="/2022/09/07/js-zhong-guo-biao-zhun-shi-jian-zhuan-hua-wei-nian-yue-ri-shi-fen-miao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="git基础">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="js-封装常用的方法">
                         
-                        <span class="card-title">git基础</span>
+                        <span class="card-title">js-封装常用的方法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            版本控制软件git 提交代码到同一分支时冲突的解决​      我们在同一分支上开发代码时，代码冲突是不可避免的。下面通过我今天提交项目就遇到了这个问题，问题就是:同事和我两个人在同一个分支上开发代码，今天他提交之后，我在去用git pus
+                            
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-03-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-07
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%B7%A5%E5%85%B7/" class="post-category">
-                                    工具
+                            <a href="/categories/js%E6%96%B9%E6%B3%95/" class="post-category">
+                                    js方法
                                 </a>
                             
                             
@@ -1065,8 +1037,8 @@ in:description xxx   按照项目描述description 搜索  <span aria-hidden="tr
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">
-                        <span class="chip bg-color">Git版本控制</span>
+                    <a href="/tags/js/">
+                        <span class="chip bg-color">js</span>
                     </a>
                     
                 </div>

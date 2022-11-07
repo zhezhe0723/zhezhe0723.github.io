@@ -6,11 +6,11 @@
     <meta charset="utf-8">
     <meta name="keywords" content="Array的常见用法, 可可托海">
     <meta name="description" content="JS 中截取数组的方法
-splice()方法
+[TOC]
 
-​         splice()方法通过删除或者替换现有元素或者原地添加新的元素来修改数组，并以数组的形式返回被修改的内容。这个方法会改变原数组。
+1. splice()方法​         splice()方法通过删除或者替换现有元素或者原地添加新的元素来修改数组，并以数组的形式返回被修改的内容。这个方法会改变原数组。
 ​      –语法–
-array.sp">
+">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -640,10 +640,10 @@ array.sp">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="JS-中截取数组的方法"><a href="#JS-中截取数组的方法" class="headerlink" title="JS 中截取数组的方法"></a>JS 中截取数组的方法</h3><ol>
-<li><strong>splice()方法</strong></li>
-</ol>
-<p>​         splice()方法通过删除或者替换现有元素或者原地添加新的元素来修改数组，并以数组的形式返回被修改的内容。这个方法会改变原数组。</p>
+                <h3 id="JS-中截取数组的方法"><a href="#JS-中截取数组的方法" class="headerlink" title="JS 中截取数组的方法"></a>JS 中截取数组的方法</h3><blockquote>
+<p>[TOC]</p>
+</blockquote>
+<h4 id="1-splice-方法"><a href="#1-splice-方法" class="headerlink" title="1. splice()方法"></a>1. <strong>splice()方法</strong></h4><p>​         splice()方法通过删除或者替换现有元素或者原地添加新的元素来修改数组，并以数组的形式返回被修改的内容。这个方法会改变原数组。</p>
 <p>​      <strong>–语法–</strong></p>
 <pre class="line-numbers language-js" data-language="js"><code class="language-js">array<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span>start<span class="token punctuation">[</span><span class="token punctuation">,</span>deleteCount<span class="token punctuation">[</span><span class="token punctuation">,</span>item1<span class="token punctuation">[</span><span class="token punctuation">,</span>item2<span class="token punctuation">[</span><span class="token punctuation">,</span><span class="token operator">...</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 <span class="token comment">//start :指定修改的开始位置（从0开始计数），如果超出了数组的长度，则从数组末尾开始添加内容；如果是负值，则表示从数组末位（从后往前数）开始的第n 位；如果负数的绝对值大于数组的长度，则表示开始的位置为第0位。</span>
@@ -669,6 +669,46 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token keyword">var</span> arr1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>  <span class="token comment">//从索引 1 的位置开始删除所有元素</span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>  <span class="token comment">//原数组：arr["a"]   </span>
 console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span> <span class="token comment">//返回值 --被删除的元素 arr1 ["b", "c", "d", "e"]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-filter-方法"><a href="#2-filter-方法" class="headerlink" title="2. filter() 方法"></a>2. filter() 方法</h4><p><strong>–语法–</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">filter() 方法会创建一个新数组，其中包含所有通过回调函数测试的元素。filter 为数组中的每个元素调用一次 callback 函数， callback 函数返回 true 表示该元素通过测试，保留该元素，false 则不保留。filter 不会改变原数组，它返回过滤后的新数组。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>–案例–</strong></p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> animals <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Fluffykins"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"rabbit"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Caro"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span><span class="token string">"dog"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Hamilton"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"dog"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Harold"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"fish"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Ursula"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"cat"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Jimmy"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"fish"</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> dogs <span class="token operator">=</span> animals<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">x</span> <span class="token operator">=></span> x<span class="token punctuation">.</span>species <span class="token operator">===</span> <span class="token string">"dog"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> dogs <span class="token operator">=</span> animals<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> item<span class="token punctuation">.</span>species <span class="token operator">===</span> <span class="token string">"dog"</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>dogs<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token comment">// &#123;name: "Caro", species: "dog"&#125;</span>
+<span class="token comment">// &#123; name: "Hamilton", species: "dog" &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="3-map-方法"><a href="#3-map-方法" class="headerlink" title="3. map()方法"></a>3. map()方法</h4><p><strong>–语法–</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">map() 方法创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果。map 不会改变原数组。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>–案例–</strong></p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> animals <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Fluffykins"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"rabbit"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Caro"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span><span class="token string">"dog"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Hamilton"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"dog"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Harold"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"fish"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Ursula"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"cat"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Jimmy"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"fish"</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> names <span class="token operator">=</span> animals<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">x</span><span class="token operator">=></span>x<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> names <span class="token operator">=</span> animals<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> item<span class="token punctuation">.</span>name
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>names<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token comment">//["Fluffykins", "Caro", "Hamilton", "Harold", "Ursula", "Jimmy"]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
                 
