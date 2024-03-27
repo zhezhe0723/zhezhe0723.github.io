@@ -1,6 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Array的常见用法</title>
+    <url>/2022/08/17/array-de-chang-jian-yong-fa/</url>
+    <content><![CDATA[<h3 id="JS-中截取数组的方法"><a href="#JS-中截取数组的方法" class="headerlink" title="JS 中截取数组的方法"></a>JS 中截取数组的方法</h3><blockquote>
+<p>[TOC]</p>
+</blockquote>
+<h4 id="1-splice-方法"><a href="#1-splice-方法" class="headerlink" title="1. splice()方法"></a>1. <strong>splice()方法</strong></h4><p>​         splice()方法通过删除或者替换现有元素或者原地添加新的元素来修改数组，并以数组的形式返回被修改的内容。这个方法会改变原数组。</p>
+<p>​      <strong>–语法–</strong></p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">array<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span>start<span class="token punctuation">[</span><span class="token punctuation">,</span>deleteCount<span class="token punctuation">[</span><span class="token punctuation">,</span>item1<span class="token punctuation">[</span><span class="token punctuation">,</span>item2<span class="token punctuation">[</span><span class="token punctuation">,</span><span class="token operator">...</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment">//start :指定修改的开始位置（从0开始计数），如果超出了数组的长度，则从数组末尾开始添加内容；如果是负值，则表示从数组末位（从后往前数）开始的第n 位；如果负数的绝对值大于数组的长度，则表示开始的位置为第0位。</span>
+<span class="token comment">//deleteCount(可选) :整数，表示要删除的数组元素的个数。如果deleteCount大于start之后的元素的总数，则从start后面的元素都将被删除（包含第start位）；如果 deleteCount 是 0 或者负数，则不移除元素。这种情况下，至少应添加一个新元素。</span>
+<span class="token comment">// item1,item2(可选) :要添加进数组的元素，从start 位置开始。如果不指定，则 splice() 将只删除数组元素。</span>
+<span class="token comment">// 返回值 由被删除的元素组成的一个数组。如果只删除了一个元素，则返回只包含一个元素的数组。如果没有删除元素，则返回空数组。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>​     <strong>–案例–</strong></p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token string">"d"</span><span class="token punctuation">,</span><span class="token string">"e"</span><span class="token punctuation">]</span>
+<span class="token keyword">var</span> arr1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">"f"</span><span class="token punctuation">)</span> 
+<span class="token comment">// 3 表示从索引为3的位置开始删除，</span>
+<span class="token comment">// 1 删除元素的个数</span>
+<span class="token comment">// 最后面是表示向原数组中添加元素，位置就是前面两个数字所定义的位置添加数据</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span> <span class="token comment">//原数组：arr["a", "b", "c", "f", "e"]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span>  <span class="token comment">// 返回值 --被删除的元素 arr1 ["d"]</span>
+
+<span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token string">"d"</span><span class="token punctuation">,</span><span class="token string">"e"</span><span class="token punctuation">]</span>
+<span class="token keyword">var</span> arr1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>  
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>  <span class="token comment">//原数组：arr ["a", "b", "e"]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span> <span class="token comment">// 返回值 --被删除的元素 arr1 ["c", "d"]</span>
+
+<span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token string">"d"</span><span class="token punctuation">,</span><span class="token string">"e"</span><span class="token punctuation">]</span>
+<span class="token keyword">var</span> arr1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>  <span class="token comment">//从索引 1 的位置开始删除所有元素</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>  <span class="token comment">//原数组：arr["a"]   </span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span> <span class="token comment">//返回值 --被删除的元素 arr1 ["b", "c", "d", "e"]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-filter-方法"><a href="#2-filter-方法" class="headerlink" title="2. filter() 方法"></a>2. filter() 方法</h4><p><strong>–语法–</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">filter() 方法会创建一个新数组，其中包含所有通过回调函数测试的元素。filter 为数组中的每个元素调用一次 callback 函数， callback 函数返回 true 表示该元素通过测试，保留该元素，false 则不保留。filter 不会改变原数组，它返回过滤后的新数组。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>–案例–</strong></p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> animals <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Fluffykins"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"rabbit"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Caro"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span><span class="token string">"dog"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Hamilton"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"dog"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Harold"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"fish"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Ursula"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"cat"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Jimmy"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"fish"</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> dogs <span class="token operator">=</span> animals<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">x</span> <span class="token operator">=></span> x<span class="token punctuation">.</span>species <span class="token operator">===</span> <span class="token string">"dog"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> dogs <span class="token operator">=</span> animals<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> item<span class="token punctuation">.</span>species <span class="token operator">===</span> <span class="token string">"dog"</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>dogs<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token comment">// &#123;name: "Caro", species: "dog"&#125;</span>
+<span class="token comment">// &#123; name: "Hamilton", species: "dog" &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="3-map-方法"><a href="#3-map-方法" class="headerlink" title="3. map()方法"></a>3. map()方法</h4><p><strong>–语法–</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">map() 方法创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果。map 不会改变原数组。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>–案例–</strong></p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> animals <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Fluffykins"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"rabbit"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Caro"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span><span class="token string">"dog"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Hamilton"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"dog"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Harold"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"fish"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Ursula"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"cat"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Jimmy"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"fish"</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> names <span class="token operator">=</span> animals<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">x</span><span class="token operator">=></span>x<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> names <span class="token operator">=</span> animals<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> item<span class="token punctuation">.</span>name
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>names<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token comment">//["Fluffykins", "Caro", "Hamilton", "Harold", "Ursula", "Jimmy"]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+]]></content>
+      <categories>
+        <category>Array</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Express</title>
     <url>/2022/03/16/express/</url>
     <content><![CDATA[<h2 id="Express简介"><a href="#Express简介" class="headerlink" title="Express简介"></a>Express简介</h2><h3 id="什么是Express"><a href="#什么是Express" class="headerlink" title="什么是Express"></a>什么是Express</h3><p>官方给出的概念：Express 是基于 Node.js 平台，快速、开放、极简的 Web 开发框架。<br>通俗的理解：Express 的作用和 Node.js 内置的 http 模块类似，是专门用来创建 Web 服务器的。<br>Express 的本质：就是一个 npm 上的第三方包，提供了快速创建 Web 服务器的便捷方法。<br>Express 的中文官网：<a href="http://www.expressjs.com.cn/">http://www.expressjs.com.cn/</a> </p>
@@ -109,87 +190,6 @@ module.exports &#x3D; router<span aria-hidden="true" class="line-numbers-rows"><
       </categories>
       <tags>
         <tag>Express</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Array的常见用法</title>
-    <url>/2022/08/17/array-de-chang-jian-yong-fa/</url>
-    <content><![CDATA[<h3 id="JS-中截取数组的方法"><a href="#JS-中截取数组的方法" class="headerlink" title="JS 中截取数组的方法"></a>JS 中截取数组的方法</h3><blockquote>
-<p>[TOC]</p>
-</blockquote>
-<h4 id="1-splice-方法"><a href="#1-splice-方法" class="headerlink" title="1. splice()方法"></a>1. <strong>splice()方法</strong></h4><p>​         splice()方法通过删除或者替换现有元素或者原地添加新的元素来修改数组，并以数组的形式返回被修改的内容。这个方法会改变原数组。</p>
-<p>​      <strong>–语法–</strong></p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">array<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span>start<span class="token punctuation">[</span><span class="token punctuation">,</span>deleteCount<span class="token punctuation">[</span><span class="token punctuation">,</span>item1<span class="token punctuation">[</span><span class="token punctuation">,</span>item2<span class="token punctuation">[</span><span class="token punctuation">,</span><span class="token operator">...</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token comment">//start :指定修改的开始位置（从0开始计数），如果超出了数组的长度，则从数组末尾开始添加内容；如果是负值，则表示从数组末位（从后往前数）开始的第n 位；如果负数的绝对值大于数组的长度，则表示开始的位置为第0位。</span>
-<span class="token comment">//deleteCount(可选) :整数，表示要删除的数组元素的个数。如果deleteCount大于start之后的元素的总数，则从start后面的元素都将被删除（包含第start位）；如果 deleteCount 是 0 或者负数，则不移除元素。这种情况下，至少应添加一个新元素。</span>
-<span class="token comment">// item1,item2(可选) :要添加进数组的元素，从start 位置开始。如果不指定，则 splice() 将只删除数组元素。</span>
-<span class="token comment">// 返回值 由被删除的元素组成的一个数组。如果只删除了一个元素，则返回只包含一个元素的数组。如果没有删除元素，则返回空数组。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>​     <strong>–案例–</strong></p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token string">"d"</span><span class="token punctuation">,</span><span class="token string">"e"</span><span class="token punctuation">]</span>
-<span class="token keyword">var</span> arr1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">"f"</span><span class="token punctuation">)</span> 
-<span class="token comment">// 3 表示从索引为3的位置开始删除，</span>
-<span class="token comment">// 1 删除元素的个数</span>
-<span class="token comment">// 最后面是表示向原数组中添加元素，位置就是前面两个数字所定义的位置添加数据</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span> <span class="token comment">//原数组：arr["a", "b", "c", "f", "e"]</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span>  <span class="token comment">// 返回值 --被删除的元素 arr1 ["d"]</span>
-
-<span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token string">"d"</span><span class="token punctuation">,</span><span class="token string">"e"</span><span class="token punctuation">]</span>
-<span class="token keyword">var</span> arr1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>  
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>  <span class="token comment">//原数组：arr ["a", "b", "e"]</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span> <span class="token comment">// 返回值 --被删除的元素 arr1 ["c", "d"]</span>
-
-<span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token string">"d"</span><span class="token punctuation">,</span><span class="token string">"e"</span><span class="token punctuation">]</span>
-<span class="token keyword">var</span> arr1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>  <span class="token comment">//从索引 1 的位置开始删除所有元素</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>  <span class="token comment">//原数组：arr["a"]   </span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span> <span class="token comment">//返回值 --被删除的元素 arr1 ["b", "c", "d", "e"]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="2-filter-方法"><a href="#2-filter-方法" class="headerlink" title="2. filter() 方法"></a>2. filter() 方法</h4><p><strong>–语法–</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">filter() 方法会创建一个新数组，其中包含所有通过回调函数测试的元素。filter 为数组中的每个元素调用一次 callback 函数， callback 函数返回 true 表示该元素通过测试，保留该元素，false 则不保留。filter 不会改变原数组，它返回过滤后的新数组。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><strong>–案例–</strong></p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> animals <span class="token operator">=</span> <span class="token punctuation">[</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Fluffykins"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"rabbit"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Caro"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span><span class="token string">"dog"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Hamilton"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"dog"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Harold"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"fish"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Ursula"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"cat"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Jimmy"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"fish"</span> <span class="token punctuation">&#125;</span>
-<span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> dogs <span class="token operator">=</span> animals<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">x</span> <span class="token operator">=></span> x<span class="token punctuation">.</span>species <span class="token operator">===</span> <span class="token string">"dog"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> dogs <span class="token operator">=</span> animals<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> item<span class="token punctuation">.</span>species <span class="token operator">===</span> <span class="token string">"dog"</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>dogs<span class="token punctuation">)</span><span class="token punctuation">;</span> 
-<span class="token comment">// &#123;name: "Caro", species: "dog"&#125;</span>
-<span class="token comment">// &#123; name: "Hamilton", species: "dog" &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="3-map-方法"><a href="#3-map-方法" class="headerlink" title="3. map()方法"></a>3. map()方法</h4><p><strong>–语法–</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">map() 方法创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果。map 不会改变原数组。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><strong>–案例–</strong></p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> animals <span class="token operator">=</span> <span class="token punctuation">[</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Fluffykins"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"rabbit"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Caro"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span><span class="token string">"dog"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Hamilton"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"dog"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Harold"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"fish"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Ursula"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"cat"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Jimmy"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"fish"</span> <span class="token punctuation">&#125;</span>
-<span class="token punctuation">]</span><span class="token punctuation">;</span>
-
-<span class="token keyword">var</span> names <span class="token operator">=</span> animals<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">x</span><span class="token operator">=></span>x<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> names <span class="token operator">=</span> animals<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> item<span class="token punctuation">.</span>name
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>names<span class="token punctuation">)</span><span class="token punctuation">;</span> 
-<span class="token comment">//["Fluffykins", "Caro", "Hamilton", "Harold", "Ursula", "Jimmy"]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-]]></content>
-      <categories>
-        <category>Array</category>
-      </categories>
-      <tags>
-        <tag>JS</tag>
       </tags>
   </entry>
   <entry>
@@ -346,7 +346,7 @@ git commit -m &quot;第一次提交&quot;<span aria-hidden="true" class="line-nu
 (只有第一次推送内容需要-u origin master，往后都不用了)<h2 id="SSH-key"><a href="#SSH-key" class="headerlink" title="SSH key"></a>SSH key</h2></li>
 </ol>
 <p><strong>SSH key介绍</strong><br>SSH key 的作用：实现本地仓库和 Github 之间免登录的加密数据传输。<br>SSH key 的好处：免登录身份认证、数据加密传输。<br>SSH key 由两部分组成，分别是：<br>① id_rsa（私钥文件，存放于客户端的电脑中即可）<br>② id_rsa.pub（公钥文件，需要配置到 Github 中）<br><strong>生成SSH key</strong></p>
-<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#x79;&#111;&#x75;&#114;&#95;&#101;&#109;&#x61;&#x69;&#108;&#64;&#101;&#120;&#97;&#109;&#112;&#108;&#101;&#x2e;&#99;&#111;&#x6d;">&#x79;&#111;&#x75;&#114;&#95;&#101;&#109;&#x61;&#x69;&#108;&#64;&#101;&#120;&#97;&#109;&#112;&#108;&#101;&#x2e;&#99;&#111;&#x6d;</a> 替换为注册 Github 账号时填写的邮箱：</p>
+<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#x79;&#x6f;&#x75;&#114;&#95;&#x65;&#x6d;&#x61;&#x69;&#x6c;&#x40;&#x65;&#120;&#x61;&#x6d;&#x70;&#x6c;&#101;&#46;&#99;&#111;&#109;">&#x79;&#x6f;&#x75;&#114;&#95;&#x65;&#x6d;&#x61;&#x69;&#x6c;&#x40;&#x65;&#120;&#x61;&#x6d;&#x70;&#x6c;&#101;&#46;&#99;&#111;&#109;</a> 替换为注册 Github 账号时填写的邮箱：</p>
 <pre class="line-numbers language-none"><code class="language-none">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>③ 连续敲击 3 次回车，即可在 C:\Users\用户名文件夹.ssh 目录中生成 id_rsa 和 id_rsa.pub 两个文件</p>
 <p><strong>配置SSH key</strong><br>① 使用记事本打开 id_rsa.pub 文件，复制里面的文本内容<br>② 在浏览器中登录 Github，点击头像 -&gt; Settings -&gt; SSH and GPG Keys -&gt; New SSH key<br>③ 将 id_rsa.pub 文件中的内容，粘贴到 Key 对应的文本框中<br>④ 在 Title 文本框中任意填写一个名称，来标识这个 Key 从何而来</p>
@@ -726,6 +726,63 @@ siderMenuData: [
       </tags>
   </entry>
   <entry>
+    <title>Node.js的模块化</title>
+    <url>/2022/03/10/node-js-de-mo-kuai-hua/</url>
+    <content><![CDATA[<h1 id="什么是模块化"><a href="#什么是模块化" class="headerlink" title="什么是模块化"></a>什么是模块化</h1><p>编程领域中的模块化，就是遵守固定的规则，把一个大文件拆成独立并互相依赖的多个小模块。<br>把代码进行模块化拆分的好处：</p>
+<ul>
+<li>提高了代码的复用性</li>
+<li>提高了代码的可维护性</li>
+<li>可以实现按需加载<span id="more"></span>
+<h1 id="Node-js中的模块化"><a href="#Node-js中的模块化" class="headerlink" title="Node.js中的模块化"></a>Node.js中的模块化</h1></li>
+</ul>
+<h2 id="模块的分类"><a href="#模块的分类" class="headerlink" title="模块的分类"></a>模块的分类</h2><p>Node.js 中根据模块来源的不同，将模块分为了 3 大类，分别是：</p>
+<ul>
+<li>内置模块（内置模块是由 Node.js 官方提供的，例如 fs、path、http 等）</li>
+<li>自定义模块（用户创建的每个 .js 文件，都是自定义模块）</li>
+<li>第三方模块（由第三方开发出来的模块，并非官方提供的内置模块，也不是用户创建的自定义模块，使用前需要先下载）</li>
+</ul>
+<h2 id="加载模块"><a href="#加载模块" class="headerlink" title="加载模块"></a>加载模块</h2><p>使用强大的 require() 方法，可以加载需要的内置模块、用户自定义模块、第三方模块进行使用<br>（注意：使用 require() 方法加载其它模块时，会执行被加载模块中的代码）</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 1.加载内置的fs模块
+const fs &#x3D; require(&#39;fs&#39; )
+&#x2F;&#x2F; 2.加载用户的自定义模块
+const custom &#x3D; require( &#39; .&#x2F;custom.js&#39;)
+&#x2F;&#x2F; 3.加载第三方模块(关于第三方模块的下载和使用，会在后面的课程中进行专]的讲解)
+const moment &#x3D; require( &#39; moment &#39; )<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="模块作用域"><a href="#模块作用域" class="headerlink" title="模块作用域"></a>模块作用域</h2><p>与函数作用域类似，在自定义模块中定义的变量、方法等成员，只能在当前模块内被访问，这种模块级别的访问限制，叫做模块作用域；他的好处是：防止全局变量污染的问题</p>
+<h2 id="向外共享模块作用域中的成员"><a href="#向外共享模块作用域中的成员" class="headerlink" title="向外共享模块作用域中的成员"></a>向外共享模块作用域中的成员</h2><ol>
+<li>module对象：在每个 .js 自定义模块中都有一个 module 对象，它里面存储了和当前模块有关的信息</li>
+<li>module.exports 对象：在自定义模块中，可以使用 module.exports 对象，将模块内的成员共享出去，供外界使用。外界用 require() 方法导入自定义模块时，得到的就是 module.exports 所指向的对象。（注意：使用 require() 方法导入模块时，导入的结果，永远以 module.exports 指向的对象为准）</li>
+<li>exports 对象：由于 module.exports 单词写起来比较复杂，为了简化向外共享成员的代码，Node 提供了 exports 对象。默认情况下，exports 和 module.exports 指向同一个对象。最终共享的结果，还是以 module.exports 指向的对象为准。</li>
+</ol>
+<h1 id="模块的加载机制"><a href="#模块的加载机制" class="headerlink" title="模块的加载机制"></a>模块的加载机制</h1><h2 id="优先从缓存中加载"><a href="#优先从缓存中加载" class="headerlink" title="优先从缓存中加载"></a>优先从缓存中加载</h2><p>模块在第一次加载后会被缓存。 这也意味着多次调用 require() 不会导致模块的代码被执行多次。<br>注意：不论是内置模块、用户自定义模块、还是第三方模块，它们都会优先从缓存中加载，从而提高模块的加载效率。</p>
+<h2 id="内置模块的加载机制"><a href="#内置模块的加载机制" class="headerlink" title="内置模块的加载机制"></a>内置模块的加载机制</h2><p>内置模块是由 Node.js 官方提供的模块，内置模块的加载优先级最高。<br>例如，require(‘fs’) 始终返回内置的 fs 模块，即使在 node_modules 目录下有名字相同的包也叫做 fs。</p>
+<h2 id="自定义模块的加载机制"><a href="#自定义模块的加载机制" class="headerlink" title="自定义模块的加载机制"></a>自定义模块的加载机制</h2><p>使用 require() 加载自定义模块时，必须指定以 .&#x2F; 或 ..&#x2F; 开头的路径标识符。在加载自定义模块时，如果没有指定 .&#x2F; 或 ..&#x2F; 这样的路径标识符，则 node 会把它当作内置模块或第三方模块进行加载。</p>
+<p>同时，在使用 require() 导入自定义模块时，如果省略了文件的扩展名，则 Node.js 会按顺序分别尝试加载以下的文件：<br>按照确切的文件名进行加载</p>
+<ul>
+<li>补全 .js 扩展名进行加载</li>
+<li>补全 .json 扩展名进行加载</li>
+<li>补全 .node 扩展名进行加载</li>
+<li>加载失败，终端报错<h2 id="第三方模块的加载机制"><a href="#第三方模块的加载机制" class="headerlink" title="第三方模块的加载机制"></a>第三方模块的加载机制</h2>如果传递给 require() 的模块标识符不是一个内置模块，也没有以 ‘.&#x2F;’ 或 ‘..&#x2F;’ 开头，则 Node.js 会从当前模块的父目录开始，尝试从 &#x2F;node_modules 文件夹中加载第三方模块。<br>如果没有找到对应的第三方模块，则移动到再上一层父目录中，进行加载，直到文件系统的根目录。<br>例如，假设在 ‘C:\Users\itheima\project\foo.js’ 文件里调用了 require(‘tools’)，则 Node.js 会按以下顺序查找：</li>
+<li>C:\Users\itheima\project\node_modules\tools</li>
+<li>C:\Users\itheima\node_modules\tools</li>
+<li>C:\Users\node_modules\tools</li>
+<li>C:\node_modules\tools</li>
+</ul>
+<h2 id="目录作为模块"><a href="#目录作为模块" class="headerlink" title="目录作为模块"></a>目录作为模块</h2><p>当把目录作为模块标识符，传递给 require() 进行加载的时候，有三种加载方式：</p>
+<ul>
+<li>在被加载的目录下查找一个叫做 package.json 的文件，并寻找 main 属性，作为 require() 加载的入口</li>
+<li>如果目录里没有 package.json 文件，或者 main 入口不存在或无法解析，则 Node.js 将会试图加载目录下的 index.js 文件。</li>
+<li>如果以上两步都失败了，则 Node.js 会在终端打印错误消息，报告模块的缺失：Error: Cannot find module ‘xxx’</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前后端交互</category>
+      </categories>
+      <tags>
+        <tag>Node.js的模块化</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MarkdownPad语法</title>
     <url>/2022/02/14/markdownpad-yu-fa/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> 我之前记笔记一直用OneNote，但是年前心血来潮，就自己建了博客，想着把自己的学习心得发到博客上。但是博客算是完工了，但是写文章又成了一大难题，就自己在网上查找写博客的编辑器，发现用Markdown Pad来编写文章很方便。但是刚接触这个编辑器，其中的语法看了几次记不住，于是准备写一下Markdown Pad的写作语法。以供自己写作的时候还要在网上找（麻烦….）。<span id="more"></span></p>
@@ -813,63 +870,6 @@ Ctrl+K　代码块
 ]]></content>
       <tags>
         <tag>MarkdownPad语法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Node.js的模块化</title>
-    <url>/2022/03/10/node-js-de-mo-kuai-hua/</url>
-    <content><![CDATA[<h1 id="什么是模块化"><a href="#什么是模块化" class="headerlink" title="什么是模块化"></a>什么是模块化</h1><p>编程领域中的模块化，就是遵守固定的规则，把一个大文件拆成独立并互相依赖的多个小模块。<br>把代码进行模块化拆分的好处：</p>
-<ul>
-<li>提高了代码的复用性</li>
-<li>提高了代码的可维护性</li>
-<li>可以实现按需加载<span id="more"></span>
-<h1 id="Node-js中的模块化"><a href="#Node-js中的模块化" class="headerlink" title="Node.js中的模块化"></a>Node.js中的模块化</h1></li>
-</ul>
-<h2 id="模块的分类"><a href="#模块的分类" class="headerlink" title="模块的分类"></a>模块的分类</h2><p>Node.js 中根据模块来源的不同，将模块分为了 3 大类，分别是：</p>
-<ul>
-<li>内置模块（内置模块是由 Node.js 官方提供的，例如 fs、path、http 等）</li>
-<li>自定义模块（用户创建的每个 .js 文件，都是自定义模块）</li>
-<li>第三方模块（由第三方开发出来的模块，并非官方提供的内置模块，也不是用户创建的自定义模块，使用前需要先下载）</li>
-</ul>
-<h2 id="加载模块"><a href="#加载模块" class="headerlink" title="加载模块"></a>加载模块</h2><p>使用强大的 require() 方法，可以加载需要的内置模块、用户自定义模块、第三方模块进行使用<br>（注意：使用 require() 方法加载其它模块时，会执行被加载模块中的代码）</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 1.加载内置的fs模块
-const fs &#x3D; require(&#39;fs&#39; )
-&#x2F;&#x2F; 2.加载用户的自定义模块
-const custom &#x3D; require( &#39; .&#x2F;custom.js&#39;)
-&#x2F;&#x2F; 3.加载第三方模块(关于第三方模块的下载和使用，会在后面的课程中进行专]的讲解)
-const moment &#x3D; require( &#39; moment &#39; )<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="模块作用域"><a href="#模块作用域" class="headerlink" title="模块作用域"></a>模块作用域</h2><p>与函数作用域类似，在自定义模块中定义的变量、方法等成员，只能在当前模块内被访问，这种模块级别的访问限制，叫做模块作用域；他的好处是：防止全局变量污染的问题</p>
-<h2 id="向外共享模块作用域中的成员"><a href="#向外共享模块作用域中的成员" class="headerlink" title="向外共享模块作用域中的成员"></a>向外共享模块作用域中的成员</h2><ol>
-<li>module对象：在每个 .js 自定义模块中都有一个 module 对象，它里面存储了和当前模块有关的信息</li>
-<li>module.exports 对象：在自定义模块中，可以使用 module.exports 对象，将模块内的成员共享出去，供外界使用。外界用 require() 方法导入自定义模块时，得到的就是 module.exports 所指向的对象。（注意：使用 require() 方法导入模块时，导入的结果，永远以 module.exports 指向的对象为准）</li>
-<li>exports 对象：由于 module.exports 单词写起来比较复杂，为了简化向外共享成员的代码，Node 提供了 exports 对象。默认情况下，exports 和 module.exports 指向同一个对象。最终共享的结果，还是以 module.exports 指向的对象为准。</li>
-</ol>
-<h1 id="模块的加载机制"><a href="#模块的加载机制" class="headerlink" title="模块的加载机制"></a>模块的加载机制</h1><h2 id="优先从缓存中加载"><a href="#优先从缓存中加载" class="headerlink" title="优先从缓存中加载"></a>优先从缓存中加载</h2><p>模块在第一次加载后会被缓存。 这也意味着多次调用 require() 不会导致模块的代码被执行多次。<br>注意：不论是内置模块、用户自定义模块、还是第三方模块，它们都会优先从缓存中加载，从而提高模块的加载效率。</p>
-<h2 id="内置模块的加载机制"><a href="#内置模块的加载机制" class="headerlink" title="内置模块的加载机制"></a>内置模块的加载机制</h2><p>内置模块是由 Node.js 官方提供的模块，内置模块的加载优先级最高。<br>例如，require(‘fs’) 始终返回内置的 fs 模块，即使在 node_modules 目录下有名字相同的包也叫做 fs。</p>
-<h2 id="自定义模块的加载机制"><a href="#自定义模块的加载机制" class="headerlink" title="自定义模块的加载机制"></a>自定义模块的加载机制</h2><p>使用 require() 加载自定义模块时，必须指定以 .&#x2F; 或 ..&#x2F; 开头的路径标识符。在加载自定义模块时，如果没有指定 .&#x2F; 或 ..&#x2F; 这样的路径标识符，则 node 会把它当作内置模块或第三方模块进行加载。</p>
-<p>同时，在使用 require() 导入自定义模块时，如果省略了文件的扩展名，则 Node.js 会按顺序分别尝试加载以下的文件：<br>按照确切的文件名进行加载</p>
-<ul>
-<li>补全 .js 扩展名进行加载</li>
-<li>补全 .json 扩展名进行加载</li>
-<li>补全 .node 扩展名进行加载</li>
-<li>加载失败，终端报错<h2 id="第三方模块的加载机制"><a href="#第三方模块的加载机制" class="headerlink" title="第三方模块的加载机制"></a>第三方模块的加载机制</h2>如果传递给 require() 的模块标识符不是一个内置模块，也没有以 ‘.&#x2F;’ 或 ‘..&#x2F;’ 开头，则 Node.js 会从当前模块的父目录开始，尝试从 &#x2F;node_modules 文件夹中加载第三方模块。<br>如果没有找到对应的第三方模块，则移动到再上一层父目录中，进行加载，直到文件系统的根目录。<br>例如，假设在 ‘C:\Users\itheima\project\foo.js’ 文件里调用了 require(‘tools’)，则 Node.js 会按以下顺序查找：</li>
-<li>C:\Users\itheima\project\node_modules\tools</li>
-<li>C:\Users\itheima\node_modules\tools</li>
-<li>C:\Users\node_modules\tools</li>
-<li>C:\node_modules\tools</li>
-</ul>
-<h2 id="目录作为模块"><a href="#目录作为模块" class="headerlink" title="目录作为模块"></a>目录作为模块</h2><p>当把目录作为模块标识符，传递给 require() 进行加载的时候，有三种加载方式：</p>
-<ul>
-<li>在被加载的目录下查找一个叫做 package.json 的文件，并寻找 main 属性，作为 require() 加载的入口</li>
-<li>如果目录里没有 package.json 文件，或者 main 入口不存在或无法解析，则 Node.js 将会试图加载目录下的 index.js 文件。</li>
-<li>如果以上两步都失败了，则 Node.js 会在终端打印错误消息，报告模块的缺失：Error: Cannot find module ‘xxx’</li>
-</ul>
-]]></content>
-      <categories>
-        <category>前后端交互</category>
-      </categories>
-      <tags>
-        <tag>Node.js的模块化</tag>
       </tags>
   </entry>
   <entry>
@@ -1060,6 +1060,280 @@ res . end(str)
       </categories>
       <tags>
         <tag>Node</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Scss的基本用法</title>
+    <url>/2022/08/22/scss-de-ji-ben-yong-fa-ru-men-pian/</url>
+    <content><![CDATA[<h3 id="一、什么是Sass"><a href="#一、什么是Sass" class="headerlink" title="一、什么是Sass"></a>一、什么是Sass</h3><p>   Sass 是采用 Ruby 语言编写的一款 CSS 预处理语言，它诞生于2007年，是最大的成熟的 CSS 预处理语言。最初它是为了配合 HAML（一种缩进式 HTML 预编译器）而设计的，因此有着和 HTML 一样的缩进式风格。</p>
+<h3 id="二、Sass和Scss的区别"><a href="#二、Sass和Scss的区别" class="headerlink" title="二、Sass和Scss的区别"></a>二、Sass和Scss的区别</h3><p>   Sass 和 SCSS 其实是同一种东西，我们平时都称之为 Sass，两者之间不同之处有以下两点：</p>
+<blockquote>
+<ol>
+<li>文件扩展名不同。：Sass 是以“.sass”后缀为扩展名，而 SCSS 是以“.scss”后缀为扩展名。</li>
+<li>语法书写方式不同。：Sass 是以严格的缩进式语法规则来书写，不带大括号( { } )和分号( ; )，而 SCSS 的语法书写和我们的 CSS 语法书写方式非常类似。</li>
+</ol>
+</blockquote>
+<p><strong>示例：</strong></p>
+<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token comment">// Sass语法</span>
+<span class="token property"><span class="token variable">$font-stac</span></span><span class="token punctuation">:</span> Helvetica<span class="token punctuation">,</span> sans-serif  <span class="token comment">//定义变量</span>
+<span class="token property"><span class="token variable">$primary-color</span></span><span class="token punctuation">:</span> #333 <span class="token comment">//定义变量</span>
+body 
+  <span class="token property">font</span><span class="token punctuation">:</span> 100% <span class="token variable">$font-stack</span><span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> <span class="token variable">$primary-color</span><span class="token punctuation">;</span> <span class="token comment">// 没有 &#123;&#125; 和 ;</span>
+
+
+<span class="token comment">// Scss语法</span>
+<span class="token property"><span class="token variable">$font-stack</span></span><span class="token punctuation">:</span> Helvetica<span class="token punctuation">,</span> sans-serif<span class="token punctuation">;</span>
+<span class="token property"><span class="token variable">$primary-color</span></span><span class="token punctuation">:</span> #333<span class="token punctuation">;</span>
+<span class="token selector">body </span><span class="token punctuation">&#123;</span>
+  <span class="token property">font</span><span class="token punctuation">:</span> 100% <span class="token variable">$font-stack</span><span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> <span class="token variable">$primary-color</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token comment">// 编译出来的css</span>
+<span class="token selector">body </span><span class="token punctuation">&#123;</span>
+  <span class="token property">font</span><span class="token punctuation">:</span> 100% Helvetica<span class="token punctuation">,</span> sans-serif<span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> #333<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="三、Scss的基本语法"><a href="#三、Scss的基本语法" class="headerlink" title="三、Scss的基本语法"></a>三、Scss的基本语法</h3><blockquote>
+<p><a href="https://www.sassmeister.com/">scss转css在线网址</a></p>
+</blockquote>
+<ol>
+<li><p>声明变量 <strong>$</strong>   </p>
+<p>$ 符号用于对变量进行声明。</p>
+</li>
+</ol>
+<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token comment">//Scss语法</span>
+<span class="token property"><span class="token variable">$color</span></span><span class="token punctuation">:</span> #333<span class="token punctuation">;</span>
+<span class="token selector">.a </span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> <span class="token variable">$color</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">//编译出来的css语法</span>
+<span class="token selector">.a </span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span>#333<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>默认变量 <strong>!default</strong></li>
+</ol>
+<p> 在Scss中设置默认变量，只需要在相应值的后面加上 <strong>!default</strong>  即可。</p>
+<p>如果分配给变量的值后面添加了 <strong>!default</strong> 标志，这意味着该变量如果已经赋值，那么它不会被重新赋值，但是，如果他尚未赋值，那么他会被赋予新的给定值。<strong>默认的就是代表层级最低的</strong></p>
+<ol start="3">
+<li><p>变量调用</p>
+<p>直接调用即可。变量声明时也可以直接调用已经声明好的变量</p>
+</li>
+</ol>
+<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token comment">//Scss语法</span>
+<span class="token property"><span class="token variable">$color</span></span><span class="token punctuation">:</span> #999<span class="token punctuation">;</span>
+<span class="token property"><span class="token variable">$color1</span></span> <span class="token punctuation">:</span><span class="token variable">$color</span><span class="token punctuation">;</span> 
+<span class="token selector">.a </span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span> <span class="token punctuation">:</span><span class="token variable">$color1</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">//css语法</span>
+<span class="token selector">.a </span><span class="token punctuation">&#123;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> #999<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="4">
+<li>局部变量和<strong>全局变量</strong></li>
+</ol>
+<p>在元素内部定义的变量不会影响其他的元素</p>
+<ol start="5">
+<li>嵌套</li>
+</ol>
+<ul>
+<li>选择器嵌套：Sass 中还提供了选择器嵌套功能，但这也并不意味着你在 Sass 中的嵌套是无节制的，因为你嵌套的层级越深，编译出来的 CSS 代码的选择器层级将越深，这往往是大家不愿意看到的一点</li>
+<li>属性嵌套：Sass 中还提供属性嵌套，CSS 有一些属性前缀相同，只是后缀不一样，比如：border-top&#x2F;border-right，与这个类似的还有 margin、padding、font 等属性。</li>
+<li>伪类嵌套：借助 <strong>&amp;</strong></li>
+</ul>
+<ol start="6">
+<li>混合宏：如果你的整个网站中有几处小样式类似，比如颜色，字体等，在 Sass 可以使用变量来统一处理，那么这种选择还是不错的。但当你的样式变得越来越复杂，需要重复使用大段的样式时，使用变量就无法达到我们目了。这个时候 Sass 中的混合宏就会变得非常有意义。</li>
+</ol>
+<ul>
+<li><p>6.1 声明</p>
+<ul>
+<li><p>6.1.1 <strong>不带参数混合宏</strong>：在Sass中、使用 “@mixin” 来声明一个混合宏。如：</p>
+<pre><code>     <pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token keyword">@mixin</span> <span class="token selector">border-radius</span><span class="token punctuation">&#123;</span>
+    <span class="token property">-webkit-border-radius</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
+    <span class="token property">border-radius</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</code></pre>
+</li>
+</ul>
+<p>其中 @mixin 是用来声明混合宏的关键词，有点类似 CSS 中的 @media、@font-face 一样。border-radius 是混合宏的名称。大括号里面是复用的样式代码。</p>
+<ul>
+<li>6.1.2 <strong>带参数混合宏</strong>：除了声明一个不带参数的混合宏之外，还可以在定义混合宏是带有参数</li>
+</ul>
+<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token keyword">@mixin</span> <span class="token function">border-radius</span><span class="token punctuation">(</span><span class="token property"><span class="token variable">$radius</span></span><span class="token punctuation">:</span>5px<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token property">-webkit-border-radius</span><span class="token punctuation">:</span> <span class="token variable">$radius</span><span class="token punctuation">;</span>
+    <span class="token property">border-radius</span><span class="token punctuation">:</span> <span class="token variable">$radius</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>6.2 调用</p>
+</li>
+</ul>
+<p>​    在 Sass 中通过 @mixin 关键词声明了一个混合宏，那么在实际调用中，其匹配了一个关键词“ @include ”来调用声明好的混合宏。例如在你的样式中定义了一个圆角的混合宏“border-radius”:</p>
+<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token keyword">@mixin</span> <span class="token selector">border-radius</span><span class="token punctuation">&#123;</span>
+    <span class="token property">-webkit-border-radius</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
+    <span class="token property">border-radius</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在一个按钮中要调用定义好的混合宏“border-radius”,可以这样使用：</p>
+<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token selector">button </span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">@include</span> border-radius<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>这个时候编译出来的css:</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">button</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">-webkit-border-radius</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
+  <span class="token property">border-radius</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li><p>6.3 混合宏的参数：Sass 的混合宏有一个强大的功能，可以传参，那么在 Sass 中传参主要有以下几种情形：</p>
+<ul>
+<li>6.3.1 传一个不带值得参数：在混合宏中，可以传一个不带任何值得参数，比如：</li>
+</ul>
+<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token keyword">@mixin</span> <span class="token function">border-radius</span><span class="token punctuation">(</span><span class="token variable">$radius</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token property">-webkit-border-radius</span><span class="token punctuation">:</span> <span class="token variable">$radius</span><span class="token punctuation">;</span>
+  <span class="token property">border-radius</span><span class="token punctuation">:</span> <span class="token variable">$radius</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在混合宏“border-radius”中定义了一个不带任何值的参数“$radius”。</p>
+<p>在调用的时候可以给这个混合宏传一个参数值：</p>
+<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token selector">.box </span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">@include</span> <span class="token function">border-radius</span><span class="token punctuation">(</span>3px<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>这里表示给混合宏传递了一个“border-radius”的值为 “3px”</p>
+<p>编译出来的css</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.box</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">-webkit-border-radius</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
+  <span class="token property">border-radius</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>6.3.2 传一个带值的参数：在Sass的混合宏中，还可以给混合宏的参数传一个默认值，</li>
+</ul>
+<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token keyword">@mixin</span> <span class="token function">border-radius</span><span class="token punctuation">(</span><span class="token property"><span class="token variable">$radius</span></span><span class="token punctuation">:</span>3px<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token property">-webkit-border-radius</span><span class="token punctuation">:</span> <span class="token variable">$radius</span><span class="token punctuation">;</span>
+  <span class="token property">border-radius</span><span class="token punctuation">:</span> <span class="token variable">$radius</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在混合宏“border-radius”传了一个参数“$radius”，而且给这个参数赋予了一个默认值“3px”。</p>
+<p>在调用类似这样的混合宏时，会多有一个机会，假设你的页面中的圆角很多地方都是“3px”的圆角，那么这个时候只需要调用默认的混合宏“border-radius”:<code>@include border-radius;</code></p>
+<p>编译出来的css：<code>border-radius: 3px</code></p>
+<p><strong>同样也可以根据实际情况，随机给混合宏传值</strong></p>
+</li>
+<li><p>6.4  混合宏的不足</p>
+</li>
+</ul>
+<p>混合宏在实际编码中给我们带来很多方便之处，特别是对于复用重复代码块。但其最大的不足之处是会生成冗余的代码块。比如在不同的地方调用一个相同的混合宏时。如：</p>
+<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token keyword">@mixin</span> <span class="token selector">border-radius</span><span class="token punctuation">&#123;</span>
+  <span class="token property">-webkit-border-radius</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
+  <span class="token property">border-radius</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.box </span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">@include</span> border-radius<span class="token punctuation">;</span>
+  <span class="token property">margin-bottom</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.btn </span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">@include</span> border-radius<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol start="7">
+<li>扩展&#x2F;继承</li>
+</ol>
+<p>在Sass中是通过关键字 “@extend”来继承已存在的类样式块，从而实现代码的继承。</p>
+<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token comment">// SCSS</span>
+<span class="token selector">.btn </span><span class="token punctuation">&#123;</span>
+  <span class="token property">border</span><span class="token punctuation">:</span> 1px solid #ccc<span class="token punctuation">;</span>
+  <span class="token property">padding</span><span class="token punctuation">:</span> 6px 10px<span class="token punctuation">;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> 14px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.btn-primary </span><span class="token punctuation">&#123;</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> #f36<span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>
+  <span class="token keyword">@extend</span> .btn<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.btn-second </span><span class="token punctuation">&#123;</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> orange<span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>
+  <span class="token keyword">@extend</span> .btn<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">// CSS
+.btn, .btn-primary, .btn-second</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">border</span><span class="token punctuation">:</span> 1px solid #ccc<span class="token punctuation">;</span>
+  <span class="token property">padding</span><span class="token punctuation">:</span> 6px 10px<span class="token punctuation">;</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> 14px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> <span class="token selector">// 合并到了一起
+
+.btn-primary</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> #f36<span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.btn-second</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">background-clor</span><span class="token punctuation">:</span> orange<span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>从示例代码可以看出，在 Sass 中的继承，可以继承类样式块中所有样式代码，而且编译出来的 CSS 会将选择器合并在一起，形成组合选择器</p>
+<ol start="8">
+<li><strong>占位符  %</strong>  placeholder</li>
+</ol>
+<p>它可以取代以前 CSS 中的基类造成的代码冗余的情形。因为 %placeholder 声明的代码，如果不被 @extend 调用的话，不会产生任何代码。</p>
+<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token selector"><span class="token placeholder">%mt5</span> </span><span class="token punctuation">&#123;</span>
+  <span class="token property">margin-top</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector"><span class="token placeholder">%pt5</span></span><span class="token punctuation">&#123;</span>
+  <span class="token property">padding-top</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这段代码没有被 @extend 调用，他并没有产生任何代码块，只是静静的躺在你的某个 SCSS 文件中。只有通过 @extend 调用才会产生代码</p>
+<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token comment">// SCSS</span>
+<span class="token selector"><span class="token placeholder">%mt5</span> </span><span class="token punctuation">&#123;</span>
+  <span class="token property">margin-top</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector"><span class="token placeholder">%pt5</span></span><span class="token punctuation">&#123;</span>
+  <span class="token property">padding-top</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.btn </span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">@extend</span> <span class="token placeholder selector">%mt5</span><span class="token punctuation">;</span>
+  <span class="token keyword">@extend</span> <span class="token placeholder selector">%pt5</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.block </span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">@extend</span> <span class="token placeholder selector">%mt5</span><span class="token punctuation">;</span>
+
+  <span class="token selector">span </span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">@extend</span> <span class="token placeholder selector">%pt5</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">// CSS
+.btn, .block</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">margin-top</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.btn, .block span</span> <span class="token punctuation">&#123;</span>
+  <span class="token property">padding-top</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>从编译出来的 CSS 代码可以看出，通过 @extend 调用的占位符，编译出来的代码会将相同的代码合并在一起。这也是我们希望看到的效果，也让你的代码变得更为干净。</p>
+]]></content>
+      <categories>
+        <category>css预编译语法</category>
+      </categories>
+      <tags>
+        <tag>Scss</tag>
       </tags>
   </entry>
   <entry>
@@ -1414,280 +1688,6 @@ Vue<span class="token punctuation">.</span><span class="token function">componen
       </categories>
       <tags>
         <tag>Vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Scss的基本用法</title>
-    <url>/2022/08/22/scss-de-ji-ben-yong-fa-ru-men-pian/</url>
-    <content><![CDATA[<h3 id="一、什么是Sass"><a href="#一、什么是Sass" class="headerlink" title="一、什么是Sass"></a>一、什么是Sass</h3><p>   Sass 是采用 Ruby 语言编写的一款 CSS 预处理语言，它诞生于2007年，是最大的成熟的 CSS 预处理语言。最初它是为了配合 HAML（一种缩进式 HTML 预编译器）而设计的，因此有着和 HTML 一样的缩进式风格。</p>
-<h3 id="二、Sass和Scss的区别"><a href="#二、Sass和Scss的区别" class="headerlink" title="二、Sass和Scss的区别"></a>二、Sass和Scss的区别</h3><p>   Sass 和 SCSS 其实是同一种东西，我们平时都称之为 Sass，两者之间不同之处有以下两点：</p>
-<blockquote>
-<ol>
-<li>文件扩展名不同。：Sass 是以“.sass”后缀为扩展名，而 SCSS 是以“.scss”后缀为扩展名。</li>
-<li>语法书写方式不同。：Sass 是以严格的缩进式语法规则来书写，不带大括号( { } )和分号( ; )，而 SCSS 的语法书写和我们的 CSS 语法书写方式非常类似。</li>
-</ol>
-</blockquote>
-<p><strong>示例：</strong></p>
-<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token comment">// Sass语法</span>
-<span class="token property"><span class="token variable">$font-stac</span></span><span class="token punctuation">:</span> Helvetica<span class="token punctuation">,</span> sans-serif  <span class="token comment">//定义变量</span>
-<span class="token property"><span class="token variable">$primary-color</span></span><span class="token punctuation">:</span> #333 <span class="token comment">//定义变量</span>
-body 
-  <span class="token property">font</span><span class="token punctuation">:</span> 100% <span class="token variable">$font-stack</span><span class="token punctuation">;</span>
-  <span class="token property">color</span><span class="token punctuation">:</span> <span class="token variable">$primary-color</span><span class="token punctuation">;</span> <span class="token comment">// 没有 &#123;&#125; 和 ;</span>
-
-
-<span class="token comment">// Scss语法</span>
-<span class="token property"><span class="token variable">$font-stack</span></span><span class="token punctuation">:</span> Helvetica<span class="token punctuation">,</span> sans-serif<span class="token punctuation">;</span>
-<span class="token property"><span class="token variable">$primary-color</span></span><span class="token punctuation">:</span> #333<span class="token punctuation">;</span>
-<span class="token selector">body </span><span class="token punctuation">&#123;</span>
-  <span class="token property">font</span><span class="token punctuation">:</span> 100% <span class="token variable">$font-stack</span><span class="token punctuation">;</span>
-  <span class="token property">color</span><span class="token punctuation">:</span> <span class="token variable">$primary-color</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token comment">// 编译出来的css</span>
-<span class="token selector">body </span><span class="token punctuation">&#123;</span>
-  <span class="token property">font</span><span class="token punctuation">:</span> 100% Helvetica<span class="token punctuation">,</span> sans-serif<span class="token punctuation">;</span>
-  <span class="token property">color</span><span class="token punctuation">:</span> #333<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="三、Scss的基本语法"><a href="#三、Scss的基本语法" class="headerlink" title="三、Scss的基本语法"></a>三、Scss的基本语法</h3><blockquote>
-<p><a href="https://www.sassmeister.com/">scss转css在线网址</a></p>
-</blockquote>
-<ol>
-<li><p>声明变量 <strong>$</strong>   </p>
-<p>$ 符号用于对变量进行声明。</p>
-</li>
-</ol>
-<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token comment">//Scss语法</span>
-<span class="token property"><span class="token variable">$color</span></span><span class="token punctuation">:</span> #333<span class="token punctuation">;</span>
-<span class="token selector">.a </span><span class="token punctuation">&#123;</span>
-    <span class="token property">color</span><span class="token punctuation">:</span> <span class="token variable">$color</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token comment">//编译出来的css语法</span>
-<span class="token selector">.a </span><span class="token punctuation">&#123;</span>
-    <span class="token property">color</span><span class="token punctuation">:</span>#333<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ol start="2">
-<li>默认变量 <strong>!default</strong></li>
-</ol>
-<p> 在Scss中设置默认变量，只需要在相应值的后面加上 <strong>!default</strong>  即可。</p>
-<p>如果分配给变量的值后面添加了 <strong>!default</strong> 标志，这意味着该变量如果已经赋值，那么它不会被重新赋值，但是，如果他尚未赋值，那么他会被赋予新的给定值。<strong>默认的就是代表层级最低的</strong></p>
-<ol start="3">
-<li><p>变量调用</p>
-<p>直接调用即可。变量声明时也可以直接调用已经声明好的变量</p>
-</li>
-</ol>
-<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token comment">//Scss语法</span>
-<span class="token property"><span class="token variable">$color</span></span><span class="token punctuation">:</span> #999<span class="token punctuation">;</span>
-<span class="token property"><span class="token variable">$color1</span></span> <span class="token punctuation">:</span><span class="token variable">$color</span><span class="token punctuation">;</span> 
-<span class="token selector">.a </span><span class="token punctuation">&#123;</span>
-    <span class="token property">color</span> <span class="token punctuation">:</span><span class="token variable">$color1</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token comment">//css语法</span>
-<span class="token selector">.a </span><span class="token punctuation">&#123;</span>
-  <span class="token property">color</span><span class="token punctuation">:</span> #999<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ol start="4">
-<li>局部变量和<strong>全局变量</strong></li>
-</ol>
-<p>在元素内部定义的变量不会影响其他的元素</p>
-<ol start="5">
-<li>嵌套</li>
-</ol>
-<ul>
-<li>选择器嵌套：Sass 中还提供了选择器嵌套功能，但这也并不意味着你在 Sass 中的嵌套是无节制的，因为你嵌套的层级越深，编译出来的 CSS 代码的选择器层级将越深，这往往是大家不愿意看到的一点</li>
-<li>属性嵌套：Sass 中还提供属性嵌套，CSS 有一些属性前缀相同，只是后缀不一样，比如：border-top&#x2F;border-right，与这个类似的还有 margin、padding、font 等属性。</li>
-<li>伪类嵌套：借助 <strong>&amp;</strong></li>
-</ul>
-<ol start="6">
-<li>混合宏：如果你的整个网站中有几处小样式类似，比如颜色，字体等，在 Sass 可以使用变量来统一处理，那么这种选择还是不错的。但当你的样式变得越来越复杂，需要重复使用大段的样式时，使用变量就无法达到我们目了。这个时候 Sass 中的混合宏就会变得非常有意义。</li>
-</ol>
-<ul>
-<li><p>6.1 声明</p>
-<ul>
-<li><p>6.1.1 <strong>不带参数混合宏</strong>：在Sass中、使用 “@mixin” 来声明一个混合宏。如：</p>
-<pre><code>     <pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token keyword">@mixin</span> <span class="token selector">border-radius</span><span class="token punctuation">&#123;</span>
-    <span class="token property">-webkit-border-radius</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
-    <span class="token property">border-radius</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-</code></pre>
-</li>
-</ul>
-<p>其中 @mixin 是用来声明混合宏的关键词，有点类似 CSS 中的 @media、@font-face 一样。border-radius 是混合宏的名称。大括号里面是复用的样式代码。</p>
-<ul>
-<li>6.1.2 <strong>带参数混合宏</strong>：除了声明一个不带参数的混合宏之外，还可以在定义混合宏是带有参数</li>
-</ul>
-<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token keyword">@mixin</span> <span class="token function">border-radius</span><span class="token punctuation">(</span><span class="token property"><span class="token variable">$radius</span></span><span class="token punctuation">:</span>5px<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    <span class="token property">-webkit-border-radius</span><span class="token punctuation">:</span> <span class="token variable">$radius</span><span class="token punctuation">;</span>
-    <span class="token property">border-radius</span><span class="token punctuation">:</span> <span class="token variable">$radius</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>6.2 调用</p>
-</li>
-</ul>
-<p>​    在 Sass 中通过 @mixin 关键词声明了一个混合宏，那么在实际调用中，其匹配了一个关键词“ @include ”来调用声明好的混合宏。例如在你的样式中定义了一个圆角的混合宏“border-radius”:</p>
-<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token keyword">@mixin</span> <span class="token selector">border-radius</span><span class="token punctuation">&#123;</span>
-    <span class="token property">-webkit-border-radius</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
-    <span class="token property">border-radius</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>在一个按钮中要调用定义好的混合宏“border-radius”,可以这样使用：</p>
-<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token selector">button </span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">@include</span> border-radius<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>这个时候编译出来的css:</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">button</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">-webkit-border-radius</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
-  <span class="token property">border-radius</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li><p>6.3 混合宏的参数：Sass 的混合宏有一个强大的功能，可以传参，那么在 Sass 中传参主要有以下几种情形：</p>
-<ul>
-<li>6.3.1 传一个不带值得参数：在混合宏中，可以传一个不带任何值得参数，比如：</li>
-</ul>
-<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token keyword">@mixin</span> <span class="token function">border-radius</span><span class="token punctuation">(</span><span class="token variable">$radius</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-  <span class="token property">-webkit-border-radius</span><span class="token punctuation">:</span> <span class="token variable">$radius</span><span class="token punctuation">;</span>
-  <span class="token property">border-radius</span><span class="token punctuation">:</span> <span class="token variable">$radius</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>在混合宏“border-radius”中定义了一个不带任何值的参数“$radius”。</p>
-<p>在调用的时候可以给这个混合宏传一个参数值：</p>
-<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token selector">.box </span><span class="token punctuation">&#123;</span>
-  <span class="token keyword">@include</span> <span class="token function">border-radius</span><span class="token punctuation">(</span>3px<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>这里表示给混合宏传递了一个“border-radius”的值为 “3px”</p>
-<p>编译出来的css</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.box</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">-webkit-border-radius</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
-  <span class="token property">border-radius</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li>6.3.2 传一个带值的参数：在Sass的混合宏中，还可以给混合宏的参数传一个默认值，</li>
-</ul>
-<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token keyword">@mixin</span> <span class="token function">border-radius</span><span class="token punctuation">(</span><span class="token property"><span class="token variable">$radius</span></span><span class="token punctuation">:</span>3px<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-  <span class="token property">-webkit-border-radius</span><span class="token punctuation">:</span> <span class="token variable">$radius</span><span class="token punctuation">;</span>
-  <span class="token property">border-radius</span><span class="token punctuation">:</span> <span class="token variable">$radius</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>在混合宏“border-radius”传了一个参数“$radius”，而且给这个参数赋予了一个默认值“3px”。</p>
-<p>在调用类似这样的混合宏时，会多有一个机会，假设你的页面中的圆角很多地方都是“3px”的圆角，那么这个时候只需要调用默认的混合宏“border-radius”:<code>@include border-radius;</code></p>
-<p>编译出来的css：<code>border-radius: 3px</code></p>
-<p><strong>同样也可以根据实际情况，随机给混合宏传值</strong></p>
-</li>
-<li><p>6.4  混合宏的不足</p>
-</li>
-</ul>
-<p>混合宏在实际编码中给我们带来很多方便之处，特别是对于复用重复代码块。但其最大的不足之处是会生成冗余的代码块。比如在不同的地方调用一个相同的混合宏时。如：</p>
-<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token keyword">@mixin</span> <span class="token selector">border-radius</span><span class="token punctuation">&#123;</span>
-  <span class="token property">-webkit-border-radius</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
-  <span class="token property">border-radius</span><span class="token punctuation">:</span> 3px<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token selector">.box </span><span class="token punctuation">&#123;</span>
-  <span class="token keyword">@include</span> border-radius<span class="token punctuation">;</span>
-  <span class="token property">margin-bottom</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token selector">.btn </span><span class="token punctuation">&#123;</span>
-  <span class="token keyword">@include</span> border-radius<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ol start="7">
-<li>扩展&#x2F;继承</li>
-</ol>
-<p>在Sass中是通过关键字 “@extend”来继承已存在的类样式块，从而实现代码的继承。</p>
-<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token comment">// SCSS</span>
-<span class="token selector">.btn </span><span class="token punctuation">&#123;</span>
-  <span class="token property">border</span><span class="token punctuation">:</span> 1px solid #ccc<span class="token punctuation">;</span>
-  <span class="token property">padding</span><span class="token punctuation">:</span> 6px 10px<span class="token punctuation">;</span>
-  <span class="token property">font-size</span><span class="token punctuation">:</span> 14px<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token selector">.btn-primary </span><span class="token punctuation">&#123;</span>
-  <span class="token property">background-color</span><span class="token punctuation">:</span> #f36<span class="token punctuation">;</span>
-  <span class="token property">color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>
-  <span class="token keyword">@extend</span> .btn<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token selector">.btn-second </span><span class="token punctuation">&#123;</span>
-  <span class="token property">background-color</span><span class="token punctuation">:</span> orange<span class="token punctuation">;</span>
-  <span class="token property">color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>
-  <span class="token keyword">@extend</span> .btn<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">// CSS
-.btn, .btn-primary, .btn-second</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">border</span><span class="token punctuation">:</span> 1px solid #ccc<span class="token punctuation">;</span>
-  <span class="token property">padding</span><span class="token punctuation">:</span> 6px 10px<span class="token punctuation">;</span>
-  <span class="token property">font-size</span><span class="token punctuation">:</span> 14px<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span> <span class="token selector">// 合并到了一起
-
-.btn-primary</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">background-color</span><span class="token punctuation">:</span> #f36<span class="token punctuation">;</span>
-  <span class="token property">color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token selector">.btn-second</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">background-clor</span><span class="token punctuation">:</span> orange<span class="token punctuation">;</span>
-  <span class="token property">color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>从示例代码可以看出，在 Sass 中的继承，可以继承类样式块中所有样式代码，而且编译出来的 CSS 会将选择器合并在一起，形成组合选择器</p>
-<ol start="8">
-<li><strong>占位符  %</strong>  placeholder</li>
-</ol>
-<p>它可以取代以前 CSS 中的基类造成的代码冗余的情形。因为 %placeholder 声明的代码，如果不被 @extend 调用的话，不会产生任何代码。</p>
-<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token selector"><span class="token placeholder">%mt5</span> </span><span class="token punctuation">&#123;</span>
-  <span class="token property">margin-top</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token selector"><span class="token placeholder">%pt5</span></span><span class="token punctuation">&#123;</span>
-  <span class="token property">padding-top</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>这段代码没有被 @extend 调用，他并没有产生任何代码块，只是静静的躺在你的某个 SCSS 文件中。只有通过 @extend 调用才会产生代码</p>
-<pre class="line-numbers language-scss" data-language="scss"><code class="language-scss"><span class="token comment">// SCSS</span>
-<span class="token selector"><span class="token placeholder">%mt5</span> </span><span class="token punctuation">&#123;</span>
-  <span class="token property">margin-top</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token selector"><span class="token placeholder">%pt5</span></span><span class="token punctuation">&#123;</span>
-  <span class="token property">padding-top</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token selector">.btn </span><span class="token punctuation">&#123;</span>
-  <span class="token keyword">@extend</span> <span class="token placeholder selector">%mt5</span><span class="token punctuation">;</span>
-  <span class="token keyword">@extend</span> <span class="token placeholder selector">%pt5</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token selector">.block </span><span class="token punctuation">&#123;</span>
-  <span class="token keyword">@extend</span> <span class="token placeholder selector">%mt5</span><span class="token punctuation">;</span>
-
-  <span class="token selector">span </span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">@extend</span> <span class="token placeholder selector">%pt5</span><span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">// CSS
-.btn, .block</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">margin-top</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token selector">.btn, .block span</span> <span class="token punctuation">&#123;</span>
-  <span class="token property">padding-top</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>从编译出来的 CSS 代码可以看出，通过 @extend 调用的占位符，编译出来的代码会将相同的代码合并在一起。这也是我们希望看到的效果，也让你的代码变得更为干净。</p>
-]]></content>
-      <categories>
-        <category>css预编译语法</category>
-      </categories>
-      <tags>
-        <tag>Scss</tag>
       </tags>
   </entry>
   <entry>
@@ -2863,7 +2863,7 @@ plugins: [htmlPlugin, cleanPlugin], <span aria-hidden="true" class="line-numbers
 
 
 
-<p><img src="https://raw.githubusercontent.com/zhezhe0723/Blog/master/img/202403271015255.jpg" alt="8e26b7ad00a578c3e5df59a043678dd9."></p>
+<p><img src="https://raw.githubusercontent.com/zhezhe0723/Blog/master/img/202403271015255.jpg"></p>
 <p><img src="https://raw.githubusercontent.com/zhezhe0723/Blog/master/img/202403271022593.jpg" alt="f85864fdd53f713e57f05347127318af."></p>
 ]]></content>
       <categories>
