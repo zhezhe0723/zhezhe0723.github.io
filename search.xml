@@ -1,87 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Array的常见用法</title>
-    <url>/2022/08/17/array-de-chang-jian-yong-fa/</url>
-    <content><![CDATA[<h3 id="JS-中截取数组的方法"><a href="#JS-中截取数组的方法" class="headerlink" title="JS 中截取数组的方法"></a>JS 中截取数组的方法</h3><blockquote>
-<p>[TOC]</p>
-</blockquote>
-<h4 id="1-splice-方法"><a href="#1-splice-方法" class="headerlink" title="1. splice()方法"></a>1. <strong>splice()方法</strong></h4><p>​         splice()方法通过删除或者替换现有元素或者原地添加新的元素来修改数组，并以数组的形式返回被修改的内容。这个方法会改变原数组。</p>
-<p>​      <strong>–语法–</strong></p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">array<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span>start<span class="token punctuation">[</span><span class="token punctuation">,</span>deleteCount<span class="token punctuation">[</span><span class="token punctuation">,</span>item1<span class="token punctuation">[</span><span class="token punctuation">,</span>item2<span class="token punctuation">[</span><span class="token punctuation">,</span><span class="token operator">...</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token comment">//start :指定修改的开始位置（从0开始计数），如果超出了数组的长度，则从数组末尾开始添加内容；如果是负值，则表示从数组末位（从后往前数）开始的第n 位；如果负数的绝对值大于数组的长度，则表示开始的位置为第0位。</span>
-<span class="token comment">//deleteCount(可选) :整数，表示要删除的数组元素的个数。如果deleteCount大于start之后的元素的总数，则从start后面的元素都将被删除（包含第start位）；如果 deleteCount 是 0 或者负数，则不移除元素。这种情况下，至少应添加一个新元素。</span>
-<span class="token comment">// item1,item2(可选) :要添加进数组的元素，从start 位置开始。如果不指定，则 splice() 将只删除数组元素。</span>
-<span class="token comment">// 返回值 由被删除的元素组成的一个数组。如果只删除了一个元素，则返回只包含一个元素的数组。如果没有删除元素，则返回空数组。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>​     <strong>–案例–</strong></p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token string">"d"</span><span class="token punctuation">,</span><span class="token string">"e"</span><span class="token punctuation">]</span>
-<span class="token keyword">var</span> arr1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">"f"</span><span class="token punctuation">)</span> 
-<span class="token comment">// 3 表示从索引为3的位置开始删除，</span>
-<span class="token comment">// 1 删除元素的个数</span>
-<span class="token comment">// 最后面是表示向原数组中添加元素，位置就是前面两个数字所定义的位置添加数据</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span> <span class="token comment">//原数组：arr["a", "b", "c", "f", "e"]</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span>  <span class="token comment">// 返回值 --被删除的元素 arr1 ["d"]</span>
-
-<span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token string">"d"</span><span class="token punctuation">,</span><span class="token string">"e"</span><span class="token punctuation">]</span>
-<span class="token keyword">var</span> arr1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>  
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>  <span class="token comment">//原数组：arr ["a", "b", "e"]</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span> <span class="token comment">// 返回值 --被删除的元素 arr1 ["c", "d"]</span>
-
-<span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token string">"d"</span><span class="token punctuation">,</span><span class="token string">"e"</span><span class="token punctuation">]</span>
-<span class="token keyword">var</span> arr1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>  <span class="token comment">//从索引 1 的位置开始删除所有元素</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>  <span class="token comment">//原数组：arr["a"]   </span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span> <span class="token comment">//返回值 --被删除的元素 arr1 ["b", "c", "d", "e"]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="2-filter-方法"><a href="#2-filter-方法" class="headerlink" title="2. filter() 方法"></a>2. filter() 方法</h4><p><strong>–语法–</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">filter() 方法会创建一个新数组，其中包含所有通过回调函数测试的元素。filter 为数组中的每个元素调用一次 callback 函数， callback 函数返回 true 表示该元素通过测试，保留该元素，false 则不保留。filter 不会改变原数组，它返回过滤后的新数组。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><strong>–案例–</strong></p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> animals <span class="token operator">=</span> <span class="token punctuation">[</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Fluffykins"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"rabbit"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Caro"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span><span class="token string">"dog"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Hamilton"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"dog"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Harold"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"fish"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Ursula"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"cat"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Jimmy"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"fish"</span> <span class="token punctuation">&#125;</span>
-<span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> dogs <span class="token operator">=</span> animals<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">x</span> <span class="token operator">=></span> x<span class="token punctuation">.</span>species <span class="token operator">===</span> <span class="token string">"dog"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> dogs <span class="token operator">=</span> animals<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> item<span class="token punctuation">.</span>species <span class="token operator">===</span> <span class="token string">"dog"</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>dogs<span class="token punctuation">)</span><span class="token punctuation">;</span> 
-<span class="token comment">// &#123;name: "Caro", species: "dog"&#125;</span>
-<span class="token comment">// &#123; name: "Hamilton", species: "dog" &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="3-map-方法"><a href="#3-map-方法" class="headerlink" title="3. map()方法"></a>3. map()方法</h4><p><strong>–语法–</strong></p>
-<pre class="line-numbers language-none"><code class="language-none">map() 方法创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果。map 不会改变原数组。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><strong>–案例–</strong></p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> animals <span class="token operator">=</span> <span class="token punctuation">[</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Fluffykins"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"rabbit"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Caro"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span><span class="token string">"dog"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Hamilton"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"dog"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Harold"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"fish"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Ursula"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"cat"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Jimmy"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"fish"</span> <span class="token punctuation">&#125;</span>
-<span class="token punctuation">]</span><span class="token punctuation">;</span>
-
-<span class="token keyword">var</span> names <span class="token operator">=</span> animals<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">x</span><span class="token operator">=></span>x<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> names <span class="token operator">=</span> animals<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> item<span class="token punctuation">.</span>name
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>names<span class="token punctuation">)</span><span class="token punctuation">;</span> 
-<span class="token comment">//["Fluffykins", "Caro", "Hamilton", "Harold", "Ursula", "Jimmy"]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-]]></content>
-      <categories>
-        <category>Array</category>
-      </categories>
-      <tags>
-        <tag>JS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Express</title>
     <url>/2022/03/16/express/</url>
     <content><![CDATA[<h2 id="Express简介"><a href="#Express简介" class="headerlink" title="Express简介"></a>Express简介</h2><h3 id="什么是Express"><a href="#什么是Express" class="headerlink" title="什么是Express"></a>什么是Express</h3><p>官方给出的概念：Express 是基于 Node.js 平台，快速、开放、极简的 Web 开发框架。<br>通俗的理解：Express 的作用和 Node.js 内置的 http 模块类似，是专门用来创建 Web 服务器的。<br>Express 的本质：就是一个 npm 上的第三方包，提供了快速创建 Web 服务器的便捷方法。<br>Express 的中文官网：<a href="http://www.expressjs.com.cn/">http://www.expressjs.com.cn/</a> </p>
@@ -322,6 +241,87 @@ module.exports &#x3D; router<span aria-hidden="true" class="line-numbers-rows"><
       </tags>
   </entry>
   <entry>
+    <title>Array的常见用法</title>
+    <url>/2022/08/17/array-de-chang-jian-yong-fa/</url>
+    <content><![CDATA[<h3 id="JS-中截取数组的方法"><a href="#JS-中截取数组的方法" class="headerlink" title="JS 中截取数组的方法"></a>JS 中截取数组的方法</h3><blockquote>
+<p>[TOC]</p>
+</blockquote>
+<h4 id="1-splice-方法"><a href="#1-splice-方法" class="headerlink" title="1. splice()方法"></a>1. <strong>splice()方法</strong></h4><p>​         splice()方法通过删除或者替换现有元素或者原地添加新的元素来修改数组，并以数组的形式返回被修改的内容。这个方法会改变原数组。</p>
+<p>​      <strong>–语法–</strong></p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">array<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span>start<span class="token punctuation">[</span><span class="token punctuation">,</span>deleteCount<span class="token punctuation">[</span><span class="token punctuation">,</span>item1<span class="token punctuation">[</span><span class="token punctuation">,</span>item2<span class="token punctuation">[</span><span class="token punctuation">,</span><span class="token operator">...</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment">//start :指定修改的开始位置（从0开始计数），如果超出了数组的长度，则从数组末尾开始添加内容；如果是负值，则表示从数组末位（从后往前数）开始的第n 位；如果负数的绝对值大于数组的长度，则表示开始的位置为第0位。</span>
+<span class="token comment">//deleteCount(可选) :整数，表示要删除的数组元素的个数。如果deleteCount大于start之后的元素的总数，则从start后面的元素都将被删除（包含第start位）；如果 deleteCount 是 0 或者负数，则不移除元素。这种情况下，至少应添加一个新元素。</span>
+<span class="token comment">// item1,item2(可选) :要添加进数组的元素，从start 位置开始。如果不指定，则 splice() 将只删除数组元素。</span>
+<span class="token comment">// 返回值 由被删除的元素组成的一个数组。如果只删除了一个元素，则返回只包含一个元素的数组。如果没有删除元素，则返回空数组。</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>​     <strong>–案例–</strong></p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token string">"d"</span><span class="token punctuation">,</span><span class="token string">"e"</span><span class="token punctuation">]</span>
+<span class="token keyword">var</span> arr1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">"f"</span><span class="token punctuation">)</span> 
+<span class="token comment">// 3 表示从索引为3的位置开始删除，</span>
+<span class="token comment">// 1 删除元素的个数</span>
+<span class="token comment">// 最后面是表示向原数组中添加元素，位置就是前面两个数字所定义的位置添加数据</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span> <span class="token comment">//原数组：arr["a", "b", "c", "f", "e"]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span>  <span class="token comment">// 返回值 --被删除的元素 arr1 ["d"]</span>
+
+<span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token string">"d"</span><span class="token punctuation">,</span><span class="token string">"e"</span><span class="token punctuation">]</span>
+<span class="token keyword">var</span> arr1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>  
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>  <span class="token comment">//原数组：arr ["a", "b", "e"]</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span> <span class="token comment">// 返回值 --被删除的元素 arr1 ["c", "d"]</span>
+
+<span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"a"</span><span class="token punctuation">,</span><span class="token string">"b"</span><span class="token punctuation">,</span><span class="token string">"c"</span><span class="token punctuation">,</span><span class="token string">"d"</span><span class="token punctuation">,</span><span class="token string">"e"</span><span class="token punctuation">]</span>
+<span class="token keyword">var</span> arr1 <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>  <span class="token comment">//从索引 1 的位置开始删除所有元素</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span>  <span class="token comment">//原数组：arr["a"]   </span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>arr1<span class="token punctuation">)</span> <span class="token comment">//返回值 --被删除的元素 arr1 ["b", "c", "d", "e"]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="2-filter-方法"><a href="#2-filter-方法" class="headerlink" title="2. filter() 方法"></a>2. filter() 方法</h4><p><strong>–语法–</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">filter() 方法会创建一个新数组，其中包含所有通过回调函数测试的元素。filter 为数组中的每个元素调用一次 callback 函数， callback 函数返回 true 表示该元素通过测试，保留该元素，false 则不保留。filter 不会改变原数组，它返回过滤后的新数组。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>–案例–</strong></p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> animals <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Fluffykins"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"rabbit"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Caro"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span><span class="token string">"dog"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Hamilton"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"dog"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Harold"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"fish"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Ursula"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"cat"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Jimmy"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"fish"</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> dogs <span class="token operator">=</span> animals<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">x</span> <span class="token operator">=></span> x<span class="token punctuation">.</span>species <span class="token operator">===</span> <span class="token string">"dog"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> dogs <span class="token operator">=</span> animals<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> item<span class="token punctuation">.</span>species <span class="token operator">===</span> <span class="token string">"dog"</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>dogs<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token comment">// &#123;name: "Caro", species: "dog"&#125;</span>
+<span class="token comment">// &#123; name: "Hamilton", species: "dog" &#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="3-map-方法"><a href="#3-map-方法" class="headerlink" title="3. map()方法"></a>3. map()方法</h4><p><strong>–语法–</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">map() 方法创建一个新数组，其结果是该数组中的每个元素都调用一个提供的函数后返回的结果。map 不会改变原数组。<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>–案例–</strong></p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> animals <span class="token operator">=</span> <span class="token punctuation">[</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Fluffykins"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"rabbit"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Caro"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span><span class="token string">"dog"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Hamilton"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"dog"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Harold"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"fish"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Ursula"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"cat"</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#123;</span> <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">"Jimmy"</span><span class="token punctuation">,</span> <span class="token literal-property property">species</span><span class="token operator">:</span> <span class="token string">"fish"</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">var</span> names <span class="token operator">=</span> animals<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">x</span><span class="token operator">=></span>x<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> names <span class="token operator">=</span> animals<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">item</span><span class="token operator">=></span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> item<span class="token punctuation">.</span>name
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>names<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token comment">//["Fluffykins", "Caro", "Hamilton", "Harold", "Ursula", "Jimmy"]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+]]></content>
+      <categories>
+        <category>Array</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Github的使用</title>
     <url>/2022/03/01/github-de-shi-yong/</url>
     <content><![CDATA[<h1 id="开源项目托管平台"><a href="#开源项目托管平台" class="headerlink" title="开源项目托管平台"></a>开源项目托管平台</h1><p>专门用于免费存放开源项目源代码的网站，叫做开源项目托管平台。目前世界上比较出名的开源项目托管平台<br>主要有以下 3 个：</p>
@@ -346,7 +346,7 @@ git commit -m &quot;第一次提交&quot;<span aria-hidden="true" class="line-nu
 (只有第一次推送内容需要-u origin master，往后都不用了)<h2 id="SSH-key"><a href="#SSH-key" class="headerlink" title="SSH key"></a>SSH key</h2></li>
 </ol>
 <p><strong>SSH key介绍</strong><br>SSH key 的作用：实现本地仓库和 Github 之间免登录的加密数据传输。<br>SSH key 的好处：免登录身份认证、数据加密传输。<br>SSH key 由两部分组成，分别是：<br>① id_rsa（私钥文件，存放于客户端的电脑中即可）<br>② id_rsa.pub（公钥文件，需要配置到 Github 中）<br><strong>生成SSH key</strong></p>
-<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#x79;&#x6f;&#x75;&#114;&#95;&#x65;&#x6d;&#x61;&#x69;&#x6c;&#x40;&#x65;&#120;&#x61;&#x6d;&#x70;&#x6c;&#101;&#46;&#99;&#111;&#109;">&#x79;&#x6f;&#x75;&#114;&#95;&#x65;&#x6d;&#x61;&#x69;&#x6c;&#x40;&#x65;&#120;&#x61;&#x6d;&#x70;&#x6c;&#101;&#46;&#99;&#111;&#109;</a> 替换为注册 Github 账号时填写的邮箱：</p>
+<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#121;&#111;&#117;&#114;&#95;&#x65;&#109;&#97;&#105;&#108;&#x40;&#101;&#x78;&#x61;&#x6d;&#112;&#x6c;&#101;&#x2e;&#x63;&#x6f;&#x6d;">&#121;&#111;&#117;&#114;&#95;&#x65;&#109;&#97;&#105;&#108;&#x40;&#101;&#x78;&#x61;&#x6d;&#112;&#x6c;&#101;&#x2e;&#x63;&#x6f;&#x6d;</a> 替换为注册 Github 账号时填写的邮箱：</p>
 <pre class="line-numbers language-none"><code class="language-none">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>③ 连续敲击 3 次回车，即可在 C:\Users\用户名文件夹.ssh 目录中生成 id_rsa 和 id_rsa.pub 两个文件</p>
 <p><strong>配置SSH key</strong><br>① 使用记事本打开 id_rsa.pub 文件，复制里面的文本内容<br>② 在浏览器中登录 Github，点击头像 -&gt; Settings -&gt; SSH and GPG Keys -&gt; New SSH key<br>③ 将 id_rsa.pub 文件中的内容，粘贴到 Key 对应的文本框中<br>④ 在 Title 文本框中任意填写一个名称，来标识这个 Key 从何而来</p>
@@ -726,63 +726,6 @@ siderMenuData: [
       </tags>
   </entry>
   <entry>
-    <title>Node.js的模块化</title>
-    <url>/2022/03/10/node-js-de-mo-kuai-hua/</url>
-    <content><![CDATA[<h1 id="什么是模块化"><a href="#什么是模块化" class="headerlink" title="什么是模块化"></a>什么是模块化</h1><p>编程领域中的模块化，就是遵守固定的规则，把一个大文件拆成独立并互相依赖的多个小模块。<br>把代码进行模块化拆分的好处：</p>
-<ul>
-<li>提高了代码的复用性</li>
-<li>提高了代码的可维护性</li>
-<li>可以实现按需加载<span id="more"></span>
-<h1 id="Node-js中的模块化"><a href="#Node-js中的模块化" class="headerlink" title="Node.js中的模块化"></a>Node.js中的模块化</h1></li>
-</ul>
-<h2 id="模块的分类"><a href="#模块的分类" class="headerlink" title="模块的分类"></a>模块的分类</h2><p>Node.js 中根据模块来源的不同，将模块分为了 3 大类，分别是：</p>
-<ul>
-<li>内置模块（内置模块是由 Node.js 官方提供的，例如 fs、path、http 等）</li>
-<li>自定义模块（用户创建的每个 .js 文件，都是自定义模块）</li>
-<li>第三方模块（由第三方开发出来的模块，并非官方提供的内置模块，也不是用户创建的自定义模块，使用前需要先下载）</li>
-</ul>
-<h2 id="加载模块"><a href="#加载模块" class="headerlink" title="加载模块"></a>加载模块</h2><p>使用强大的 require() 方法，可以加载需要的内置模块、用户自定义模块、第三方模块进行使用<br>（注意：使用 require() 方法加载其它模块时，会执行被加载模块中的代码）</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 1.加载内置的fs模块
-const fs &#x3D; require(&#39;fs&#39; )
-&#x2F;&#x2F; 2.加载用户的自定义模块
-const custom &#x3D; require( &#39; .&#x2F;custom.js&#39;)
-&#x2F;&#x2F; 3.加载第三方模块(关于第三方模块的下载和使用，会在后面的课程中进行专]的讲解)
-const moment &#x3D; require( &#39; moment &#39; )<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="模块作用域"><a href="#模块作用域" class="headerlink" title="模块作用域"></a>模块作用域</h2><p>与函数作用域类似，在自定义模块中定义的变量、方法等成员，只能在当前模块内被访问，这种模块级别的访问限制，叫做模块作用域；他的好处是：防止全局变量污染的问题</p>
-<h2 id="向外共享模块作用域中的成员"><a href="#向外共享模块作用域中的成员" class="headerlink" title="向外共享模块作用域中的成员"></a>向外共享模块作用域中的成员</h2><ol>
-<li>module对象：在每个 .js 自定义模块中都有一个 module 对象，它里面存储了和当前模块有关的信息</li>
-<li>module.exports 对象：在自定义模块中，可以使用 module.exports 对象，将模块内的成员共享出去，供外界使用。外界用 require() 方法导入自定义模块时，得到的就是 module.exports 所指向的对象。（注意：使用 require() 方法导入模块时，导入的结果，永远以 module.exports 指向的对象为准）</li>
-<li>exports 对象：由于 module.exports 单词写起来比较复杂，为了简化向外共享成员的代码，Node 提供了 exports 对象。默认情况下，exports 和 module.exports 指向同一个对象。最终共享的结果，还是以 module.exports 指向的对象为准。</li>
-</ol>
-<h1 id="模块的加载机制"><a href="#模块的加载机制" class="headerlink" title="模块的加载机制"></a>模块的加载机制</h1><h2 id="优先从缓存中加载"><a href="#优先从缓存中加载" class="headerlink" title="优先从缓存中加载"></a>优先从缓存中加载</h2><p>模块在第一次加载后会被缓存。 这也意味着多次调用 require() 不会导致模块的代码被执行多次。<br>注意：不论是内置模块、用户自定义模块、还是第三方模块，它们都会优先从缓存中加载，从而提高模块的加载效率。</p>
-<h2 id="内置模块的加载机制"><a href="#内置模块的加载机制" class="headerlink" title="内置模块的加载机制"></a>内置模块的加载机制</h2><p>内置模块是由 Node.js 官方提供的模块，内置模块的加载优先级最高。<br>例如，require(‘fs’) 始终返回内置的 fs 模块，即使在 node_modules 目录下有名字相同的包也叫做 fs。</p>
-<h2 id="自定义模块的加载机制"><a href="#自定义模块的加载机制" class="headerlink" title="自定义模块的加载机制"></a>自定义模块的加载机制</h2><p>使用 require() 加载自定义模块时，必须指定以 .&#x2F; 或 ..&#x2F; 开头的路径标识符。在加载自定义模块时，如果没有指定 .&#x2F; 或 ..&#x2F; 这样的路径标识符，则 node 会把它当作内置模块或第三方模块进行加载。</p>
-<p>同时，在使用 require() 导入自定义模块时，如果省略了文件的扩展名，则 Node.js 会按顺序分别尝试加载以下的文件：<br>按照确切的文件名进行加载</p>
-<ul>
-<li>补全 .js 扩展名进行加载</li>
-<li>补全 .json 扩展名进行加载</li>
-<li>补全 .node 扩展名进行加载</li>
-<li>加载失败，终端报错<h2 id="第三方模块的加载机制"><a href="#第三方模块的加载机制" class="headerlink" title="第三方模块的加载机制"></a>第三方模块的加载机制</h2>如果传递给 require() 的模块标识符不是一个内置模块，也没有以 ‘.&#x2F;’ 或 ‘..&#x2F;’ 开头，则 Node.js 会从当前模块的父目录开始，尝试从 &#x2F;node_modules 文件夹中加载第三方模块。<br>如果没有找到对应的第三方模块，则移动到再上一层父目录中，进行加载，直到文件系统的根目录。<br>例如，假设在 ‘C:\Users\itheima\project\foo.js’ 文件里调用了 require(‘tools’)，则 Node.js 会按以下顺序查找：</li>
-<li>C:\Users\itheima\project\node_modules\tools</li>
-<li>C:\Users\itheima\node_modules\tools</li>
-<li>C:\Users\node_modules\tools</li>
-<li>C:\node_modules\tools</li>
-</ul>
-<h2 id="目录作为模块"><a href="#目录作为模块" class="headerlink" title="目录作为模块"></a>目录作为模块</h2><p>当把目录作为模块标识符，传递给 require() 进行加载的时候，有三种加载方式：</p>
-<ul>
-<li>在被加载的目录下查找一个叫做 package.json 的文件，并寻找 main 属性，作为 require() 加载的入口</li>
-<li>如果目录里没有 package.json 文件，或者 main 入口不存在或无法解析，则 Node.js 将会试图加载目录下的 index.js 文件。</li>
-<li>如果以上两步都失败了，则 Node.js 会在终端打印错误消息，报告模块的缺失：Error: Cannot find module ‘xxx’</li>
-</ul>
-]]></content>
-      <categories>
-        <category>前后端交互</category>
-      </categories>
-      <tags>
-        <tag>Node.js的模块化</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MarkdownPad语法</title>
     <url>/2022/02/14/markdownpad-yu-fa/</url>
     <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> 我之前记笔记一直用OneNote，但是年前心血来潮，就自己建了博客，想着把自己的学习心得发到博客上。但是博客算是完工了，但是写文章又成了一大难题，就自己在网上查找写博客的编辑器，发现用Markdown Pad来编写文章很方便。但是刚接触这个编辑器，其中的语法看了几次记不住，于是准备写一下Markdown Pad的写作语法。以供自己写作的时候还要在网上找（麻烦….）。<span id="more"></span></p>
@@ -870,6 +813,63 @@ Ctrl+K　代码块
 ]]></content>
       <tags>
         <tag>MarkdownPad语法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Node.js的模块化</title>
+    <url>/2022/03/10/node-js-de-mo-kuai-hua/</url>
+    <content><![CDATA[<h1 id="什么是模块化"><a href="#什么是模块化" class="headerlink" title="什么是模块化"></a>什么是模块化</h1><p>编程领域中的模块化，就是遵守固定的规则，把一个大文件拆成独立并互相依赖的多个小模块。<br>把代码进行模块化拆分的好处：</p>
+<ul>
+<li>提高了代码的复用性</li>
+<li>提高了代码的可维护性</li>
+<li>可以实现按需加载<span id="more"></span>
+<h1 id="Node-js中的模块化"><a href="#Node-js中的模块化" class="headerlink" title="Node.js中的模块化"></a>Node.js中的模块化</h1></li>
+</ul>
+<h2 id="模块的分类"><a href="#模块的分类" class="headerlink" title="模块的分类"></a>模块的分类</h2><p>Node.js 中根据模块来源的不同，将模块分为了 3 大类，分别是：</p>
+<ul>
+<li>内置模块（内置模块是由 Node.js 官方提供的，例如 fs、path、http 等）</li>
+<li>自定义模块（用户创建的每个 .js 文件，都是自定义模块）</li>
+<li>第三方模块（由第三方开发出来的模块，并非官方提供的内置模块，也不是用户创建的自定义模块，使用前需要先下载）</li>
+</ul>
+<h2 id="加载模块"><a href="#加载模块" class="headerlink" title="加载模块"></a>加载模块</h2><p>使用强大的 require() 方法，可以加载需要的内置模块、用户自定义模块、第三方模块进行使用<br>（注意：使用 require() 方法加载其它模块时，会执行被加载模块中的代码）</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 1.加载内置的fs模块
+const fs &#x3D; require(&#39;fs&#39; )
+&#x2F;&#x2F; 2.加载用户的自定义模块
+const custom &#x3D; require( &#39; .&#x2F;custom.js&#39;)
+&#x2F;&#x2F; 3.加载第三方模块(关于第三方模块的下载和使用，会在后面的课程中进行专]的讲解)
+const moment &#x3D; require( &#39; moment &#39; )<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="模块作用域"><a href="#模块作用域" class="headerlink" title="模块作用域"></a>模块作用域</h2><p>与函数作用域类似，在自定义模块中定义的变量、方法等成员，只能在当前模块内被访问，这种模块级别的访问限制，叫做模块作用域；他的好处是：防止全局变量污染的问题</p>
+<h2 id="向外共享模块作用域中的成员"><a href="#向外共享模块作用域中的成员" class="headerlink" title="向外共享模块作用域中的成员"></a>向外共享模块作用域中的成员</h2><ol>
+<li>module对象：在每个 .js 自定义模块中都有一个 module 对象，它里面存储了和当前模块有关的信息</li>
+<li>module.exports 对象：在自定义模块中，可以使用 module.exports 对象，将模块内的成员共享出去，供外界使用。外界用 require() 方法导入自定义模块时，得到的就是 module.exports 所指向的对象。（注意：使用 require() 方法导入模块时，导入的结果，永远以 module.exports 指向的对象为准）</li>
+<li>exports 对象：由于 module.exports 单词写起来比较复杂，为了简化向外共享成员的代码，Node 提供了 exports 对象。默认情况下，exports 和 module.exports 指向同一个对象。最终共享的结果，还是以 module.exports 指向的对象为准。</li>
+</ol>
+<h1 id="模块的加载机制"><a href="#模块的加载机制" class="headerlink" title="模块的加载机制"></a>模块的加载机制</h1><h2 id="优先从缓存中加载"><a href="#优先从缓存中加载" class="headerlink" title="优先从缓存中加载"></a>优先从缓存中加载</h2><p>模块在第一次加载后会被缓存。 这也意味着多次调用 require() 不会导致模块的代码被执行多次。<br>注意：不论是内置模块、用户自定义模块、还是第三方模块，它们都会优先从缓存中加载，从而提高模块的加载效率。</p>
+<h2 id="内置模块的加载机制"><a href="#内置模块的加载机制" class="headerlink" title="内置模块的加载机制"></a>内置模块的加载机制</h2><p>内置模块是由 Node.js 官方提供的模块，内置模块的加载优先级最高。<br>例如，require(‘fs’) 始终返回内置的 fs 模块，即使在 node_modules 目录下有名字相同的包也叫做 fs。</p>
+<h2 id="自定义模块的加载机制"><a href="#自定义模块的加载机制" class="headerlink" title="自定义模块的加载机制"></a>自定义模块的加载机制</h2><p>使用 require() 加载自定义模块时，必须指定以 .&#x2F; 或 ..&#x2F; 开头的路径标识符。在加载自定义模块时，如果没有指定 .&#x2F; 或 ..&#x2F; 这样的路径标识符，则 node 会把它当作内置模块或第三方模块进行加载。</p>
+<p>同时，在使用 require() 导入自定义模块时，如果省略了文件的扩展名，则 Node.js 会按顺序分别尝试加载以下的文件：<br>按照确切的文件名进行加载</p>
+<ul>
+<li>补全 .js 扩展名进行加载</li>
+<li>补全 .json 扩展名进行加载</li>
+<li>补全 .node 扩展名进行加载</li>
+<li>加载失败，终端报错<h2 id="第三方模块的加载机制"><a href="#第三方模块的加载机制" class="headerlink" title="第三方模块的加载机制"></a>第三方模块的加载机制</h2>如果传递给 require() 的模块标识符不是一个内置模块，也没有以 ‘.&#x2F;’ 或 ‘..&#x2F;’ 开头，则 Node.js 会从当前模块的父目录开始，尝试从 &#x2F;node_modules 文件夹中加载第三方模块。<br>如果没有找到对应的第三方模块，则移动到再上一层父目录中，进行加载，直到文件系统的根目录。<br>例如，假设在 ‘C:\Users\itheima\project\foo.js’ 文件里调用了 require(‘tools’)，则 Node.js 会按以下顺序查找：</li>
+<li>C:\Users\itheima\project\node_modules\tools</li>
+<li>C:\Users\itheima\node_modules\tools</li>
+<li>C:\Users\node_modules\tools</li>
+<li>C:\node_modules\tools</li>
+</ul>
+<h2 id="目录作为模块"><a href="#目录作为模块" class="headerlink" title="目录作为模块"></a>目录作为模块</h2><p>当把目录作为模块标识符，传递给 require() 进行加载的时候，有三种加载方式：</p>
+<ul>
+<li>在被加载的目录下查找一个叫做 package.json 的文件，并寻找 main 属性，作为 require() 加载的入口</li>
+<li>如果目录里没有 package.json 文件，或者 main 入口不存在或无法解析，则 Node.js 将会试图加载目录下的 index.js 文件。</li>
+<li>如果以上两步都失败了，则 Node.js 会在终端打印错误消息，报告模块的缺失：Error: Cannot find module ‘xxx’</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前后端交互</category>
+      </categories>
+      <tags>
+        <tag>Node.js的模块化</tag>
       </tags>
   </entry>
   <entry>
@@ -1906,6 +1906,67 @@ Vue<span class="token punctuation">.</span><span class="token function">filters<
       </tags>
   </entry>
   <entry>
+    <title>js-封装常用的方法</title>
+    <url>/2022/09/07/js-zhong-guo-biao-zhun-shi-jian-zhuan-hua-wei-nian-yue-ri-shi-fen-miao/</url>
+    <content><![CDATA[<h3 id="js-中国标准时间转化为年月日时分秒"><a href="#js-中国标准时间转化为年月日时分秒" class="headerlink" title="js-中国标准时间转化为年月日时分秒"></a>js-中国标准时间转化为年月日时分秒</h3><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token comment">// 中国标准时间</span>
+<span class="token keyword">let</span> myTime <span class="token operator">=</span> <span class="token string">"Wed Feb 16 2022 00:00:00 GMT+0800"</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> newTime <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">filterTime</span><span class="token punctuation">(</span> myTime<span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newTime<span class="token punctuation">)</span> <span class="token comment">// 2022-02-16 00:00:00</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">filterTime</span><span class="token punctuation">(</span><span class="token parameter">time</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">let</span> date <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> y <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getFullYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> m <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getMonth</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        m <span class="token operator">=</span> m <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> m <span class="token operator">:</span> m<span class="token punctuation">;</span>
+        <span class="token keyword">let</span> d <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        d <span class="token operator">=</span> d <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> d <span class="token operator">:</span> d<span class="token punctuation">;</span>
+        <span class="token keyword">let</span> h <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getHours</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        h <span class="token operator">=</span> h <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> h <span class="token operator">:</span> h<span class="token punctuation">;</span>
+        <span class="token keyword">let</span> minute <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getMinutes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        minute <span class="token operator">=</span> minute <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> minute <span class="token operator">:</span> minute<span class="token punctuation">;</span>
+        <span class="token keyword">let</span> s <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getSeconds</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        s <span class="token operator">=</span> s <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> s <span class="token operator">:</span> s<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> y <span class="token operator">+</span> <span class="token string">"-"</span> <span class="token operator">+</span> m <span class="token operator">+</span> <span class="token string">"-"</span> <span class="token operator">+</span> d <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> h <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> minute <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> s<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span>    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="js-利用-setInterval函数实现当前时间"><a href="#js-利用-setInterval函数实现当前时间" class="headerlink" title="js- 利用 setInterval函数实现当前时间"></a>js- 利用 <code>setInterval</code>函数实现当前时间</h3><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">//获取当前时间</span>
+<span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">var</span> date <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> year <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getFullYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> mth <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getMonth</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> d <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> h <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getHours</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> m <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getMinutes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> s <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getSeconds</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> week <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getDay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment">//定义拼接变量,变量调用转换两位数函数</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>timeNow <span class="token operator">=</span> year <span class="token operator">+</span> <span class="token string">"年"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span>mth<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"月"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"日"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span>h<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+   <span class="token comment">//定义函数，将一位数"1"转为两位数"01"</span>
+<span class="token function">fn</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  str <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> str <span class="token operator">=</span> <span class="token string">"0"</span> <span class="token operator">+</span> str <span class="token operator">:</span> str<span class="token punctuation">;</span>
+  <span class="token keyword">return</span> str<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token comment">//最后在vue的mounted生命周期里面使用setInterval函数</span>
+<span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+]]></content>
+      <categories>
+        <category>js方法</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>git基础</title>
     <url>/2022/03/01/git-ji-chu/</url>
     <content><![CDATA[<h1 id="版本控制软件"><a href="#版本控制软件" class="headerlink" title="版本控制软件"></a>版本控制软件</h1><h4 id="git-提交代码到同一分支时冲突的解决"><a href="#git-提交代码到同一分支时冲突的解决" class="headerlink" title="git 提交代码到同一分支时冲突的解决"></a>git 提交代码到同一分支时冲突的解决</h4><p>​      我们在同一分支上开发代码时，代码冲突是不可避免的。下面通过我今天提交项目就遇到了这个问题，问题就是:同事和我两个人在同一个分支上开发代码，今天他提交之后，我在去用<code>git push -u origin mall</code>提交代码出现一下报错</p>
@@ -2125,67 +2186,6 @@ git reset <span class="token operator">--</span>hard <span class="token operator
       </tags>
   </entry>
   <entry>
-    <title>js-封装常用的方法</title>
-    <url>/2022/09/07/js-zhong-guo-biao-zhun-shi-jian-zhuan-hua-wei-nian-yue-ri-shi-fen-miao/</url>
-    <content><![CDATA[<h3 id="js-中国标准时间转化为年月日时分秒"><a href="#js-中国标准时间转化为年月日时分秒" class="headerlink" title="js-中国标准时间转化为年月日时分秒"></a>js-中国标准时间转化为年月日时分秒</h3><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-<span class="token comment">// 中国标准时间</span>
-<span class="token keyword">let</span> myTime <span class="token operator">=</span> <span class="token string">"Wed Feb 16 2022 00:00:00 GMT+0800"</span><span class="token punctuation">;</span>
-<span class="token keyword">let</span> newTime <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">filterTime</span><span class="token punctuation">(</span> myTime<span class="token punctuation">)</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newTime<span class="token punctuation">)</span> <span class="token comment">// 2022-02-16 00:00:00</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-<span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-    <span class="token function">filterTime</span><span class="token punctuation">(</span><span class="token parameter">time</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">let</span> date <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">let</span> y <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getFullYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">let</span> m <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getMonth</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        m <span class="token operator">=</span> m <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> m <span class="token operator">:</span> m<span class="token punctuation">;</span>
-        <span class="token keyword">let</span> d <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        d <span class="token operator">=</span> d <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> d <span class="token operator">:</span> d<span class="token punctuation">;</span>
-        <span class="token keyword">let</span> h <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getHours</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        h <span class="token operator">=</span> h <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> h <span class="token operator">:</span> h<span class="token punctuation">;</span>
-        <span class="token keyword">let</span> minute <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getMinutes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        minute <span class="token operator">=</span> minute <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> minute <span class="token operator">:</span> minute<span class="token punctuation">;</span>
-        <span class="token keyword">let</span> s <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getSeconds</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        s <span class="token operator">=</span> s <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> s <span class="token operator">:</span> s<span class="token punctuation">;</span>
-        <span class="token keyword">return</span> y <span class="token operator">+</span> <span class="token string">"-"</span> <span class="token operator">+</span> m <span class="token operator">+</span> <span class="token string">"-"</span> <span class="token operator">+</span> d <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> h <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> minute <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> s<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span>    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="js-利用-setInterval函数实现当前时间"><a href="#js-利用-setInterval函数实现当前时间" class="headerlink" title="js- 利用 setInterval函数实现当前时间"></a>js- 利用 <code>setInterval</code>函数实现当前时间</h3><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">//获取当前时间</span>
-<span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">var</span> date <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">var</span> year <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getFullYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">var</span> mth <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getMonth</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
-  <span class="token keyword">var</span> d <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">var</span> h <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getHours</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">var</span> m <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getMinutes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">var</span> s <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getSeconds</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">var</span> week <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getDay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token comment">//定义拼接变量,变量调用转换两位数函数</span>
-  <span class="token keyword">this</span><span class="token punctuation">.</span>timeNow <span class="token operator">=</span> year <span class="token operator">+</span> <span class="token string">"年"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span>mth<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"月"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"日"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span>h<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-   <span class="token comment">//定义函数，将一位数"1"转为两位数"01"</span>
-<span class="token function">fn</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  str <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> str <span class="token operator">=</span> <span class="token string">"0"</span> <span class="token operator">+</span> str <span class="token operator">:</span> str<span class="token punctuation">;</span>
-  <span class="token keyword">return</span> str<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-    <span class="token comment">//最后在vue的mounted生命周期里面使用setInterval函数</span>
-<span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-  <span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-]]></content>
-      <categories>
-        <category>js方法</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>js判断数组的方法</title>
     <url>/2022/09/05/js-pan-duan-shu-zu-de-fang-fa/</url>
     <content><![CDATA[<h3 id="js-判断数组的四种方法"><a href="#js-判断数组的四种方法" class="headerlink" title="js  判断数组的四种方法"></a>js  判断数组的四种方法</h3><ol>
@@ -2352,69 +2352,6 @@ i5ting_toc -f 要转换的md文件路径 -o<span aria-hidden="true" class="line-
       </tags>
   </entry>
   <entry>
-    <title>uni-app使用总结</title>
-    <url>/2022/08/10/uni-app-shi-yong-zong-jie/</url>
-    <content><![CDATA[<h3 id="rich-text-富文本-图片自适应问题-解决"><a href="#rich-text-富文本-图片自适应问题-解决" class="headerlink" title="rich-text 富文本 图片自适应问题 解决"></a>rich-text 富文本 图片自适应问题 解决</h3><p>  <strong>问题：</strong> rich-text是微信小程序的富文本标签，在使用rich-text的时候，需要rich-text内部图片宽高自适应。</p>
-<p>  <strong>解决方法：</strong> 首先新建一个 text.js 文件</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">/**
- * 处理富文本里的图片宽度自适应
- * 1.去掉img标签里的style、width、height属性
- * 2.img标签添加style属性：max-width:100%;height:auto
- * 3.修改所有style里的width属性为max-width:100%
- * 4.去掉&lt;br/>标签
- * @param html
- * @returns &#123;void|string|*&#125;
- */</span>
-<span class="token keyword">function</span> <span class="token function">formatRichText</span><span class="token punctuation">(</span><span class="token parameter">html</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-  <span class="token keyword">let</span> newContent<span class="token operator">=</span> html<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">&lt;img[^>]*></span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">match<span class="token punctuation">,</span>capture</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    match <span class="token operator">=</span> match<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">style="[^"]+"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">style='[^']+'</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    match <span class="token operator">=</span> match<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">width="[^"]+"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">width='[^']+'</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    match <span class="token operator">=</span> match<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">height="[^"]+"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">height='[^']+'</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> match<span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  newContent <span class="token operator">=</span> newContent<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">style="[^"]+"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">match<span class="token punctuation">,</span>capture</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    match <span class="token operator">=</span> match<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">width:[^;]+;</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">'max-width:100%;'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">width:[^;]+;</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">'max-width:100%;'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> match<span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  newContent <span class="token operator">=</span> newContent<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">&lt;br[^>]*\/></span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  newContent <span class="token operator">=</span> newContent<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\&lt;img</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">'&lt;img style="max-width:100%;height:auto;display:block;margin-top:0;margin-bottom:0;"'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">return</span> newContent<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
- 
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  formatRichText
-<span class="token punctuation">&#125;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>   接下来，那个页面需要进行富文本展示，就把这个js 文件引入</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span>
-		formatRichText
-	<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'xxxxx/text.js'</span>  <span class="token comment">//看自己的路径</span>
-
-
-<span class="token comment">//这个是获取富文本的接口</span>
-<span class="token function">teacher</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">this</span><span class="token punctuation">.</span>strings <span class="token operator">=</span> <span class="token function">formatRichText</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span>data<span class="token punctuation">.</span>teacherDetails<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-
-
-<span class="token comment">//这是需要在页面上展示的内容</span>
-<span class="token operator">&lt;</span>rich<span class="token operator">-</span>text <span class="token operator">:</span>nodes<span class="token operator">=</span><span class="token string">"strings"</span> style<span class="token operator">=</span><span class="token string">"width: 100%;"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>rich<span class="token operator">-</span>text<span class="token operator">></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<p><strong>完美解决 uni-app 的 rich-text组件 中图片宽高自适应问题</strong> </p>
-<p>加油加油加油！！！</p>
-]]></content>
-      <categories>
-        <category>框架</category>
-      </categories>
-      <tags>
-        <tag>uni-app</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>vue-组件间传值</title>
     <url>/2022/10/31/vue-zu-jian-jian-chuan-zhi/</url>
     <content><![CDATA[<h3 id="vue-组件间传值"><a href="#vue-组件间传值" class="headerlink" title="vue 组件间传值"></a>vue 组件间传值</h3><p>一、父组件向子组件传值–详细讲解（自定义属性）</p>
@@ -2494,6 +2431,69 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       </categories>
       <tags>
         <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>uni-app使用总结</title>
+    <url>/2022/08/10/uni-app-shi-yong-zong-jie/</url>
+    <content><![CDATA[<h3 id="rich-text-富文本-图片自适应问题-解决"><a href="#rich-text-富文本-图片自适应问题-解决" class="headerlink" title="rich-text 富文本 图片自适应问题 解决"></a>rich-text 富文本 图片自适应问题 解决</h3><p>  <strong>问题：</strong> rich-text是微信小程序的富文本标签，在使用rich-text的时候，需要rich-text内部图片宽高自适应。</p>
+<p>  <strong>解决方法：</strong> 首先新建一个 text.js 文件</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">/**
+ * 处理富文本里的图片宽度自适应
+ * 1.去掉img标签里的style、width、height属性
+ * 2.img标签添加style属性：max-width:100%;height:auto
+ * 3.修改所有style里的width属性为max-width:100%
+ * 4.去掉&lt;br/>标签
+ * @param html
+ * @returns &#123;void|string|*&#125;
+ */</span>
+<span class="token keyword">function</span> <span class="token function">formatRichText</span><span class="token punctuation">(</span><span class="token parameter">html</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">let</span> newContent<span class="token operator">=</span> html<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">&lt;img[^>]*></span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">match<span class="token punctuation">,</span>capture</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    match <span class="token operator">=</span> match<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">style="[^"]+"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">style='[^']+'</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    match <span class="token operator">=</span> match<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">width="[^"]+"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">width='[^']+'</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    match <span class="token operator">=</span> match<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">height="[^"]+"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">height='[^']+'</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> match<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  newContent <span class="token operator">=</span> newContent<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">style="[^"]+"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">match<span class="token punctuation">,</span>capture</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    match <span class="token operator">=</span> match<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">width:[^;]+;</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">'max-width:100%;'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">width:[^;]+;</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">'max-width:100%;'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> match<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  newContent <span class="token operator">=</span> newContent<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">&lt;br[^>]*\/></span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  newContent <span class="token operator">=</span> newContent<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\&lt;img</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">'&lt;img style="max-width:100%;height:auto;display:block;margin-top:0;margin-bottom:0;"'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> newContent<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+ 
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  formatRichText
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>   接下来，那个页面需要进行富文本展示，就把这个js 文件引入</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span>
+		formatRichText
+	<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'xxxxx/text.js'</span>  <span class="token comment">//看自己的路径</span>
+
+
+<span class="token comment">//这个是获取富文本的接口</span>
+<span class="token function">teacher</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span>strings <span class="token operator">=</span> <span class="token function">formatRichText</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span>data<span class="token punctuation">.</span>teacherDetails<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+
+<span class="token comment">//这是需要在页面上展示的内容</span>
+<span class="token operator">&lt;</span>rich<span class="token operator">-</span>text <span class="token operator">:</span>nodes<span class="token operator">=</span><span class="token string">"strings"</span> style<span class="token operator">=</span><span class="token string">"width: 100%;"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>rich<span class="token operator">-</span>text<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p><strong>完美解决 uni-app 的 rich-text组件 中图片宽高自适应问题</strong> </p>
+<p>加油加油加油！！！</p>
+]]></content>
+      <categories>
+        <category>框架</category>
+      </categories>
+      <tags>
+        <tag>uni-app</tag>
       </tags>
   </entry>
   <entry>
