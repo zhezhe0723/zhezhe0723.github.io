@@ -82,117 +82,6 @@ console<span class="token punctuation">.</span><span class="token function">log<
       </tags>
   </entry>
   <entry>
-    <title>Express</title>
-    <url>/2022/03/16/express/</url>
-    <content><![CDATA[<h2 id="Express简介"><a href="#Express简介" class="headerlink" title="Express简介"></a>Express简介</h2><h3 id="什么是Express"><a href="#什么是Express" class="headerlink" title="什么是Express"></a>什么是Express</h3><p>官方给出的概念：Express 是基于 Node.js 平台，快速、开放、极简的 Web 开发框架。<br>通俗的理解：Express 的作用和 Node.js 内置的 http 模块类似，是专门用来创建 Web 服务器的。<br>Express 的本质：就是一个 npm 上的第三方包，提供了快速创建 Web 服务器的便捷方法。<br>Express 的中文官网：<a href="http://www.expressjs.com.cn/">http://www.expressjs.com.cn/</a> </p>
-<span id="more"></span>
-
-<h3 id="Express的作用"><a href="#Express的作用" class="headerlink" title="Express的作用"></a>Express的作用</h3><p>对于前端程序员来说，最常见的两种服务器，分别是：</p>
-<ul>
-<li>Web 网站服务器：专门对外提供 Web 网页资源的服务器。</li>
-<li>API 接口服务器：专门对外提供 API 接口的服务器。<br>使用 Express，我们可以方便、快速的创建 Web 网站的服务器或 API 接口的服务器</li>
-</ul>
-<h3 id="Express的基本使用"><a href="#Express的基本使用" class="headerlink" title="Express的基本使用"></a>Express的基本使用</h3><ul>
-<li>安装Express<br>在项目所处的目录中，运行如下的终端命令，即可将 express 安装到项目中使用<pre class="line-numbers language-none"><code class="language-none">npm i express@4.17.1   &#x2F;&#x2F;express版本号可有可无，但是学习的时候必须和老师保持一致<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>创建基本的Web服务器<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;1．导入、express
-  const express &#x3D; require( &quot; express &quot;)
-&#x2F;&#x2F;2，创建web服字果
- const app &#x3D; express()
-&#x2F;&#x2F;3．调用 app.listen(端口号，启动成功后的回调函数)，启动服务器
- app.listen(8o,()&#x3D;&gt; &#123;
-   console.log( &#39;express server running at http:&#x2F;&#x2F;127.0.0.1&quot;))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>监听GET请求<br>通过 app.get() 方法，可以监听客户端的 GET 请求，具体的语法格式如下：<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;参数1:客户端请求的URL地址
-&#x2F;&#x2F;参数2:请求对应的处理函数
-req:请求对象(包含了与请求相关的属性与方法)
-res:响应对象(包含了与响应相关的属性与方法)
-app.get( &#39;请求URL&#39;, function(req,res) &#123;&#x2F;*处理函数*&#x2F;&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>监听POST请求<br>通过 app.post() 方法，可以监听客户端的 POST 请求，具体的语法格式如下<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;参数1:客户端请求的URL地址
-&#x2F;&#x2F;参数2:请求对应的处理函数
-&#x2F;&#x2F;  req:请求对象（包含了与请求相关的属性与方法)
-&#x2F;&#x2F;  res:响应对象(包含了与响应相关的属性与方法)
-app.post( &#39;请求URL&#39; function(req,res) &#123;&#x2F;*处理函数*&#x2F;&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>把内容响应给客户端<br>通过 res.send() 方法，可以把处理好的内容，发送给客户端：<pre class="line-numbers language-none"><code class="language-none">app.get(&#39;&#x2F;user&#39;, (req, res) &#x3D;&gt; &#123;
-  &#x2F;&#x2F; 调用 express 提供的 res.send() 方法，向客户端响应一个 JSON 对象
-res.send(&#123; name: &#39;zs&#39;, age: 20, gender: &#39;男&#39; &#125;)
-&#125;)
-app.post(&#39;&#x2F;user&#39;, (req, res) &#x3D;&gt; &#123;
-  &#x2F;&#x2F; 调用 express 提供的 res.send() 方法，向客户端响应一个 文本字符串
- res.send(&#39;请求成功&#39;)
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>获取URL中携带的查询参数<br>通过 req.query 对象，可以访问到客户端通过查询字符串的形式，发送到服务器的参数：<pre class="line-numbers language-none"><code class="language-none"> app.get(&#39;&#x2F;&#39;, (req, res) &#x3D;&gt; &#123;
-&#x2F;&#x2F; 通过 req.query 可以获取到客户端发送过来的 查询参数
-&#x2F;&#x2F; 注意：默认情况下，req.query 是一个空对象
-console.log(req.query)
-res.send(req.query)
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>获取URL中的动态参数<br>通过 req.params 对象，可以访问到 URL 中，通过 : 匹配到的动态参数：<pre class="line-numbers language-none"><code class="language-none"> &#x2F;&#x2F; 注意：这里的 :id 是一个动态的参数
-app.get(&#39;&#x2F;user&#x2F;:ids&#x2F;:username&#39;, (req, res) &#x3D;&gt; &#123;
-&#x2F;&#x2F; req.params 是动态匹配到的 URL 参数，默认也是一个空对象
-console.log(req.params)
-res.send(req.params)
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="托管静态资源"><a href="#托管静态资源" class="headerlink" title="托管静态资源"></a>托管静态资源</h3>express 提供了一个非常好用的函数，叫做 express.static()，通过它，我们可以非常方便地创建一个静态资源服务器，例如，通过如下代码就可以将 public 目录下的图片、CSS 文件、JavaScript 文件对外开放访问了：<pre class="line-numbers language-none"><code class="language-none">app.use(express.static(&#39;public&#39;))<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-现在，你就可以访问 public 目录中的所有文件了：<br><a href="http://localhost:3000/images/bg.jpg">http://localhost:3000/images/bg.jpg</a><br><a href="http://localhost:3000/css/style.css">http://localhost:3000/css/style.css</a><br><a href="http://localhost:3000/js/login.js">http://localhost:3000/js/login.js</a></li>
-</ul>
-<p><strong>注意：</strong></p>
-<ul>
-<li>Express 在指定的静态目录中查找文件，并对外提供资源的访问路径。因此，存放静态文件的目录名不会出现在 URL 中</li>
-<li>如果要托管多个静态资源目录，就要多次调用express.static()函数，但是函数会根据目录的添加顺序查找所需的文件</li>
-</ul>
-<p><strong>挂载路径前缀：</strong>如果希望在托管的静态资源访问路径之前，挂载路径前缀，则可以使用如下的方式：</p>
-<pre class="line-numbers language-none"><code class="language-none">app.use(&#39;&#x2F;pubic&#39;,express.static(&#39;public&#39;))<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>现在，你就可以通过带有 &#x2F;public 前缀地址来访问 public 目录中的文件了：<br><a href="http://localhost:3000/public/images/kitten.jpg">http://localhost:3000/public/images/kitten.jpg</a><br><a href="http://localhost:3000/public/css/style.css">http://localhost:3000/public/css/style.css</a><br><a href="http://localhost:3000/public/js/app.js">http://localhost:3000/public/js/app.js</a></p>
-<h3 id="nodemon"><a href="#nodemon" class="headerlink" title="nodemon"></a>nodemon</h3><p>在编写调试 Node.js 项目的时候，如果修改了项目的代码，则需要频繁的手动 close 掉，然后再重新启动，非常繁琐。<br>现在，我们可以使用 nodemon <a href="https://www.npmjs.com/package/nodemon">https://www.npmjs.com/package/nodemon</a> 这个工具，它能够监听项目文件的变动，当代码被修改后，nodemon 会自动帮我们重启项目，极大方便了开发和调试。<br>**安装nodemon:**在终端中，运行如下命令，即可将 nodemon 安装为全局可用的工具：</p>
-<pre class="line-numbers language-none"><code class="language-none">npm i -g nodemon  &#x2F;&#x2F;-g  全局<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>当基于 Node.js 编写了一个网站应用的时候，传统的方式，是运行 node app.js 命令，来启动项目。这样做的坏处是：代码被修改之后，需要手动重启项目。<br>现在，我们可以将 node 命令替换为 nodemon 命令，使用 nodemon app.js 来启动项目。这样做的好处是：代码被修改之后，会被 nodemon 监听到，从而实现自动重启项目的效果。</p>
-<h2 id="Express-路由"><a href="#Express-路由" class="headerlink" title="Express 路由"></a>Express 路由</h2><h3 id="路由的概念"><a href="#路由的概念" class="headerlink" title="路由的概念"></a>路由的概念</h3><p>广义上来讲，路由就是映射关系。在 Express 中，路由指的是客户端的请求与服务器处理函数之间的映射关系。<br>Express 中的路由分 3 部分组成，分别是请求的类型、请求的 URL 地址、处理函数，格式如下：<br> <strong>app.METHOD(PATH,HANDLER)</strong><br><strong>路由的匹配过程：</strong><br>每当一个请求到达服务器之后，需要先经过路由的匹配，只有匹配成功之后，才会调用对应的处理函数。<br>在匹配时，会按照路由的顺序进行匹配，如果请求类型和请求的 URL 同时匹配成功，则 Express 会将这次请求，转交给对应的 function 函数进行处理。</p>
-<h3 id="路由的使用"><a href="#路由的使用" class="headerlink" title="路由的使用"></a>路由的使用</h3><ul>
-<li>最简单的用法<br>在 Express 中使用路由最简单的方式，就是把路由挂载到 app 上，示例代码如下：<pre class="line-numbers language-none"><code class="language-none">  const express &#x3D; require(&#39;express&#39;)
-  const app &#x3D; express()
-&#x2F;&#x2F; 挂载路由
-app.get(&#39;&#x2F;&#39;, (req, res) &#x3D;&gt; &#123;
-  res.send(&#39;hello world.&#39;)
-&#125;)
-app.post(&#39;&#x2F;&#39;, (req, res) &#x3D;&gt; &#123;
- 	res.send(&#39;Post Request.&#39;)
-&#125;)
-  &#x2F;&#x2F;启动Web服务器
-app.listen(80, () &#x3D;&gt; &#123;
-	 console.log(&#39;http:&#x2F;&#x2F;127.0.0.1&#39;)
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>路由的模块化<br>为了方便对路由进行模块化的管理，Express 不建议将路由直接挂载到 app 上，而是推荐将路由抽离为单独的模块。<br>将路由抽离为单独模块的步骤如下：</li>
-</ul>
-<p>1.创建路由模块对应的 .js 文件<br>2.调用 express.Router() 函数创建路由对象<br>3.向路由对象上挂载具体的路由<br>4.使用 module.exports 向外共享路由对象<br>5.使用 app.use() 函数注册路由模块</p>
-<ul>
-<li>创建路由模块<pre class="line-numbers language-none"><code class="language-none">   &#x2F;&#x2F; 这是路由模块
-   &#x2F;&#x2F; 1. 导入 express
-   const express &#x3D; require(&#39;express&#39;)
-   &#x2F;&#x2F; 2. 创建路由对象
-   const router &#x3D; express.Router()
-   &#x2F;&#x2F; 3. 挂载具体的路由
-   router.get(&#39;&#x2F;user&#x2F;list&#39;, (req, res) &#x3D;&gt; &#123;
-     res.send(&#39;Get user list.&#39;)
-   &#125;)
-   router.post(&#39;&#x2F;user&#x2F;add&#39;, (req, res) &#x3D;&gt; &#123;
-     res.send(&#39;Add new user.&#39;)
-   &#125;)
-&#x2F;&#x2F; 4. 向外导出路由对象
-module.exports &#x3D; router<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>注册路由模块<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 1. 导入路由模块
-   const router &#x3D; require(&#39;.&#x2F;03.router&#39;)
-&#x2F;&#x2F; 2. 注册路由模块
-   app.use(&#39;&#x2F;api&#39;, router)
-&#x2F;&#x2F; 注意： app.use() 函数的作用，就是来注册全局中间件<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-]]></content>
-      <categories>
-        <category>前后端交互</category>
-      </categories>
-      <tags>
-        <tag>Express</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Flex布局</title>
     <url>/2022/07/10/flex-bu-ju/</url>
     <content><![CDATA[<h3 id="Flex-布局的定义"><a href="#Flex-布局的定义" class="headerlink" title="Flex 布局的定义"></a>Flex 布局的定义</h3><p>Flex 是Flexible Box 的缩写，意为“弹性布局” ，用来为盒状模型提供最大的灵活性。</p>
@@ -322,6 +211,117 @@ module.exports &#x3D; router<span aria-hidden="true" class="line-numbers-rows"><
       </tags>
   </entry>
   <entry>
+    <title>Express</title>
+    <url>/2022/03/16/express/</url>
+    <content><![CDATA[<h2 id="Express简介"><a href="#Express简介" class="headerlink" title="Express简介"></a>Express简介</h2><h3 id="什么是Express"><a href="#什么是Express" class="headerlink" title="什么是Express"></a>什么是Express</h3><p>官方给出的概念：Express 是基于 Node.js 平台，快速、开放、极简的 Web 开发框架。<br>通俗的理解：Express 的作用和 Node.js 内置的 http 模块类似，是专门用来创建 Web 服务器的。<br>Express 的本质：就是一个 npm 上的第三方包，提供了快速创建 Web 服务器的便捷方法。<br>Express 的中文官网：<a href="http://www.expressjs.com.cn/">http://www.expressjs.com.cn/</a> </p>
+<span id="more"></span>
+
+<h3 id="Express的作用"><a href="#Express的作用" class="headerlink" title="Express的作用"></a>Express的作用</h3><p>对于前端程序员来说，最常见的两种服务器，分别是：</p>
+<ul>
+<li>Web 网站服务器：专门对外提供 Web 网页资源的服务器。</li>
+<li>API 接口服务器：专门对外提供 API 接口的服务器。<br>使用 Express，我们可以方便、快速的创建 Web 网站的服务器或 API 接口的服务器</li>
+</ul>
+<h3 id="Express的基本使用"><a href="#Express的基本使用" class="headerlink" title="Express的基本使用"></a>Express的基本使用</h3><ul>
+<li>安装Express<br>在项目所处的目录中，运行如下的终端命令，即可将 express 安装到项目中使用<pre class="line-numbers language-none"><code class="language-none">npm i express@4.17.1   &#x2F;&#x2F;express版本号可有可无，但是学习的时候必须和老师保持一致<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>创建基本的Web服务器<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;1．导入、express
+  const express &#x3D; require( &quot; express &quot;)
+&#x2F;&#x2F;2，创建web服字果
+ const app &#x3D; express()
+&#x2F;&#x2F;3．调用 app.listen(端口号，启动成功后的回调函数)，启动服务器
+ app.listen(8o,()&#x3D;&gt; &#123;
+   console.log( &#39;express server running at http:&#x2F;&#x2F;127.0.0.1&quot;))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>监听GET请求<br>通过 app.get() 方法，可以监听客户端的 GET 请求，具体的语法格式如下：<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;参数1:客户端请求的URL地址
+&#x2F;&#x2F;参数2:请求对应的处理函数
+req:请求对象(包含了与请求相关的属性与方法)
+res:响应对象(包含了与响应相关的属性与方法)
+app.get( &#39;请求URL&#39;, function(req,res) &#123;&#x2F;*处理函数*&#x2F;&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>监听POST请求<br>通过 app.post() 方法，可以监听客户端的 POST 请求，具体的语法格式如下<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;参数1:客户端请求的URL地址
+&#x2F;&#x2F;参数2:请求对应的处理函数
+&#x2F;&#x2F;  req:请求对象（包含了与请求相关的属性与方法)
+&#x2F;&#x2F;  res:响应对象(包含了与响应相关的属性与方法)
+app.post( &#39;请求URL&#39; function(req,res) &#123;&#x2F;*处理函数*&#x2F;&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>把内容响应给客户端<br>通过 res.send() 方法，可以把处理好的内容，发送给客户端：<pre class="line-numbers language-none"><code class="language-none">app.get(&#39;&#x2F;user&#39;, (req, res) &#x3D;&gt; &#123;
+  &#x2F;&#x2F; 调用 express 提供的 res.send() 方法，向客户端响应一个 JSON 对象
+res.send(&#123; name: &#39;zs&#39;, age: 20, gender: &#39;男&#39; &#125;)
+&#125;)
+app.post(&#39;&#x2F;user&#39;, (req, res) &#x3D;&gt; &#123;
+  &#x2F;&#x2F; 调用 express 提供的 res.send() 方法，向客户端响应一个 文本字符串
+ res.send(&#39;请求成功&#39;)
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>获取URL中携带的查询参数<br>通过 req.query 对象，可以访问到客户端通过查询字符串的形式，发送到服务器的参数：<pre class="line-numbers language-none"><code class="language-none"> app.get(&#39;&#x2F;&#39;, (req, res) &#x3D;&gt; &#123;
+&#x2F;&#x2F; 通过 req.query 可以获取到客户端发送过来的 查询参数
+&#x2F;&#x2F; 注意：默认情况下，req.query 是一个空对象
+console.log(req.query)
+res.send(req.query)
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>获取URL中的动态参数<br>通过 req.params 对象，可以访问到 URL 中，通过 : 匹配到的动态参数：<pre class="line-numbers language-none"><code class="language-none"> &#x2F;&#x2F; 注意：这里的 :id 是一个动态的参数
+app.get(&#39;&#x2F;user&#x2F;:ids&#x2F;:username&#39;, (req, res) &#x3D;&gt; &#123;
+&#x2F;&#x2F; req.params 是动态匹配到的 URL 参数，默认也是一个空对象
+console.log(req.params)
+res.send(req.params)
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="托管静态资源"><a href="#托管静态资源" class="headerlink" title="托管静态资源"></a>托管静态资源</h3>express 提供了一个非常好用的函数，叫做 express.static()，通过它，我们可以非常方便地创建一个静态资源服务器，例如，通过如下代码就可以将 public 目录下的图片、CSS 文件、JavaScript 文件对外开放访问了：<pre class="line-numbers language-none"><code class="language-none">app.use(express.static(&#39;public&#39;))<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+现在，你就可以访问 public 目录中的所有文件了：<br><a href="http://localhost:3000/images/bg.jpg">http://localhost:3000/images/bg.jpg</a><br><a href="http://localhost:3000/css/style.css">http://localhost:3000/css/style.css</a><br><a href="http://localhost:3000/js/login.js">http://localhost:3000/js/login.js</a></li>
+</ul>
+<p><strong>注意：</strong></p>
+<ul>
+<li>Express 在指定的静态目录中查找文件，并对外提供资源的访问路径。因此，存放静态文件的目录名不会出现在 URL 中</li>
+<li>如果要托管多个静态资源目录，就要多次调用express.static()函数，但是函数会根据目录的添加顺序查找所需的文件</li>
+</ul>
+<p><strong>挂载路径前缀：</strong>如果希望在托管的静态资源访问路径之前，挂载路径前缀，则可以使用如下的方式：</p>
+<pre class="line-numbers language-none"><code class="language-none">app.use(&#39;&#x2F;pubic&#39;,express.static(&#39;public&#39;))<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>现在，你就可以通过带有 &#x2F;public 前缀地址来访问 public 目录中的文件了：<br><a href="http://localhost:3000/public/images/kitten.jpg">http://localhost:3000/public/images/kitten.jpg</a><br><a href="http://localhost:3000/public/css/style.css">http://localhost:3000/public/css/style.css</a><br><a href="http://localhost:3000/public/js/app.js">http://localhost:3000/public/js/app.js</a></p>
+<h3 id="nodemon"><a href="#nodemon" class="headerlink" title="nodemon"></a>nodemon</h3><p>在编写调试 Node.js 项目的时候，如果修改了项目的代码，则需要频繁的手动 close 掉，然后再重新启动，非常繁琐。<br>现在，我们可以使用 nodemon <a href="https://www.npmjs.com/package/nodemon">https://www.npmjs.com/package/nodemon</a> 这个工具，它能够监听项目文件的变动，当代码被修改后，nodemon 会自动帮我们重启项目，极大方便了开发和调试。<br>**安装nodemon:**在终端中，运行如下命令，即可将 nodemon 安装为全局可用的工具：</p>
+<pre class="line-numbers language-none"><code class="language-none">npm i -g nodemon  &#x2F;&#x2F;-g  全局<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>当基于 Node.js 编写了一个网站应用的时候，传统的方式，是运行 node app.js 命令，来启动项目。这样做的坏处是：代码被修改之后，需要手动重启项目。<br>现在，我们可以将 node 命令替换为 nodemon 命令，使用 nodemon app.js 来启动项目。这样做的好处是：代码被修改之后，会被 nodemon 监听到，从而实现自动重启项目的效果。</p>
+<h2 id="Express-路由"><a href="#Express-路由" class="headerlink" title="Express 路由"></a>Express 路由</h2><h3 id="路由的概念"><a href="#路由的概念" class="headerlink" title="路由的概念"></a>路由的概念</h3><p>广义上来讲，路由就是映射关系。在 Express 中，路由指的是客户端的请求与服务器处理函数之间的映射关系。<br>Express 中的路由分 3 部分组成，分别是请求的类型、请求的 URL 地址、处理函数，格式如下：<br> <strong>app.METHOD(PATH,HANDLER)</strong><br><strong>路由的匹配过程：</strong><br>每当一个请求到达服务器之后，需要先经过路由的匹配，只有匹配成功之后，才会调用对应的处理函数。<br>在匹配时，会按照路由的顺序进行匹配，如果请求类型和请求的 URL 同时匹配成功，则 Express 会将这次请求，转交给对应的 function 函数进行处理。</p>
+<h3 id="路由的使用"><a href="#路由的使用" class="headerlink" title="路由的使用"></a>路由的使用</h3><ul>
+<li>最简单的用法<br>在 Express 中使用路由最简单的方式，就是把路由挂载到 app 上，示例代码如下：<pre class="line-numbers language-none"><code class="language-none">  const express &#x3D; require(&#39;express&#39;)
+  const app &#x3D; express()
+&#x2F;&#x2F; 挂载路由
+app.get(&#39;&#x2F;&#39;, (req, res) &#x3D;&gt; &#123;
+  res.send(&#39;hello world.&#39;)
+&#125;)
+app.post(&#39;&#x2F;&#39;, (req, res) &#x3D;&gt; &#123;
+ 	res.send(&#39;Post Request.&#39;)
+&#125;)
+  &#x2F;&#x2F;启动Web服务器
+app.listen(80, () &#x3D;&gt; &#123;
+	 console.log(&#39;http:&#x2F;&#x2F;127.0.0.1&#39;)
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>路由的模块化<br>为了方便对路由进行模块化的管理，Express 不建议将路由直接挂载到 app 上，而是推荐将路由抽离为单独的模块。<br>将路由抽离为单独模块的步骤如下：</li>
+</ul>
+<p>1.创建路由模块对应的 .js 文件<br>2.调用 express.Router() 函数创建路由对象<br>3.向路由对象上挂载具体的路由<br>4.使用 module.exports 向外共享路由对象<br>5.使用 app.use() 函数注册路由模块</p>
+<ul>
+<li>创建路由模块<pre class="line-numbers language-none"><code class="language-none">   &#x2F;&#x2F; 这是路由模块
+   &#x2F;&#x2F; 1. 导入 express
+   const express &#x3D; require(&#39;express&#39;)
+   &#x2F;&#x2F; 2. 创建路由对象
+   const router &#x3D; express.Router()
+   &#x2F;&#x2F; 3. 挂载具体的路由
+   router.get(&#39;&#x2F;user&#x2F;list&#39;, (req, res) &#x3D;&gt; &#123;
+     res.send(&#39;Get user list.&#39;)
+   &#125;)
+   router.post(&#39;&#x2F;user&#x2F;add&#39;, (req, res) &#x3D;&gt; &#123;
+     res.send(&#39;Add new user.&#39;)
+   &#125;)
+&#x2F;&#x2F; 4. 向外导出路由对象
+module.exports &#x3D; router<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>注册路由模块<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 1. 导入路由模块
+   const router &#x3D; require(&#39;.&#x2F;03.router&#39;)
+&#x2F;&#x2F; 2. 注册路由模块
+   app.use(&#39;&#x2F;api&#39;, router)
+&#x2F;&#x2F; 注意： app.use() 函数的作用，就是来注册全局中间件<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+]]></content>
+      <categories>
+        <category>前后端交互</category>
+      </categories>
+      <tags>
+        <tag>Express</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Github的使用</title>
     <url>/2022/03/01/github-de-shi-yong/</url>
     <content><![CDATA[<h1 id="开源项目托管平台"><a href="#开源项目托管平台" class="headerlink" title="开源项目托管平台"></a>开源项目托管平台</h1><p>专门用于免费存放开源项目源代码的网站，叫做开源项目托管平台。目前世界上比较出名的开源项目托管平台<br>主要有以下 3 个：</p>
@@ -346,7 +346,7 @@ git commit -m &quot;第一次提交&quot;<span aria-hidden="true" class="line-nu
 (只有第一次推送内容需要-u origin master，往后都不用了)<h2 id="SSH-key"><a href="#SSH-key" class="headerlink" title="SSH key"></a>SSH key</h2></li>
 </ol>
 <p><strong>SSH key介绍</strong><br>SSH key 的作用：实现本地仓库和 Github 之间免登录的加密数据传输。<br>SSH key 的好处：免登录身份认证、数据加密传输。<br>SSH key 由两部分组成，分别是：<br>① id_rsa（私钥文件，存放于客户端的电脑中即可）<br>② id_rsa.pub（公钥文件，需要配置到 Github 中）<br><strong>生成SSH key</strong></p>
-<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#121;&#111;&#x75;&#114;&#95;&#x65;&#x6d;&#x61;&#x69;&#x6c;&#64;&#x65;&#120;&#x61;&#x6d;&#112;&#108;&#x65;&#46;&#x63;&#x6f;&#x6d;">&#121;&#111;&#x75;&#114;&#95;&#x65;&#x6d;&#x61;&#x69;&#x6c;&#64;&#x65;&#120;&#x61;&#x6d;&#112;&#108;&#x65;&#46;&#x63;&#x6f;&#x6d;</a> 替换为注册 Github 账号时填写的邮箱：</p>
+<p>① 打开 Git Bash<br>② 粘贴如下的命令，并将 <a href="mailto:&#x79;&#x6f;&#x75;&#x72;&#95;&#101;&#x6d;&#x61;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#x70;&#x6c;&#101;&#46;&#99;&#111;&#109;">&#x79;&#x6f;&#x75;&#x72;&#95;&#101;&#x6d;&#x61;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#x70;&#x6c;&#101;&#46;&#99;&#111;&#109;</a> 替换为注册 Github 账号时填写的邮箱：</p>
 <pre class="line-numbers language-none"><code class="language-none">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>③ 连续敲击 3 次回车，即可在 C:\Users\用户名文件夹.ssh 目录中生成 id_rsa 和 id_rsa.pub 两个文件</p>
 <p><strong>配置SSH key</strong><br>① 使用记事本打开 id_rsa.pub 文件，复制里面的文本内容<br>② 在浏览器中登录 Github，点击头像 -&gt; Settings -&gt; SSH and GPG Keys -&gt; New SSH key<br>③ 将 id_rsa.pub 文件中的内容，粘贴到 Key 对应的文本框中<br>④ 在 Title 文本框中任意填写一个名称，来标识这个 Key 从何而来</p>
@@ -431,6 +431,96 @@ in:description xxx   按照项目描述description 搜索  <span aria-hidden="tr
       </categories>
       <tags>
         <tag>Github</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MarkdownPad语法</title>
+    <url>/2022/02/14/markdownpad-yu-fa/</url>
+    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> 我之前记笔记一直用OneNote，但是年前心血来潮，就自己建了博客，想着把自己的学习心得发到博客上。但是博客算是完工了，但是写文章又成了一大难题，就自己在网上查找写博客的编辑器，发现用Markdown Pad来编写文章很方便。但是刚接触这个编辑器，其中的语法看了几次记不住，于是准备写一下Markdown Pad的写作语法。以供自己写作的时候还要在网上找（麻烦….）。<span id="more"></span></p>
+<h1 id="语法介绍"><a href="#语法介绍" class="headerlink" title="语法介绍"></a>语法介绍</h1><h2 id="段落文本"><a href="#段落文本" class="headerlink" title="段落文本"></a>段落文本</h2><p><b>换行：</b>直接敲回车键即可</p>
+<p><strong>空格：</strong></p>
+<pre><code>   &amp;emsp;//两个空格大小，也就是一个中文字符
+   &amp;ensp;//一个空格大小，也就是半个中文字符
+   &amp;nbsp;//1/2个空格大小，也就是1/4个中文字
+   （但是现在这个功能好像不可以）
+</code></pre>
+<p><strong>文本</strong>：</p>
+<pre><code>*斜体文本*  _斜体文本_  //两种方式都可
+**加粗文本**  __加粗文本__  //两种方式都可
+***斜体加粗***  ___斜体加粗___  //两种方式都可
+&lt;u&gt;下划线&lt;/u&gt;
+^上表^  //具体以指数公式展示
+~下标~  //具体以水的化学式展示
+</code></pre>
+<p><strong>分割线：</strong>分割线的语法只需要三个 * 号或者在选项卡中添加水平标尺，快捷键 CTRL+R</p>
+<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>标题有三种设置方式：①手动添加；②快捷键添加；③选项卡添加；</p>
+<p>  ①手动添加 </p>
+<pre><code>                   #一级标题的内容#
+                  ##二级标题的内容##
+                 ###三级标题的内容###
+    以此类推
+</code></pre>
+<p>  ②快捷键添加<br>直接在键盘上输入ctrl+num,这里的num是指标题的级数，例如：设置一级标题 ctrl+1以此类推<br>③选项卡添加（可以忽略不计）</p>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><p>有序列表，顾名思义，即输入的内容按序号进行标识排列。<br>①手动添加<br>在输入的内容前，添加num. + 空格 ，接着按 回车 ，即可添加num+1条内容<br>②快捷键添加<br>直接在键盘上输入Ctrl+Shift+O，输入第一条内容后，按 回车 ，即可添加第二条内容。注意快捷键输入的是 字母O ，而不是 数字0。<br><img src="/picture/Snipaste_2022-02-14_21-13-42.png"></p>
+<h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><p>&amp;emsp;&amp;emsp;无序列表，顾名思义，即输入的内容不按序号进行排列。<br>①手动添加<br>在输入的内容前，添加-&#x2F;* + 空格 ，接着按回车 ，即可添加下一条内容。<br>②快捷键添加<br>直接在键盘上输入Ctrl+U，输入第一条内容后，按回车 ，即可添加第二条内容。<br><img src="/picture/Snipaste_2022-02-14_21-07-27.png"></p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>&amp;emsp;&amp;emsp;引用可以将一段文字进行单独的标识，<br>①手动添加<br>在需要标注引用的内容前，输入&gt;，即可将此内容标记为引用类型。<br>②快捷键添加<br>直接在键盘上输入Ctrl+Q。</p>
+<h2 id="图片与超链接"><a href="#图片与超链接" class="headerlink" title="图片与超链接"></a>图片与超链接</h2><h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><ol>
+<li>网上的图片，添加到正在编辑的文本中进行展示。此时我们便需要用到插入图片的语法。<code>![name](url)</code>  name 是添加图片的文字描述，自己添加即可，url 是添加图片的网址</li>
+<li>本地的图片，使用相对路径插入图片。比如你把一个叫做1.png的图片和*.md文件放在一起，那么你就可以用这种方式插入图片：<code>![](1.png)</code><br>如果不想放在同一层级,那么就可以这样插入:<code>![](foldername/1.png)</code> 表示引用同层级一个叫做”foldername”的文件夹中的1.png图片,以此类推<h3 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h3>&amp;emsp;&amp;emsp;超链接和图片的添加方式只差一个!号</li>
+</ol>
+<p>图片为：<code>![]()</code></p>
+<p>链接为：<code>[]()</code></p>
+<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><ul>
+<li><p>表格的话直接用HTML写就可以</p>
+<pre><code>  &lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;姓名&lt;/td&gt;
+        &lt;td&gt;性别&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;李斯&lt;/td&gt;
+        &lt;td&gt;男&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+</code></pre>
+</li>
+<li><p>结果如下：</p>
+</li>
+</ul>
+<p><img src="/picture/Snipaste_2022-02-14_22-11-01.png"></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><ul>
+<li>代码行：前后添加 &#96; 一个即可</li>
+<li>代码块：前后添加 &#96;&#96;&#96;  三个即可</li>
+<li>或者快捷键 CTRL+K<h2 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h2><pre class="line-numbers language-none"><code class="language-none"> \\ 反斜杠 
+\&#96; 反引号 
+\* 星号 
+\_ 下划线 
+\&#123;&#125; 大括号 
+\[] 中括号 
+\() 小括号 
+\# 井号 
+\+ 加号 
+\- 减号 
+\. 英文句号 
+\! 感叹号<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><pre class="line-numbers language-none"><code class="language-none">      ctrl+1 一级标题 
+   ctrl+2 二级标题 
+····
+ctrl+shift+o 有序列表
+ctrl+u 无序列表
+ctrl+g 插入图片
+ctrl+L 插入超链接
+Ctrl+B　粗体 
+Ctrl+I　斜体
+Ctrl+Q　引用 
+Ctrl+K　代码块
+   Ctrl+R  分割线 
+   Ctrl+T  时间戳<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+]]></content>
+      <tags>
+        <tag>MarkdownPad语法</tag>
       </tags>
   </entry>
   <entry>
@@ -723,96 +813,6 @@ siderMenuData: [
       </categories>
       <tags>
         <tag>IView</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MarkdownPad语法</title>
-    <url>/2022/02/14/markdownpad-yu-fa/</url>
-    <content><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p> 我之前记笔记一直用OneNote，但是年前心血来潮，就自己建了博客，想着把自己的学习心得发到博客上。但是博客算是完工了，但是写文章又成了一大难题，就自己在网上查找写博客的编辑器，发现用Markdown Pad来编写文章很方便。但是刚接触这个编辑器，其中的语法看了几次记不住，于是准备写一下Markdown Pad的写作语法。以供自己写作的时候还要在网上找（麻烦….）。<span id="more"></span></p>
-<h1 id="语法介绍"><a href="#语法介绍" class="headerlink" title="语法介绍"></a>语法介绍</h1><h2 id="段落文本"><a href="#段落文本" class="headerlink" title="段落文本"></a>段落文本</h2><p><b>换行：</b>直接敲回车键即可</p>
-<p><strong>空格：</strong></p>
-<pre><code>   &amp;emsp;//两个空格大小，也就是一个中文字符
-   &amp;ensp;//一个空格大小，也就是半个中文字符
-   &amp;nbsp;//1/2个空格大小，也就是1/4个中文字
-   （但是现在这个功能好像不可以）
-</code></pre>
-<p><strong>文本</strong>：</p>
-<pre><code>*斜体文本*  _斜体文本_  //两种方式都可
-**加粗文本**  __加粗文本__  //两种方式都可
-***斜体加粗***  ___斜体加粗___  //两种方式都可
-&lt;u&gt;下划线&lt;/u&gt;
-^上表^  //具体以指数公式展示
-~下标~  //具体以水的化学式展示
-</code></pre>
-<p><strong>分割线：</strong>分割线的语法只需要三个 * 号或者在选项卡中添加水平标尺，快捷键 CTRL+R</p>
-<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>标题有三种设置方式：①手动添加；②快捷键添加；③选项卡添加；</p>
-<p>  ①手动添加 </p>
-<pre><code>                   #一级标题的内容#
-                  ##二级标题的内容##
-                 ###三级标题的内容###
-    以此类推
-</code></pre>
-<p>  ②快捷键添加<br>直接在键盘上输入ctrl+num,这里的num是指标题的级数，例如：设置一级标题 ctrl+1以此类推<br>③选项卡添加（可以忽略不计）</p>
-<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><p>有序列表，顾名思义，即输入的内容按序号进行标识排列。<br>①手动添加<br>在输入的内容前，添加num. + 空格 ，接着按 回车 ，即可添加num+1条内容<br>②快捷键添加<br>直接在键盘上输入Ctrl+Shift+O，输入第一条内容后，按 回车 ，即可添加第二条内容。注意快捷键输入的是 字母O ，而不是 数字0。<br><img src="/picture/Snipaste_2022-02-14_21-13-42.png"></p>
-<h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><p>&amp;emsp;&amp;emsp;无序列表，顾名思义，即输入的内容不按序号进行排列。<br>①手动添加<br>在输入的内容前，添加-&#x2F;* + 空格 ，接着按回车 ，即可添加下一条内容。<br>②快捷键添加<br>直接在键盘上输入Ctrl+U，输入第一条内容后，按回车 ，即可添加第二条内容。<br><img src="/picture/Snipaste_2022-02-14_21-07-27.png"></p>
-<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>&amp;emsp;&amp;emsp;引用可以将一段文字进行单独的标识，<br>①手动添加<br>在需要标注引用的内容前，输入&gt;，即可将此内容标记为引用类型。<br>②快捷键添加<br>直接在键盘上输入Ctrl+Q。</p>
-<h2 id="图片与超链接"><a href="#图片与超链接" class="headerlink" title="图片与超链接"></a>图片与超链接</h2><h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><ol>
-<li>网上的图片，添加到正在编辑的文本中进行展示。此时我们便需要用到插入图片的语法。<code>![name](url)</code>  name 是添加图片的文字描述，自己添加即可，url 是添加图片的网址</li>
-<li>本地的图片，使用相对路径插入图片。比如你把一个叫做1.png的图片和*.md文件放在一起，那么你就可以用这种方式插入图片：<code>![](1.png)</code><br>如果不想放在同一层级,那么就可以这样插入:<code>![](foldername/1.png)</code> 表示引用同层级一个叫做”foldername”的文件夹中的1.png图片,以此类推<h3 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h3>&amp;emsp;&amp;emsp;超链接和图片的添加方式只差一个!号</li>
-</ol>
-<p>图片为：<code>![]()</code></p>
-<p>链接为：<code>[]()</code></p>
-<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><ul>
-<li><p>表格的话直接用HTML写就可以</p>
-<pre><code>  &lt;table&gt;
-    &lt;tr&gt;
-        &lt;td&gt;姓名&lt;/td&gt;
-        &lt;td&gt;性别&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td&gt;李斯&lt;/td&gt;
-        &lt;td&gt;男&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/table&gt;
-</code></pre>
-</li>
-<li><p>结果如下：</p>
-</li>
-</ul>
-<p><img src="/picture/Snipaste_2022-02-14_22-11-01.png"></p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><ul>
-<li>代码行：前后添加 &#96; 一个即可</li>
-<li>代码块：前后添加 &#96;&#96;&#96;  三个即可</li>
-<li>或者快捷键 CTRL+K<h2 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h2><pre class="line-numbers language-none"><code class="language-none"> \\ 反斜杠 
-\&#96; 反引号 
-\* 星号 
-\_ 下划线 
-\&#123;&#125; 大括号 
-\[] 中括号 
-\() 小括号 
-\# 井号 
-\+ 加号 
-\- 减号 
-\. 英文句号 
-\! 感叹号<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-</ul>
-<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><pre class="line-numbers language-none"><code class="language-none">      ctrl+1 一级标题 
-   ctrl+2 二级标题 
-····
-ctrl+shift+o 有序列表
-ctrl+u 无序列表
-ctrl+g 插入图片
-ctrl+L 插入超链接
-Ctrl+B　粗体 
-Ctrl+I　斜体
-Ctrl+Q　引用 
-Ctrl+K　代码块
-   Ctrl+R  分割线 
-   Ctrl+T  时间戳<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-]]></content>
-      <tags>
-        <tag>MarkdownPad语法</tag>
       </tags>
   </entry>
   <entry>
@@ -1691,6 +1691,221 @@ Vue<span class="token punctuation">.</span><span class="token function">componen
       </tags>
   </entry>
   <entry>
+    <title>Vue基础入门</title>
+    <url>/2022/04/01/vue-ji-chu-ru-men/</url>
+    <content><![CDATA[<h2 id="什么是vue"><a href="#什么是vue" class="headerlink" title="什么是vue"></a>什么是vue</h2><ol>
+<li>构建用户界面</li>
+</ol>
+<ul>
+<li>用vue往HTML页面中填充数据，非常方便</li>
+</ul>
+<ol start="2">
+<li>框架</li>
+</ol>
+<ul>
+<li>框架是一套现成的解决方案，程序员只能遵守框架内的规范，去编写自己的业务功能！</li>
+<li>要学习vue，就是在学习vue框架中规定的用法！</li>
+<li>vue的指令，组件（是对UI结构的复用），路由，Vuex，vue组件库</li>
+<li>只有把上面罗列的知识，掌握之后，才有开发vue项目的能力</li>
+</ul>
+<span id="more"></span>
+
+<p><strong>重点：</strong></p>
+<ol>
+<li>能够知道 vue 的基本使用步骤：①导入vue.js文件，②new Vue()构造函数，得到vm实例对象，③声明 el 和 data 数据节点，④ MVVM 的对应关系</li>
+<li>掌握 vue 中常见指令的基本用法：插值表达式，v-bind(:),v-on(@),v-if和v-else;v-for,:key,v-model</li>
+</ol>
+<h2 id="vue-的特性"><a href="#vue-的特性" class="headerlink" title="vue 的特性"></a>vue 的特性</h2><p>1.数据驱动视图</p>
+<ul>
+<li>数据的变化<strong>会驱动视图</strong>自动更新</li>
+<li>好处：程序员只管把数据维护好，那么页面结构会被vue自动渲染出来!</li>
+</ul>
+<p>2.双向数据绑定</p>
+<blockquote>
+<p>在网页中，form表单负责<strong>采集数据</strong>，Ajax负责<strong>提交数据</strong>！</p>
+</blockquote>
+<ul>
+<li>js数据的变化，会被自动渲染到页面上，开发者不需要手动操作DOM元素</li>
+<li>页面上表单采集的数据发生变化的时候，会被vue自动获取到，并更新到js数据中<blockquote>
+<p>注意：数据驱动视图和双向数据绑定的底层原理是 MVVM（Mode 数据源、View 视图、ViewModel 就是 vue 的实例）</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="vue的使用"><a href="#vue的使用" class="headerlink" title="vue的使用"></a>vue的使用</h2><ol>
+<li>导入vue.js的script脚本文件</li>
+<li>在页面中声明一个将要被vue所控制的DOM区域</li>
+<li>创建vm 实例对象（vue实例对象）</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">&lt;!-- 希望Vue能够控制下面的这个div 帮我们在把数据填充到div 内部 --&gt;
+&lt;div id&#x3D;&quot;app&quot;&gt;&#123;&#123; username &#125;&#125;&lt;&#x2F;div&gt;
+&lt;!-- 1.导入Vue的库文件，在Windows全局就有了Vue构造函数 --&gt;
+&lt;script src&#x3D;&quot;.&#x2F;lib&#x2F;vue-2.6.12.js&quot;&gt;&lt;&#x2F;script&gt;
+&lt;!-- 2.创建Vue实例对象 --&gt;
+&lt;script&gt;
+    &#x2F;&#x2F; 创建Vue的实例对象
+    const vm &#x3D; new Vue(&#123;
+        &#x2F;&#x2F; el 属性是固定写法，表示当前vm实例要控制页面上的哪个区域，接收的值是一个选择器
+        el: &#39;#app&#39;,
+        &#x2F;&#x2F; data 对象就是要渲染到页面上的数据
+        data: &#123;
+            username: &#39;zhangsan&#39;
+        &#125;
+    &#125;)
+&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="vue-的调试工具"><a href="#vue-的调试工具" class="headerlink" title="vue 的调试工具"></a>vue 的调试工具</h2><ol>
+<li>安装vue-devtools调试工具：vue官方提供的vue-devtools调试工具，能够方便对开发者对vue项目进行调试与开发<blockquote>
+<p>Chrome浏览器在线安装 <a href="https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd">vue-devtools</a></p>
+</blockquote>
+</li>
+</ol>
+<h2 id="vue-的指令"><a href="#vue-的指令" class="headerlink" title="vue 的指令"></a>vue 的指令</h2><h3 id="内容渲染指令"><a href="#内容渲染指令" class="headerlink" title="内容渲染指令"></a>内容渲染指令</h3><ol>
+<li><code>v-text</code> ：<code>&lt;p v-text=&quot;gender&quot;&gt;性别&lt;/p&gt;</code>指令的缺点：会覆盖元素内部原有的内容！</li>
+<li><code>&#123;&#123; &#125;&#125;</code> 插值表达式：在实际开发中用的最多，只是内容的占位符，不会覆盖原有的内容！</li>
+<li><code>v-html</code> 指令的作用：可以把带有标签的字符串，渲染成真正的 HTML 内容！<blockquote>
+<p> 注意：插值表达式只能用在元素的<strong>内容节点</strong>中，不能用在元素的<strong>属性节点</strong>中！</p>
+</blockquote>
+<h3 id="属性绑定指令"><a href="#属性绑定指令" class="headerlink" title="属性绑定指令"></a>属性绑定指令</h3></li>
+</ol>
+<ul>
+<li>在 vue 中，可以使用 <code>v-bind:</code> 指令，为元素的属性动态绑定值；</li>
+<li>简写是英文的 <code>:</code></li>
+<li>在使用 v-bind 属性绑定期间，如果绑定内容需要进行动态拼接，则字符串的外面应该包裹单引号，例如 <pre class="line-numbers language-none"><code class="language-none">&lt;div :title&#x3D;&quot;&#39;box&#39; + index&quot;&gt;这是一个 div&lt;&#x2F;div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="事件绑定指令"><a href="#事件绑定指令" class="headerlink" title="事件绑定指令"></a>事件绑定指令</h3></li>
+</ul>
+<ol>
+<li><code>v-on</code>事件绑定指令，用来辅助程序员为DOM元素绑定事件监听，简写形式：<code>@</code></li>
+<li>语法格式为：通过v-on绑定的事件处理函数，需要在<code>methods</code>节点中进行声明</li>
+</ol>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token operator">&lt;</span>button @click<span class="token operator">=</span><span class="token string">"add"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
+<span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+   <span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			<span class="token comment">// 如果在方法中要修改 data 中的数据，可以通过 this 访问到</span>
+			<span class="token keyword">this</span><span class="token punctuation">.</span>count <span class="token operator">+=</span> <span class="token number">1</span>
+   <span class="token punctuation">&#125;</span>
+   <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>注意：原生 DOM 对象有 onclick、oninput、onkeyup 等原生事件，替换为 vue 的事件绑定形式后，<br>分别为：v-on:click、v-on:input、v-on:keyup</p>
+</blockquote>
+<p>3.<code>$event</code> 的应用场景：如果默认的事件对象 e 被覆盖了，则可以手动传递一个 $event。例如：</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;button @click&#x3D;&quot;add(3, $event)&quot;&gt;&lt;&#x2F;button&gt;
+  methods: &#123;
+     add(n, e) &#123;
+  			&#x2F;&#x2F; 如果在方法中要修改 data 中的数据，可以通过 this 访问到
+  			this.count +&#x3D; 1
+     &#125;
+  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>4.事件修饰符：在事件处理函数中调用 event.preventDefault() 或 event.stopPropagation() 是非常常见的需求。因此，vue 提供了事件修饰符的概念，来辅助程序员更方便的对事件的触发进行控制</p>
+<ul>
+<li><p><code>.prevent</code>：阻止默认行为</p>
+   <pre class="line-numbers language-none"><code class="language-none">&lt;a @click.prevent&#x3D;&quot;xxx&quot;&gt;链接&lt;&#x2F;a&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p><code>.stop</code> ：阻止事件冒泡</p>
+   <pre class="line-numbers language-none"><code class="language-none">&lt;button @click.stop&#x3D;&quot;xxx&quot;&gt;按钮&lt;&#x2F;button&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<p>5.案件修饰符：在监听键盘事件时，我们经常需要判断详细的按键。此时，可以为键盘相关的事件添加按键修饰符，</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;只有在 key 是  Enter 时调用  vm.submit() 
+&lt;input @keyup.enter&#x3D;&quot;submit&quot;&gt;
+&#x2F;&#x2F;只有在 key 是  Esc 时调用  vm.clearInput() 
+&lt;input @keyup.esc&#x3D;&quot;clearInput&quot;&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="双向绑定指令"><a href="#双向绑定指令" class="headerlink" title="双向绑定指令"></a>双向绑定指令</h3><p>vue 提供了 <code>v-model</code> 双向数据绑定指令，用来辅助开发者在不操作 DOM 的前提下，快速获取表单的数据。</p>
+<ol>
+<li>input 输入框<ul>
+<li>type&#x3D;”radio”</li>
+<li>type&#x3D;”checkbox”</li>
+<li>type&#x3D;”xxxx”</li>
+</ul>
+</li>
+<li>textarea</li>
+<li>select</li>
+<li>v-model 指令的修饰符<ul>
+<li>.number:自动将用户的输入值转为数值类型 <code>&lt;input v-model.number=&quot;age&quot;/&gt;</code></li>
+</ul>
+<ul>
+<li>.trim: 自动过滤用户输入的首尾空白字符  <code>&lt;inut v-model.trim=&quot;msg&quot;/&gt;</code></li>
+<li>.lazy： 在”change”时而非”input”时更新 <code>&lt;input v-model.lazy=&quot;msg&quot;/&gt;</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="条件渲染指令"><a href="#条件渲染指令" class="headerlink" title="条件渲染指令"></a>条件渲染指令</h3><p>条件渲染指令用来辅助开发者按需控制 DOM 的显示与隐藏。条件渲染指令有如下两个，分别是：</p>
+<ul>
+<li>v-if</li>
+<li>v-show</li>
+</ul>
+<ol>
+<li><code>v-show</code> 的原理是：动态为元素添加或移除 <code>display: none</code> 样式，来实现元素的显示和隐藏<ul>
+<li>如果要频繁的切换元素的显示状态，用 v-show 性能会更好</li>
+</ul>
+</li>
+<li><code>v-if</code> 的原理是：每次动态创建或移除元素，实现元素的显示和隐藏<ul>
+<li>如果刚进入页面的时候，某些元素默认不需要被展示，而且后期这个元素很可能也不需要被展示出来，此时 v-if 性能更好</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p> 在实际开发中，绝大多数情况，不用考虑性能问题，直接使用 v-if 就好了！！！</p>
+</blockquote>
+<ol start="3">
+<li><p><code>v-else</code> : v-if 可以单独使用，或配合 v-else 指令一起使用：v-else 指令必须配合 v-if 指令一起使用，否则它将不会被识别！</p>
+<h3 id="列表渲染指令"><a href="#列表渲染指令" class="headerlink" title="列表渲染指令"></a>列表渲染指令</h3><p>vue 提供了 <code>v-for</code> 列表渲染指令，用来辅助开发者基于一个数组来循环渲染一个列表结构。v-for 指令需要使<br>用 <code>item in items</code> 形式的特殊语法，其中：</p>
+<ul>
+<li>items 是待循环的数组</li>
+<li>item 是被循环的每一项</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>v-for 指令还支持一个可选的第二个参数，即当前项的索引。语法格式为 (item, index) in items，<blockquote>
+<p>注意：v-for 指令中的 item 项和 index 索引都是形参，可以根据需要进行重命名。例如 (user, i) in userlist</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>使用 key 维护列表的状态</strong>:<br>当列表的数据变化时，默认情况下，vue 会尽可能的复用已存在的 DOM 元素，从而提升渲染的性能。但这种默认的性能优化策略，会导致有状态的列表无法被正确更新。<br>为了给 vue 一个提示，以便它能跟踪每个节点的身份，从而在保证有状态的列表被正确更新的前提下，提升渲<br>染的性能。此时，需要为每项提供一个唯一的 key 属性：<br><strong>key 的注意事项</strong>:<br>① key 的值只能是字符串或数字类型<br>② key 的值必须具有唯一性（即：key 的值不能重复）<br>③ 建议把数据项 id 属性的值作为 key 的值（因为 id 属性的值具有唯一性）<br>④ 使用 index 的值当作 key 的值没有任何意义（因为 index 的值不具有唯一性）<br>⑤ 建议使用 v-for 指令时一定要指定 key 的值（既提升性能、又防止列表状态紊乱）</p>
+<h2 id="Vue的过滤器"><a href="#Vue的过滤器" class="headerlink" title="Vue的过滤器"></a>Vue的过滤器</h2><h3 id="定义过滤器"><a href="#定义过滤器" class="headerlink" title="定义过滤器"></a>定义过滤器</h3><p>  在创建vue 实例期间，可以在 <code>filters</code> 节点中定义过滤器，</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">count vm<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+  <span class="token literal-property property">el</span><span class="token operator">:</span><span class="token string">'#app'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+     <span class="token literal-property property">message</span><span class="token operator">:</span> <span class="token string">'hello vue.js'</span><span class="token punctuation">,</span>
+     <span class="token literal-property property">info</span><span class="token operator">:</span> <span class="token string">'title info'</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">filters</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>    <span class="token comment">//在filters 节点下定义"过滤器"</span>
+    <span class="token function">capitalize</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>    <span class="token comment">//把首字母转为大写的过滤器</span>
+       <span class="token keyword">return</span> str<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> str<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+   <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span>
+  
+
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="私有过滤器和全局过滤器"><a href="#私有过滤器和全局过滤器" class="headerlink" title="私有过滤器和全局过滤器"></a>私有过滤器和全局过滤器</h3><p>在 filters 节点下定义的过滤器，称为“私有过滤器”，因为它只能在当前 vm 实例所控制的 el 区域内使用。<br>如果希望在多个 vue 实例之间共享过滤器，则可以按照如下的格式定义全局过滤器：</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js">  <span class="token comment">//全局过滤器--独立于每个 vm 实例之外</span>
+  <span class="token comment">//Vue.filters() 方法，接收两个参数</span>
+  <span class="token comment">//第一个参数，是全局过滤器的 "名字"</span>
+  <span class="token comment">//第二个参数，是全局过滤器的 "处理函数"</span>
+Vue<span class="token punctuation">.</span><span class="token function">filters</span><span class="token punctuation">(</span><span class="token string">'capitalize'</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token operator">=></span><span class="token punctuation">&#123;</span>
+   <span class="token keyword">return</span> str<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span> str<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'~~'</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="过滤器的调用"><a href="#过滤器的调用" class="headerlink" title="过滤器的调用"></a>过滤器的调用</h3><p>过滤器可以串联的进行调用 <code>&#123;&#123;message | filterA | filterB&#125;&#125;</code>  中间用 ‘|’ 隔开<br>A–处理过的值传递给 B ，最终把 B处理的结果渲染到页面上</p>
+<h3 id="过滤器传参"><a href="#过滤器传参" class="headerlink" title="过滤器传参"></a>过滤器传参</h3><p>  过滤器的本质是JavaScript 函数，因此可以接收参数，</p>
+<pre class="line-numbers language-none"><code class="language-none">  &lt;p&gt;&#123;&#123;message | filterA(arg1,arg2) &#125;&#125;&lt;&#x2F;p&gt;
+   Vue.filter(&#39;filterA&#39;,(msg,arg1,arg2)&#x3D;&gt;&#123;
+   &#x2F;&#x2F;过滤器代码逻辑
+&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="过滤器的兼容性"><a href="#过滤器的兼容性" class="headerlink" title="过滤器的兼容性"></a>过滤器的兼容性</h3><p>过滤器仅在 vue 2.x 和 1.x 中受支持，在 vue 3.x 的版本中剔除了过滤器相关的功能。<br>在企业级项目开发中：</p>
+<ul>
+<li>如果使用的是 2.x 版本的 vue，则依然可以使用过滤器相关的功能</li>
+<li>如果项目已经升级到了 3.x 版本的 vue，官方建议使用计算属性或方法代替被剔除的过滤器功能<br>具体的迁移指南，请参考 vue 3.x 的官方文档给出的说明：<a href="https://v3.vuejs.org/guide/migration/filters.html#migration-strategy">https://v3.vuejs.org/guide/migration/filters.html#migration-strategy</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Vue的相关基础知识</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>git基础</title>
     <url>/2022/03/01/git-ji-chu/</url>
     <content><![CDATA[<h1 id="版本控制软件"><a href="#版本控制软件" class="headerlink" title="版本控制软件"></a>版本控制软件</h1><h4 id="git-提交代码到同一分支时冲突的解决"><a href="#git-提交代码到同一分支时冲突的解决" class="headerlink" title="git 提交代码到同一分支时冲突的解决"></a>git 提交代码到同一分支时冲突的解决</h4><p>​      我们在同一分支上开发代码时，代码冲突是不可避免的。下面通过我今天提交项目就遇到了这个问题，问题就是:同事和我两个人在同一个分支上开发代码，今天他提交之后，我在去用<code>git push -u origin mall</code>提交代码出现一下报错</p>
@@ -1910,282 +2125,6 @@ git reset <span class="token operator">--</span>hard <span class="token operator
       </tags>
   </entry>
   <entry>
-    <title>Vue基础入门</title>
-    <url>/2022/04/01/vue-ji-chu-ru-men/</url>
-    <content><![CDATA[<h2 id="什么是vue"><a href="#什么是vue" class="headerlink" title="什么是vue"></a>什么是vue</h2><ol>
-<li>构建用户界面</li>
-</ol>
-<ul>
-<li>用vue往HTML页面中填充数据，非常方便</li>
-</ul>
-<ol start="2">
-<li>框架</li>
-</ol>
-<ul>
-<li>框架是一套现成的解决方案，程序员只能遵守框架内的规范，去编写自己的业务功能！</li>
-<li>要学习vue，就是在学习vue框架中规定的用法！</li>
-<li>vue的指令，组件（是对UI结构的复用），路由，Vuex，vue组件库</li>
-<li>只有把上面罗列的知识，掌握之后，才有开发vue项目的能力</li>
-</ul>
-<span id="more"></span>
-
-<p><strong>重点：</strong></p>
-<ol>
-<li>能够知道 vue 的基本使用步骤：①导入vue.js文件，②new Vue()构造函数，得到vm实例对象，③声明 el 和 data 数据节点，④ MVVM 的对应关系</li>
-<li>掌握 vue 中常见指令的基本用法：插值表达式，v-bind(:),v-on(@),v-if和v-else;v-for,:key,v-model</li>
-</ol>
-<h2 id="vue-的特性"><a href="#vue-的特性" class="headerlink" title="vue 的特性"></a>vue 的特性</h2><p>1.数据驱动视图</p>
-<ul>
-<li>数据的变化<strong>会驱动视图</strong>自动更新</li>
-<li>好处：程序员只管把数据维护好，那么页面结构会被vue自动渲染出来!</li>
-</ul>
-<p>2.双向数据绑定</p>
-<blockquote>
-<p>在网页中，form表单负责<strong>采集数据</strong>，Ajax负责<strong>提交数据</strong>！</p>
-</blockquote>
-<ul>
-<li>js数据的变化，会被自动渲染到页面上，开发者不需要手动操作DOM元素</li>
-<li>页面上表单采集的数据发生变化的时候，会被vue自动获取到，并更新到js数据中<blockquote>
-<p>注意：数据驱动视图和双向数据绑定的底层原理是 MVVM（Mode 数据源、View 视图、ViewModel 就是 vue 的实例）</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="vue的使用"><a href="#vue的使用" class="headerlink" title="vue的使用"></a>vue的使用</h2><ol>
-<li>导入vue.js的script脚本文件</li>
-<li>在页面中声明一个将要被vue所控制的DOM区域</li>
-<li>创建vm 实例对象（vue实例对象）</li>
-</ol>
-<pre class="line-numbers language-none"><code class="language-none">&lt;!-- 希望Vue能够控制下面的这个div 帮我们在把数据填充到div 内部 --&gt;
-&lt;div id&#x3D;&quot;app&quot;&gt;&#123;&#123; username &#125;&#125;&lt;&#x2F;div&gt;
-&lt;!-- 1.导入Vue的库文件，在Windows全局就有了Vue构造函数 --&gt;
-&lt;script src&#x3D;&quot;.&#x2F;lib&#x2F;vue-2.6.12.js&quot;&gt;&lt;&#x2F;script&gt;
-&lt;!-- 2.创建Vue实例对象 --&gt;
-&lt;script&gt;
-    &#x2F;&#x2F; 创建Vue的实例对象
-    const vm &#x3D; new Vue(&#123;
-        &#x2F;&#x2F; el 属性是固定写法，表示当前vm实例要控制页面上的哪个区域，接收的值是一个选择器
-        el: &#39;#app&#39;,
-        &#x2F;&#x2F; data 对象就是要渲染到页面上的数据
-        data: &#123;
-            username: &#39;zhangsan&#39;
-        &#125;
-    &#125;)
-&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="vue-的调试工具"><a href="#vue-的调试工具" class="headerlink" title="vue 的调试工具"></a>vue 的调试工具</h2><ol>
-<li>安装vue-devtools调试工具：vue官方提供的vue-devtools调试工具，能够方便对开发者对vue项目进行调试与开发<blockquote>
-<p>Chrome浏览器在线安装 <a href="https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd">vue-devtools</a></p>
-</blockquote>
-</li>
-</ol>
-<h2 id="vue-的指令"><a href="#vue-的指令" class="headerlink" title="vue 的指令"></a>vue 的指令</h2><h3 id="内容渲染指令"><a href="#内容渲染指令" class="headerlink" title="内容渲染指令"></a>内容渲染指令</h3><ol>
-<li><code>v-text</code> ：<code>&lt;p v-text=&quot;gender&quot;&gt;性别&lt;/p&gt;</code>指令的缺点：会覆盖元素内部原有的内容！</li>
-<li><code>&#123;&#123; &#125;&#125;</code> 插值表达式：在实际开发中用的最多，只是内容的占位符，不会覆盖原有的内容！</li>
-<li><code>v-html</code> 指令的作用：可以把带有标签的字符串，渲染成真正的 HTML 内容！<blockquote>
-<p> 注意：插值表达式只能用在元素的<strong>内容节点</strong>中，不能用在元素的<strong>属性节点</strong>中！</p>
-</blockquote>
-<h3 id="属性绑定指令"><a href="#属性绑定指令" class="headerlink" title="属性绑定指令"></a>属性绑定指令</h3></li>
-</ol>
-<ul>
-<li>在 vue 中，可以使用 <code>v-bind:</code> 指令，为元素的属性动态绑定值；</li>
-<li>简写是英文的 <code>:</code></li>
-<li>在使用 v-bind 属性绑定期间，如果绑定内容需要进行动态拼接，则字符串的外面应该包裹单引号，例如 <pre class="line-numbers language-none"><code class="language-none">&lt;div :title&#x3D;&quot;&#39;box&#39; + index&quot;&gt;这是一个 div&lt;&#x2F;div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h3 id="事件绑定指令"><a href="#事件绑定指令" class="headerlink" title="事件绑定指令"></a>事件绑定指令</h3></li>
-</ul>
-<ol>
-<li><code>v-on</code>事件绑定指令，用来辅助程序员为DOM元素绑定事件监听，简写形式：<code>@</code></li>
-<li>语法格式为：通过v-on绑定的事件处理函数，需要在<code>methods</code>节点中进行声明</li>
-</ol>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token operator">&lt;</span>button @click<span class="token operator">=</span><span class="token string">"add"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">></span>
-<span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-   <span class="token function">add</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-			<span class="token comment">// 如果在方法中要修改 data 中的数据，可以通过 this 访问到</span>
-			<span class="token keyword">this</span><span class="token punctuation">.</span>count <span class="token operator">+=</span> <span class="token number">1</span>
-   <span class="token punctuation">&#125;</span>
-   <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<blockquote>
-<p>注意：原生 DOM 对象有 onclick、oninput、onkeyup 等原生事件，替换为 vue 的事件绑定形式后，<br>分别为：v-on:click、v-on:input、v-on:keyup</p>
-</blockquote>
-<p>3.<code>$event</code> 的应用场景：如果默认的事件对象 e 被覆盖了，则可以手动传递一个 $event。例如：</p>
-<pre class="line-numbers language-none"><code class="language-none">&lt;button @click&#x3D;&quot;add(3, $event)&quot;&gt;&lt;&#x2F;button&gt;
-  methods: &#123;
-     add(n, e) &#123;
-  			&#x2F;&#x2F; 如果在方法中要修改 data 中的数据，可以通过 this 访问到
-  			this.count +&#x3D; 1
-     &#125;
-  &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>4.事件修饰符：在事件处理函数中调用 event.preventDefault() 或 event.stopPropagation() 是非常常见的需求。因此，vue 提供了事件修饰符的概念，来辅助程序员更方便的对事件的触发进行控制</p>
-<ul>
-<li><p><code>.prevent</code>：阻止默认行为</p>
-   <pre class="line-numbers language-none"><code class="language-none">&lt;a @click.prevent&#x3D;&quot;xxx&quot;&gt;链接&lt;&#x2F;a&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p><code>.stop</code> ：阻止事件冒泡</p>
-   <pre class="line-numbers language-none"><code class="language-none">&lt;button @click.stop&#x3D;&quot;xxx&quot;&gt;按钮&lt;&#x2F;button&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-</ul>
-<p>5.案件修饰符：在监听键盘事件时，我们经常需要判断详细的按键。此时，可以为键盘相关的事件添加按键修饰符，</p>
-<pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F;只有在 key 是  Enter 时调用  vm.submit() 
-&lt;input @keyup.enter&#x3D;&quot;submit&quot;&gt;
-&#x2F;&#x2F;只有在 key 是  Esc 时调用  vm.clearInput() 
-&lt;input @keyup.esc&#x3D;&quot;clearInput&quot;&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="双向绑定指令"><a href="#双向绑定指令" class="headerlink" title="双向绑定指令"></a>双向绑定指令</h3><p>vue 提供了 <code>v-model</code> 双向数据绑定指令，用来辅助开发者在不操作 DOM 的前提下，快速获取表单的数据。</p>
-<ol>
-<li>input 输入框<ul>
-<li>type&#x3D;”radio”</li>
-<li>type&#x3D;”checkbox”</li>
-<li>type&#x3D;”xxxx”</li>
-</ul>
-</li>
-<li>textarea</li>
-<li>select</li>
-<li>v-model 指令的修饰符<ul>
-<li>.number:自动将用户的输入值转为数值类型 <code>&lt;input v-model.number=&quot;age&quot;/&gt;</code></li>
-</ul>
-<ul>
-<li>.trim: 自动过滤用户输入的首尾空白字符  <code>&lt;inut v-model.trim=&quot;msg&quot;/&gt;</code></li>
-<li>.lazy： 在”change”时而非”input”时更新 <code>&lt;input v-model.lazy=&quot;msg&quot;/&gt;</code></li>
-</ul>
-</li>
-</ol>
-<h3 id="条件渲染指令"><a href="#条件渲染指令" class="headerlink" title="条件渲染指令"></a>条件渲染指令</h3><p>条件渲染指令用来辅助开发者按需控制 DOM 的显示与隐藏。条件渲染指令有如下两个，分别是：</p>
-<ul>
-<li>v-if</li>
-<li>v-show</li>
-</ul>
-<ol>
-<li><code>v-show</code> 的原理是：动态为元素添加或移除 <code>display: none</code> 样式，来实现元素的显示和隐藏<ul>
-<li>如果要频繁的切换元素的显示状态，用 v-show 性能会更好</li>
-</ul>
-</li>
-<li><code>v-if</code> 的原理是：每次动态创建或移除元素，实现元素的显示和隐藏<ul>
-<li>如果刚进入页面的时候，某些元素默认不需要被展示，而且后期这个元素很可能也不需要被展示出来，此时 v-if 性能更好</li>
-</ul>
-</li>
-</ol>
-<blockquote>
-<p> 在实际开发中，绝大多数情况，不用考虑性能问题，直接使用 v-if 就好了！！！</p>
-</blockquote>
-<ol start="3">
-<li><p><code>v-else</code> : v-if 可以单独使用，或配合 v-else 指令一起使用：v-else 指令必须配合 v-if 指令一起使用，否则它将不会被识别！</p>
-<h3 id="列表渲染指令"><a href="#列表渲染指令" class="headerlink" title="列表渲染指令"></a>列表渲染指令</h3><p>vue 提供了 <code>v-for</code> 列表渲染指令，用来辅助开发者基于一个数组来循环渲染一个列表结构。v-for 指令需要使<br>用 <code>item in items</code> 形式的特殊语法，其中：</p>
-<ul>
-<li>items 是待循环的数组</li>
-<li>item 是被循环的每一项</li>
-</ul>
-</li>
-</ol>
-<ul>
-<li>v-for 指令还支持一个可选的第二个参数，即当前项的索引。语法格式为 (item, index) in items，<blockquote>
-<p>注意：v-for 指令中的 item 项和 index 索引都是形参，可以根据需要进行重命名。例如 (user, i) in userlist</p>
-</blockquote>
-</li>
-</ul>
-<p><strong>使用 key 维护列表的状态</strong>:<br>当列表的数据变化时，默认情况下，vue 会尽可能的复用已存在的 DOM 元素，从而提升渲染的性能。但这种默认的性能优化策略，会导致有状态的列表无法被正确更新。<br>为了给 vue 一个提示，以便它能跟踪每个节点的身份，从而在保证有状态的列表被正确更新的前提下，提升渲<br>染的性能。此时，需要为每项提供一个唯一的 key 属性：<br><strong>key 的注意事项</strong>:<br>① key 的值只能是字符串或数字类型<br>② key 的值必须具有唯一性（即：key 的值不能重复）<br>③ 建议把数据项 id 属性的值作为 key 的值（因为 id 属性的值具有唯一性）<br>④ 使用 index 的值当作 key 的值没有任何意义（因为 index 的值不具有唯一性）<br>⑤ 建议使用 v-for 指令时一定要指定 key 的值（既提升性能、又防止列表状态紊乱）</p>
-<h2 id="Vue的过滤器"><a href="#Vue的过滤器" class="headerlink" title="Vue的过滤器"></a>Vue的过滤器</h2><h3 id="定义过滤器"><a href="#定义过滤器" class="headerlink" title="定义过滤器"></a>定义过滤器</h3><p>  在创建vue 实例期间，可以在 <code>filters</code> 节点中定义过滤器，</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">count vm<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
-  <span class="token literal-property property">el</span><span class="token operator">:</span><span class="token string">'#app'</span><span class="token punctuation">,</span>
-  <span class="token literal-property property">data</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-     <span class="token literal-property property">message</span><span class="token operator">:</span> <span class="token string">'hello vue.js'</span><span class="token punctuation">,</span>
-     <span class="token literal-property property">info</span><span class="token operator">:</span> <span class="token string">'title info'</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-  <span class="token literal-property property">filters</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>    <span class="token comment">//在filters 节点下定义"过滤器"</span>
-    <span class="token function">capitalize</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>    <span class="token comment">//把首字母转为大写的过滤器</span>
-       <span class="token keyword">return</span> str<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> str<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
-   <span class="token punctuation">&#125;</span>
-  <span class="token punctuation">&#125;</span>
-  
-
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="私有过滤器和全局过滤器"><a href="#私有过滤器和全局过滤器" class="headerlink" title="私有过滤器和全局过滤器"></a>私有过滤器和全局过滤器</h3><p>在 filters 节点下定义的过滤器，称为“私有过滤器”，因为它只能在当前 vm 实例所控制的 el 区域内使用。<br>如果希望在多个 vue 实例之间共享过滤器，则可以按照如下的格式定义全局过滤器：</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js">  <span class="token comment">//全局过滤器--独立于每个 vm 实例之外</span>
-  <span class="token comment">//Vue.filters() 方法，接收两个参数</span>
-  <span class="token comment">//第一个参数，是全局过滤器的 "名字"</span>
-  <span class="token comment">//第二个参数，是全局过滤器的 "处理函数"</span>
-Vue<span class="token punctuation">.</span><span class="token function">filters</span><span class="token punctuation">(</span><span class="token string">'capitalize'</span><span class="token punctuation">,</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token operator">=></span><span class="token punctuation">&#123;</span>
-   <span class="token keyword">return</span> str<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span> str<span class="token punctuation">.</span><span class="token function">slice</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">'~~'</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="过滤器的调用"><a href="#过滤器的调用" class="headerlink" title="过滤器的调用"></a>过滤器的调用</h3><p>过滤器可以串联的进行调用 <code>&#123;&#123;message | filterA | filterB&#125;&#125;</code>  中间用 ‘|’ 隔开<br>A–处理过的值传递给 B ，最终把 B处理的结果渲染到页面上</p>
-<h3 id="过滤器传参"><a href="#过滤器传参" class="headerlink" title="过滤器传参"></a>过滤器传参</h3><p>  过滤器的本质是JavaScript 函数，因此可以接收参数，</p>
-<pre class="line-numbers language-none"><code class="language-none">  &lt;p&gt;&#123;&#123;message | filterA(arg1,arg2) &#125;&#125;&lt;&#x2F;p&gt;
-   Vue.filter(&#39;filterA&#39;,(msg,arg1,arg2)&#x3D;&gt;&#123;
-   &#x2F;&#x2F;过滤器代码逻辑
-&#125;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="过滤器的兼容性"><a href="#过滤器的兼容性" class="headerlink" title="过滤器的兼容性"></a>过滤器的兼容性</h3><p>过滤器仅在 vue 2.x 和 1.x 中受支持，在 vue 3.x 的版本中剔除了过滤器相关的功能。<br>在企业级项目开发中：</p>
-<ul>
-<li>如果使用的是 2.x 版本的 vue，则依然可以使用过滤器相关的功能</li>
-<li>如果项目已经升级到了 3.x 版本的 vue，官方建议使用计算属性或方法代替被剔除的过滤器功能<br>具体的迁移指南，请参考 vue 3.x 的官方文档给出的说明：<a href="https://v3.vuejs.org/guide/migration/filters.html#migration-strategy">https://v3.vuejs.org/guide/migration/filters.html#migration-strategy</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Vue的相关基础知识</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>js-封装常用的方法</title>
-    <url>/2022/09/07/js-zhong-guo-biao-zhun-shi-jian-zhuan-hua-wei-nian-yue-ri-shi-fen-miao/</url>
-    <content><![CDATA[<h3 id="js-中国标准时间转化为年月日时分秒"><a href="#js-中国标准时间转化为年月日时分秒" class="headerlink" title="js-中国标准时间转化为年月日时分秒"></a>js-中国标准时间转化为年月日时分秒</h3><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-<span class="token comment">// 中国标准时间</span>
-<span class="token keyword">let</span> myTime <span class="token operator">=</span> <span class="token string">"Wed Feb 16 2022 00:00:00 GMT+0800"</span><span class="token punctuation">;</span>
-<span class="token keyword">let</span> newTime <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">filterTime</span><span class="token punctuation">(</span> myTime<span class="token punctuation">)</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newTime<span class="token punctuation">)</span> <span class="token comment">// 2022-02-16 00:00:00</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-<span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
-    <span class="token function">filterTime</span><span class="token punctuation">(</span><span class="token parameter">time</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">let</span> date <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">let</span> y <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getFullYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">let</span> m <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getMonth</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        m <span class="token operator">=</span> m <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> m <span class="token operator">:</span> m<span class="token punctuation">;</span>
-        <span class="token keyword">let</span> d <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        d <span class="token operator">=</span> d <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> d <span class="token operator">:</span> d<span class="token punctuation">;</span>
-        <span class="token keyword">let</span> h <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getHours</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        h <span class="token operator">=</span> h <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> h <span class="token operator">:</span> h<span class="token punctuation">;</span>
-        <span class="token keyword">let</span> minute <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getMinutes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        minute <span class="token operator">=</span> minute <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> minute <span class="token operator">:</span> minute<span class="token punctuation">;</span>
-        <span class="token keyword">let</span> s <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getSeconds</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        s <span class="token operator">=</span> s <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> s <span class="token operator">:</span> s<span class="token punctuation">;</span>
-        <span class="token keyword">return</span> y <span class="token operator">+</span> <span class="token string">"-"</span> <span class="token operator">+</span> m <span class="token operator">+</span> <span class="token string">"-"</span> <span class="token operator">+</span> d <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> h <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> minute <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> s<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-<span class="token punctuation">&#125;</span>    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="js-利用-setInterval函数实现当前时间"><a href="#js-利用-setInterval函数实现当前时间" class="headerlink" title="js- 利用 setInterval函数实现当前时间"></a>js- 利用 <code>setInterval</code>函数实现当前时间</h3><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">//获取当前时间</span>
-<span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  <span class="token keyword">var</span> date <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">var</span> year <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getFullYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">var</span> mth <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getMonth</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
-  <span class="token keyword">var</span> d <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">var</span> h <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getHours</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">var</span> m <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getMinutes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">var</span> s <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getSeconds</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">var</span> week <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getDay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-  <span class="token comment">//定义拼接变量,变量调用转换两位数函数</span>
-  <span class="token keyword">this</span><span class="token punctuation">.</span>timeNow <span class="token operator">=</span> year <span class="token operator">+</span> <span class="token string">"年"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span>mth<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"月"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"日"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span>h<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-   <span class="token comment">//定义函数，将一位数"1"转为两位数"01"</span>
-<span class="token function">fn</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-  str <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> str <span class="token operator">=</span> <span class="token string">"0"</span> <span class="token operator">+</span> str <span class="token operator">:</span> str<span class="token punctuation">;</span>
-  <span class="token keyword">return</span> str<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
-    <span class="token comment">//最后在vue的mounted生命周期里面使用setInterval函数</span>
-<span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-  <span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-]]></content>
-      <categories>
-        <category>js方法</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>npm与包的简单概念</title>
     <url>/2022/03/10/npm-yu-bao-de-jian-dan-gai-nian/</url>
     <content><![CDATA[<h1 id="包"><a href="#包" class="headerlink" title="包"></a>包</h1><ul>
@@ -2352,66 +2291,64 @@ Array<span class="token punctuation">.</span><span class="token function">isArra
       </tags>
   </entry>
   <entry>
-    <title>uni-app使用总结</title>
-    <url>/2022/08/10/uni-app-shi-yong-zong-jie/</url>
-    <content><![CDATA[<h3 id="rich-text-富文本-图片自适应问题-解决"><a href="#rich-text-富文本-图片自适应问题-解决" class="headerlink" title="rich-text 富文本 图片自适应问题 解决"></a>rich-text 富文本 图片自适应问题 解决</h3><p>  <strong>问题：</strong> rich-text是微信小程序的富文本标签，在使用rich-text的时候，需要rich-text内部图片宽高自适应。</p>
-<p>  <strong>解决方法：</strong> 首先新建一个 text.js 文件</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">/**
- * 处理富文本里的图片宽度自适应
- * 1.去掉img标签里的style、width、height属性
- * 2.img标签添加style属性：max-width:100%;height:auto
- * 3.修改所有style里的width属性为max-width:100%
- * 4.去掉&lt;br/>标签
- * @param html
- * @returns &#123;void|string|*&#125;
- */</span>
-<span class="token keyword">function</span> <span class="token function">formatRichText</span><span class="token punctuation">(</span><span class="token parameter">html</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-  <span class="token keyword">let</span> newContent<span class="token operator">=</span> html<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">&lt;img[^>]*></span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">match<span class="token punctuation">,</span>capture</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    match <span class="token operator">=</span> match<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">style="[^"]+"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">style='[^']+'</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    match <span class="token operator">=</span> match<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">width="[^"]+"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">width='[^']+'</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    match <span class="token operator">=</span> match<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">height="[^"]+"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">height='[^']+'</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> match<span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  newContent <span class="token operator">=</span> newContent<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">style="[^"]+"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">match<span class="token punctuation">,</span>capture</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-    match <span class="token operator">=</span> match<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">width:[^;]+;</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">'max-width:100%;'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">width:[^;]+;</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">'max-width:100%;'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> match<span class="token punctuation">;</span>
-  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  newContent <span class="token operator">=</span> newContent<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">&lt;br[^>]*\/></span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  newContent <span class="token operator">=</span> newContent<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\&lt;img</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">'&lt;img style="max-width:100%;height:auto;display:block;margin-top:0;margin-bottom:0;"'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">return</span> newContent<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
- 
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
-  formatRichText
-<span class="token punctuation">&#125;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <title>js-封装常用的方法</title>
+    <url>/2022/09/07/js-zhong-guo-biao-zhun-shi-jian-zhuan-hua-wei-nian-yue-ri-shi-fen-miao/</url>
+    <content><![CDATA[<h3 id="js-中国标准时间转化为年月日时分秒"><a href="#js-中国标准时间转化为年月日时分秒" class="headerlink" title="js-中国标准时间转化为年月日时分秒"></a>js-中国标准时间转化为年月日时分秒</h3><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token function">created</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+<span class="token comment">// 中国标准时间</span>
+<span class="token keyword">let</span> myTime <span class="token operator">=</span> <span class="token string">"Wed Feb 16 2022 00:00:00 GMT+0800"</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> newTime <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">filterTime</span><span class="token punctuation">(</span> myTime<span class="token punctuation">)</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>newTime<span class="token punctuation">)</span> <span class="token comment">// 2022-02-16 00:00:00</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token literal-property property">methods</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">filterTime</span><span class="token punctuation">(</span><span class="token parameter">time</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">let</span> date <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>time<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> y <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getFullYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> m <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getMonth</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        m <span class="token operator">=</span> m <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> m <span class="token operator">:</span> m<span class="token punctuation">;</span>
+        <span class="token keyword">let</span> d <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        d <span class="token operator">=</span> d <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> d <span class="token operator">:</span> d<span class="token punctuation">;</span>
+        <span class="token keyword">let</span> h <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getHours</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        h <span class="token operator">=</span> h <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> h <span class="token operator">:</span> h<span class="token punctuation">;</span>
+        <span class="token keyword">let</span> minute <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getMinutes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        minute <span class="token operator">=</span> minute <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> minute <span class="token operator">:</span> minute<span class="token punctuation">;</span>
+        <span class="token keyword">let</span> s <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getSeconds</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        s <span class="token operator">=</span> s <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> <span class="token string">"0"</span> <span class="token operator">+</span> s <span class="token operator">:</span> s<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> y <span class="token operator">+</span> <span class="token string">"-"</span> <span class="token operator">+</span> m <span class="token operator">+</span> <span class="token string">"-"</span> <span class="token operator">+</span> d <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> h <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> minute <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> s<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+<span class="token punctuation">&#125;</span>    <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>   接下来，那个页面需要进行富文本展示，就把这个js 文件引入</p>
-<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span>
-		formatRichText
-	<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'xxxxx/text.js'</span>  <span class="token comment">//看自己的路径</span>
+<h3 id="js-利用-setInterval函数实现当前时间"><a href="#js-利用-setInterval函数实现当前时间" class="headerlink" title="js- 利用 setInterval函数实现当前时间"></a>js- 利用 <code>setInterval</code>函数实现当前时间</h3><pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">//获取当前时间</span>
+<span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">var</span> date <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> year <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getFullYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> mth <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getMonth</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> d <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> h <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getHours</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> m <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getMinutes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> s <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getSeconds</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">var</span> week <span class="token operator">=</span> date<span class="token punctuation">.</span><span class="token function">getDay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
+  <span class="token comment">//定义拼接变量,变量调用转换两位数函数</span>
+  <span class="token keyword">this</span><span class="token punctuation">.</span>timeNow <span class="token operator">=</span> year <span class="token operator">+</span> <span class="token string">"年"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span>mth<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"月"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"日"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span>h<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">":"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+   <span class="token comment">//定义函数，将一位数"1"转为两位数"01"</span>
+<span class="token function">fn</span><span class="token punctuation">(</span><span class="token parameter">str</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  str <span class="token operator">&lt;</span> <span class="token number">10</span> <span class="token operator">?</span> str <span class="token operator">=</span> <span class="token string">"0"</span> <span class="token operator">+</span> str <span class="token operator">:</span> str<span class="token punctuation">;</span>
+  <span class="token keyword">return</span> str<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token comment">//最后在vue的mounted生命周期里面使用setInterval函数</span>
+<span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<span class="token comment">//这个是获取富文本的接口</span>
-<span class="token function">teacher</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">this</span><span class="token punctuation">.</span>strings <span class="token operator">=</span> <span class="token function">formatRichText</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span>data<span class="token punctuation">.</span>teacherDetails<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-
-
-<span class="token comment">//这是需要在页面上展示的内容</span>
-<span class="token operator">&lt;</span>rich<span class="token operator">-</span>text <span class="token operator">:</span>nodes<span class="token operator">=</span><span class="token string">"strings"</span> style<span class="token operator">=</span><span class="token string">"width: 100%;"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>rich<span class="token operator">-</span>text<span class="token operator">></span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<p><strong>完美解决 uni-app 的 rich-text组件 中图片宽高自适应问题</strong> </p>
-<p>加油加油加油！！！</p>
 ]]></content>
       <categories>
-        <category>框架</category>
+        <category>js方法</category>
       </categories>
       <tags>
-        <tag>uni-app</tag>
+        <tag>js</tag>
       </tags>
   </entry>
   <entry>
@@ -2494,6 +2431,69 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       </categories>
       <tags>
         <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>uni-app使用总结</title>
+    <url>/2022/08/10/uni-app-shi-yong-zong-jie/</url>
+    <content><![CDATA[<h3 id="rich-text-富文本-图片自适应问题-解决"><a href="#rich-text-富文本-图片自适应问题-解决" class="headerlink" title="rich-text 富文本 图片自适应问题 解决"></a>rich-text 富文本 图片自适应问题 解决</h3><p>  <strong>问题：</strong> rich-text是微信小程序的富文本标签，在使用rich-text的时候，需要rich-text内部图片宽高自适应。</p>
+<p>  <strong>解决方法：</strong> 首先新建一个 text.js 文件</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token comment">/**
+ * 处理富文本里的图片宽度自适应
+ * 1.去掉img标签里的style、width、height属性
+ * 2.img标签添加style属性：max-width:100%;height:auto
+ * 3.修改所有style里的width属性为max-width:100%
+ * 4.去掉&lt;br/>标签
+ * @param html
+ * @returns &#123;void|string|*&#125;
+ */</span>
+<span class="token keyword">function</span> <span class="token function">formatRichText</span><span class="token punctuation">(</span><span class="token parameter">html</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token keyword">let</span> newContent<span class="token operator">=</span> html<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">&lt;img[^>]*></span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">match<span class="token punctuation">,</span>capture</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    match <span class="token operator">=</span> match<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">style="[^"]+"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">style='[^']+'</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    match <span class="token operator">=</span> match<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">width="[^"]+"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">width='[^']+'</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    match <span class="token operator">=</span> match<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">height="[^"]+"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">height='[^']+'</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> match<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  newContent <span class="token operator">=</span> newContent<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">style="[^"]+"</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">match<span class="token punctuation">,</span>capture</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    match <span class="token operator">=</span> match<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">width:[^;]+;</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">'max-width:100%;'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">width:[^;]+;</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">'max-width:100%;'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> match<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  newContent <span class="token operator">=</span> newContent<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">&lt;br[^>]*\/></span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  newContent <span class="token operator">=</span> newContent<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token regex"><span class="token regex-delimiter">/</span><span class="token regex-source language-regex">\&lt;img</span><span class="token regex-delimiter">/</span><span class="token regex-flags">gi</span></span><span class="token punctuation">,</span> <span class="token string">'&lt;img style="max-width:100%;height:auto;display:block;margin-top:0;margin-bottom:0;"'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> newContent<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+ 
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+  formatRichText
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>   接下来，那个页面需要进行富文本展示，就把这个js 文件引入</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">&#123;</span>
+		formatRichText
+	<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'xxxxx/text.js'</span>  <span class="token comment">//看自己的路径</span>
+
+
+<span class="token comment">//这个是获取富文本的接口</span>
+<span class="token function">teacher</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">res</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span>strings <span class="token operator">=</span> <span class="token function">formatRichText</span><span class="token punctuation">(</span>res<span class="token punctuation">.</span>data<span class="token punctuation">.</span>teacherDetails<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+
+<span class="token comment">//这是需要在页面上展示的内容</span>
+<span class="token operator">&lt;</span>rich<span class="token operator">-</span>text <span class="token operator">:</span>nodes<span class="token operator">=</span><span class="token string">"strings"</span> style<span class="token operator">=</span><span class="token string">"width: 100%;"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>rich<span class="token operator">-</span>text<span class="token operator">></span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p><strong>完美解决 uni-app 的 rich-text组件 中图片宽高自适应问题</strong> </p>
+<p>加油加油加油！！！</p>
+]]></content>
+      <categories>
+        <category>框架</category>
+      </categories>
+      <tags>
+        <tag>uni-app</tag>
       </tags>
   </entry>
   <entry>
@@ -2859,8 +2859,12 @@ plugins: [htmlPlugin, cleanPlugin], <span aria-hidden="true" class="line-numbers
 
 
 
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 
+
+<p><img src="https://raw.githubusercontent.com/zhezhe0723/Blog/master/img/202403271015255.jpg" alt="8e26b7ad00a578c3e5df59a043678dd9."></p>
+<p><img src="https://raw.githubusercontent.com/zhezhe0723/Blog/master/img/202403271022593.jpg" alt="f85864fdd53f713e57f05347127318af."></p>
 ]]></content>
       <categories>
         <category>工作问题</category>
